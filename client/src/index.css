@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(80deg,rgb(18, 83, 109),rgb(192, 47, 127));
+  background-size: 400% 400%;
+  animation: color 8s ease-in-out infinite; 
+  color: #ffffff;
+overflow: hidden;
+}
+
+/*
+**ANIMATION**
+
+@keyframes color {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+*/
