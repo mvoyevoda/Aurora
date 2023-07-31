@@ -1,3 +1,11 @@
 body{
     background-color: black;
+    text-align: center;
+}
+.signup_form{
+    margin: 4px;
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    top: 25%;
 }
