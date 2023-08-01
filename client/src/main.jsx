@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from "./routes/root";
-import SignUp from "./routes/signup";
-import LogIn from "./routes/login";
+import SignUp from "./views/signup";
+import LogIn from "./views/login";
+import Welcome from "./views/welcome";
 import "./index.css";
 // import '@fontsource/roboto/300.css';
 // import '@fontsource/roboto/400.css';
@@ -18,7 +18,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Welcome />,
   },{
     path: "/signup",
     element: <SignUp />,

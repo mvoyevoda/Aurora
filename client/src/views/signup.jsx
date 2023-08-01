@@ -1,6 +1,7 @@
-import "./styles/signup.css"
+import "../styles/signup.css"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
 export default function SignUp(){
    
     const handleSignUp = (event) => {

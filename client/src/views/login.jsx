@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import "./styles/signup.css"
+import "../styles/signup.css"
 import Link from '@mui/material/Link';
 
 
