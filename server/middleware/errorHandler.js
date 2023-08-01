@@ -1,7 +1,9 @@
 const {
     ValidationError,
     DuplicateError,
-    DBError
+    DBError,
+    ForbiddenError,
+    NotFoundError
 } = require('./errors');
 
 const validationErrorHandler = (err, req, res, next) => {
@@ -31,8 +33,28 @@ const dbErrorHandler = (err, req, res, next) => {
     next(err);
 };
 
+const forbiddenErrorHandler = (err, req, res, next) => {
+    if (err instanceof ForbiddenError) {
+        return res.status(403).json({
+            message: 'You are not authorized to access this resource.'
+        });
+    }
+    next(err);
+};
+
+const notFoundErrorHandler = (err, req, res, next) => {
+    if (err instanceof NotFoundError) {
+        return res.status(404).json({
+            message: 'The requested resource was not found.'
+        });
+    }
+    next(err);
+};
+
 module.exports = {
     validationErrorHandler,
     duplicateErrorHandler,
-    dbErrorHandler
+    dbErrorHandler,
+    forbiddenErrorHandler,
+    notFoundErrorHandler
 };
