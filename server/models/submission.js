@@ -4,34 +4,31 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class Attempt extends Model {
+    class Submission extends Model {
         static associate(models) {
-            //associations
+            // Define associations here if needed
         }
     }
 
-    Attempt.init({
-        attemptId: {
+    Submission.init({
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        score: {
-            type: DataTypes.INTEGER,
+        submissionText: {
+            type: DataTypes.STRING,
         },
-        progress: {
-            type: DataTypes.INTEGER,
-        },
-        timeTaken: {
-            type: DataTypes.INTEGER,
+        isCorrect: {
+            type: DataTypes.BOOLEAN,
         },
     }, {
         sequelize,
-        modelName: 'Attempt',
-        tableName: 'attempts',
+        modelName: 'Submission',
+        tableName: 'submissions',
         timestamps: true,
         underscored: true,
     });
-    return Attempt;
+    return Submission;
 };

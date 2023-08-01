@@ -4,40 +4,47 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class Question extends Model {
+    class Quiz extends Model {
         static associate(models) {
             // Define associations here if needed
         }
     }
 
-    Question.init({
-        questionId: {
+    Quiz.init({
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        questionText: {
+        category: {
             type: DataTypes.STRING,
         },
-        correctAnswer: {
+        language: {
+            type: DataTypes.STRING,
+        },
+        title: {
+            type: DataTypes.STRING,
+        },
+        difficulty: {
             type: DataTypes.INTEGER,
         },
-        answerChoices: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-        },
-        questionType: {
+        quizLength: {
             type: DataTypes.INTEGER,
         },
-        flag: {
-            type: DataTypes.BOOLEAN,
+        avgScore: {
+            type: DataTypes.INTEGER,
+        },
+        avgTime: {
+            type: DataTypes.INTEGER,
         },
     }, {
         sequelize,
-        modelName: 'Question',
-        tableName: 'questions',
+        modelName: 'Quiz',
+        tableName: 'quizzes',
         timestamps: true,
         underscored: true,
     });
-    return Question;
+
+    return Quiz;
 };

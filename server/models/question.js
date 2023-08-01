@@ -4,31 +4,40 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class Submission extends Model {
+    class Question extends Model {
         static associate(models) {
             // Define associations here if needed
         }
     }
 
-    Submission.init({
-        submissionId: {
+    Question.init({
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        submissionTest: {
+        questionText: {
             type: DataTypes.STRING,
         },
-        isCorrect: {
+        correctAnswer: {
+            type: DataTypes.INTEGER,
+        },
+        answerChoices: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+        },
+        questionType: {
+            type: DataTypes.INTEGER,
+        },
+        flag: {
             type: DataTypes.BOOLEAN,
         },
     }, {
         sequelize,
-        modelName: 'Submission',
-        tableName: 'submissions',
+        modelName: 'Question',
+        tableName: 'questions',
         timestamps: true,
         underscored: true,
     });
-    return Submission;
+    return Question;
 };
