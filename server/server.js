@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-app.use('/auth', authRoutes);
+app.use('api/auth', authRoutes);
 
 app.use(validationErrorHandler);
 app.use(duplicateErrorHandler);
