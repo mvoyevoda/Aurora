@@ -2,39 +2,33 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('quizzes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userName: {
+      category: {
         type: Sequelize.STRING
       },
-      email: {
+      language: {
         type: Sequelize.STRING
       },
-      password: {
+      title: {
         type: Sequelize.STRING
       },
-      quizzes_generated: {
-        type: Sequelize.STRING
-      },
-      best_category: {
-        type: Sequelize.STRING
-      },
-      worst_category: {
-        type: Sequelize.STRING
-      },
-      favorite_category: {
-        type: Sequelize.STRING
-      },
-      account_type: {
+      difficulty: {
         type: Sequelize.INTEGER
       },
-      premium_account: {
-        type: Sequelize.BOOLEAN
+      quizLength: {
+        type: Sequelize.INTEGER
+      },
+      avgScore: {
+        type: Sequelize.INTEGER
+      },
+      avgTime: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('quizzes');
   }
 };
