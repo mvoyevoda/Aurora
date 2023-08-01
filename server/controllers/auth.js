@@ -12,14 +12,14 @@ const {
     DBError,
     ForbiddenError,
     NotFoundError
-} = require('../errors');
+} = require('../middleware/errors');
 const {
     validationErrorHandler,
     duplicateErrorHandler,
     dbErrorHandler,
     forbiddenErrorHandler,
     notFoundErrorHandler
-} = require('../middlewares/errorHandlers');
+} = require('../middleware/errorHandlers');
 
 exports.signup = [
     body('email').isEmail().withMessage('Please enter a valid email'),

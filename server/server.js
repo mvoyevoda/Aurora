@@ -4,6 +4,8 @@ const port = 4000;
 const session = require("express-session");
 require("dotenv").config();
 const cors = require("cors");
+// const authRoutes = require('./routes/authRoutes')
+const openAIRoutes = require('./routes/openAIRoutes')
 
 app.get('/', (req, res) => {
     res.send("Aurora")
@@ -17,6 +19,12 @@ app.use(
     })
 );
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// app.use('api/auth', authRoutes);
+app.use('/api/openAI', openAIRoutes);
+
 app.use((req, res, next) => {
     console.log(`Request: ${req.method} ${req.originalUrl}`);
     res.on("finish", () => {
@@ -25,19 +33,20 @@ app.use((req, res, next) => {
     });
     next();
 });
-app.use(express.json());
 
-app.use('api/auth', authRoutes);
 
-app.use(validationErrorHandler);
-app.use(duplicateErrorHandler);
-app.use(dbErrorHandler);
-app.use(forbiddenErrorHandler);
-app.use(notFoundErrorHandler);
+
+
+// app.use(validationErrorHandler);
+// app.use(duplicateErrorHandler);
+// app.use(dbErrorHandler);
+// app.use(forbiddenErrorHandler);
+// app.use(notFoundErrorHandler);
 
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).send('Something broke!');
+    next();
 });
 
 app.use(
