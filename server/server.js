@@ -32,7 +32,7 @@ app.use(
       resave: false,
       saveUninitialized: false,
       cookie: {
-          maxAge: 3600000, // 1 hour
+          maxAge: 60 * 60 * 1000, // 1 hour
       },
   })
 );
