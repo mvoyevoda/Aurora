@@ -1,0 +1,17 @@
+.configurator {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 300px;
+  align-items: center;
+}
+
+.configurator * {
+  margin: 10px;
+  width: 100px;
+  text-align: center;
+}
+
+.prompt {
+  width: 300px;
+}

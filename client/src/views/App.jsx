@@ -1,8 +1,10 @@
+import Configurator from "../components/Configurator"
+
 function App() {
 
   return (
     <div className="app" >
-      Welcome to the app
+      <Configurator />
     </div>
   )
 }
