@@ -19,8 +19,24 @@ class DBError extends Error {
     }
 }
 
+class ForbiddenError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'ForbiddenError';
+    }
+}
+
+class NotFoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'NotFoundError';
+    }
+}
+
 module.exports = {
     ValidationError,
     DuplicateError,
-    DBError
-}
+    DBError,
+    ForbiddenError,
+    NotFoundError
+};
