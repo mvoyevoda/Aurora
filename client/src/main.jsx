@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import SignUp from "./views/signup";
 import LogIn from "./views/login";
 import Welcome from "./views/welcome";
+import App from "./views/App";
 import "./index.css";
 // import '@fontsource/roboto/300.css';
 // import '@fontsource/roboto/400.css';
@@ -19,12 +20,18 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Welcome />,
-  },{
+  },
+  {
     path: "/signup",
     element: <SignUp />,
-  },{
+  },
+  {
     path: "/login",
     element: <LogIn />,
+  },
+  {
+    path: "/app",
+    element: <App />,
   },
 ]);
 
