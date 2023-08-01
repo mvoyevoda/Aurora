@@ -1,31 +1,57 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class User extends Model {
     static associate(models) {
-      // define association here
+      // Define associations here if needed
     }
   }
-  Users.init({
-    userName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    quizzes_generated: DataTypes.STRING,
-    best_category: DataTypes.STRING,
-    worst_category: DataTypes.STRING,
-    favorite_category: DataTypes.STRING,
-    account_type: DataTypes.INTEGER,
-    premium_account: DataTypes.BOOLEAN
+
+  User.init({
+    userId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    quizzesGenerated: {
+      type: DataTypes.STRING,
+    },
+    bestCategory: {
+      type: DataTypes.STRING,
+    },
+    worstCategory: {
+      type: DataTypes.STRING,
+    },
+    favoriteCategory: {
+      type: DataTypes.STRING,
+    },
+    accountType: {
+      type: DataTypes.INTEGER,
+    },
+    premiumAccount: {
+      type: DataTypes.BOOLEAN,
+    },
   }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'User',
+    tableName: 'users',
+    underscored: true,
+    timestamps: true,
   });
-  return Users;
+
+  return User;
 };

@@ -1,26 +1,42 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  class Questions extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class Question extends Model {
     static associate(models) {
-      // define association here
+      // Define associations here if needed
     }
   }
-  Questions.init({
-    question_text: DataTypes.STRING,
-    correct_answer: DataTypes.INTEGER,
-    answer_choices: DataTypes.ARRAY,
-    flag: DataTypes.BOOLEAN
+
+  Question.init({
+    questionId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+    questionText: {
+      type: DataTypes.STRING,
+    },
+    correctAnswer: {
+      type: DataTypes.INTEGER,
+    },
+    answerChoices: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+    },
+    questionType: {
+      type: DataTypes.INTEGER,
+    },
+    flag: {
+      type: DataTypes.BOOLEAN,
+    },
   }, {
     sequelize,
-    modelName: 'Questions',
+    modelName: 'Question',
+    tableName: 'questions',
+    timestamps: true,
+    underscored: true,
   });
-  return Questions;
+
+  return Question;
 };
