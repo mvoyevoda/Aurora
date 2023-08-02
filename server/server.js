@@ -55,14 +55,12 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
-
-// app.use(validationErrorHandler);
-// app.use(duplicateErrorHandler);
-// app.use(dbErrorHandler);
-// app.use(forbiddenErrorHandler);
-// app.use(notFoundErrorHandler);
+Errors
+app.use(validationErrorHandler);
+app.use(duplicateErrorHandler);
+app.use(dbErrorHandler);
+app.use(forbiddenErrorHandler);
+app.use(notFoundErrorHandler);
 
 app.use((err, req, res, next) => {
     console.error(err);
