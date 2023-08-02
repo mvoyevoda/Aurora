@@ -1,7 +1,11 @@
+import NavBar from "../components/NavBar";
+import WCard from "../components/WCard";
+
 export default function Welcome(){
     return (
         <>
-        <h1>Home page</h1>
+        <NavBar />
+        <WCard />
         </>
     )
 }
