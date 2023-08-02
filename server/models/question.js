@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       static associate(models) {
         this.belongsTo(models.Quiz, {
           foreignKey: 'quizId',
-          as: 'quiz'
+          as: 'quizId'
         });
       }
     }
@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
+            allowNull: false,
+        },
+        quizId: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         questionText: {
