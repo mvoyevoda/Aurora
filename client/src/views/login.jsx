@@ -6,8 +6,6 @@ import Link from '@mui/material/Link';
 import axios from 'axios';
 
 
-
-
 export default function LogIn(){
     const emailRef = useRef();
     const passwordRef = useRef();
