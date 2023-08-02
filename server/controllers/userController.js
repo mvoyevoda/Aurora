@@ -23,4 +23,18 @@ async function getUserById (req, res, next) {
     }
 };
 
-module.exports = { getAllUsers, getUserById}
+async function deleteUser (req, res, next) {
+    try {
+        const user = await User.findByPk(req.params.id);
+        if (!user) {
+            throw new NotFoundError("User not found");
+        }
+        await user.destroy();
+        res.status(200).json({ message: "User deleted successfully" });
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
+};
+
+module.exports = { getAllUsers, getUserById, deleteUser };
