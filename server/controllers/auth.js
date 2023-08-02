@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const { Op } = require('sequelize');
 const {
     body,
     validationResult
@@ -34,7 +35,21 @@ exports.signup = [
                 throw new ValidationError('Validation error');
             }
 
-            const hashedPassword = await bcrypt.hash(req.body.password, 8);
+            // Check for existing user with same email or username
+            const existingUser = await User.findOne({
+                where: {
+                    [Op.or]: [
+                        { userName: req.body.userName },
+                        { email: req.body.email }
+                    ]
+                }
+            });
+
+            if (existingUser) {
+                throw new DuplicateError('Username or email already in use');
+            }
+
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
             const user = await User.create({
                 userName: req.body.userName,
@@ -86,6 +101,9 @@ exports.login = [
 
             if (user) {
                 const auth = await bcrypt.compare(req.body.password, user.password);
+                console.log(req.body.password);
+                console.log(user.password);
+                console.log('Comparison:', auth);
 
                 if (auth) {
                     req.session.userId = user.id;
