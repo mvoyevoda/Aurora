@@ -1,6 +1,6 @@
 const { Configuration, OpenAIApi } = require("openai");
 
-function generate(req, res) {
+async function generate(req, res) {
 
   const { prompt, questions, minutes, difficulty } = req.body;
 
