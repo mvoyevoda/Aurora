@@ -4,8 +4,16 @@ const port = 4000;
 const session = require("express-session");
 require("dotenv").config();
 const cors = require("cors");
-// const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes')
 const openAIRoutes = require('./routes/openAIRoutes')
+const userRoutes = require('./routes/userRoutes');
+const {
+  validationErrorHandler,
+  duplicateErrorHandler,
+  dbErrorHandler,
+  forbiddenErrorHandler,
+  notFoundErrorHandler
+} = require('./middleware/errorHandlers');
 
 app.get('/', (req, res) => {
     res.send("Aurora")
@@ -22,8 +30,21 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use('api/auth', authRoutes);
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 60 * 60 * 1000, // 1 hour
+        },
+    })
+);
+
+//Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/openAI', openAIRoutes);
+app.use('/api/users', userRoutes);
 
 app.use((req, res, next) => {
     console.log(`Request: ${req.method} ${req.originalUrl}`);
@@ -33,6 +54,9 @@ app.use((req, res, next) => {
     });
     next();
 });
+
+
+
 
 // app.use(validationErrorHandler);
 // app.use(duplicateErrorHandler);
@@ -46,16 +70,6 @@ app.use((err, req, res, next) => {
     next();
 });
 
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 60 * 60 * 1000, // 1 hour
-        },
-    })
-);
 
 
 app.listen(port, () => {

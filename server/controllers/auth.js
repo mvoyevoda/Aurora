@@ -42,9 +42,15 @@ exports.signup = [
                 password: hashedPassword
             });
 
-            req.session.userId = user.userId;
+            req.session.userId = user.id;
 
-            res.status(201).json(user);
+            res.status(201).json({
+                message: 'Signup was successful!',
+                user: {
+                    userName: user.userName,
+                    email:user.email
+                }
+            });
         } catch (error) {
             if (error instanceof ValidationError) {
                 validationErrorHandler(error, req, res);
@@ -82,8 +88,10 @@ exports.login = [
                 const auth = await bcrypt.compare(req.body.password, user.password);
 
                 if (auth) {
-                    req.session.userId = user.userId;
-                    return res.status(200).json(user);
+                    req.session.userId = user.id;
+                    return res.status(200).json({
+                        message: 'Login was successful!'
+                    });
                 } else {
                     throw new ForbiddenError('Incorrect password');
                 }
