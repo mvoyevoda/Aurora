@@ -34,9 +34,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
-
 // app.use(validationErrorHandler);
 // app.use(duplicateErrorHandler);
 // app.use(dbErrorHandler);
