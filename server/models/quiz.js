@@ -6,10 +6,11 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Quiz extends Model {
       static associate(models) {
-        // hasMany association since one quiz has many questions
-        Quiz.hasMany(models.Question, {
+        this.hasMany(models.Question, {
             foreignKey: 'quizId',
-            as: 'questions'
+        });
+        this.hasMany(models.Attempt, {
+          foreignKey: 'quizId',
         });
       }
     }

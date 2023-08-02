@@ -6,12 +6,14 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             this.belongsTo(models.User, {
                 foreignKey: 'userId',
-                as: 'user'
             });
 
             this.belongsTo(models.Quiz, {
                 foreignKey: 'quizId',
-                as: 'quiz'
+            });
+
+            this.hasMany(models.Submission, {
+                foreignKey: 'AttemptId',
             });
         }
     }

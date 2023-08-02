@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       static associate(models) {
         this.belongsTo(models.Quiz, {
           foreignKey: 'quizId',
-          as: 'quizId'
+        });
+        this.hasMany(models.Submission, {
+          foreignKey: 'questionId',
         });
       }
     }
