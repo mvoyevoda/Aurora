@@ -20,10 +20,6 @@ function generate(req, res) {
     .then(response => {
       const completion = response.data.choices[0].message.content;
       console.log(completion);
-
-
-
-      // console.log(prompt)
       res.send(completion);
     })
     .catch(error => {

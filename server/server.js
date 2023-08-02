@@ -55,7 +55,7 @@ app.use((req, res, next) => {
     next();
 });
 
-Errors
+//Errors
 app.use(validationErrorHandler);
 app.use(duplicateErrorHandler);
 app.use(dbErrorHandler);

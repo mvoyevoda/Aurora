@@ -1,3 +1,4 @@
+import axios from 'axios';
 import "../styles/configurator.css"
 
 export default function Configurator(){
