@@ -2,10 +2,7 @@ const { Configuration, OpenAIApi } = require("openai");
 
 function generate(req, res) {
 
-  const prompt = req.body.prompt;
-  const questions = req.body.questions;
-  const minutes = req.body.minutes;
-  const difficulty = req.body.difficulty;
+  const { prompt, questions, minutes, difficulty } = req.body;
 
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -31,12 +28,21 @@ function generate(req, res) {
     .then(response => {
       const completion = response.data.choices[0].message.content;
       console.log(completion);
-      res.send(completion);
+      // res.send(completion); //SEND ID OF QUIZ IN DATABASE
     })
     .catch(error => {
       console.error('Error:', error);
       res.status(500).json({ error: 'Failed to generate completion.' });
     });
+
+    try {
+      const quiz = await Quiz.create({ prompt, questions, minutes, difficulty });
+        // Send the ID of the new row back to the client
+        res.json({ success: true, id: quiz.id });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to generate quiz.' });
+    }
 }
 
 module.exports = { generate };

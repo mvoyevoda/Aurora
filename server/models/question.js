@@ -5,9 +5,12 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
     class Question extends Model {
-        static associate(models) {
-            // Define associations here if needed
-        }
+      static associate(models) {
+        this.belongsTo(models.Quiz, {
+          foreignKey: 'quizId',
+          as: 'quiz'
+        });
+      }
     }
 
     Question.init({
