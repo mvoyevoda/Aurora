@@ -5,9 +5,13 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
     class Quiz extends Model {
-        static associate(models) {
-            // Define associations here if needed
-        }
+      static associate(models) {
+        // hasMany association since one quiz has many questions
+        Quiz.hasMany(models.Question, {
+            foreignKey: 'quizId',
+            as: 'questions'
+        });
+      }
     }
 
     Quiz.init({
