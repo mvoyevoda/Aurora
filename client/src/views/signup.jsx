@@ -1,17 +1,19 @@
 import "../styles/signup.css"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import axios from 'axios';
 
 export default function SignUp(){
    
-    const handleSignUp = (event) => {
+    const handleSignUp = async (event) => {
         event.preventDefault();
-        var full_name = document.getElementById('full_name').value;
-        var username = document.getElementById('username').value;
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
+        const full_name = document.getElementById('full_name').value;
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-        console.log(full_name + ' ' + username + ' ' + email + ' ' + password);
+        const response = await axios.post('http://localhost:4000/api/auth/signup', { full_name, username, email, password })
+        console.log(response.data.message);
     }
     return (
         <>

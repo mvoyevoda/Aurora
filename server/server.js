@@ -15,17 +15,18 @@ const {
   notFoundErrorHandler
 } = require('./middleware/errorHandlers');
 
+app.use(
+  cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+      allowHeaders: ["Content-Type", "Authorization"],
+      method: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
 app.get('/', (req, res) => {
     res.send("Aurora")
 })
-
-app.use(
-    cors({
-        origin: "http://127.0.0.1:5173",
-        allowHeaders: ["Content-Type", "Authorization"],
-        method: ["GET", "POST", "PUT", "DELETE"],
-    })
-);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
