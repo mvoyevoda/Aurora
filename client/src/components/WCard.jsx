@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Logo from '../images/Logo.png'; // Replace the path with the actual path to your image
+import WLogo from '../images/WLogo.png'; // Replace the path with the actual path to your image
 
 export default function WCard() {
   return (
@@ -26,7 +26,7 @@ export default function WCard() {
       </Card>
 
       <Box sx={{ width: 700, paddingRight: 22, paddingTop: 10 }}>
-        <img src={Logo} alt="AURORA" style={{ width: '100%', height: 'auto' }} />
+        <img src={WLogo} alt="AURORA" style={{ width: '100%', height: 'auto' }} />
       </Box>
     </Box>
   );
