@@ -101,9 +101,6 @@ exports.login = [
 
             if (user) {
                 const auth = await bcrypt.compare(req.body.password, user.password);
-                console.log(req.body.password);
-                console.log(user.password);
-                console.log('Comparison:', auth);
 
                 if (auth) {
                     req.session.userId = user.id;
