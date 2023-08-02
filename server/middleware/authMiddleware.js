@@ -1,3 +1,7 @@
+const {
+    User
+} = require('../models');
+
 const authenticateUser = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.session.userId);

@@ -6,6 +6,7 @@ require("dotenv").config();
 const cors = require("cors");
 const authRoutes = require('./routes/authRoutes')
 const openAIRoutes = require('./routes/openAIRoutes')
+const userRoutes = require('./routes/userRoutes');
 const {
   validationErrorHandler,
   duplicateErrorHandler,
@@ -29,8 +30,21 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('api/auth', authRoutes);
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 60 * 60 * 1000, // 1 hour
+        },
+    })
+);
+
+//Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/openAI', openAIRoutes);
+app.use('/api/users', userRoutes);
 
 app.use((req, res, next) => {
     console.log(`Request: ${req.method} ${req.originalUrl}`);
@@ -43,7 +57,7 @@ app.use((req, res, next) => {
 
 
 
-
+//Errors
 app.use(validationErrorHandler);
 app.use(duplicateErrorHandler);
 app.use(dbErrorHandler);
@@ -56,16 +70,6 @@ app.use((err, req, res, next) => {
     next();
 });
 
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 60 * 60 * 1000, // 1 hour
-        },
-    })
-);
 
 
 app.listen(port, () => {
