@@ -16,8 +16,8 @@ export default function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             &nbsp;
           </Typography>
-          <Button color="inherit">Sign in</Button>
-          <Button color="inherit">Log in</Button>
+          <Button href='./signup' color="inherit">Sign up</Button>
+          <Button href= 'login' color="inherit">Log in</Button>
         </Toolbar>
       </AppBar>
     </Box>
