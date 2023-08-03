@@ -1,35 +1,56 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import "../styles/portal.css"
 
 export default function Portal() {
   const { id } = useParams();
-  const [quiz, setQuiz] = useState(null);
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    async function fetchQuiz() {
+    async function fetchQuestions() {
       try {
         const response = await axios.get(`http://localhost:4000/api/quizzes/${id}`);
-        setQuiz(response.data);
+        setQuestions(response.data);
       } catch (error) {
         console.error("Failed to fetch quiz:", error);
       }
     }
 
-    fetchQuiz();
+    fetchQuestions();
   }, [id]);
 
   return (
     <>
-      <h1 className="">welcome to portal. quiz id: {id}</h1>
-      {quiz && (
-        <div>
-          <h2>{quiz.category}</h2>
-          <p>Number of questions: {quiz.quizLength}</p>
-          <p>Difficulty: {quiz.difficulty}</p>
-          {/* Add more fields as needed */}
-        </div>
-      )}
+      <h1 className="">QUIZ ID: {id}</h1>
+      <div className="quiz-container" >
+        {questions.length > 0 && (
+          <div>
+            {questions.map((question, questionIndex) => (
+              <div key={questionIndex}>
+                <h3>{question.questionText}</h3>
+                {question.questionType === 0 && question.answerChoices.map((choice, choiceIndex) => (
+                  <button key={choiceIndex} onClick={() => { /* Handle the click event here */ }}>
+                    {choice}
+                  </button>
+                ))}
+                {question.questionType === 1 && (
+                  <div>
+                    <button onClick={() => { /* Handle true click */ }}>True</button>
+                    <button onClick={() => { /* Handle false click */ }}>False</button>
+                  </div>
+                )}
+                {question.questionType === 2 && (
+                  <div>
+                    <input type="text" placeholder="Enter your answer" />
+                  </div>
+                )}
+                {/* Render other fields as needed */}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 }
