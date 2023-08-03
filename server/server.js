@@ -7,6 +7,7 @@ const cors = require("cors");
 const authRoutes = require('./routes/authRoutes')
 const openAIRoutes = require('./routes/openAIRoutes')
 const userRoutes = require('./routes/userRoutes');
+const quizRoutes = require('./routes/quizRoutes');
 const {
   validationErrorHandler,
   duplicateErrorHandler,
@@ -46,6 +47,7 @@ app.use(
 app.use('/api/auth', authRoutes);
 app.use('/api/openAI', openAIRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/quizzes', quizRoutes);
 
 app.use((req, res, next) => {
     console.log(`Request: ${req.method} ${req.originalUrl}`);

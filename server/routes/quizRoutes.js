@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const openAIController = require('../controllers/openAIController')
 const authenticateUser = require('../middleware/authMiddleware');
+const quizController = require('../controllers/quizController')
 
-router.post('/generate', openAIController.generate);
+router.get('/:id', quizController.getQuiz);
 
 module.exports = router;
