@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SignUp from "./views/signup";
 import LogIn from "./views/login";
-import Welcome from "./views/welcome";
+import Welcome from "./views/welcome";;
 import App from "./views/App";
 import Portal from "./components/Portal";
 import "./styles/index.css";
+
 // import '@fontsource/roboto/300.css';
 // import '@fontsource/roboto/400.css';
 // import '@fontsource/roboto/500.css';

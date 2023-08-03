@@ -25,10 +25,10 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false,
         },
-        // userId: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        // },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
         category: {
             type: DataTypes.STRING,
         },

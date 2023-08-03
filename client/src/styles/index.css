@@ -17,6 +17,7 @@ body {
 
 
 
+
 @keyframes color {
   0% {
     background-position: 0% 50%;
@@ -28,5 +29,3 @@ body {
     background-position: 0% 50%;
   }
 }
-
-
