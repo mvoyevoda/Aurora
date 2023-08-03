@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
             this.hasMany(models.Attempt, {
                 foreignKey: 'userId',
             });
-            this.hasMany(models.Quiz, {
-                foreignKey: 'userId',
-            });
+            // this.hasMany(models.Quiz, {
+            //     foreignKey: 'userId',
+            // });
         }
     }
 

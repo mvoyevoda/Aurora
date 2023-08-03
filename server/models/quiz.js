@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
             this.hasMany(models.Attempt, {
                 foreignKey: 'quizId',
             });
-            this.belongsTo(models.User, {
-                foreignKey: 'userId',
-            });
+            // this.belongsTo(models.User, {
+            //     foreignKey: 'userId',
+            // });
         }
     }
 
@@ -25,10 +25,10 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false,
         },
-        userId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
+        // userId: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        // },
         category: {
             type: DataTypes.STRING,
         },
