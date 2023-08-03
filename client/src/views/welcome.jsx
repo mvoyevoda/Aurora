@@ -1,7 +1,13 @@
+import NavBar from "../components/NavBar";
+import WCard from "../components/WCard";
+import SignUpButton from "../components/SignUpButton"
+
 export default function Welcome(){
     return (
         <>
-        <h1>Home page</h1>
+        <NavBar />
+        <WCard />
+        <SignUpButton />
         </>
     )
 }
