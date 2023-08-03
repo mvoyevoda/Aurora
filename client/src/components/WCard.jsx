@@ -19,7 +19,7 @@ export default function WCard() {
             AURORA
           </Typography>
 
-          <Typography variant="body2" fontWeight="light-bold" color={"white"} fontSize={30} paddingTop={1} sx={{ lineHeight: 1 }} >
+          <Typography variant="body2" fontWeight="light-bold" color={"white"} fontSize={27} paddingTop={1} sx={{ lineHeight: 1 }} >
             Generate, assess, and improve with interactive quizzes. Track progress, receive valuable feedback, and unlock your learning potential.
           </Typography>
         </CardContent>

@@ -10,16 +10,39 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
         <Toolbar sx={{ justifyContent: 'flex-start', paddingLeft: '16px' }}>
-          <Button color="inherit" sx={{ marginRight: '16px', backgroundColor: 'rgba(212, 212, 212, 0.30)' }}>
+          <Button
+            color="inherit"
+            sx={{
+              marginRight: '16px',
+              backgroundColor: 'transparent',
+              border: '1px solid white', // Add a white stroke
+              borderRadius: '4px', // Optional: add border radius to make the edges smoother
+            }}
+          >
             Home
           </Button>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             &nbsp;
           </Typography>
-          <Button color="inherit" sx={{ backgroundColor: 'rgba(212, 212, 212, 0.30)' }}>
+          <Button
+            color="inherit"
+            sx={{
+              backgroundColor: 'transparent',
+              border: '1px solid white', // Add a white stroke
+              borderRadius: '4px', // Optional: add border radius to make the edges smoother
+            }}
+          >
             Log In
           </Button>
-          <Button color="inherit" sx={{ backgroundColor: 'rgba(212, 212, 212, 0.30)', marginLeft: '30px' }}>
+          <Button
+            color="inherit"
+            sx={{
+              backgroundColor: 'transparent',
+              border: '1px solid white', // Add a white stroke
+              borderRadius: '4px', // Optional: add border radius to make the edges smoother
+              marginLeft: '30px',
+            }}
+          >
             Sign in
           </Button>
         </Toolbar>
