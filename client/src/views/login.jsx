@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "../styles/signup.css"
@@ -9,6 +10,8 @@ import axios from 'axios';
 export default function LogIn(){
     const emailRef = useRef();
     const passwordRef = useRef();
+
+    const navigate = useNavigate();
 
     const handleLogIn = async (e) => {
         e.preventDefault();
@@ -23,6 +26,7 @@ export default function LogIn(){
             withCredentials: true,
           });
           console.log(response.data);
+          navigate('/app');
         } catch (error) {
           console.error(`Error: ${error}`);
         }

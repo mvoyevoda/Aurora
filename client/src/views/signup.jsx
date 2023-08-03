@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "../styles/signup.css"
@@ -11,6 +12,8 @@ export default function SignUp(){
     const userNameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
+
+    const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -27,6 +30,7 @@ export default function SignUp(){
             withCredentials: true,
           });
           console.log(response.data);
+          navigate('/app');
         } catch (error) {
           console.error(`Error: ${error}`);
         }
