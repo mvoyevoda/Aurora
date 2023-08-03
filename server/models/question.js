@@ -46,8 +46,6 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Question',
         tableName: 'questions',
         timestamps: true,
-        // BELOW LINE MUST NOT BE TRUE!!!
-        // underscored: true, 
     });
     return Question;
 };
