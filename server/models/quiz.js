@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
         difficulty: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
         },
         quizLength: {
             type: DataTypes.INTEGER,
@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Quiz',
         tableName: 'quizzes',
         timestamps: true,
-        underscored: true,
+        // underscored: true,
     });
 
     return Quiz;

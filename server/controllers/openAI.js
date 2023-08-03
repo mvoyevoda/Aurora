@@ -1,15 +1,19 @@
 const { Configuration, OpenAIApi } = require("openai");
+const { Quiz } = require('../models');
+const { Question } = require('../models');
 
 async function generate(req, res) {
 
+  // Form Data
   const { prompt, questions, minutes, difficulty } = req.body;
 
+  // OpenAI Configuration
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
-
   const openai = new OpenAIApi(configuration);
 
+  // Generate quiz
   openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [{ role: "user", content: 
@@ -25,24 +29,44 @@ async function generate(req, res) {
       Please generate a quiz on this topic: "${prompt}", ${questions} questions, difficulty: ${difficulty}` 
     }],
   })
-    .then(response => {
-      const completion = response.data.choices[0].message.content;
-      console.log(completion);
-      // res.send(completion); //SEND ID OF QUIZ IN DATABASE
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'Failed to generate completion.' });
-    });
+  .then(response => {
+    const completion = response.data.choices[0].message.content;
+    console.log(completion);
 
+    // Parse the JSON response
+    // const quizContent = JSON.parse(completion);
+
+
+  // Save quiz inside database --> **Quizzes and Questions tables will be used**
     try {
-      const quiz = await Quiz.create({ prompt, questions, minutes, difficulty });
-        // Send the ID of the new row back to the client
-        res.json({ success: true, id: quiz.id });
+      // console.log(prompt + questions + difficulty)
+      const quiz = Quiz.create({
+        category: prompt,
+        quizLength: questions,
+        difficulty: difficulty
+      })
+      // .then(res => {res.json()}).then(json => console.log(json))
+
+      // Iterate through questions and create rows in the Questions table
+      // Assuming quizContent contains the questions as per your message's structure
+      // for (const question of quizContent.questions) {
+        // TODO: Create rows in the Questions table using question object
+        // Make sure to relate them to the quiz.id if there's a relationship between Quizzes and Questions
+      // }
+
+      // Send the ID of the new row back to the client
+      res.json({ success: true, id: quiz.id });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Failed to generate quiz.' });
     }
+
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Failed to generate completion.' });
+  });
+  
 }
 
 module.exports = { generate };
