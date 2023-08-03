@@ -89,25 +89,27 @@ export default function SignUp(){
             required
             inputRef={passwordRef}
             />
-            <Link href="#" variant="p" color = 'inherit' children="Forgot password?" 
+            <Link href="#" variant="p" color = 'inherit' 
             sx={{
                 position: 'relative',
                 left: '320px',
                 
-            }}/>
+            }}>
+                Forgot password?
+            </Link>
             <Button href="./login" 
             variant="outlined" 
-            children= "Already have an account?"
             sx={{
                 color: 'white',
                 border: '1px solid',
                 borderRadius: '50px',
                 display: 'block',
                 marginBottom: '20px' 
-            }}/>
+            }}>
+                Already have an account?
+            </Button>
             <Button variant="outlined"
             type="submit" 
-            children= "Sign Up" 
             sx={{
                 color: 'white',
                 border: '1px solid',
@@ -116,7 +118,9 @@ export default function SignUp(){
                 borderRadius: '50px',
                 '&:hover': {
                 }
-            }}/>
+            }}>
+                Sign Up
+            </Button>
 
          </form>
         </>
