@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import WLogo from '../images/WLogo.png'; // Replace the path with the actual path to your image
+import './styles/signup.css';
 
 export default function WCard() {
   return (
@@ -26,7 +27,7 @@ export default function WCard() {
       </Card>
 
       <Box sx={{ width: 700, paddingRight: 22, paddingTop: 10 }}>
-        <img src={WLogo} alt="AURORA" style={{ width: '100%', height: 'auto' }} />
+        <img src={WLogo} alt="AURORA"  className= 'rotate-image' style={{ width: '100%', height: 'auto', paddingLeft: '50px' }} />
       </Box>
     </Box>
   );

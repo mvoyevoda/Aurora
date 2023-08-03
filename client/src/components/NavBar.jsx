@@ -26,6 +26,7 @@ export default function NavBar() {
           </Typography>
           <Button
             color="inherit"
+            href='./login'
             sx={{
               backgroundColor: 'transparent',
               border: '1px solid white', // Add a white stroke
@@ -36,6 +37,7 @@ export default function NavBar() {
           </Button>
           <Button
             color="inherit"
+            href='./signup'
             sx={{
               backgroundColor: 'transparent',
               border: '1px solid white', // Add a white stroke
@@ -43,7 +45,7 @@ export default function NavBar() {
               marginLeft: '30px',
             }}
           >
-            Sign in
+            Sign up
           </Button>
         </Toolbar>
       </AppBar>
