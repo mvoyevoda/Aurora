@@ -35,7 +35,6 @@ exports.signup = [
                 throw new ValidationError('Validation error');
             }
 
-            // Check for existing user with same email or username
             const existingUser = await User.findOne({
                 where: {
                     [Op.or]: [
