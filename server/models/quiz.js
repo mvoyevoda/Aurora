@@ -5,14 +5,17 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
     class Quiz extends Model {
-      static associate(models) {
-        this.hasMany(models.Question, {
-            foreignKey: 'quizId',
-        });
-        this.hasMany(models.Attempt, {
-          foreignKey: 'quizId',
-        });
-      }
+        static associate(models) {
+            this.hasMany(models.Question, {
+                foreignKey: 'quizId',
+            });
+            this.hasMany(models.Attempt, {
+                foreignKey: 'quizId',
+            });
+            this.belongsTo(models.User, {
+                foreignKey: 'userId',
+            });
+        }
     }
 
     Quiz.init({
@@ -20,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
+            allowNull: false,
+        },
+        userId: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         category: {
@@ -48,7 +55,6 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Quiz',
         tableName: 'quizzes',
         timestamps: true,
-        // underscored: true,
     });
 
     return Quiz;
