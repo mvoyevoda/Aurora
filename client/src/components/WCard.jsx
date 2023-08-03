@@ -4,31 +4,57 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import WLogo from '../images/WLogo.png'; // Replace the path with the actual path to your image
+import WLogo from '../images/WLogo.png';
 import './styles/signup.css';
+import { Grid } from '@mui/material';
 
 export default function WCard() {
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 24 }}>
-      <Card sx={{ minWidth: 300, maxWidth: 700, minHeight: 300, textAlign: 'center', backgroundColor: 'rgba(212, 212, 212, 0.30)', boxShadow: 'none' }}>
-        <CardContent>
-          <Typography variant="body1" fontWeight="bold" fontSize={48} color={"white"} paddingTop={3} sx={{ lineHeight: 1 }}>
-            WELCOME TO
-          </Typography>
+    <Grid
+      container
+      justifyContent="center" // Center items horizontally
+      alignItems="center" // Center items vertically
+      spacing={2} // Add spacing between Grid items
+      sx={{
+        // Responsive layout adjustments
+        '@media (max-width: 700px)': {
+          flexDirection: 'column', // Stack items in a column on small screens
+        },
+      }}
+    >
+      <Grid item xs={12} sm={6}>
+        <Card
+          sx={{
+            minWidth: '200px', // Use relative units (e.g., 'px' or 'rem')
+            maxWidth: '80%', // Use relative units for maximum width
+            minHeight: '300px',
+            textAlign: 'center',
+            backgroundColor: 'rgba(212, 212, 212, 0.30)',
+            boxShadow: 'none',
+          }}
+        >
+          <CardContent>
+            <Typography variant="body1" fontWeight="bold" fontSize={{ xs: '2rem', sm: '3rem', md: '4rem' }} color="white" paddingTop={3} sx={{ lineHeight: 1 }}>
+              WELCOME TO
+            </Typography>
 
-          <Typography variant="body1" fontWeight="bold" fontSize={52} color={"white"} paddingTop={1} paddingBottom={1} sx={{ lineHeight: 1 }}>
-            AURORA
-          </Typography>
+            <Typography variant="body1" fontWeight="bold" fontSize={{ xs: '2.5rem', sm: '3.5rem', md: '4.5rem' }} color="white" paddingTop={1} paddingBottom={1} sx={{ lineHeight: 1 }}>
+              AURORA
+            </Typography>
 
-          <Typography variant="body2" fontWeight="light-bold" color={"white"} fontSize={27} paddingTop={1} sx={{ lineHeight: 1 }} >
-            Generate, assess, and improve with interactive quizzes. Track progress, receive valuable feedback, and unlock your learning potential.
-          </Typography>
-        </CardContent>
-      </Card>
+            <Typography variant="body2" fontWeight="light-bold" color="white" fontSize={{ xs: '1rem', sm: '1.5rem', md: '2rem' }} paddingTop={1} sx={{ lineHeight: 1 }}>
+              Generate, assess, and improve with interactive quizzes. Track progress, receive valuable feedback, and unlock your learning potential.
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
 
-      <Box sx={{ width: 700, paddingRight: 22, paddingTop: 10 }}>
-        <img src={WLogo} alt="AURORA"  className= 'rotate-image' style={{ width: '100%', height: 'auto', paddingLeft: '50px' }} />
-      </Box>
-    </Box>
+      <Grid item xs={12} sm={6}>
+        <Box sx={{ width: '100%', maxWidth: '80%', paddingRight: 22, paddingTop: 10, mx: 'auto' }}>
+          {/* Use 'auto' margin to center the image horizontally */}
+          <img src={WLogo} alt="AURORA" className="rotate-image" style={{ width: '100%', height: 'auto', paddingLeft: '10%' }} />
+        </Box>
+      </Grid>
+    </Grid>
   );
 }
