@@ -34,7 +34,7 @@ export default function LogIn(){
     return (
         <>
         <h1>Log In</h1>
-        <form onSubmit={ handleLogIn } className="signup_form">
+        <form onSubmit={handleLogIn} className="signup_form">
             <TextField
             sx={{
                 backgroundColor: 'rgba(217, 217, 217, 0.20)',
@@ -60,15 +60,16 @@ export default function LogIn(){
             required
             inputRef = { passwordRef }
             />
-            <Link href="#" variant="p" color = 'inherit' children="Forgot password?" 
+            <Link href="#" variant="p" color = 'inherit' 
             sx={{
                 position: 'relative',
                 left: '320px',
                 
-            }}/>
+            }}>
+                Forgot password?
+            </Link>
             <Button href="./signup" 
             variant="outlined" 
-            children= "Don't have an account?"
             sx={{
                 marginTop: '10px',
                 color: 'white',
@@ -76,11 +77,11 @@ export default function LogIn(){
                 borderRadius: '50px',
                 display: 'block',
                 marginBottom: '20px' 
-            }}/>
+            }}>
+                Don&apos;t have an account?
+            </Button>
             <Button variant="outlined"
             type="submit" 
-            children= "Log In" 
-            //onClick={handleLogIn}
             sx={{
                 color: 'white',
                 border: '1px solid',
@@ -89,10 +90,10 @@ export default function LogIn(){
                 borderRadius: '50px',
                 '&:hover': {
                 }
-            }}/>
-
+            }}>
+                Log In
+            </Button>
          </form>
-
         </>
     )
 }
