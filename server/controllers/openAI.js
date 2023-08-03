@@ -39,26 +39,28 @@ async function generate(req, res) {
 
   // Save quiz inside database --> **Quizzes and Questions tables will be used**
     try {
-      // console.log(prompt + questions + difficulty)
+
       const quiz = Quiz.create({
         category: prompt,
         quizLength: questions,
         difficulty: difficulty
+      }).then(quiz => {
+        
+        console.log("Created quiz with ID: " + quiz.id);
+        // Iterate through questions and create rows in the Questions table
+        // Assuming quizContent contains the questions as per your message's structure
+        // for (const question of quizContent.questions) {
+          // TODO: Create rows in the Questions table using question object
+          // Make sure to relate them to the quiz.id if there's a relationship between Quizzes and Questions
+        // }
+        // Send the ID of the new row back to the client
+        res.json({ success: true, id: quiz.id });
+
       })
-      // .then(res => {res.json()}).then(json => console.log(json))
 
-      // Iterate through questions and create rows in the Questions table
-      // Assuming quizContent contains the questions as per your message's structure
-      // for (const question of quizContent.questions) {
-        // TODO: Create rows in the Questions table using question object
-        // Make sure to relate them to the quiz.id if there's a relationship between Quizzes and Questions
-      // }
-
-      // Send the ID of the new row back to the client
-      res.json({ success: true, id: quiz.id });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Failed to generate quiz.' });
+      res.status(500).json({ error: 'Failed to add quiz to database.' });
     }
 
   })
