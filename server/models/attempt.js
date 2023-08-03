@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             });
 
             this.hasMany(models.Submission, {
-                foreignKey: 'AttemptId',
+                foreignKey: 'attemptId',
             });
         }
     }
@@ -49,7 +49,6 @@ module.exports = (sequelize, DataTypes) => {
             modelName: 'Attempt',
             tableName: 'attempts',
             timestamps: true,
-            // underscored: true,
         }
     );
     return Attempt;
