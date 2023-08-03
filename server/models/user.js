@@ -22,10 +22,6 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false,
         },
-        quizId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
         userName: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -56,5 +52,6 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'users',
         timestamps: true,
     });
+
     return User;
 };
