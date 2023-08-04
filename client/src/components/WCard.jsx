@@ -16,21 +16,26 @@ export default function WCard() {
       alignItems="center" // Center items vertically
       spacing={2} // Add spacing between Grid items
       sx={{
+        // Add left padding to shift the content to the right
+        paddingLeft: '120px',
         // Responsive layout adjustments
         '@media (max-width: 700px)': {
-          flexDirection: 'column', // Stack items in a column on small screens
+          flexDirection: 'column', 
+          paddingLeft: 0, // Remove left padding on smaller screens
         },
       }}
     >
       <Grid item xs={12} sm={6}>
         <Card
           sx={{
-            minWidth: '200px', // Use relative units (e.g., 'px' or 'rem')
-            maxWidth: '80%', // Use relative units for maximum width
+            minWidth: '200px', 
+            maxWidth: '80%', 
             minHeight: '300px',
             textAlign: 'center',
-            backgroundColor: 'rgba(212, 212, 212, 0.30)',
+            backgroundColor: 'rgba(212, 212, 212, 0.0)',
             boxShadow: 'none',
+            // Add right margin to shift the card to the right
+            marginRight: '50px',
           }}
         >
           <CardContent>
@@ -51,7 +56,6 @@ export default function WCard() {
 
       <Grid item xs={12} sm={6}>
         <Box sx={{ width: '100%', maxWidth: '80%', paddingRight: 22, paddingTop: 10, mx: 'auto' }}>
-          {/* Use 'auto' margin to center the image horizontally */}
           <img src={WLogo} alt="AURORA" className="rotate-image" style={{ width: '100%', height: 'auto', paddingLeft: '10%' }} />
         </Box>
       </Grid>
