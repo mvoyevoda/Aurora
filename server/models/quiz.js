@@ -6,7 +6,15 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Quiz extends Model {
         static associate(models) {
-            // Define associations here if needed
+            this.hasMany(models.Question, {
+                foreignKey: 'quizId',
+            });
+            this.hasMany(models.Attempt, {
+                foreignKey: 'quizId',
+            });
+            // this.belongsTo(models.User, {
+            //     foreignKey: 'userId',
+            // });
         }
     }
 
@@ -16,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
         },
         category: {
             type: DataTypes.STRING,
@@ -27,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
         difficulty: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
         },
         quizLength: {
             type: DataTypes.INTEGER,
@@ -43,7 +55,6 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'Quiz',
         tableName: 'quizzes',
         timestamps: true,
-        underscored: true,
     });
 
     return Quiz;

@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SignUp from "./views/signup";
 import LogIn from "./views/login";
-import Welcome from "./views/welcome";;
+import Welcome from "./views/welcome";
 import App from "./views/App";
-
+import Portal from "./components/Portal";
 import "./styles/index.css";
 
 // import '@fontsource/roboto/300.css';
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/app",
     element: <App />,
+  },
+  {
+    path: "/portal/:id", 
+    element: <Portal />
   },
 ]);
 

@@ -1,12 +1,15 @@
 'use strict';
-const {
-    Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
     class Submission extends Model {
         static associate(models) {
-            // Define associations here if needed
+            this.belongsTo(models.Attempt, {
+                foreignKey: 'attemptId',
+            });
+            this.belongsTo(models.Question, {
+                foreignKey: 'questionId',
+            });
         }
     }
 
@@ -23,12 +26,19 @@ module.exports = (sequelize, DataTypes) => {
         isCorrect: {
             type: DataTypes.BOOLEAN,
         },
+        attemptId: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        questionId: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
     }, {
         sequelize,
         modelName: 'Submission',
         tableName: 'submissions',
         timestamps: true,
-        underscored: true,
     });
     return Submission;
 };

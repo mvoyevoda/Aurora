@@ -6,7 +6,12 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         static associate(models) {
-            // Define associations here if needed
+            this.hasMany(models.Attempt, {
+                foreignKey: 'userId',
+            });
+            // this.hasMany(models.Quiz, {
+            //     foreignKey: 'userId',
+            // });
         }
     }
 
@@ -29,9 +34,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        quizzesGenerated: {
-            type: DataTypes.STRING,
-        },
         bestCategory: {
             type: DataTypes.STRING,
         },
@@ -44,14 +46,12 @@ module.exports = (sequelize, DataTypes) => {
         accountType: {
             type: DataTypes.INTEGER,
         },
-        premiumAccount: {
-            type: DataTypes.BOOLEAN,
-        },
     }, {
         sequelize,
         modelName: 'User',
         tableName: 'users',
         timestamps: true,
     });
+
     return User;
 };
