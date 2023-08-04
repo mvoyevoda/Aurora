@@ -6,6 +6,8 @@ import "../styles/signup.css"
 import Link from '@mui/material/Link';
 import axios from 'axios';
 import HomeNB from "../components/HomeNB";
+import GoogleIcon from '@mui/icons-material/Google';
+
 
 export default function SignUp(){
 
@@ -41,13 +43,27 @@ export default function SignUp(){
         <>
         <HomeNB/>
          <h1>Sign Up</h1>
+    <Button
+      variant="contained"
+      startIcon={<GoogleIcon />}
+      onClick={() => {
+        // Handle the "Sign Up with Google" button click
+      }}>
+      Sign Up with Google
+    </Button>
+
          <form onSubmit={handleSignUp} className="signup_form">
             <TextField
             sx={{
                 backgroundColor: 'rgba(217, 217, 217, 0.20)',
-                marginBottom: '10px'
+                marginBottom: '10px',
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: 'black',
+                  },
+          
             }}
-            variant="standard"
+            color='text'
+            variant="filled"
             label= "Full Name"
             id="full_name"
             fullWidth= "true"
@@ -57,9 +73,14 @@ export default function SignUp(){
             <TextField
             sx={{
                 backgroundColor: 'rgba(217, 217, 217, 0.20)',
-                marginBottom: '10px'
+                marginBottom: '10px',
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: 'black',
+                  },
+          
             }}
-            variant="standard"
+            color='text'
+            variant="filled"
             label= "Username"
             id="username"
             fullWidth= "true"
@@ -69,9 +90,14 @@ export default function SignUp(){
             <TextField
             sx={{
                 backgroundColor: 'rgba(217, 217, 217, 0.20)',
-                marginBottom: '10px'
+                marginBottom: '10px',
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: 'black',
+                  },
+          
             }}
-            variant="standard"
+            color='text'
+            variant="filled"
             label= "Email"
             id="email"
             fullWidth= "true"
@@ -81,9 +107,14 @@ export default function SignUp(){
             <TextField
             sx={{
                 backgroundColor: 'rgba(217, 217, 217, 0.20)',
-                marginBottom: '10px'
+                marginBottom: '10px',
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: 'black',
+                  },
+          
             }}
-            variant="standard"
+            color='text'
+            variant="filled"
             label= "Password"
             id="password"
             type="password"
@@ -106,7 +137,12 @@ export default function SignUp(){
                 border: '1px solid',
                 borderRadius: '50px',
                 display: 'block',
-                marginBottom: '20px' 
+                marginBottom: '20px' ,
+                '&:hover': {
+                    backgroundColor: 'rgba(217, 217, 217, 0.20)',
+                    borderColor: 'white'
+                }
+
             }}>
                 Already have an account?
             </Button>
@@ -119,6 +155,8 @@ export default function SignUp(){
                 width: '100%',
                 borderRadius: '50px',
                 '&:hover': {
+                    backgroundColor: 'rgba(217, 217, 217, 0.20)',
+                    borderColor: 'white'
                 }
             }}>
                 Sign Up

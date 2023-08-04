@@ -27,6 +27,6 @@ input:-webkit-autofill:active  {
   }
   
   .rotate-image {
-    animation: rotate 20s linear infinite; /* Adjust the duration (10s) as desired */
+    animation: rotate 20s linear infinite; 
   }
   
