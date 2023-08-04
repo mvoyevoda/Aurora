@@ -13,7 +13,7 @@ export default function Configurator() {
     const difficulty = e.target.difficulty.value;
 
     try {
-      const response = await axios.post("http://localhost:4000/api/openAI/generate", {
+      const response = await axios.post("/api/openAI/generate", {
         prompt,
         questions,
         minutes,
