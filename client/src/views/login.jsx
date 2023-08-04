@@ -13,12 +13,16 @@ export default function LogIn() {
 
   const navigate = useNavigate();
 
+  const handleForgotPasswordClick = () => {
+    navigate('/forgotPassword');
+  }
+
   const handleLogIn = async (e) => {
     e.preventDefault();
     try {
       const response = await axios({
         method: "post",
-        url: "http://localhost:4000/api/auth/login",
+        url: "/api/auth/login",
         data: {
           email: emailRef.current.value,
           password: passwordRef.current.value,
@@ -61,7 +65,7 @@ export default function LogIn() {
           required
           inputRef={passwordRef}
         />
-        <Link
+        <Link onClick={handleForgotPasswordClick}
           href="#"
           variant="p"
           color="inherit"

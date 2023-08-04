@@ -21,7 +21,7 @@ export default function SignUp(){
         try {
           const response = await axios({
             method: 'post',
-            url: 'http://localhost:4000/api/auth/signup',
+            url: '/api/auth/signup',
             data: {
               full_name: full_nameRef.current.value,
               userName: userNameRef.current.value,
