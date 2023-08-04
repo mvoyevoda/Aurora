@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import "../styles/signup.css"
 import Link from '@mui/material/Link';
 import axios from 'axios';
+import HomeNB from "../components/HomeNB";
 
 export default function SignUp(){
 
@@ -38,6 +39,7 @@ export default function SignUp(){
 
     return (
         <>
+        <HomeNB/>
          <h1>Sign Up</h1>
          <form onSubmit={handleSignUp} className="signup_form">
             <TextField
