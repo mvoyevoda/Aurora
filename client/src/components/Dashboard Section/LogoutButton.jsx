@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function NavBar() {
+export default function LogoutButton() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -12,42 +12,19 @@ export default function NavBar() {
         sx={{ backgroundColor: "transparent", boxShadow: "none" }}
       >
         <Toolbar sx={{ justifyContent: "flex-start", paddingLeft: "16px" }}>
-          {/* <Button
-            color="inherit"
-            sx={{
-              marginRight: '16px',
-              backgroundColor: 'transparent',
-              border: '1px solid white', // Add a white stroke
-              borderRadius: '4px', // Optional: add border radius to make the edges smoother
-            }}
-          >
-            Home
-          </Button> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             &nbsp;
           </Typography>
           <Button
             color="inherit"
-            href="./login"
+            href="/"
             sx={{
               backgroundColor: "transparent",
               border: "1px solid white",
               borderRadius: "4px", 
             }}
           >
-            Log In
-          </Button>
-          <Button
-            color="inherit"
-            href="./signup"
-            sx={{
-              backgroundColor: "transparent",
-              border: "1px solid white",
-              borderRadius: "4px", 
-              marginLeft: "30px",
-            }}
-          >
-            Sign up
+            Log Out
           </Button>
         </Toolbar>
       </AppBar>

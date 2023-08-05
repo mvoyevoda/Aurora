@@ -5,23 +5,21 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import WLogo from '../images/WLogo.png';
-import './styles/signup.css';
+import '../styles/signup.css';
 import { Grid } from '@mui/material';
 
 export default function WCard() {
   return (
-    <Grid
+<Grid
       container
       justifyContent="center" // Center items horizontally
       alignItems="center" // Center items vertically
       spacing={2} // Add spacing between Grid items
       sx={{
-        // Add left padding to shift the content to the right
         paddingLeft: '120px',
-        // Responsive layout adjustments
         '@media (max-width: 700px)': {
           flexDirection: 'column', 
-          paddingLeft: 0, // Remove left padding on smaller screens
+          paddingLeft: 0, 
         },
       }}
     >
@@ -56,7 +54,7 @@ export default function WCard() {
 
       <Grid item xs={12} sm={6}>
         <Box sx={{ width: '100%', maxWidth: '80%', paddingRight: 22, paddingTop: 10, mx: 'auto' }}>
-          <img src={WLogo} alt="AURORA" className="rotate-image" style={{ width: '100%', height: 'auto', paddingLeft: '10%' }} />
+          <img src={WLogo} alt="AURORA" className="rotate-image" style={{ width: '100%', height: 'auto'}} />
         </Box>
       </Grid>
     </Grid>
