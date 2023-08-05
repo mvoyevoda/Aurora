@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Dashboard from './views/dashboard';
 import SignUp from "./views/signup";
 import LogIn from "./views/login";
 import Welcome from "./views/welcome";
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LogIn />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
   {
     path: "/app",
