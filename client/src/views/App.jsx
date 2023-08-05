@@ -7,7 +7,7 @@ function App() {
   // const [quiz, setQuiz] = useState({});
 
   return (
-    <div className="app" >
+    <div className="" >
       {/* {quiz ? <Configurator /> : <Portal />} */}
       <Configurator />
     </div>
