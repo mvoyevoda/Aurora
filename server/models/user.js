@@ -46,6 +46,12 @@ module.exports = (sequelize, DataTypes) => {
         accountType: {
             type: DataTypes.INTEGER,
         },
+        resetPasswordToken: {
+            type: DataTypes.STRING,
+        },
+        resetPasswordExpires: {
+            type: DataTypes.DATE,
+        },
     }, {
         sequelize,
         modelName: 'User',

@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '@mui/material/Button';
 
 const SignUpButton = () => {
@@ -6,7 +5,6 @@ const SignUpButton = () => {
     <Button
       variant="contained"
       type="submit"
-      children="Sign Up for free"
       href="./signup"
       sx={{
         color: 'white',
@@ -15,7 +13,9 @@ const SignUpButton = () => {
         borderRadius: '50px',
         '&:hover': { backgroundColor: 'rgba(212, 212, 212, 0.30)' }
       }}
-    />
+    >
+      Sign Up for free
+    </Button>
   );
 };
 
