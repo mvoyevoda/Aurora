@@ -1,6 +1,6 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-
+//Will be for footer
 export default function NavSettings() {
   return (
     <Button
