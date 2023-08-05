@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "../styles/configurator.css"
+import LogoutBtn from './LogoutBtn'
 
 export default function Configurator() {
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +36,9 @@ export default function Configurator() {
   };
 
   return (
-    <div className="configurator">
+    <>
+      <LogoutBtn />
+      <div className="configurator">
       <form onSubmit={handleSubmit} className="">
         <input type="text" name="prompt" className="prompt" placeholder="summarize the quiz topic in a few words... " />
         <input type="text" name="questions" className="questions" placeholder="# of questions" />
@@ -43,5 +47,6 @@ export default function Configurator() {
         <input type="submit" value="Generate" />
       </form>
     </div>
+    </>
   );
 }
