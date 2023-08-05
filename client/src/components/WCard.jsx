@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import WLogo from '../images/WLogo.png';
-import './styles/signup.css';
+import '../styles/signup.css';
 import { Grid } from '@mui/material';
 
 export default function WCard() {
