@@ -4,17 +4,17 @@ const port = 4000;
 const session = require("express-session");
 require("dotenv").config();
 const cors = require("cors");
-const authRoutes = require('./routes/authRoutes');
-const openAIRoutes = require('./routes/openAIRoutes');
-const userRoutes = require('./routes/userRoutes');
-const quizRoutes = require('./routes/quizRoutes');
+const authRoutes = require("./routes/authRoutes");
+const openAIRoutes = require("./routes/openAIRoutes");
+const userRoutes = require("./routes/userRoutes");
+const quizRoutes = require("./routes/quizRoutes");
 const {
   validationErrorHandler,
   duplicateErrorHandler,
   dbErrorHandler,
   forbiddenErrorHandler,
-  notFoundErrorHandler
-} = require('./middleware/errorHandlers');
+  notFoundErrorHandler,
+} = require("./middleware/errorHandlers");
 
 app.use(
   cors({
@@ -25,7 +25,7 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send("Aurora");
 });
 
@@ -38,16 +38,17 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
+      httpOnly: true,
       maxAge: 60 * 60 * 1000, // 1 hour
     },
   })
 );
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/openAI', openAIRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/quizzes', quizRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/openAI", openAIRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/quizzes", quizRoutes);
 
 app.use((req, res, next) => {
   console.log(`Request: ${req.method} ${req.originalUrl}`);
@@ -67,7 +68,7 @@ app.use(notFoundErrorHandler);
 
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).send('Something broke!');
+  res.status(500).send("Something broke!");
   next();
 });
 

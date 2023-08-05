@@ -10,7 +10,7 @@ export default function Portal() {
   useEffect(() => {
     async function fetchQuestions() {
       try {
-        const response = await axios.get(`http://localhost:4000/api/quizzes/${id}`);
+        const response = await axios.get(`/api/quizzes/${id}`);
         setQuestions(response.data);
       } catch (error) {
         console.error("Failed to fetch quiz:", error);
@@ -21,7 +21,7 @@ export default function Portal() {
   }, [id]);
 
   return (
-    <>
+    <> 
       <h1 className="">QUIZ ID: {id}</h1>
       <div className="quiz-container" >
         {questions.length > 0 && (

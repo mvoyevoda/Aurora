@@ -9,6 +9,7 @@ import Portal from "./components/Portal";
 import ForgotPassword from './views/forgotPassword';
 import ResetPassword from './views/resetPassword';
 import "./styles/index.css";
+import ProtectedRoute from './components/ProtectedRoute';
 
 // import '@fontsource/roboto/300.css';
 // import '@fontsource/roboto/400.css';
@@ -20,6 +21,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import AuthProvider from './contexts/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -40,11 +42,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/app",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/portal/:id", 
-    element: <Portal />
+    element: (
+    <ProtectedRoute>
+      <Portal />
+    </ProtectedRoute>
+    ),
   },
   {
     path: "/forgotPassword",
@@ -59,6 +69,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 );
