@@ -12,7 +12,7 @@ export default function NavGenerator() {
         boxShadow: "none", // Remove drop shadow
         border: "none", // Remove border
         width: "100%", // Set button width to 100% of the card width
-        height: "8vh", // Set button height to 100% of the card height
+        height: "9vh", // Set button height to 100% of the card height
         fontSize: "15px", // Change the font size of the text
         "&:hover": {
           backgroundColor: "rgba(212, 212, 212, .08)",
