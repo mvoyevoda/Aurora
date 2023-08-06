@@ -26,20 +26,7 @@ const {
       next(err);
     }
   };
-  
-  async function getCurrentUser(req, res, next) {
-    try {
-      const user = await User.findByPk(req.user.id);
-      if (!user) {
-        throw new NotFoundError("User not found");
-      }
-      res.status(200).json(user);
-    } catch (err) {
-      console.log(err);
-      next(err);
-    }
-  };
-  
+
   async function deleteUser(req, res, next) {
     try {
       const user = await User.findByPk(req.params.id);
@@ -56,9 +43,9 @@ const {
     }
   };
   
+  
   module.exports = {
     getAllUsers,
     getUserById,
     deleteUser,
-    getCurrentUser
   };
