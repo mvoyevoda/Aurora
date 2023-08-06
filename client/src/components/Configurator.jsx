@@ -9,8 +9,6 @@ import Button from "@mui/material/Button";
 
 import "../styles/signup.css";
 
-
-
 // eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
   configurator: {

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import "../styles/portal.css"
+import "../styles/portal.css";
 
 export default function Portal() {
   const { id } = useParams();
   const [questions, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -22,35 +23,45 @@ export default function Portal() {
 
   return (
     <> 
-      <h1 className="">QUIZ ID: {id}</h1>
-      <div className="quiz-container" >
-        {questions.length > 0 && (
-          <div>
-            {questions.map((question, questionIndex) => (
-              <div key={questionIndex}>
-                <h3>{question.questionText}</h3>
-                {question.questionType === 0 && question.answerChoices.map((choice, choiceIndex) => (
-                  <button key={choiceIndex} onClick={() => { /* Handle the click event here */ }}>
-                    {choice}
-                  </button>
-                ))}
-                {question.questionType === 1 && (
-                  <div>
-                    <button onClick={() => { /* Handle true click */ }}>True</button>
-                    <button onClick={() => { /* Handle false click */ }}>False</button>
-                  </div>
-                )}
-                {question.questionType === 2 && (
-                  <div>
-                    <input type="text" placeholder="Enter your answer" />
-                  </div>
-                )}
-                {/* Render other fields as needed */}
-              </div>
-            ))}
-          </div>
+      <h3>{currentQuestion+1} / {questions.length}</h3>
+      <h1 className="question-text">
+        {questions[currentQuestion]?.questionText}
+      </h1>
+      <div className="answer-choices">
+        {/* Multiple Choice Container */}
+        {questions[currentQuestion]?.questionType === 0 && (
+          questions[currentQuestion]?.answerChoices?.map((choice, index) => (
+            <button key={index} onClick={() => {
+              // CHOOSE ANSWER AND SUBMIT LOGIC
+            }}>
+              {choice}
+            </button>
+          ))
+        )}
+        {/* True/False Container */}
+        {questions[currentQuestion]?.questionType === 1 && (
+          <>         
+            <button >True</button>
+            <button >False</button>
+          </>
+        )}
+        {/* True/False Container */}
+        {questions[currentQuestion]?.questionType === 2 && (
+          <>         
+          <input type="text" />
+          </>
         )}
       </div>
+      {currentQuestion !== 0 && (
+        <button onClick={() => setCurrentQuestion(currentQuestion - 1)}>
+          Prev
+        </button>
+      )}
+      {currentQuestion !== questions.length-1 && (
+        <button onClick={() => setCurrentQuestion(currentQuestion + 1)}>
+          Next
+        </button>
+      )}
     </>
   );
 }
