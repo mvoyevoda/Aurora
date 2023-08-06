@@ -1,12 +1,12 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 //Done with GeneratorButton
-export default function NavGenerator() {
+export default function NavDashboard() {
   return (
     <Button
       variant="contained"
       color="primary"
-      href="./generator"
+      href="./dashboard"
       sx={{
         backgroundColor: "rgba(212, 212, 212, .05)", // Change the color and opacity here
         color: "rgba(255, 255, 255, .4)", // Change the text color to white with reduced opacity
@@ -21,7 +21,7 @@ export default function NavGenerator() {
         },
       }}
     >
-      ^ Generator ^
+      v Dashboard v
     </Button>
   );
 }

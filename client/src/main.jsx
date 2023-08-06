@@ -4,7 +4,7 @@ import Dashboard from './views/dashboard';
 import SignUp from "./views/signup";
 import LogIn from "./views/login";
 import Welcome from "./views/welcome";
-import App from "./views/App";
+import App from "./views/Generator";
 import Portal from "./components/Portal";
 import ForgotPassword from './views/forgotPassword';
 import ResetPassword from './views/resetPassword';
@@ -43,11 +43,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/app",
+    path: "/generator",
     element: (
-      <ProtectedRoute>
+      //<ProtectedRoute>
         <App />
-      </ProtectedRoute>
+      //</ProtectedRoute>
     ),
     errorElement: <ErrorPage />,
   },
