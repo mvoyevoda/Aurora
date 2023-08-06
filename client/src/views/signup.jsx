@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -13,6 +13,8 @@ export default function SignUp() {
   const userNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -30,6 +32,11 @@ export default function SignUp() {
       navigate("/app");
     } catch (error) {
       console.error(`Error: ${error}`);
+      if(error.response){
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("An unexpected error has occured. Try again.");
+      }
     }
   };
 
@@ -48,6 +55,7 @@ export default function SignUp() {
       </Button>
 
       <form onSubmit={handleSignUp} className="signup_form">
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         <TextField
           sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",

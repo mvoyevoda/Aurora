@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -11,6 +11,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function LogIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
@@ -25,7 +26,11 @@ export default function LogIn() {
       await login(emailRef.current.value, passwordRef.current.value);
       navigate("/app");
     } catch (error) {
-      // You can show a user-friendly error message here based on the error.
+      if(error.message.includes("401")) {
+        setErrorMessage("Invalid email or password.");
+      } else {
+        setErrorMessage("An unexpected error has occured. Try again.");
+      }
       console.error(`Error: ${error}`);
     }
   };
@@ -34,6 +39,7 @@ export default function LogIn() {
     <>
       <HomeNB />
       <h1>Log In</h1>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       <Button
         variant="contained"
         startIcon={<GoogleIcon />}
