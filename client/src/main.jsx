@@ -10,6 +10,7 @@ import ForgotPassword from './views/forgotPassword';
 import ResetPassword from './views/resetPassword';
 import "./styles/index.css";
 import ProtectedRoute from './components/ProtectedRoute';
+import ErrorPage from './ErrorPage';
 
 // import '@fontsource/roboto/300.css';
 // import '@fontsource/roboto/400.css';
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/app",
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
         <App />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorPage />,
   },
   {
     path: "/portal/:id", 
@@ -55,6 +58,7 @@ const router = createBrowserRouter([
       <Portal />
     </ProtectedRoute>
     ),
+    errorElement: <ErrorPage />,
   },
   {
     path: "/forgotPassword",
