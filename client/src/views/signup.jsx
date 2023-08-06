@@ -54,119 +54,119 @@ export default function SignUp() {
         Sign Up with Google
       </Button>
 
-      <form onSubmit={handleSignUp} className="signup_form">
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-        <TextField
-          sx={{
-            backgroundColor: "rgba(217, 217, 217, 0.20)",
-            marginBottom: "10px",
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "black",
-            },
-          }}
-          color="text"
-          variant="filled"
-          label="Full Name"
-          id="full_name"
-          fullWidth="true"
-          required
-          inputRef={full_nameRef}
-        />
-        <TextField
-          sx={{
-            backgroundColor: "rgba(217, 217, 217, 0.20)",
-            marginBottom: "10px",
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "black",
-            },
-          }}
-          color="text"
-          variant="filled"
-          label="Username"
-          id="username"
-          fullWidth="true"
-          required
-          inputRef={userNameRef}
-        />
-        <TextField
-          sx={{
-            backgroundColor: "rgba(217, 217, 217, 0.20)",
-            marginBottom: "10px",
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "black",
-            },
-          }}
-          color="text"
-          variant="filled"
-          label="Email"
-          id="email"
-          fullWidth="true"
-          required
-          inputRef={emailRef}
-        />
-        <TextField
-          sx={{
-            backgroundColor: "rgba(217, 217, 217, 0.20)",
-            marginBottom: "10px",
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "black",
-            },
-          }}
-          color="text"
-          variant="filled"
-          label="Password"
-          id="password"
-          type="password"
-          fullWidth="true"
-          required
-          inputRef={passwordRef}
-        />
-        <Link
-          href="#"
-          variant="p"
-          color="inherit"
-          sx={{
-            position: "relative",
-            left: "320px",
-          }}
-        >
-          Forgot password?
-        </Link>
-        <Button
-          href="./login"
-          variant="outlined"
-          sx={{
-            color: "white",
-            border: "1px solid",
-            borderRadius: "50px",
-            display: "block",
-            marginBottom: "20px",
-            "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
-              borderColor: "white",
-            },
-          }}
-        >
-          Already have an account?
-        </Button>
-        <Button
-          variant="outlined"
-          type="submit"
-          sx={{
-            color: "white",
-            border: "1px solid",
-            display: "block",
-            width: "100%",
-            borderRadius: "50px",
-            "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
-              borderColor: "white",
-            },
-          }}
-        >
-          Sign Up
-        </Button>
-      </form>
+<form onSubmit={handleSignUp} className="signup_form">
+  {errorMessage && <div className="error-message">{errorMessage}</div>}
+  <TextField
+    sx={{
+      backgroundColor: "rgba(217, 217, 217, 0.20)",
+      marginBottom: "1rem", // Relative unit
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "black",
+      },
+    }}
+    color="text"
+    variant="filled"
+    label="Full Name"
+    id="full_name"
+    fullWidth={true}
+    required
+    inputRef={full_nameRef}
+  />
+  <TextField
+    sx={{
+      backgroundColor: "rgba(217, 217, 217, 0.20)",
+      marginBottom: "1rem", // Relative unit
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "black",
+      },
+    }}
+    color="text"
+    variant="filled"
+    label="Username"
+    id="username"
+    fullWidth={true}
+    required
+    inputRef={userNameRef}
+  />
+  <TextField
+    sx={{
+      backgroundColor: "rgba(217, 217, 217, 0.20)",
+      marginBottom: "1rem", // Relative unit
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "black",
+      },
+    }}
+    color="text"
+    variant="filled"
+    label="Email"
+    id="email"
+    fullWidth={true}
+    required
+    inputRef={emailRef}
+  />
+  <TextField
+    sx={{
+      backgroundColor: "rgba(217, 217, 217, 0.20)",
+      marginBottom: "1rem", // Relative unit
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "black",
+      },
+    }}
+    color="text"
+    variant="filled"
+    label="Password"
+    id="password"
+    type="password"
+    fullWidth={true}
+    required
+    inputRef={passwordRef}
+  />
+  <Link
+    href="#"
+    variant="p"
+    color="inherit"
+    sx={{
+      position: "relative",
+      left: "19rem", 
+    }}
+  >
+    Forgot password?
+  </Link>
+  <Button
+    href="./login"
+    variant="outlined"
+    sx={{
+      color: "white",
+      border: "1px solid",
+      borderRadius: "50px",
+      display: "block",
+      marginBottom: "2rem", 
+      "&:hover": {
+        backgroundColor: "rgba(217, 217, 217, 0.20)",
+        borderColor: "white",
+      },
+    }}
+  >
+    Already have an account?
+  </Button>
+  <Button
+    variant="outlined"
+    type="submit"
+    sx={{
+      color: "white",
+      border: "1px solid",
+      display: "block",
+      width: "100%",
+      borderRadius: "50px",
+      "&:hover": {
+        backgroundColor: "rgba(217, 217, 217, 0.20)",
+        borderColor: "white",
+      },
+    }}
+  >
+    Sign Up
+  </Button>
+</form>
     </>
   );
 }
