@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             });
         }
     }
-
+// 
     Submission.init({
         id: {
             type: DataTypes.INTEGER,
