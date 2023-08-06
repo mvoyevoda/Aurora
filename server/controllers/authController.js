@@ -280,3 +280,30 @@ exports.resetPassword = async (req, res) => {
     });
   }
 };
+
+exports.getCurrentUser = async (req, res, next) => {
+  try {
+    // Check the existence of req.user and log its value
+    if (!req.user) {
+      console.log("req.user is undefined or null");
+      return res.status(401).json({ message: "No authenticated user" });
+    }
+    
+    console.log("req.user.id:", req.user.id);
+    
+    if (!req.user.id) {
+      console.log("req.user.id is undefined or null");
+      return res.status(401).json({ message: "No authenticated user" });
+    }
+
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found in the database" });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+

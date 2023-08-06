@@ -25,10 +25,6 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("Aurora");
-});
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -44,12 +40,6 @@ app.use(
   })
 );
 
-// Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/openAI", openAIRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/quizzes", quizRoutes);
-
 app.use((req, res, next) => {
   console.log(`Request: ${req.method} ${req.originalUrl}`);
   res.on("finish", () => {
@@ -58,6 +48,16 @@ app.use((req, res, next) => {
   });
   next();
 });
+
+app.get("/", (req, res) => {
+  res.send("Aurora");
+});
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/openAI", openAIRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/quizzes", quizRoutes);
 
 // Errors
 app.use(validationErrorHandler);
