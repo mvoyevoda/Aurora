@@ -2,8 +2,8 @@
 import NavGenerator from "../components/Dashboard Section/NavGenerator";
 import {QuizGen} from "../components/Dashboard Section/QuizGen";
 import FavCategory from "../components/Dashboard Section/FavCategory";
-//import NavSettings from "../components/Dashboard Section/NavSettings"\
-//Will add back later
+import RecentTitle from "../components/Dashboard Section/RecentQuizzes/RecentTitle";
+//import NavSettings from "../components/Dashboard Section/NavSettings"
 
 export default function Dashboard() {
   return (
@@ -11,6 +11,7 @@ export default function Dashboard() {
       <NavGenerator />
       <QuizGen />
       <FavCategory />
+      <RecentTitle />
     </>
   );
 }
