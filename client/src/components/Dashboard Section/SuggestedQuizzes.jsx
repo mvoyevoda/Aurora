@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function RecentTitle() {
+export default function SuggestedTitle() {
   return (
     <Card 
     sx={{
@@ -21,7 +21,7 @@ export default function RecentTitle() {
         sx={{ mb: 1.5 }} 
         color="text.secondary"
         >
-          Recent
+          Suggested
         </Typography>
         <p>1</p>
         <p>2</p>
