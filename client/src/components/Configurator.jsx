@@ -86,7 +86,6 @@ export default function Configurator() {
 
   return (
     <>
-      <LogoutBtn />
       <div className={classes.configurator}>
       <form onSubmit={handleSubmit}>
         <Input
@@ -101,6 +100,7 @@ export default function Configurator() {
           </label>
           <Slider
             value={questions}
+            name="questions"
             onChange={handleQuestionsChange}
             step={1}
             min={5}
@@ -115,6 +115,7 @@ export default function Configurator() {
           </label>
           <Slider
             value={minutes}
+            name="mins"
             onChange={handleMinutesChange}
             step={5}
             min={5}
@@ -129,6 +130,7 @@ export default function Configurator() {
           </label>
           <Slider
             value={difficulty}
+            name="difficulty"
             onChange={handleDifficultyChange}
             step={1}
             min={1}
