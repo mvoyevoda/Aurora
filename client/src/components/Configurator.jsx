@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 //import "../styles/configurator.css"
-import LogoutBtn from './LogoutBtn'
-import React, { useState } from "react";
+import { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Slider from "@mui/material/Slider";
 import Input from "@mui/material/Input";
@@ -12,6 +11,7 @@ import "../styles/signup.css";
 
 
 
+// eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
   configurator: {
     display: "flex",
@@ -74,7 +74,7 @@ export default function Configurator() {
       // If successful, redirect to the new URL with the ID from the response
       if (response.data.success) {
         const id = response.data.id;
-        // window.location.href = `http://localhost:5173/portal/:id`;
+        //window.location.href = `http://localhost:5173/portal/:id`;
         navigate(`/portal/${id}`);
       } else {
         console.error("Failed to generate quiz");
