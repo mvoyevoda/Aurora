@@ -4,7 +4,7 @@ import {QuizGen} from "../components/Dashboard Section/QuizGen";
 import FavCategory from "../components/Dashboard Section/FavCategory";
 import RecentTitle from "../components/Dashboard Section/RecentQuizzes/RecentTitle";
 import "../styles/dashboard.css"
-import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes";
+import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes/SuggestedQuizzes";
 //import NavSettings from "../components/Dashboard Section/NavSettings"
 
 
