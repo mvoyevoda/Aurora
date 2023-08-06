@@ -16,7 +16,7 @@ export default function WCard() {
       alignItems="center" // Center items vertically
       spacing={2} // Add spacing between Grid items
       sx={{
-        paddingLeft: '120px',
+        paddingLeft: '7.5em',
         '@media (max-width: 700px)': {
           flexDirection: 'column', 
           paddingLeft: 0, 
@@ -26,14 +26,14 @@ export default function WCard() {
       <Grid item xs={12} sm={6}>
         <Card
           sx={{
-            minWidth: '200px', 
+            minWidth: '12.5em', 
             maxWidth: '80%', 
-            minHeight: '300px',
+            minHeight: '18.75',
             textAlign: 'center',
             backgroundColor: 'rgba(212, 212, 212, 0.0)',
             boxShadow: 'none',
             // Add right margin to shift the card to the right
-            marginRight: '50px',
+            marginRight: '3.125em',
           }}
         >
           <CardContent>

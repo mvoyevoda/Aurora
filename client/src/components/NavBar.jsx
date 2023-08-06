@@ -11,46 +11,45 @@ export default function NavBar() {
         position="static"
         sx={{ backgroundColor: "transparent", boxShadow: "none" }}
       >
-        <Toolbar sx={{ justifyContent: "flex-start", paddingLeft: "16px" }}>
-          {/* <Button
-            color="inherit"
-            sx={{
-              marginRight: '16px',
-              backgroundColor: 'transparent',
-              border: '1px solid white', // Add a white stroke
-              borderRadius: '4px', // Optional: add border radius to make the edges smoother
-            }}
-          >
-            Home
-          </Button> */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            &nbsp;
-          </Typography>
-          <Button
-            color="inherit"
-            href="./login"
-            sx={{
-              backgroundColor: "transparent",
-              border: "1px solid white",
-              borderRadius: "4px", 
-            }}
-          >
-            Log In
-          </Button>
-          <Button
-            color="inherit"
-            href="./signup"
-            sx={{
-              backgroundColor: "transparent",
-              border: "1px solid white",
-              borderRadius: "4px", 
-              marginLeft: "30px",
-            }}
-          >
-            Sign up
-          </Button>
-        </Toolbar>
-      </AppBar>
+<Toolbar sx={{ justifyContent: "flex-start", paddingLeft: "1em" }}>
+      {/* <Button
+        color="inherit"
+        sx={{
+          marginRight: '1em',
+          backgroundColor: 'transparent',
+          border: '1px solid white', // Add a white stroke
+          borderRadius: '0.25em', // Optional: add border radius to make the edges smoother
+        }}
+      >
+        Home
+      </Button> */}
+      <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        &nbsp;
+      </Typography>
+      <Button
+        color="inherit"
+        href="./login"
+        sx={{
+          backgroundColor: "transparent",
+          border: "1px solid white",
+          borderRadius: "0.25em", 
+        }}
+      >
+        Log In
+      </Button>
+      <Button
+        color="inherit"
+        href="./signup"
+        sx={{
+          backgroundColor: "transparent",
+          border: "1px solid white",
+          borderRadius: "0.25em", 
+          marginLeft: "1.875em", // Approximately 30px in em units (30px / 16px = 1.875em)
+        }}
+      >
+        Sign up
+      </Button>
+    </Toolbar>      </AppBar>
     </Box>
   );
 }

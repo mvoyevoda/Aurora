@@ -23,16 +23,16 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     background: "rgba(217, 217, 217, 0.20)",
-    borderRadius: "4px", // Replace with your desired value in pixels or use a numeric value
-    padding: "8px", // Replace with your desired value in pixels or use a numeric value
-    margin: "8px 0", // Replace with your desired value in pixels or use a numeric value
+    borderRadius: "0.25em", 
+    padding: "0.5em", 
+    margin: "0.5em 0", 
   },
   slider: {
-    width: "200px", // Replace with your desired value in pixels or use a numeric value
-    margin: "8px 0", // Replace with your desired value in pixels or use a numeric value
+    width: "12.5em", 
+    margin: "0.5em 0", 
   },
   button: {
-    margin: "16px 0", // Replace with your desired value in pixels or use a numeric value
+    margin: "1em 0", 
   },
 }));
 
@@ -85,7 +85,8 @@ export default function Configurator() {
   };
 
   return (
-    <div className={classes.configurator}>
+    <>
+      <div className={classes.configurator}>
       <form onSubmit={handleSubmit}>
         <Input
           type="text"
@@ -99,6 +100,7 @@ export default function Configurator() {
           </label>
           <Slider
             value={questions}
+            name="questions"
             onChange={handleQuestionsChange}
             step={1}
             min={5}
@@ -113,6 +115,7 @@ export default function Configurator() {
           </label>
           <Slider
             value={minutes}
+            name="mins"
             onChange={handleMinutesChange}
             step={5}
             min={5}
@@ -127,6 +130,7 @@ export default function Configurator() {
           </label>
           <Slider
             value={difficulty}
+            name="difficulty"
             onChange={handleDifficultyChange}
             step={1}
             min={1}
@@ -152,6 +156,7 @@ export default function Configurator() {
         </Button>
       </form>
     </div>
+    </>
   );
 
 }

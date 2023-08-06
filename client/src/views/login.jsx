@@ -51,87 +51,86 @@ export default function LogIn() {
       </Button>
 
       <form onSubmit={handleLogIn} className="signup_form">
-        <TextField
-          sx={{
+      <TextField
+        sx={{
+          backgroundColor: "rgba(217, 217, 217, 0.20)",
+          marginBottom: "0.625em", 
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "black",
+          },
+        }}
+        variant="standard"
+        color="text"
+        label="Email"
+        id="email"
+        fullWidth 
+        required
+        inputRef={emailRef}
+      />
+      <TextField
+        sx={{
+          backgroundColor: "rgba(217, 217, 217, 0.20)",
+          marginBottom: "0.625em", 
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "black",
+          },
+        }}
+        variant="standard"
+        color="text"
+        label="Password"
+        id="password"
+        type="password"
+        fullWidth 
+        required
+        inputRef={passwordRef}
+      />
+      <Link
+        onClick={handleForgotPasswordClick}
+        href="#"
+        variant="p"
+        color="inherit"
+        sx={{
+          position: "relative",
+          left: "20em", 
+        }}
+      >
+        Forgot password?
+      </Link>
+      <Button
+        href="./signup"
+        variant="outlined"
+        sx={{
+          marginTop: "0.625em", 
+          color: "white",
+          border: "1px solid",
+          borderRadius: "50px",
+          display: "block",
+          marginBottom: "1.25em", 
+          "&:hover": {
             backgroundColor: "rgba(217, 217, 217, 0.20)",
-            marginBottom: "10px",
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "black",
-            },
-          }}
-          variant="standard"
-          color="text"
-          label="Email"
-          id="email"
-          fullWidth="true"
-          required
-          inputRef={emailRef}
-        />
-        <TextField
-          sx={{
+            borderColor: "white",
+          },
+        }}
+      >
+        Don&apos;t have an account?
+      </Button>
+      <Button
+        variant="outlined"
+        type="submit"
+        sx={{
+          color: "white",
+          border: "1px solid",
+          display: "block",
+          width: "100%",
+          borderRadius: "50px",
+          "&:hover": {
             backgroundColor: "rgba(217, 217, 217, 0.20)",
-            marginBottom: "10px",
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "black",
-            },
-          }}
-          variant="standard"
-          color="text"
-          label="Password"
-          id="password"
-          type="password"
-          fullWidth="true"
-          required
-          inputRef={passwordRef}
-        />
-        <Link
-          onClick={handleForgotPasswordClick}
-          href="#"
-          variant="p"
-          color="inherit"
-          sx={{
-            position: "relative",
-            left: "320px",
-          }}
-        >
-          Forgot password?
-        </Link>
-        <Button
-          href="./signup"
-          variant="outlined"
-          sx={{
-            marginTop: "10px",
-            color: "white",
-            border: "1px solid",
-            borderRadius: "50px",
-            display: "block",
-            marginBottom: "20px",
-            "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
-              borderColor: "white",
-            },
-          }}
-        >
-          Don&apos;t have an account?
-        </Button>
-        <Button
-          variant="outlined"
-          type="submit"
-          sx={{
-            color: "white",
-            border: "1px solid",
-            display: "block",
-            width: "100%",
-            borderRadius: "50px",
-            "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
-              borderColor: "white",
-            },
-          }}
-        >
-          Log In
-        </Button>
-      </form>
-    </>
+            borderColor: "white",
+          },
+        }}
+      >
+        Log In
+      </Button>
+    </form>    </>
   );
 }
