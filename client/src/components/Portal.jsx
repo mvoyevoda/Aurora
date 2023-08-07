@@ -12,10 +12,10 @@ export default function Portal() {
   const [progress, setProgress] = useState(0)
 
   const authContext = useContext(AuthContext);
-  const userId = authContext.currentUser.id;
+  const userId = authContext.currentUser?.id;
 
   useEffect(() => {
-    // console.log("1st USE EFFECT RAN")
+    console.log("1st USE EFFECT RAN")
     async function fetchData() {
       try {
         // Fetch questions
@@ -29,7 +29,7 @@ export default function Portal() {
   }, [quizId]);
 
   useEffect(() => {
-    // console.log("2nd USE EFFECT RAN")
+    console.log("2nd USE EFFECT RAN")
     async function fetchAttempt() {
 
       if (!userId){
