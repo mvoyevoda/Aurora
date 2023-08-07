@@ -12,7 +12,7 @@ export default function LogoutButton() {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/api/auth/logout", {})
+      const response = await axios.post("/api/auth/logout", {})
       console.log(response);
       navigate('/');
     } catch (error) {
