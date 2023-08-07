@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
         const response = await axios.get("/api/auth/current_user", {
           withCredentials: true
         });
-        setCurrentUser(response.data); // assuming the user data is directly in response.data
+        setCurrentUser(response.data);
       } catch (error) {
         console.error(error);
         setCurrentUser(null);

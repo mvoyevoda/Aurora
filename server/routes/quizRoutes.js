@@ -5,6 +5,7 @@ const quizController = require('../controllers/quizController')
 
 router.use(authenticateUser);
 
+router.get('/', quizController.getAllQuizzes);
 router.get('/:id', quizController.getQuizQuestions);
 
 module.exports = router;

@@ -29,4 +29,13 @@ async function getQuizQuestions(req, res) {
   }
 };
 
-module.exports = { getQuiz, getQuizQuestions };
+async function getAllQuizzes (req, res) {
+  try {
+    const quizzes = await Quiz.findAll();
+    return res.status(200).json({ quizzes });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { getQuiz, getQuizQuestions, getAllQuizzes };
