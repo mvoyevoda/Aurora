@@ -7,7 +7,7 @@ export default function SuggestedTitle() {
   return (
     <Card 
     sx={{
-        background: "rgba(212, 212, 212, 0.1)",
+        background: "rgba(212, 212, 212, 0)",
         boxShadow: "none",
         height: '10vh',
         width: "50vh",
@@ -17,7 +17,7 @@ export default function SuggestedTitle() {
       <CardContent>
         <Typography 
         sx={{ mb: 1.5 }} 
-        color="white"
+        color="rgba(255, 255, 255, .7)"
         fontSize="2.5rem"
         >
           Suggested

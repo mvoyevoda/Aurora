@@ -7,7 +7,7 @@ export default function RecentTitle() {
   return (
     <Card 
     sx={{
-        background: "rgba(212, 212, 212, 0.1)",
+        background: "rgba(212, 212, 212, 0)",
         height: '10vh',
         width: "50vh",
         marginBottom: "10vh",
@@ -17,7 +17,7 @@ export default function RecentTitle() {
       <CardContent>
         <Typography 
         sx={{ mb: 1.5 }} 
-        color="white"
+        color="rgba(255, 255, 255, .7)"
         fontSize="2.5rem"
         >
           Recent
