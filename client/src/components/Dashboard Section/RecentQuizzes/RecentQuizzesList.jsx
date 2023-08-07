@@ -1,34 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
-const mockRecentQuizzes = [
-  "Quiz 1",
-  "Quiz 2",
-  "Quiz 3",
-  "Quiz 1",
-  "Quiz 2",
-  "Quiz 3",
-  "Quiz 1",
-  "Quiz 2",
-  "Quiz 3",
-  "Quiz 2",
-  "Quiz 3",
-
-
- ];
+import axios from "axios";
 
 const RecentQuizzesList = () => {
-  const shouldEnableScroll = mockRecentQuizzes.length > 8;
+  const [recentQuizzes, setRecentQuizzes] = useState([]);
+
+  useEffect(() => {
+    // Fetch recent quizzes from your backend API
+    axios
+      .get("http://localhost:4000/api/quizzes") // Update the URL to your backend API endpoint
+      .then((response) => {
+        setRecentQuizzes(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const shouldEnableScroll = recentQuizzes.length > 8;
 
   return (
     <div style={{ maxHeight: "690px", overflowY: shouldEnableScroll ? "auto" : "initial" }}>
-      {mockRecentQuizzes.map((quizTitle, index) => (
-        <Card key={index} variant="outlined" style={{ marginBottom: "10px" }}>
+      {recentQuizzes.map((quiz) => (
+        <Card key={quiz.id} variant="outlined" style={{ marginBottom: "10px" }}>
           <CardContent>
             <Typography variant="h6" component="h2">
-              {quizTitle}
+              {quiz.category}
             </Typography>
           </CardContent>
         </Card>
