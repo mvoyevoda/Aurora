@@ -24,7 +24,9 @@ export default function FavCategory() {
           color="white"
           fontSize={80}
           sx={{ lineHeight: 1 }}
-        >N/A</Typography>
+        >
+          N/A
+        </Typography>
         {/* Additional Content */}
         <Typography
           variant="subtitle2"
@@ -32,7 +34,7 @@ export default function FavCategory() {
           fontSize={25}
           sx={{ lineHeight: 1 }}
         >
-            Favorite Category
+          Favorite Category
         </Typography>
       </CardContent>
     </Card>
