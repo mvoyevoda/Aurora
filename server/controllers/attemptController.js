@@ -1,32 +1,5 @@
 const { Attempt } = require('../models');
 
-async function getAttempt(req, res) {
-  const userId = parseInt(req.params.userId);
-  const quizId = parseInt(req.params.quizId);
-
-  try {
-      let attempt = await Attempt.findOne({
-          where: {
-              userId: userId,
-              quizId: quizId
-          }
-      });
-
-      if (!attempt) {  
-          res.status(404).json({ message: "No attempt found" });
-      } else {
-          let attempts = await Attempt.findAll({
-              where: {
-                  userId: userId
-              }
-          });
-          res.status(200).json({ message: "Attempt found", attempts: attempts });
-      }
-  } catch (error) {
-      res.status(500).json({ message: "Error fetching attempt", error: error.message });
-  }
-};
-
 async function createAttempt(req, res) {
   const userId = parseInt(req.params.userId);
   const quizId = parseInt(req.params.quizId);
@@ -62,4 +35,4 @@ async function updateProgress(req, res) {
   }
 }
 
-module.exports = { getAttempt, createAttempt , updateProgress };
+module.exports = { createAttempt , updateProgress };
