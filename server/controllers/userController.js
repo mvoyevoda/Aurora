@@ -68,28 +68,29 @@ async function getAttemptsByUser(req, res, next) {
       whereClause.quizId = quizId;
     }
 
-    const attempts = await Attempt.findAll({
+    const attempt = await Attempt.findOne({
       where: whereClause,
+      order: [
+        ['updatedAt', 'DESC']
+      ],
       include: [{
-          model: User,
-          as: 'User',
-          attributes: ['id', 'userName', 'email']
-        },
-        {
-          model: Quiz,
-          as: 'Quiz',
-          attributes: ['id', 'category', 'language', 'title', 'difficulty']
-        }
-      ]
+        model: User,
+        as: 'User',
+        attributes: ['id', 'userName', 'email']
+      }, {
+        model: Quiz,
+        as: 'Quiz',
+        attributes: ['id', 'category', 'language', 'title', 'difficulty']
+      }]
     });
 
-    if (attempts.length === 0) {
+    if (!attempt) {
       return res.status(404).json({
         message: "No attempts found for this user and quiz."
       });
     }
 
-    res.status(200).json(attempts);
+    res.status(200).json(attempt);
   } catch (err) {
     console.log(err);
     next(err);
