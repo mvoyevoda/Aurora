@@ -5,9 +5,15 @@ import Typography from "@material-ui/core/Typography";
 
 const mockRecentQuizzes = [
   "Quiz 1",
+  "Quiz 2",
+  "Quiz 3",
+  "Quiz 1",
+  "Quiz 2",
+  "Quiz 3",
+  "Quiz 1",
   "Quiz 1",
 
-];
+ ];
 
 const RecentQuizzesList = () => {
   return (

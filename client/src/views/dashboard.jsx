@@ -6,7 +6,8 @@ import RecentTitle from "../components/Dashboard Section/RecentQuizzes/RecentTit
 import "../styles/dashboard.css"
 import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes/SuggestedTitle";
 import NavSettings from "../components/Dashboard Section/NavSettings"
-
+import RecentQuizzesList from "../components/Dashboard Section/RecentQuizzes/RecentQuizzesList";
+import SuggestedQuizzesList from "../components/Dashboard Section/SuggestedQuizzes/SuggestedQuizzesList";
 
 const styles = {
   pcContainer: {
@@ -33,6 +34,7 @@ const styles = {
     flex: 2,
     display: 'flex',
     flexDirection: 'column',
+    
   }
 };
 
@@ -48,9 +50,11 @@ export default function Dashboard() {
         <div style={styles.rightColumn}>
           <div style ={styles.recentColumn}>
           <RecentTitle />
+          <RecentQuizzesList />
           </div>
           <div style={styles.suggestedColumn}>
           <SuggestedTitle />
+          <SuggestedQuizzesList />
           </div>
         </div>
     </div>    
