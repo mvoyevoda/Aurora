@@ -16,70 +16,103 @@ export default function Portal() {
   const userId = authContext.currentUser.id;
 
   useEffect(() => {
+    console.log("1st USE EFFECT RAN")
     async function fetchData() {
       try {
-        // Fetch user ID
-        // const userResponse = await axios.get('/auth/current_user');
-        // setUserId(userResponse.data.id);
-        
         // Fetch questions
         const questionsResponse = await axios.get(`/api/quizzes/${quizId}`);
         setQuestions(questionsResponse.data);
-        
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     }
-  
     fetchData();
-  }, [quizId]);
+  }, []);
 
   useEffect(() => {
+    console.log("2nd USE EFFECT RAN")
     async function fetchAttempt() {
-      if (!userId) return; // skip if userId is not available yet
 
+      if (!userId){
+        console.log("USERID NOT AVAILABLE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        return; // skip if userId is not available yet
+      } 
+  
       try {
         // Verify attempt and fetch progress
-        const attemptResponse = await axios.get(`/api/attempts/${userId}/${quizId}`);
+        const attemptResponse = await axios.get(`/api/users/${userId}/attempts/${quizId}`);
+        console.log(attemptResponse.data)
+
         setAttemptId(attemptResponse.data.id);
-        setProgress(attemptResponse.data.progress);
+        setProgress(attemptResponse.data.progress ?? 0);
       } catch (error) {
-        console.error("Failed to fetch attempt:", error);
-      }
-    }
-
-    fetchAttempt();
-  }, [quizId, userId]);
-  
-
-  async function handleSubmission(submission){
-    try {
-      const submissionResponse = await axios.post(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
-        questionType: questions[currentQuestion].questionType,
-        answerChoice: submission
-      });
-      
-      if (submissionResponse.status === 201) {
-        setProgress(progress + 1);
-        
-        // Update progress in the attempt in the database
-        const attemptResponse = await axios.put(`/api/attempts/${attemptId}`, {
-            progress: progress
-        });
-  
-        if (attemptResponse.status !== 200) {
-          console.error("Failed to update attempt:", attemptResponse.data);
+        // Only make the POST request if the error status is 404
+        if (error.response && error.response.status === 404) {
+            try {
+                const postResponse = await axios.post(`/api/attempts/${userId}/${quizId}`);
+                // Handle the response here
+                console.log('Attempt created:', postResponse.data);
+                setAttemptId(postResponse.data.id);
+                setProgress(postResponse.data.progress ?? 0);
+            } catch(postError) {
+                console.error("Failed to create attempt:", postError);
+            }
+        } else {
+            // If the error status is not 404, log the error
+            console.error("Failed to fetch attempt:", error);
         }
       }
-    } catch (error) {
-      console.error("Failed to handle submission:", error);
     }
-  }
+  
+    fetchAttempt();
+  }, []);  
+
+  async function handleSubmission(userChoice){
+    try {
+      const getSubmissionResponse = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`)
+        
+      // If submission exists and userChoice is the same as the existing choice, do nothing
+      if (getSubmissionResponse.data.submissionChoice === userChoice) {
+        return;
+      }
+  
+      // If submission exists but userChoice is different, or if submission doesn't exist, update or create submission
+      await axios.put(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
+        submissionChoice: userChoice
+      });
+      
+    } catch (error) {
+      // If submission does not exist (status 404), create a new one
+      if (error.response && error.response.status === 404) {
+        console.log("CATCHING ERROR")
+        try {
+          const postResponse = await axios.post(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
+            submissionChoice: userChoice
+          });
+          // If a submission is successfully created, increment progress
+          if (postResponse.status === 201) {
+            setProgress((prevProgress) => prevProgress + 1)
+            await axios.post(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
+              progress: progress
+            });
+          }
+        } catch(postError) {
+          console.error("Failed to create submission:", postError);
+        }
+      }
+      // For any other errors, log them
+      else {
+        console.error("Failed to handle submission:", error);
+      }
+    }
+  }  
   
 
   return (
     <> 
       <h3>{progress} / {questions.length}</h3>
+      <p>Attempt ID: {attemptId ?? "NONE"}</p>
+      <p>User ID: {userId ?? "NONE"}</p>
       <h1 className="question-text">
         {questions[currentQuestion]?.questionText}
       </h1>

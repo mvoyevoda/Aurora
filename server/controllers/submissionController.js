@@ -1,39 +1,45 @@
 const { Submission } = require('../models');
 
+
+
+async function getSubmission(req, res) {
+
+  const attemptId = parseInt(req.params.attemptId);
+  const questionId = parseInt(req.params.questionId);
+  // const questionType = req.body.questionType;
+  try {
+    const submission = await Submission.findOne({
+      where: {
+          attemptId: attemptId,
+          questionId: questionId
+      }
+    })
+    res.status(200).json({ message: "Submission found", id: submission.id, submissionChoice: submission.submissionChoice })
+  } catch (error) {
+    res.status(404).json({  message: "Submission NOT found", error: error.message })
+  }
+
+}
+
+
+
 async function createSubmission(req, res) {
 
   const attemptId = parseInt(req.params.attemptId);
   const questionId = parseInt(req.params.questionId);
-  const questionType = req.body.questionType;
-  const answerChoice = req.body.answerChoice; 
+  const submissionChoice = req.body.submissionChoice; 
+  // const questionType = req.body.questionType;
 
   try {
-    let submission = await Submission.findOne({
-        where: {
-            attemptId: attemptId,
-            questionId: questionId
-        }
-    });
 
-    if (!submission) {  // If no submission found, create a new one
-        submission = await Submission.create({
-          attemptId: attemptId,
-          questionId: questionId,
-          // Depending on the questionType, set submissionChoice or submissionText
-          submissionChoice: questionType !== 2 ? answerChoice : null,
-          submissionText: questionType === 2 ? answerChoice : null
-        });
-        res.status(201).json({ message: "New submission created", id: submission.id });
-    } else {
-        // MODIFY FOUND SUBMISSION WITH NEW ANSWER CHOICE / TEXT
-        if (questionType !== 2) {
-          submission.submissionChoice = answerChoice;
-        } else {
-          submission.submissionText = answerChoice;
-        }
-        await submission.save();  // Save changes to the database
-        res.status(200).json({ message: "Submission updated", id: submission.id});
-    }
+    const submission = await Submission.create({
+      attemptId: attemptId,
+      questionId: questionId,
+      submissionChoice: submissionChoice,
+      // submissionChoice: questionType !== 1 ? answerChoice : submissionChoice,
+      // submissionText: questionType === 2 ? answerChoice : submissionText
+    });
+    res.status(201).json({ message: "New submission created", id: submission.id });
 
   } catch (error) {
     res.status(500).json({ message: "Error creating submission", error: error.message });
@@ -41,4 +47,41 @@ async function createSubmission(req, res) {
 
 }
 
-module.exports = { createSubmission };
+
+
+async function updateSubmission(req, res) {
+  const attemptId = parseInt(req.params.attemptId);
+  const questionId = parseInt(req.params.questionId);
+  const submissionChoice = req.body.submissionChoice; 
+  const questionType = req.body.questionType;
+
+  try {
+    // Find the existing submission
+    const submission = await Submission.findOne({
+      where: {
+        attemptId: attemptId,
+        questionId: questionId
+      }
+    });
+
+    if (!submission) {
+      // If the submission does not exist, return an error
+      return res.status(404).json({ message: "Submission not found" });
+    }
+
+    // Update the submissionChoice based on questionType
+    submission.submissionChoice = submissionChoice
+    
+    // Save the changes
+    await submission.save();
+    
+    // Return the updated submission
+    res.status(200).json({ message: "Submission updated", id: submission.id });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating submission", error: error.message });
+  }
+}
+
+
+
+module.exports = { getSubmission, createSubmission, updateSubmission };
