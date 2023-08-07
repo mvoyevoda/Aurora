@@ -13,7 +13,7 @@ export default function NavGenerator() {
         boxShadow: "none",
         border: "none",
         width: "100%",
-        height: "4rem", // Adjust the height as needed
+        height: "5.4rem", // Adjust the height as needed
         fontSize: "1rem", // Adjust the font size as needed
         display: "flex",
         flexDirection: "row",

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import axios from 'axios';
+import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ export default function LogoutButton() {
     try {
       const response = await axios.post("/api/auth/logout", {})
       console.log(response);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.error(`Error: ${error}`);
     }
@@ -36,8 +36,9 @@ export default function LogoutButton() {
             href="/"
             sx={{
               backgroundColor: "transparent",
-              border: "1px solid white",
-              borderRadius: "4px", 
+              border: "1px solid transparent",
+              borderRadius: "4px",
+              opacity: 0.5,
             }}
           >
             Log Out
