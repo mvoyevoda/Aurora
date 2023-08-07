@@ -24,7 +24,7 @@ export default function LogIn() {
     e.preventDefault();
     try {
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/app");
+      navigate("/generator");
     } catch (error) {
       if(error.message.includes("401")) {
         setErrorMessage("Invalid email or password.");

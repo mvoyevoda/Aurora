@@ -23,6 +23,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import AuthProvider from './contexts/AuthContext';
+import Generator from './views/Generator';
 
 const router = createBrowserRouter([
   {
@@ -45,9 +46,9 @@ const router = createBrowserRouter([
   {
     path: "/generator",
     element: (
-      //<ProtectedRoute>
-        <App />
-      //</ProtectedRoute>
+      <ProtectedRoute>
+        <Generator />
+      </ProtectedRoute>
     ),
     errorElement: <ErrorPage />,
   },
