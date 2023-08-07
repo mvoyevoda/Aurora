@@ -10,7 +10,6 @@ export default function RecentTitle() {
         background: "rgba(212, 212, 212, 0)",
         height: "10vh",
         width: "50vh",
-        marginBottom: "10vh",
         boxShadow: "none",
       }}
     >
