@@ -57,7 +57,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/portal/:id", 
+    path: "/portal/:quizId", 
     element: (
     <ProtectedRoute>
       <Portal />
