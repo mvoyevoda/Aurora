@@ -11,17 +11,23 @@ const mockRecentQuizzes = [
   "Quiz 2",
   "Quiz 3",
   "Quiz 1",
-  "Quiz 1",
+  "Quiz 2",
+  "Quiz 3",
+  "Quiz 2",
+  "Quiz 3",
+
 
  ];
 
 const RecentQuizzesList = () => {
+  const shouldEnableScroll = mockRecentQuizzes.length > 8;
+
   return (
-    <div>
+    <div style={{ maxHeight: "690px", overflowY: shouldEnableScroll ? "auto" : "initial" }}>
       {mockRecentQuizzes.map((quizTitle, index) => (
         <Card key={index} variant="outlined" style={{ marginBottom: "10px" }}>
           <CardContent>
-            <Typography variant="h6" component="h2" fontSize="2.5rem" >
+            <Typography variant="h6" component="h2">
               {quizTitle}
             </Typography>
           </CardContent>
