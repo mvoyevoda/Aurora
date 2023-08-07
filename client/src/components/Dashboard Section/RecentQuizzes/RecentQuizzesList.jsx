@@ -26,13 +26,13 @@ const RecentQuizzesList = () => {
     <div style={{ maxHeight: "690px", overflowY: shouldEnableScroll ? "auto" : "initial" }}>
       {recentQuizzes.map((quiz, index) => (
         <Link to={`/portal/${quiz.id}`} key={quiz.id}>
-        <Card key={quiz.id} variant="outlined" style={{ marginBottom: "10px" }}>
-          <CardContent>
-            <Typography variant="h6" component="h2">
-              {quiz.category}
-            </Typography>
-          </CardContent>
-        </Card>
+          <Card key={quiz.id} variant="outlined" style={{ marginBottom: "10px" }}>
+            <CardContent>
+              <Typography variant="h6" component="h2">
+                {quiz.category}
+              </Typography>
+            </CardContent>
+          </Card>
         </Link>
       ))}
     </div>
