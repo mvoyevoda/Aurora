@@ -4,15 +4,15 @@ import {QuizGen} from "../components/Dashboard Section/QuizGen";
 import FavCategory from "../components/Dashboard Section/FavCategory";
 import RecentTitle from "../components/Dashboard Section/RecentQuizzes/RecentTitle";
 import "../styles/dashboard.css"
-import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes/SuggestedQuizzes";
-//import NavSettings from "../components/Dashboard Section/NavSettings"
+import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes/SuggestedTitle";
+import NavSettings from "../components/Dashboard Section/NavSettings"
 
 
 const styles = {
   pcContainer: {
     display: 'flex',
     flexDirection: 'row',
-    height: '100vh', // Adjust the height based on your requirement
+    height: '82vh', // Adjust the height based on your requirement
   },
   leftColumn: {
     flex: 2,
@@ -40,6 +40,8 @@ export default function Dashboard() {
           <SuggestedTitle />
         </div>
     </div>    
+    <NavSettings/>
     </>
   );
 }
+ 
