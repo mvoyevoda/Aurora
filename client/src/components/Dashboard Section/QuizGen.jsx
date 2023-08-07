@@ -15,21 +15,20 @@ export function QuizGen() {
     >
       <CardContent>
         {/* First Text */}
-        <Typography 
+        <Typography
           variant="h5"
-          color="white" 
+          color="white"
           fontSize={210}
           sx={{ lineHeight: 1 }}
         >
           0
         </Typography>
         {/* Additional Content */}
-        <Typography 
-          variant="subtitle2" 
+        <Typography
+          variant="subtitle2"
           color="rgba(255, 255, 255, .5)"
           fontSize={25}
           sx={{ lineHeight: 1 }}
-          
         >
           Quizzes Generated
         </Typography>
