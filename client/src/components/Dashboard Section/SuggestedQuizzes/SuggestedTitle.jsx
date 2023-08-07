@@ -11,7 +11,6 @@ export default function SuggestedTitle() {
         boxShadow: "none",
         height: "10vh",
         width: "50vh",
-        marginBottom: "10vh",
       }}
     >
       <CardContent>
