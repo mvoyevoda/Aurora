@@ -31,7 +31,10 @@ async function getQuizQuestions(req, res) {
 
 async function getAllQuizzes(req, res) {
   try {
-    const quizzes = await Quiz.findAll({attributes: ['id', 'category'], });
+    const quizzes = await Quiz.findAll({
+      attributes: ['id', 'category'],
+      order: [['createdAt', 'DESC']], // Sorting by createdBy in descending order
+    });
 
     if (quizzes.length > 0) {
       res.json(quizzes);
@@ -42,7 +45,7 @@ async function getAllQuizzes(req, res) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch quizzes' });
   }
-};
+}
 
 
 module.exports = { getQuiz, getQuizQuestions, getAllQuizzes };
