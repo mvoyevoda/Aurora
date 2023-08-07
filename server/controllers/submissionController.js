@@ -47,13 +47,10 @@ async function createSubmission(req, res) {
 
 }
 
-
-
 async function updateSubmission(req, res) {
   const attemptId = parseInt(req.params.attemptId);
   const questionId = parseInt(req.params.questionId);
   const submissionChoice = req.body.submissionChoice; 
-  const questionType = req.body.questionType;
 
   try {
     // Find the existing submission
@@ -69,7 +66,7 @@ async function updateSubmission(req, res) {
       return res.status(404).json({ message: "Submission not found" });
     }
 
-    // Update the submissionChoice based on questionType
+    // Update the submissionChoice
     submission.submissionChoice = submissionChoice
     
     // Save the changes

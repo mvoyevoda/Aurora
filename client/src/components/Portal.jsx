@@ -8,7 +8,6 @@ export default function Portal() {
   const { quizId } = useParams();
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  // const [userId, setUserId] = useState(null);
   const [attemptId, setAttemptId] = useState(null)
   const [progress, setProgress] = useState(0)
 
@@ -20,14 +19,14 @@ export default function Portal() {
     async function fetchData() {
       try {
         // Fetch questions
-        const questionsResponse = await axios.get(`/api/quizzes/${quizId}`);
+        const questionsResponse = await axios.get(`/api/quizzes/${quizId}`, { withCredentials: true });
         setQuestions(questionsResponse.data);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     }
     fetchData();
-  }, []);
+  }, [quizId]);
 
   useEffect(() => {
     // console.log("2nd USE EFFECT RAN")
@@ -37,10 +36,10 @@ export default function Portal() {
         console.log("USERID NOT AVAILABLE")
         return; // skip if userId is not available yet
       } 
-  
+
       try {
         // Verify attempt and fetch progress
-        const attemptResponse = await axios.get(`/api/users/${userId}/attempts/${quizId}`);
+        const attemptResponse = await axios.get(`/api/users/${userId}/attempts/${quizId}`, { withCredentials: true });
         // console.log(attemptResponse.data)
 
         setAttemptId(attemptResponse.data.id);
@@ -49,7 +48,7 @@ export default function Portal() {
         // Only make the POST request if the error status is 404
         if (error.response && error.response.status === 404) {
             try {
-                const postResponse = await axios.post(`/api/attempts/${userId}/${quizId}`);
+                const postResponse = await axios.post(`/api/attempts/${userId}/${quizId}`, {}, { withCredentials: true });
                 // Handle the response here
                 console.log('Attempt created:', postResponse.data);
                 setAttemptId(postResponse.data.id);
@@ -63,28 +62,24 @@ export default function Portal() {
         }
       }
     }
-  
+
     fetchAttempt();
-  }, []);  
-
-  // useEffect(() => {
-
-  // }, [progress]);
+  }, [userId, quizId]);  
 
   async function handleSubmission(userChoice){
     try {
-      const getSubmissionResponse = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`)
-        
+      const getSubmissionResponse = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true })
+
       // If submission exists and userChoice is the same as the existing choice, do nothing
       if (getSubmissionResponse.data.submissionChoice === userChoice) {
         return;
       }
-  
-      // If submission exists but userChoice is different, or if submission doesn't exist, update or create submission
-      await axios.put(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
+
+      // If submission exists but userChoice is different, update the existing submission
+      await axios.patch(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
         submissionChoice: userChoice
-      });
-      
+      }, { withCredentials: true });
+
     } catch (error) {
       // If submission does not exist (status 404), create a new one
       if (error.response && error.response.status === 404) {
@@ -92,13 +87,12 @@ export default function Portal() {
         try {
           const postResponse = await axios.post(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
             submissionChoice: userChoice
-          });
+          }, { withCredentials: true });
           // If a submission is successfully created, increment progress
           if (postResponse.status === 201) {
-            // setProgress((prevProgress) => prevProgress + 1)
-            await axios.put(`/api/attempts/${attemptId}`, {
+            await axios.patch(`/api/attempts/${attemptId}`, {
               progress: progress+1
-            })
+            }, { withCredentials: true })
             .then((response) => {
               // The progress value is assumed to be in the response data. Modify as per actual response structure.
               if (response.status === 200) {
@@ -108,7 +102,7 @@ export default function Portal() {
             .catch((error) => {
               console.error("Failed to update progress:", error);
             });  
-                 
+
           }
         } catch(postError) {
           console.error("Failed to create submission:", postError);
@@ -120,7 +114,6 @@ export default function Portal() {
       }
     }
   }  
-  
 
   return (
     <> 
