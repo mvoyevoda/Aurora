@@ -8,6 +8,9 @@ const authRoutes = require("./routes/authRoutes");
 const openAIRoutes = require("./routes/openAIRoutes");
 const userRoutes = require("./routes/userRoutes");
 const quizRoutes = require("./routes/quizRoutes");
+const attemptRoutes = require("./routes/attemptRoutes");
+const submissionRoutes = require("./routes/submissionRoutes");
+
 const {
   validationErrorHandler,
   duplicateErrorHandler,
@@ -58,6 +61,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/openAI", openAIRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/quizzes", quizRoutes);
+app.use("/api/attempts", attemptRoutes);
+app.use("/api/submissions", submissionRoutes);
 
 // Errors
 app.use(validationErrorHandler);

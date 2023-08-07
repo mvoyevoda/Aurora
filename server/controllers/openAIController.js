@@ -20,11 +20,10 @@ async function generate(req, res) {
       `
       I will be taking your response and formatting it inside user-friendly quiz taking environment on my website. 
       Please respond in JSON format. 
-      For each question, specify whether the questions is 0, 1, or 2 ---> multiple choice, true/false, short response. 
+      For each question, specify whether the question is 0 or 1 or 2 ---> multiple choice or true/false
       Each question should be an object with keys: type, question, choices, answer. 
       For the multiple choice, do not include the corresponding letter, only include the choice. 
       List 4 choices for multiple choice questions. 
-      If the question is of short response type, put NULL as the answer. 
       Give me a good mix of all question types. Strictly adhere to this example format in your response:
 
       {
@@ -41,11 +40,6 @@ async function generate(req, res) {
             "question": "Which of the following is a leafy green vegetable?",
             "choices": ["Broccoli", "Spinach", "Cucumber", "Radish"],
             "correctAnswer": "1"
-          },
-          {
-            "type": 2,
-            "question": "Name a root vegetable.",
-            "correctAnswer: null
           }
         ]
       }

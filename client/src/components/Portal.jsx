@@ -1,29 +1,85 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import { AuthContext } from '../contexts/AuthContext';
 import "../styles/portal.css";
 
 export default function Portal() {
-  const { id } = useParams();
+  const { quizId } = useParams();
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  // const [userId, setUserId] = useState(null);
+  const [attemptId, setAttemptId] = useState(null)
+  const [progress, setProgress] = useState(0)
+
+  const authContext = useContext(AuthContext);
+  const userId = authContext.currentUser.id;
 
   useEffect(() => {
-    async function fetchQuestions() {
+    async function fetchData() {
       try {
-        const response = await axios.get(`/api/quizzes/${id}`);
-        setQuestions(response.data);
+        // Fetch user ID
+        // const userResponse = await axios.get('/auth/current_user');
+        // setUserId(userResponse.data.id);
+        
+        // Fetch questions
+        const questionsResponse = await axios.get(`/api/quizzes/${quizId}`);
+        setQuestions(questionsResponse.data);
+        
       } catch (error) {
-        console.error("Failed to fetch quiz:", error);
+        console.error("Failed to fetch data:", error);
+      }
+    }
+  
+    fetchData();
+  }, [quizId]);
+
+  useEffect(() => {
+    async function fetchAttempt() {
+      if (!userId) return; // skip if userId is not available yet
+
+      try {
+        // Verify attempt and fetch progress
+        const attemptResponse = await axios.get(`/api/attempts/${userId}/${quizId}`);
+        setAttemptId(attemptResponse.data.id);
+        setProgress(attemptResponse.data.progress);
+      } catch (error) {
+        console.error("Failed to fetch attempt:", error);
       }
     }
 
-    fetchQuestions();
-  }, [id]);
+    fetchAttempt();
+  }, [quizId, userId]);
+  
+
+  async function handleSubmission(submission){
+    try {
+      const submissionResponse = await axios.post(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
+        questionType: questions[currentQuestion].questionType,
+        answerChoice: submission
+      });
+      
+      if (submissionResponse.status === 201) {
+        setProgress(progress + 1);
+        
+        // Update progress in the attempt in the database
+        const attemptResponse = await axios.put(`/api/attempts/${attemptId}`, {
+            progress: progress
+        });
+  
+        if (attemptResponse.status !== 200) {
+          console.error("Failed to update attempt:", attemptResponse.data);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to handle submission:", error);
+    }
+  }
+  
 
   return (
     <> 
-      <h3>{currentQuestion+1} / {questions.length}</h3>
+      <h3>{progress} / {questions.length}</h3>
       <h1 className="question-text">
         {questions[currentQuestion]?.questionText}
       </h1>
@@ -31,26 +87,22 @@ export default function Portal() {
         {/* Multiple Choice Container */}
         {questions[currentQuestion]?.questionType === 0 && (
           questions[currentQuestion]?.answerChoices?.map((choice, index) => (
-            <button key={index} onClick={() => {
-              // CHOOSE ANSWER AND SUBMIT LOGIC
-            }}>
-              {choice}
-            </button>
+            <button key={index} onClick={() => handleSubmission(index)}>{choice}</button>
           ))
         )}
         {/* True/False Container */}
         {questions[currentQuestion]?.questionType === 1 && (
           <>         
-            <button >True</button>
-            <button >False</button>
+            <button onClick={() => handleSubmission(1)}>True</button>
+            <button onClick={() => handleSubmission(0)}>False</button>
           </>
         )}
-        {/* True/False Container */}
-        {questions[currentQuestion]?.questionType === 2 && (
+        {/* Shore Answer Container */}
+        {/* {questions[currentQuestion]?.questionType === 2 && (
           <>         
-          <input type="text" />
+          <input type="text" /> 
           </>
-        )}
+        )} */}
       </div>
       {currentQuestion !== 0 && (
         <button onClick={() => setCurrentQuestion(currentQuestion - 1)}>
