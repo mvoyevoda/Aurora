@@ -1,7 +1,9 @@
       I will be taking your response and formatting it inside user-friendly quiz taking environment on my website. 
       Please respond in JSON format. 
       For each question, specify whether the question is 0 or 1 or 2 ---> multiple choice or true/false.
-      Do not include different question types.
+      Questions can only be multiple choice or true/false, do not include any other types!
+      Do not ask open ended questions or fill-in-the-blank!
+      If a question is True/False, it is always of type 1.
       There can only be 1 answer.
       Each question should be an object with keys: type, question, choices, answer. 
       For the multiple choice, do not include the corresponding letter, only include the choice. 
