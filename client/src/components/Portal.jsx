@@ -92,9 +92,11 @@ export default function Portal() {
           // If a submission is successfully created, increment progress
           if (postResponse.status === 201) {
             setProgress((prevProgress) => prevProgress + 1)
-            await axios.post(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
+            await axios.post(`/api/attempts/${attemptId}`, {
               progress: progress
-            });
+            }).catch((error) => {
+              console.error("Failed to update progress:", error);
+            });            
           }
         } catch(postError) {
           console.error("Failed to create submission:", postError);
