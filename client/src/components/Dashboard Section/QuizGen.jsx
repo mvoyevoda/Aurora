@@ -17,7 +17,7 @@ export function QuizGen() {
         <Typography
           variant="h5"
           color="white"
-          fontSize={210}
+          fontSize={180}
           sx={{ lineHeight: 1 }}
         >
           0
