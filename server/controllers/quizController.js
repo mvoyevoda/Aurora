@@ -29,4 +29,20 @@ async function getQuizQuestions(req, res) {
   }
 };
 
-module.exports = { getQuiz, getQuizQuestions };
+async function getAllQuizzes(req, res) {
+  try {
+    const quizzes = await Quiz.findAll({attributes: ['id', 'category'], });
+
+    if (quizzes.length > 0) {
+      res.json(quizzes);
+    } else {
+      res.status(404).json({ error: 'Quizzes not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch quizzes' });
+  }
+};
+
+
+module.exports = { getQuiz, getQuizQuestions, getAllQuizzes };
