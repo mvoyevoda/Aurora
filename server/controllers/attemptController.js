@@ -1,5 +1,21 @@
 const { Attempt } = require('../models');
 
+async function getProgress(req, res) {
+  const attemptId = parseInt(req.params.attemptId);
+
+  try {
+    const attempt = await Attempt.findOne({ where: { id: attemptId }});
+
+    if (!attempt) {
+      res.status(404).json({ message: "Attempt not found" });
+    } else {
+      res.status(200).json({ message: "Attempt found", id: attempt.id, progress: attempt.progress });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching attempt", error: error.message });
+  }
+}
+
 async function createAttempt(req, res) {
   const userId = parseInt(req.params.userId);
   const quizId = parseInt(req.params.quizId);
@@ -35,4 +51,4 @@ async function updateProgress(req, res) {
   }
 }
 
-module.exports = { createAttempt , updateProgress };
+module.exports = { getProgress, createAttempt, updateProgress };

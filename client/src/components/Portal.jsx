@@ -16,7 +16,7 @@ export default function Portal() {
   const userId = authContext.currentUser.id;
 
   useEffect(() => {
-    console.log("1st USE EFFECT RAN")
+    // console.log("1st USE EFFECT RAN")
     async function fetchData() {
       try {
         // Fetch questions
@@ -30,18 +30,18 @@ export default function Portal() {
   }, []);
 
   useEffect(() => {
-    console.log("2nd USE EFFECT RAN")
+    // console.log("2nd USE EFFECT RAN")
     async function fetchAttempt() {
 
       if (!userId){
-        console.log("USERID NOT AVAILABLE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        console.log("USERID NOT AVAILABLE")
         return; // skip if userId is not available yet
       } 
   
       try {
         // Verify attempt and fetch progress
         const attemptResponse = await axios.get(`/api/users/${userId}/attempts/${quizId}`);
-        console.log(attemptResponse.data)
+        // console.log(attemptResponse.data)
 
         setAttemptId(attemptResponse.data.id);
         setProgress(attemptResponse.data.progress ?? 0);
@@ -67,6 +67,10 @@ export default function Portal() {
     fetchAttempt();
   }, []);  
 
+  // useEffect(() => {
+
+  // }, [progress]);
+
   async function handleSubmission(userChoice){
     try {
       const getSubmissionResponse = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`)
@@ -84,19 +88,27 @@ export default function Portal() {
     } catch (error) {
       // If submission does not exist (status 404), create a new one
       if (error.response && error.response.status === 404) {
-        console.log("CATCHING ERROR")
+        console.log("ENTERED CATCH - SUBMISSION DOESN'T EXIST")
         try {
           const postResponse = await axios.post(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
             submissionChoice: userChoice
           });
           // If a submission is successfully created, increment progress
           if (postResponse.status === 201) {
-            setProgress((prevProgress) => prevProgress + 1)
-            await axios.post(`/api/attempts/${attemptId}`, {
-              progress: progress
-            }).catch((error) => {
+            // setProgress((prevProgress) => prevProgress + 1)
+            await axios.put(`/api/attempts/${attemptId}`, {
+              progress: progress+1
+            })
+            .then((response) => {
+              // The progress value is assumed to be in the response data. Modify as per actual response structure.
+              if (response.status === 200) {
+                setProgress(response.data.progress);
+              }
+            })
+            .catch((error) => {
               console.error("Failed to update progress:", error);
-            });            
+            });  
+                 
           }
         } catch(postError) {
           console.error("Failed to create submission:", postError);
