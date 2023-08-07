@@ -6,3 +6,5 @@ const submissionController = require('../controllers/submissionController')
 // router.use(authenticateUser);
 
 router.post('/:attemptId/:questionId', submissionController.createSubmission);
+
+module.exports = router;

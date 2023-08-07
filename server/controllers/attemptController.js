@@ -1,31 +1,46 @@
 const { Attempt } = require('../models');
 
-async function verifyAttempt(req, res) {
-    const userId = parseInt(req.params.userId);
-    const quizId = parseInt(req.params.quizId);
+async function getAttempt(req, res) {
+  const userId = parseInt(req.params.userId);
+  const quizId = parseInt(req.params.quizId);
 
-    try {
-        let attempt = await Attempt.findOne({
-            where: {
-                userId: userId,
-                quizId: quizId
-            }
-        });
+  try {
+      let attempt = await Attempt.findOne({
+          where: {
+              userId: userId,
+              quizId: quizId
+          }
+      });
 
-        if (!attempt) {  // If no attempt found, create a new one
-            attempt = await Attempt.create({
-                userId: userId,
-                quizId: quizId,
-                progress: 0  // Start from the beginning
-                // You can add default values for other columns if necessary
-            });
-            res.status(201).json({ message: "New attempt created", id: attempt.id, progress: attempt.progress });
-        } else {
-            res.status(200).json({ message: "Attempt found", id: attempt.id, progress: attempt.progress });
-        }
-    } catch (error) {
-        res.status(500).json({ message: "Error verifying attempt", error: error.message });
-    }
+      if (!attempt) {  
+          res.status(404).json({ message: "No attempt found" });
+      } else {
+          let attempts = await Attempt.findAll({
+              where: {
+                  userId: userId
+              }
+          });
+          res.status(200).json({ message: "Attempt found", attempts: attempts });
+      }
+  } catch (error) {
+      res.status(500).json({ message: "Error fetching attempt", error: error.message });
+  }
+};
+
+async function createAttempt(req, res) {
+  const userId = parseInt(req.params.userId);
+  const quizId = parseInt(req.params.quizId);
+
+  try {
+      let attempt = await Attempt.create({
+          userId: userId,
+          quizId: quizId,
+          progress: 0  
+      });
+      res.status(201).json({ message: "New attempt created", id: attempt.id, userId: userId, quizId: quizId ,progress: attempt.progress });
+  } catch (error) {
+      res.status(500).json({ message: "Error creating attempt", error: error.message });
+  }
 };
 
 async function updateProgress(req, res) {
@@ -47,4 +62,4 @@ async function updateProgress(req, res) {
   }
 }
 
-module.exports = { verifyAttempt, updateProgress };
+module.exports = { getAttempt, createAttempt , updateProgress };
