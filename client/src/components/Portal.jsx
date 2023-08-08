@@ -91,7 +91,7 @@ export default function Portal() {
 
   useEffect(() => {
     fetchSubmission();
-}, [currentQuestion]);
+}, [currentQuestion, attemptId, questions]);
 
 
   async function handleSubmission(userChoice){
