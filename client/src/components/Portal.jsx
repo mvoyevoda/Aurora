@@ -181,9 +181,9 @@ export default function Portal() {
     }
   }
 
-  // async function handleSubmitQuiz(){
-
-  // }
+  async function handleSubmitQuiz(){
+    
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>

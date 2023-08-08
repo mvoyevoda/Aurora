@@ -68,5 +68,32 @@ async function updateProgress(req, res) {
   }
 }
 
-module.exports = { getProgress, createAttempt, updateProgress, getAllAttempts };
+async function updateScore(req, res) {
+
+  const attemptId = parseInt(req.params.attemptId);
+  const score = parseInt(req.body.score);
+
+  try {
+    const attempt = await Attempt.findOne({ where: { id: attemptId }});
+
+    if (!attempt) {
+      res.status(404).json({ message: "Attempt not found" });
+    } else {
+      attempt.score = score;
+      await attempt.save();
+      res.status(200).json({ message: "Score updated", id: attempt.id, score: attempt.score });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error updating score", error: error.message });
+  }
+
+}
+
+async function calculateScore(req, res) {
+
+  const attemptId = parseInt(req.params.attemptId);
+
+}
+
+module.exports = { getProgress, createAttempt, updateProgress, getAllAttempts, updateScore };
 
