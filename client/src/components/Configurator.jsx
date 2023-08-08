@@ -40,6 +40,7 @@ export default function Configurator() {
   const [questions, setQuestions] = useState(10);
   const [minutes, setMinutes] = useState(15);
   const [difficulty, setDifficulty] = useState(2); // 1 to 5: very easy to very hard
+  const [loading, setLoading] = useState(false)
   
   const handleQuestionsChange = (event, value) => {
     setQuestions(value);
@@ -60,6 +61,8 @@ export default function Configurator() {
     const questions = e.target.questions.value;
     const minutes = e.target.mins.value;
     const difficulty = e.target.difficulty.value;
+
+    setLoading(true)
 
     try {
       const response = await axios.post("/api/openAI/generate", {
@@ -144,14 +147,19 @@ export default function Configurator() {
             aria-labelledby="difficulty-slider"
           />
         </div>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.button}
-        >
-          Generate
-        </Button>
+        {loading ?        
+          <p className="loading">Generating...</p>
+          :
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.button}
+          >
+            Generate
+          </Button>
+        }
+
       </form>
     </div>
     </>
