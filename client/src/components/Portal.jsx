@@ -160,8 +160,10 @@ export default function Portal() {
         </Button>
       </div>
 
-      <p>Attempt ID: {attemptId ?? "NONE"}</p>
-      <p>User ID: {userId ?? "NONE"}</p>
+      <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+      <p>Attempt ID: {attemptId ?? "NONE"} <span style={{paddingLeft: '2em'}}>User ID: {userId ?? "NONE"}</span></p>
+      
+      </div>
       <h1 className="question-text">
         {questions[currentQuestion]?.questionText}
       </h1>
@@ -202,16 +204,29 @@ export default function Portal() {
           </>
         )} */}
       </div>
-      {currentQuestion !== 0 && (
-        <button onClick={() => setCurrentQuestion(currentQuestion - 1)}>
-          Prev
-        </button>
-      )}
-      {currentQuestion !== questions.length-1 && (
-        <button onClick={() => setCurrentQuestion(currentQuestion + 1)}>
-          Next
-        </button>
-      )}
+      <div style={{ position: "fixed", top: "20em", left: "50%", transform: "translateX(-50%)" }}>
+        <div style={{ display: "flex" }}>
+          {currentQuestion !== 0 && (
+            <Button
+              onClick={() => setCurrentQuestion(currentQuestion - 1)}
+              variant="contained"
+              color="primary"
+              style={{ marginRight: "10px" }}
+            >
+              Prev
+            </Button>
+          )}
+          {currentQuestion !== questions.length - 1 && (
+            <Button
+              onClick={() => setCurrentQuestion(currentQuestion + 1)}
+              variant="contained"
+              color="primary"
+            >
+              Next
+            </Button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
