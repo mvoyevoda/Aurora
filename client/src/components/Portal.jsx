@@ -92,6 +92,7 @@ export default function Portal() {
 
 
   async function handleSubmission(userChoice){
+    setSubmission(userChoice)
     try {
       const getSubmissionResponse = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true })
 
@@ -143,9 +144,8 @@ export default function Portal() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <div style={{ marginTop: "10px" }}>
-        <h3>
-          {progress} / {questions.length}
-        </h3>
+        <h3> Progress: {progress} / {questions.length} </h3>
+        <h3> Question: {currentQuestion+1} / {questions.length} </h3>
       </div>
 
       <div style={{ position: "absolute", top: "10px", right: "10px" }}>
@@ -174,7 +174,7 @@ export default function Portal() {
           questions[currentQuestion]?.answerChoices?.map((choice, index) => (
             <button
             key={index}
-            className={`${submission === index ? 'selected-choice' : ''}`}
+            className={`${submission == index ? 'selected-choice' : ''}`}
             onClick={() => handleSubmission(index)}
           >
             {choice}
@@ -185,13 +185,13 @@ export default function Portal() {
         {questions[currentQuestion]?.questionType === 1 && (
           <>         
             <button 
-              className={`${submission === 1 ? 'selected-choice' : ''}`} 
+              className={`${submission == 1 ? 'selected-choice' : ''}`} 
               onClick={() => handleSubmission(1)}
             >
               True
             </button>
             <button 
-              className={`${submission === 0 ? 'selected-choice' : ''}`} 
+              className={`${submission == 0 ? 'selected-choice' : ''}`} 
               onClick={() => handleSubmission(0)}
             >
               False
