@@ -70,9 +70,9 @@ export default function Portal() {
     fetchAttempt();
   }, [userId, quizId]);  
 
-  useEffect(() => {
-    console.log("Current Question: " + currentQuestion)
-  }, [currentQuestion])
+  // useEffect(() => {
+  //   console.log("Current Question: " + currentQuestion)
+  // }, [currentQuestion])
 
   useEffect(() => {
     async function fetchSubmission() {
