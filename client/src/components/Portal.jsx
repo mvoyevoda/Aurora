@@ -11,6 +11,9 @@ export default function Portal() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [attemptId, setAttemptId] = useState(null)
   const [progress, setProgress] = useState(0)
+  const [submission, setSubmission] = useState("")
+
+  console.log("Submission: " + submission)
 
   const authContext = useContext(AuthContext);
   const userId = authContext.currentUser?.id;
@@ -18,7 +21,7 @@ export default function Portal() {
   const isAuthChecked = authContext.isAuthChecked;
 
   useEffect(() => {
-    console.log("1st USE EFFECT RAN")
+    // console.log("1st USE EFFECT RAN")
     async function fetchData() {
       if(!isAuthChecked || !isAuthenticated) { return; }
       try {
@@ -33,7 +36,7 @@ export default function Portal() {
   }, [quizId, isAuthenticated, isAuthChecked]);
 
   useEffect(() => {
-    console.log("2nd USE EFFECT RAN")
+    // console.log("2nd USE EFFECT RAN")
     async function fetchAttempt() {
 
       if (!isAuthChecked && !isAuthenticated || !userId){
@@ -69,6 +72,24 @@ export default function Portal() {
 
     fetchAttempt();
   }, [userId, quizId, isAuthenticated, isAuthChecked]);  
+
+  useEffect(() => {
+    console.log("Current Question: " + currentQuestion)
+  }, [currentQuestion])
+
+  useEffect(() => {
+    async function fetchSubmission() {
+      try {
+        const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
+        // Update submission state if the data exists; otherwise, set it to an empty string
+        setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
+      } catch (error) {
+        console.error("Submission not yet created");
+      }
+    }
+    fetchSubmission();
+}, [currentQuestion]);
+
 
   async function handleSubmission(userChoice){
     try {
@@ -151,14 +172,30 @@ export default function Portal() {
         {/* Multiple Choice Container */}
         {questions[currentQuestion]?.questionType === 0 && (
           questions[currentQuestion]?.answerChoices?.map((choice, index) => (
-            <button key={index} onClick={() => handleSubmission(index)}>{choice}</button>
+            <button
+            key={index}
+            className={`${submission === index ? 'selected-choice' : ''}`}
+            onClick={() => handleSubmission(index)}
+          >
+            {choice}
+          </button>
           ))
         )}
         {/* True/False Container */}
         {questions[currentQuestion]?.questionType === 1 && (
           <>         
-            <button onClick={() => handleSubmission(1)}>True</button>
-            <button onClick={() => handleSubmission(0)}>False</button>
+            <button 
+              className={`${submission === 1 ? 'selected-choice' : ''}`} 
+              onClick={() => handleSubmission(1)}
+            >
+              True
+            </button>
+            <button 
+              className={`${submission === 0 ? 'selected-choice' : ''}`} 
+              onClick={() => handleSubmission(0)}
+            >
+              False
+            </button>
           </>
         )}
         {/* Shore Answer Container */}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 //import "../styles/configurator.css"
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Configurator() {
   const classes = useStyles();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [questions, setQuestions] = useState(10);
   const [minutes, setMinutes] = useState(15);
   const [difficulty, setDifficulty] = useState(2); // 1 to 5: very easy to very hard
