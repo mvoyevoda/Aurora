@@ -29,7 +29,7 @@ export default function SignUp() {
         emailRef.current.value,
         passwordRef.current.value
       );
-      navigate("/app");
+      navigate("/generator");
     } catch (error) {
       console.error(`Error: ${error}`);
       if(error.response){
