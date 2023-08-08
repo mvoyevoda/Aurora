@@ -15,6 +15,17 @@ export default function Portal() {
 
   console.log("Submission: " + submission)
 
+  async function fetchSubmission() {
+    try {
+      const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
+      // Update submission state if the data exists; otherwise, set it to an empty string
+      setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
+    } catch (error) {
+      setSubmission("")
+      console.error("Submission not yet created");
+    }
+  }
+
   const authContext = useContext(AuthContext);
   const userId = authContext.currentUser?.id;
 
@@ -29,6 +40,7 @@ export default function Portal() {
         console.error("Failed to fetch data:", error);
       }
     }
+    // fetchSubmission();
     fetchData();
   }, [quizId]);
 
@@ -75,16 +87,6 @@ export default function Portal() {
   // }, [currentQuestion])
 
   useEffect(() => {
-    async function fetchSubmission() {
-      try {
-        const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
-        // Update submission state if the data exists; otherwise, set it to an empty string
-        setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
-      } catch (error) {
-        setSubmission("")
-        console.error("Submission not yet created");
-      }
-    }
     fetchSubmission();
 }, [currentQuestion]);
 
