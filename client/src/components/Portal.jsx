@@ -21,10 +21,11 @@ export default function Portal() {
   } = useParams();
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [attemptId, setAttemptId] = useState(null)
-  const [progress, setProgress] = useState(0)
-  const [submission, setSubmission] = useState(null)
-  const [complete, setComplete] = useState(false)
+  const [attemptId, setAttemptId] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [submission, setSubmission] = useState(null);
+  const [complete, setComplete] = useState(false);
+  const [score, setScore] = useState(0);
 
   console.log("Submission: " + submission)
 
@@ -116,9 +117,9 @@ export default function Portal() {
     fetchSubmission();
   }, [currentQuestion, attemptId, questions]);
 
-  useEffect(() => {
-    if (progress === questions.length) setComplete(true)
-  }, [progress, questions.length]);
+  // useEffect(() => {
+  //   if (progress === questions.length) setComplete(true)
+  // }, [progress, questions.length]);
 
   async function handleSubmission(userChoice) {
 
@@ -181,17 +182,54 @@ export default function Portal() {
     }
   }
 
-  async function handleSubmitQuiz(){
+  async function fetchSubmissionsForAttempt() {
+    try {
+      const response = await axios.get(`/api/submissions/${attemptId}`, { withCredentials: true });
+      return response.data || [];  // Ensure that an array is returned even if response.data is undefined or null
+    } catch (error) {
+      console.error("Failed to fetch submissions:", error);
+      return [];  // Return an empty array if the fetch fails
+    }
+  }
+
+  function calculateScore(submissions) {
+    let score = 0;
+    // Ensure that submissions is an array before attempting to iterate over it
+    if (Array.isArray(submissions)) {
+      for (const submission of submissions) {
+        const question = questions.find(q => q.id === submission.questionId);
+        if (question && submission.submissionChoice === question.correctAnswer) {
+          score++;
+        }
+      }
+    }
+    return score;
+  }
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const submissions = await fetchSubmissionsForAttempt();  // Fetch submissions data
+  //     setScore(calculateScore(submissions));  // Update score state with calculated score
+  //   };
     
+  //   fetchData();
+  // }, []);
+
+  async function handleSubmitQuiz() {
+    const submissions = await fetchSubmissionsForAttempt(); // Fetch submissions data
+    console.log("Submissions:", submissions);
+    const calculatedScore = calculateScore(submissions);
+    console.log("Score: " + calculatedScore + "/" + questions.length);
+    setScore(calculatedScore);
   }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <div style={{ marginTop: "10px" }}>
-        <h3> Progress: {progress} / {questions.length} </h3>
-        <h3> Question: {currentQuestion+1} / {questions.length} </h3>
+        <h3>Progress: {progress} / {questions.length}</h3>
+        <h3>Question: {currentQuestion + 1} / {questions.length}</h3>
       </div>
-
+  
       <div style={{ position: "absolute", top: "10px", right: "10px" }}>
         <Button
           color="inherit"
@@ -206,14 +244,17 @@ export default function Portal() {
           Exit
         </Button>
       </div>
-
+  
       <div style={{ position: "absolute", top: "10px", left: "10px" }}>
-      <p>Attempt ID: {attemptId ?? "NONE"} <span style={{paddingLeft: '2em'}}>User ID: {userId ?? "NONE"}</span></p>
-      
+        <p>Attempt ID: {attemptId ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
+        {/* Display the score if it is not null */}
+        {score !== null && <p> Score: {score} / {questions.length}</p>}
       </div>
+  
       <h1 className="question-text">
         {questions[currentQuestion]?.questionText}
       </h1>
+  
       <div className="answer-choices">
         {/* Multiple Choice Container */}
         {questions[currentQuestion]?.questionType === 0 && (
@@ -222,35 +263,36 @@ export default function Portal() {
               key={index}
               className={`${submission === index ? 'selected-choice' : ''}`}
               onClick={() => handleSubmission(index)}
-              >
+            >
               {choice}
             </button>
           ))
         )}
         {/* True/False Container */}
         {questions[currentQuestion]?.questionType === 1 && (
-          <>         
-            <button 
-              className={`${submission === 1 ? 'selected-choice' : ''}`} 
+          <>
+            <button
+              className={`${submission === 1 ? 'selected-choice' : ''}`}
               onClick={() => handleSubmission(1)}
             >
               True
             </button>
-            <button 
-              className={`${submission === 0 ? 'selected-choice' : ''}`} 
+            <button
+              className={`${submission === 0 ? 'selected-choice' : ''}`}
               onClick={() => handleSubmission(0)}
             >
               False
             </button>
           </>
         )}
-        {/* Shore Answer Container */}
+        {/* Short Answer Container */}
         {/* {questions[currentQuestion]?.questionType === 2 && (
-          <>         
-          <input type="text" /> 
+          <>
+            <input type="text" />
           </>
         )} */}
       </div>
+  
       <div style={{ position: "fixed", top: "20em", left: "50%", transform: "translateX(-50%)" }}>
         <div style={{ display: "flex" }}>
           {currentQuestion !== 0 && (
@@ -272,8 +314,8 @@ export default function Portal() {
               Next
             </Button>
           )}
-          {complete &&
-            <button className="Submit Quiz" >Submit Quiz</button>
+          {progress === questions.length &&
+            <button className="Submit Quiz" onClick={handleSubmitQuiz}>Submit Quiz</button>
           }
         </div>
       </div>

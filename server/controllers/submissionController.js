@@ -79,6 +79,15 @@ async function updateSubmission(req, res) {
   }
 }
 
+async function getSubmissionsForAttempt(req, res) {
+  try {
+    const attemptId = req.params.attemptId;
+    const submissions = await Submission.findAll({ where: { attemptId } });
+    res.status(200).json(submissions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 
-module.exports = { getSubmission, createSubmission, updateSubmission };
+module.exports = { getSubmission, createSubmission, updateSubmission, getSubmissionsForAttempt };
