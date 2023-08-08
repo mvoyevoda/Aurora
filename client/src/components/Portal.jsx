@@ -81,6 +81,7 @@ export default function Portal() {
         // Update submission state if the data exists; otherwise, set it to an empty string
         setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
       } catch (error) {
+        setSubmission("")
         console.error("Submission not yet created");
       }
     }
@@ -170,25 +171,25 @@ export default function Portal() {
         {questions[currentQuestion]?.questionType === 0 && (
           questions[currentQuestion]?.answerChoices?.map((choice, index) => (
             <button
-            key={index}
-            className={`${submission == index ? 'selected-choice' : ''}`}
-            onClick={() => handleSubmission(index)}
-          >
-            {choice}
-          </button>
+              key={index}
+              className={`${submission === index ? 'selected-choice' : ''}`}
+              onClick={() => handleSubmission(index)}
+              >
+              {choice}
+            </button>
           ))
         )}
         {/* True/False Container */}
         {questions[currentQuestion]?.questionType === 1 && (
           <>         
             <button 
-              className={`${submission == 1 ? 'selected-choice' : ''}`} 
+              className={`${submission === 1 ? 'selected-choice' : ''}`} 
               onClick={() => handleSubmission(1)}
             >
               True
             </button>
             <button 
-              className={`${submission == 0 ? 'selected-choice' : ''}`} 
+              className={`${submission === 0 ? 'selected-choice' : ''}`} 
               onClick={() => handleSubmission(0)}
             >
               False
