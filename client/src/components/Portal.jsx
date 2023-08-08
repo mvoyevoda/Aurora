@@ -1,12 +1,24 @@
-import { useState, useEffect, useContext } from 'react';
-import { useParams } from "react-router-dom";
+import {
+  useState,
+  useEffect,
+  useContext
+} from 'react';
+import {
+  useParams
+} from "react-router-dom";
 import axios from 'axios';
-import { AuthContext } from '../contexts/AuthContext';
+import {
+  AuthContext
+} from '../contexts/AuthContext';
 import "../styles/portal.css";
-import { Button } from '@mui/material';
+import {
+  Button
+} from '@mui/material';
 
 export default function Portal() {
-  const { quizId } = useParams();
+  const {
+    quizId
+  } = useParams();
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [attemptId, setAttemptId] = useState(null)
@@ -18,7 +30,9 @@ export default function Portal() {
 
   async function fetchSubmission() {
     try {
-      const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
+      const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
+        withCredentials: true
+      });
       // Update submission state if the data exists; otherwise, set it to an empty string
       setSubmission(response.data.submissionChoice != null ? response.data.submissionChoice : null);
     } catch (error) {
@@ -35,10 +49,14 @@ export default function Portal() {
   useEffect(() => {
     // console.log("1st USE EFFECT RAN")
     async function fetchData() {
-      if(!isAuthChecked || !isAuthenticated) { return; }
+      if (!isAuthChecked || !isAuthenticated) {
+        return;
+      }
       try {
         // Fetch questions
-        const questionsResponse = await axios.get(`/api/quizzes/${quizId}`, { withCredentials: true });
+        const questionsResponse = await axios.get(`/api/quizzes/${quizId}`, {
+          withCredentials: true
+        });
         setQuestions(questionsResponse.data);
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -52,14 +70,16 @@ export default function Portal() {
     // console.log("2nd USE EFFECT RAN")
     async function fetchAttempt() {
 
-      if (!isAuthChecked && !isAuthenticated || !userId){
+      if (!isAuthChecked && !isAuthenticated || !userId) {
         console.log("USERID NOT AVAILABLE or NOT AUTHENTICAED")
         return; // skip if userId is not available yet
-      } 
+      }
 
       try {
         // Verify attempt and fetch progress
-        const attemptResponse = await axios.get(`/api/users/${userId}/attempts/${quizId}`, { withCredentials: true });
+        const attemptResponse = await axios.get(`/api/users/${userId}/attempts/${quizId}`, {
+          withCredentials: true
+        });
         // console.log(attemptResponse.data)
 
         setAttemptId(attemptResponse.data.id);
@@ -67,24 +87,26 @@ export default function Portal() {
       } catch (error) {
         // Only make the POST request if the error status is 404
         if (error.response && error.response.status === 404) {
-            try {
-                const postResponse = await axios.post(`/api/attempts/${userId}/${quizId}`, {}, { withCredentials: true });
-                // Handle the response here
-                console.log('Attempt created:', postResponse.data);
-                setAttemptId(postResponse.data.id);
-                setProgress(postResponse.data.progress ?? 0);
-            } catch(postError) {
-                console.error("Failed to create attempt:", postError);
-            }
+          try {
+            const postResponse = await axios.post(`/api/attempts/${userId}/${quizId}`, {}, {
+              withCredentials: true
+            });
+            // Handle the response here
+            console.log('Attempt created:', postResponse.data);
+            setAttemptId(postResponse.data.id);
+            setProgress(postResponse.data.progress ?? 0);
+          } catch (postError) {
+            console.error("Failed to create attempt:", postError);
+          }
         } else {
-            // If the error status is not 404, log the error
-            console.error("Failed to fetch attempt:", error);
+          // If the error status is not 404, log the error
+          console.error("Failed to fetch attempt:", error);
         }
       }
     }
 
     fetchAttempt();
-  }, [userId, quizId, isAuthenticated, isAuthChecked]);  
+  }, [userId, quizId, isAuthenticated, isAuthChecked]);
 
   // useEffect(() => {
   //   console.log("Current Question: " + currentQuestion)
@@ -92,16 +114,21 @@ export default function Portal() {
 
   useEffect(() => {
     fetchSubmission();
-}, [currentQuestion, attemptId, questions]);
+  }, [currentQuestion, attemptId, questions]);
 
-
-  async function handleSubmission(userChoice){
-
+  useEffect(() => {
     if (progress === questions.length) setComplete(true)
+  }, [progress, questions.length]);
+
+  async function handleSubmission(userChoice) {
+
+    //if (progress === questions.length) setComplete(true)
 
     setSubmission(userChoice)
     try {
-      const getSubmissionResponse = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true })
+      const getSubmissionResponse = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
+        withCredentials: true
+      })
 
       // If submission exists and userChoice is the same as the existing choice, do nothing
       if (getSubmissionResponse.data.submissionChoice === userChoice) {
@@ -111,7 +138,9 @@ export default function Portal() {
       // If submission exists but userChoice is different, update the existing submission
       await axios.patch(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
         submissionChoice: userChoice
-      }, { withCredentials: true });
+      }, {
+        withCredentials: true
+      });
 
     } catch (error) {
       // If submission does not exist (status 404), create a new one
@@ -120,24 +149,28 @@ export default function Portal() {
         try {
           const postResponse = await axios.post(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, {
             submissionChoice: userChoice
-          }, { withCredentials: true });
+          }, {
+            withCredentials: true
+          });
           // If a submission is successfully created, increment progress
           if (postResponse.status === 201) {
             await axios.patch(`/api/attempts/${attemptId}`, {
-              progress: progress+1
-            }, { withCredentials: true })
-            .then((response) => {
-              // The progress value is assumed to be in the response data. Modify as per actual response structure.
-              if (response.status === 200) {
-                setProgress(response.data.progress);
-              }
-            })
-            .catch((error) => {
-              console.error("Failed to update progress:", error);
-            });  
+                progress: progress + 1
+              }, {
+                withCredentials: true
+              })
+              .then((response) => {
+                // The progress value is assumed to be in the response data. Modify as per actual response structure.
+                if (response.status === 200) {
+                  setProgress(response.data.progress);
+                }
+              })
+              .catch((error) => {
+                console.error("Failed to update progress:", error);
+              });
 
           }
-        } catch(postError) {
+        } catch (postError) {
           console.error("Failed to create submission:", postError);
         }
       }
@@ -146,10 +179,10 @@ export default function Portal() {
         console.error("Failed to handle submission:", error);
       }
     }
-  }  
+  }
 
   // async function handleSubmitQuiz(){
-    
+
   // }
 
   return (
