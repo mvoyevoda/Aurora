@@ -24,7 +24,7 @@ export default function Portal() {
   const [attemptId, setAttemptId] = useState(null);
   const [progress, setProgress] = useState(0);
   const [submission, setSubmission] = useState(null);
-  const [complete, setComplete] = useState(false);
+  // const [complete, setComplete] = useState(false);
   const [score, setScore] = useState(0);
 
   console.log("Submission: " + submission)
