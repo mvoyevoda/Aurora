@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
 import "../styles/portal.css";
+import { Button } from '@mui/material';
 
 export default function Portal() {
   const { quizId } = useParams();
@@ -127,8 +128,28 @@ export default function Portal() {
   }  
 
   return (
-    <> 
-      <h3>{progress} / {questions.length}</h3>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={{ marginTop: "10px" }}>
+        <h3>
+          {progress} / {questions.length}
+        </h3>
+      </div>
+
+      <div style={{ position: "absolute", top: "10px", right: "10px" }}>
+        <Button
+          color="inherit"
+          href="/dashboard"
+          sx={{
+            backgroundColor: "transparent",
+            border: "1px solid transparent",
+            borderRadius: "4px",
+            opacity: 0.5,
+          }}
+        >
+          Exit
+        </Button>
+      </div>
+
       <p>Attempt ID: {attemptId ?? "NONE"}</p>
       <p>User ID: {userId ?? "NONE"}</p>
       <h1 className="question-text">
@@ -181,6 +202,6 @@ export default function Portal() {
           Next
         </button>
       )}
-    </>
+    </div>
   );
 }
