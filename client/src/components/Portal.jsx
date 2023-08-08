@@ -13,10 +13,13 @@ export default function Portal() {
 
   const authContext = useContext(AuthContext);
   const userId = authContext.currentUser?.id;
+  const isAuthenticated = !!authContext.currentUser;
+  const isAuthChecked = authContext.isAuthChecked;
 
   useEffect(() => {
     console.log("1st USE EFFECT RAN")
     async function fetchData() {
+      if(!isAuthChecked || !isAuthenticated) { return; }
       try {
         // Fetch questions
         const questionsResponse = await axios.get(`/api/quizzes/${quizId}`, { withCredentials: true });
@@ -26,14 +29,14 @@ export default function Portal() {
       }
     }
     fetchData();
-  }, [quizId]);
+  }, [quizId, isAuthenticated, isAuthChecked]);
 
   useEffect(() => {
     console.log("2nd USE EFFECT RAN")
     async function fetchAttempt() {
 
-      if (!userId){
-        console.log("USERID NOT AVAILABLE")
+      if (!isAuthChecked && !isAuthenticated || !userId){
+        console.log("USERID NOT AVAILABLE or NOT AUTHENTICAED")
         return; // skip if userId is not available yet
       } 
 
@@ -64,7 +67,7 @@ export default function Portal() {
     }
 
     fetchAttempt();
-  }, [userId, quizId]);  
+  }, [userId, quizId, isAuthenticated, isAuthChecked]);  
 
   async function handleSubmission(userChoice){
     try {

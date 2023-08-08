@@ -4,12 +4,15 @@ import axios from "axios";
 export const AuthContext = createContext();
 
 // eslint-disable-next-line react/prop-types
-const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children, skipAuthCheck = false }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [authError, setAuthError] = useState(null);
 
+
   useEffect(() => {
+    if(skipAuthCheck) { return; }
+
     const checkAuthStatus = async () => {
       setIsAuthChecked(false);
 
@@ -27,7 +30,7 @@ const AuthProvider = ({ children }) => {
     };
 
     checkAuthStatus();
-  }, []);
+  }, [skipAuthCheck]);
 
   const login = async (email, password) => {
     try {
