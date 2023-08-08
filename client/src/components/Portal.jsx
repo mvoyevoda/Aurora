@@ -11,7 +11,7 @@ export default function Portal() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [attemptId, setAttemptId] = useState(null)
   const [progress, setProgress] = useState(0)
-  const [submission, setSubmission] = useState("")
+  const [submission, setSubmission] = useState(null)
 
   console.log("Submission: " + submission)
 
@@ -19,7 +19,7 @@ export default function Portal() {
     try {
       const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
       // Update submission state if the data exists; otherwise, set it to an empty string
-      setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
+      setSubmission(response.data.submissionChoice != null ? response.data.submissionChoice : null);
     } catch (error) {
       setSubmission("")
       console.error("Submission not yet created");
