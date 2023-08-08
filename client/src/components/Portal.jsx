@@ -12,6 +12,7 @@ export default function Portal() {
   const [attemptId, setAttemptId] = useState(null)
   const [progress, setProgress] = useState(0)
   const [submission, setSubmission] = useState(null)
+  const [complete, setComplete] = useState(false)
 
   console.log("Submission: " + submission)
 
@@ -95,6 +96,9 @@ export default function Portal() {
 
 
   async function handleSubmission(userChoice){
+
+    if (progress === questions.length) setComplete(true)
+
     setSubmission(userChoice)
     try {
       const getSubmissionResponse = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true })
@@ -143,6 +147,10 @@ export default function Portal() {
       }
     }
   }  
+
+  // async function handleSubmitQuiz(){
+    
+  // }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -231,6 +239,9 @@ export default function Portal() {
               Next
             </Button>
           )}
+          {complete &&
+            <button className="Submit Quiz" >Submit Quiz</button>
+          }
         </div>
       </div>
     </div>

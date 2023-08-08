@@ -1,5 +1,22 @@
 const { Attempt } = require('../models');
 
+async function getAllAttempts(req, res) {
+  try {
+    // Fetch all attempts and order them by createdAt attribute in descending order
+    const attempts = await Attempt.findAll({
+      order: [['createdAt', 'DESC']]
+    });
+
+    if (attempts.length === 0) {
+      res.status(404).json({ message: "No attempts found" });
+    } else {
+      res.status(200).json(attempts);
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching all attempts", error: error.message });
+  }
+}
+
 async function getProgress(req, res) {
   const attemptId = parseInt(req.params.attemptId);
 
@@ -51,4 +68,5 @@ async function updateProgress(req, res) {
   }
 }
 
-module.exports = { getProgress, createAttempt, updateProgress };
+module.exports = { getProgress, createAttempt, updateProgress, getAllAttempts };
+

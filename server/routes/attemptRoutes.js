@@ -8,5 +8,6 @@ router.use(authenticateUser);
 router.get('/:attemptId/progress', attemptController.getProgress);
 router.patch('/:attemptId', attemptController.updateProgress);
 router.post('/:userId/:quizId', attemptController.createAttempt);
+router.get('/attempts', attemptController.getAllAttempts);
 
 module.exports = router;
