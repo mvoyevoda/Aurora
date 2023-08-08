@@ -11,7 +11,7 @@ export default function Portal() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [attemptId, setAttemptId] = useState(null)
   const [progress, setProgress] = useState(0)
-  const [submission, setSubmission] = useState("")
+  const [submission, setSubmission] = useState(null)
 
   console.log("Submission: " + submission)
 
@@ -19,7 +19,7 @@ export default function Portal() {
     try {
       const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
       // Update submission state if the data exists; otherwise, set it to an empty string
-      setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
+      setSubmission(response.data.submissionChoice != null ? response.data.submissionChoice : null);
     } catch (error) {
       setSubmission("")
       console.error("Submission not yet created");
@@ -28,10 +28,13 @@ export default function Portal() {
 
   const authContext = useContext(AuthContext);
   const userId = authContext.currentUser?.id;
+  const isAuthenticated = !!authContext.currentUser;
+  const isAuthChecked = authContext.isAuthChecked;
 
   useEffect(() => {
     // console.log("1st USE EFFECT RAN")
     async function fetchData() {
+      if(!isAuthChecked || !isAuthenticated) { return; }
       try {
         // Fetch questions
         const questionsResponse = await axios.get(`/api/quizzes/${quizId}`, { withCredentials: true });
@@ -42,14 +45,14 @@ export default function Portal() {
     }
     // fetchSubmission();
     fetchData();
-  }, [quizId]);
+  }, [quizId, isAuthenticated, isAuthChecked]);
 
   useEffect(() => {
     // console.log("2nd USE EFFECT RAN")
     async function fetchAttempt() {
 
-      if (!userId){
-        console.log("USERID NOT AVAILABLE")
+      if (!isAuthChecked && !isAuthenticated || !userId){
+        console.log("USERID NOT AVAILABLE or NOT AUTHENTICAED")
         return; // skip if userId is not available yet
       } 
 
@@ -80,7 +83,7 @@ export default function Portal() {
     }
 
     fetchAttempt();
-  }, [userId, quizId]);  
+  }, [userId, quizId, isAuthenticated, isAuthChecked]);  
 
   // useEffect(() => {
   //   console.log("Current Question: " + currentQuestion)
@@ -88,7 +91,7 @@ export default function Portal() {
 
   useEffect(() => {
     fetchSubmission();
-}, [currentQuestion]);
+}, [currentQuestion, attemptId, questions]);
 
 
   async function handleSubmission(userChoice){

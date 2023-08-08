@@ -76,7 +76,7 @@ export default function Configurator() {
       if (response.data.success) {
         const id = response.data.id;
         window.location.href = `http://localhost:5173/portal/${id}`;
-        // navigate(`/portal/${id}`);
+        //navigate(`/portal/${id}`);
       } else {
         console.error("Failed to generate quiz");
       }
