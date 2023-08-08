@@ -4,21 +4,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
 const mockRecentQuizzes = [
-  "Quiz 1",
-  "Quiz 2",
-  "Quiz 3",
-  "Quiz 4",
-  "Quiz 5",
-  "Quiz 6",
-  "Quiz 7",
-  "Quiz 8",
-  "Quiz 9",
-  "Quiz 5",
-  "Quiz 1",
-  "Quiz 2",
-  "Quiz 3",
-  "Quiz 4",
-  "Quiz 5",
+  "Comming soon...",
+ 
 ];
 
 const SuggestedQuizzesList = () => {

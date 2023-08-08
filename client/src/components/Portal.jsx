@@ -15,6 +15,17 @@ export default function Portal() {
 
   console.log("Submission: " + submission)
 
+  async function fetchSubmission() {
+    try {
+      const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
+      // Update submission state if the data exists; otherwise, set it to an empty string
+      setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
+    } catch (error) {
+      setSubmission("")
+      console.error("Submission not yet created");
+    }
+  }
+
   const authContext = useContext(AuthContext);
   const userId = authContext.currentUser?.id;
   const isAuthenticated = !!authContext.currentUser;
@@ -32,6 +43,7 @@ export default function Portal() {
         console.error("Failed to fetch data:", error);
       }
     }
+    // fetchSubmission();
     fetchData();
   }, [quizId, isAuthenticated, isAuthChecked]);
 
@@ -78,15 +90,6 @@ export default function Portal() {
   // }, [currentQuestion])
 
   useEffect(() => {
-    async function fetchSubmission() {
-      try {
-        const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
-        // Update submission state if the data exists; otherwise, set it to an empty string
-        setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
-      } catch (error) {
-        console.error("Submission not yet created");
-      }
-    }
     fetchSubmission();
 }, [currentQuestion]);
 
@@ -163,8 +166,10 @@ export default function Portal() {
         </Button>
       </div>
 
-      <p>Attempt ID: {attemptId ?? "NONE"}</p>
-      <p>User ID: {userId ?? "NONE"}</p>
+      <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+      <p>Attempt ID: {attemptId ?? "NONE"} <span style={{paddingLeft: '2em'}}>User ID: {userId ?? "NONE"}</span></p>
+      
+      </div>
       <h1 className="question-text">
         {questions[currentQuestion]?.questionText}
       </h1>
@@ -173,25 +178,25 @@ export default function Portal() {
         {questions[currentQuestion]?.questionType === 0 && (
           questions[currentQuestion]?.answerChoices?.map((choice, index) => (
             <button
-            key={index}
-            className={`${submission == index ? 'selected-choice' : ''}`}
-            onClick={() => handleSubmission(index)}
-          >
-            {choice}
-          </button>
+              key={index}
+              className={`${submission === index ? 'selected-choice' : ''}`}
+              onClick={() => handleSubmission(index)}
+              >
+              {choice}
+            </button>
           ))
         )}
         {/* True/False Container */}
         {questions[currentQuestion]?.questionType === 1 && (
           <>         
             <button 
-              className={`${submission == 1 ? 'selected-choice' : ''}`} 
+              className={`${submission === 1 ? 'selected-choice' : ''}`} 
               onClick={() => handleSubmission(1)}
             >
               True
             </button>
             <button 
-              className={`${submission == 0 ? 'selected-choice' : ''}`} 
+              className={`${submission === 0 ? 'selected-choice' : ''}`} 
               onClick={() => handleSubmission(0)}
             >
               False
@@ -205,16 +210,29 @@ export default function Portal() {
           </>
         )} */}
       </div>
-      {currentQuestion !== 0 && (
-        <button onClick={() => setCurrentQuestion(currentQuestion - 1)}>
-          Prev
-        </button>
-      )}
-      {currentQuestion !== questions.length-1 && (
-        <button onClick={() => setCurrentQuestion(currentQuestion + 1)}>
-          Next
-        </button>
-      )}
+      <div style={{ position: "fixed", top: "20em", left: "50%", transform: "translateX(-50%)" }}>
+        <div style={{ display: "flex" }}>
+          {currentQuestion !== 0 && (
+            <Button
+              onClick={() => setCurrentQuestion(currentQuestion - 1)}
+              variant="contained"
+              color="primary"
+              style={{ marginRight: "10px" }}
+            >
+              Prev
+            </Button>
+          )}
+          {currentQuestion !== questions.length - 1 && (
+            <Button
+              onClick={() => setCurrentQuestion(currentQuestion + 1)}
+              variant="contained"
+              color="primary"
+            >
+              Next
+            </Button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
