@@ -33,14 +33,6 @@ export default function Portal() {
   }, [quizId]);
 
   useEffect(() => {
-    async function fetchSubmission() {
-      const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true })
-      setSubmission(response.data.submissionChoice)
-    }
-    fetchSubmission()
-  }, [currentQuestion])
-
-  useEffect(() => {
     // console.log("2nd USE EFFECT RAN")
     async function fetchAttempt() {
 
@@ -77,6 +69,24 @@ export default function Portal() {
 
     fetchAttempt();
   }, [userId, quizId]);  
+
+  useEffect(() => {
+    console.log("Current Question: " + currentQuestion)
+  }, [currentQuestion])
+
+  useEffect(() => {
+    async function fetchSubmission() {
+      try {
+        const response = await axios.get(`/api/submissions/${attemptId}/${questions[currentQuestion].id}`, { withCredentials: true });
+        // Update submission state if the data exists; otherwise, set it to an empty string
+        setSubmission(response.data.submissionChoice ? response.data.submissionChoice : "");
+      } catch (error) {
+        console.error("Submission not yet created");
+      }
+    }
+    fetchSubmission();
+}, [currentQuestion]);
+
 
   async function handleSubmission(userChoice){
     try {
