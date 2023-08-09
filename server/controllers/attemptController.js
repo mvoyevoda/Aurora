@@ -33,6 +33,24 @@ async function getProgress(req, res) {
   }
 }
 
+async function getAttempt(req, res) {
+  const userId = parseInt(req.params.userId);
+  const quizId = parseInt(req.params.quizId);
+
+  try {
+    // Find an existing attempt for the given user and quiz
+    const attempt = await Attempt.findOne({ where: { userId, quizId }});
+
+    if (attempt) {
+      res.status(200).json(attempt); // Existing attempt found, return it
+    } else {
+      res.status(404).json({ message: "Attempt not found" }); // No existing attempt found
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching attempt", error: error.message });
+  }
+}
+
 async function createAttempt(req, res) {
   const userId = parseInt(req.params.userId);
   const quizId = parseInt(req.params.quizId);
@@ -68,6 +86,26 @@ async function updateProgress(req, res) {
   }
 }
 
+async function updateAttemptProgress(req, res) {
+  const attemptId = parseInt(req.params.attemptId);
+  const { progress } = req.body;
+
+  try {
+    const attempt = await Attempt.findByPk(attemptId);
+    if (!attempt) {
+      return res.status(404).json({ message: 'Attempt not found' });
+    }
+
+    // Update the progress for the found attempt
+    attempt.progress = progress;
+    await attempt.save();
+
+    res.status(200).json({ message: 'Progress updated successfully', progress: attempt.progress });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating progress', error: error.message });
+  }
+};
+
 async function updateScore(req, res) {
 
   const attemptId = parseInt(req.params.attemptId);
@@ -89,11 +127,5 @@ async function updateScore(req, res) {
 
 }
 
-async function calculateScore(req, res) {
-
-  const attemptId = parseInt(req.params.attemptId);
-
-}
-
-module.exports = { getProgress, createAttempt, updateProgress, getAllAttempts, updateScore };
+module.exports = { getProgress, getAttempt, createAttempt, updateProgress, updateAttemptProgress, getAllAttempts, updateScore };
 

@@ -5,10 +5,11 @@ const attemptController = require('../controllers/attemptController')
 
 router.use(authenticateUser);
 
-router.get('/:attemptId/progress', attemptController.getProgress);
-router.patch('/:attemptId', attemptController.updateProgress);
-router.post('/:userId/:quizId', attemptController.createAttempt);
 router.get('/', attemptController.getAllAttempts);
+router.get('/:attemptId/progress', attemptController.getProgress);
+router.patch('/:attemptId', attemptController.updateAttemptProgress);
+router.get('/:userId/:quizId', attemptController.getAttempt);
+router.post('/:userId/:quizId', attemptController.createAttempt);
 router.patch('/:attemptId/score', attemptController.updateScore);
 
 module.exports = router;

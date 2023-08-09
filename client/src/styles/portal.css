@@ -2,6 +2,6 @@
   margin: 50px;
 }
 
-.selected-choice {
+.highlighted {
   background-color: green;
 }
