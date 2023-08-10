@@ -1,28 +1,24 @@
-import ReactDOM from 'react-dom/client';
-import Dashboard from './views/dashboard';
+import ReactDOM from "react-dom/client";
+import Dashboard from "./views/dashboard";
 import SignUp from "./views/signup";
 import LogIn from "./views/login";
 import Welcome from "./views/welcome";
 // import App from "./views/Generator";
 import Portal from "./components/Portal";
-import ForgotPassword from './views/forgotPassword';
-import ResetPassword from './views/resetPassword';
+import ForgotPassword from "./views/forgotPassword";
+import ResetPassword from "./views/resetPassword";
 import "./styles/index.css";
-import ProtectedRoute from './components/ProtectedRoute';
-import ErrorPage from './ErrorPage';
+import ProtectedRoute from "./components/ProtectedRoute";
+import ErrorPage from "./ErrorPage";
 
 // import '@fontsource/roboto/300.css';
 // import '@fontsource/roboto/400.css';
 // import '@fontsource/roboto/500.css';
 // import '@fontsource/roboto/700.css';
 
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import AuthProvider from './contexts/AuthContext';
-import Generator from './views/Generator';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthProvider from "./contexts/AuthContext";
+import Generator from "./views/Generator";
 
 const router = createBrowserRouter([
   {
@@ -56,29 +52,28 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/portal/:quizId", 
+    path: "/portal/:quizId",
     element: (
-    <ProtectedRoute>
-      <Portal />
-    </ProtectedRoute>
+      <ProtectedRoute>
+        <Portal />
+      </ProtectedRoute>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/forgotPassword",
-    element: <ForgotPassword />
+    element: <ForgotPassword />,
   },
   {
     path: "/resetPassword/:token",
-    element: <ResetPassword />
+    element: <ResetPassword />,
   },
 ]);
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+  <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>
   // </React.StrictMode>,
 );
