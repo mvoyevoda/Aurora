@@ -17,9 +17,7 @@ export default function NavGenerator() {
         fontSize: "1rem", // Adjust the font size as needed
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between", // Aligns items with space between
-        paddingLeft: "29rem", // Add padding to the left side
+        paddingLeft: "42rem", // Add padding to the left side
         //paddingRight: "1rem", // Add padding to the right side
         "&:hover": {
           backgroundColor: "rgba(212, 212, 212, .08)",

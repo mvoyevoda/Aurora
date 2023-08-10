@@ -1,8 +1,5 @@
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 export default function FavCategory() {
@@ -25,7 +22,7 @@ export default function FavCategory() {
           fontSize={80}
           sx={{ lineHeight: 1 }}
         >
-          N/A
+          Anime
         </Typography>
         {/* Additional Content */}
         <Typography

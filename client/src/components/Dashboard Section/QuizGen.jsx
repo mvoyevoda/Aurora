@@ -20,7 +20,7 @@ export function QuizGen() {
           fontSize={180}
           sx={{ lineHeight: 1 }}
         >
-          0
+          9
         </Typography>
         {/* Additional Content */}
         <Typography
