@@ -40,7 +40,7 @@ export default function NavBar() {
           Log In
         </Button>
       </Link>
-      <Link to={'/login'} style={{textDecoration: 'none', color: 'white'}}>
+      <Link to={'/signup'} style={{textDecoration: 'none', color: 'white'}}>
         <Button
           color="inherit"
           href="./signup"
