@@ -85,7 +85,6 @@ const AuthProvider = ({ children, skipAuthCheck = false }) => {
       clearAuthError,
       login,
       signup,
-      // Include logout when you implement it
     }}>
       {children}
     </AuthContext.Provider>

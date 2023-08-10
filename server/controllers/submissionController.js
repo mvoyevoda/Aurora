@@ -1,7 +1,5 @@
 const { Submission } = require('../models');
 
-
-
 async function getSubmission(req, res) {
 
   const attemptId = parseInt(req.params.attemptId);
@@ -20,8 +18,6 @@ async function getSubmission(req, res) {
   }
 
 }
-
-
 
 async function createSubmission(req, res) {
 
