@@ -27,7 +27,10 @@ function Generator() {
   return (
     <>
     <div className="scrollDownAnimation">
+      <div className="logOutDiv">
       <LogoutButton />
+      </div>
+      
       <div style={styles.container}>
         <div style={styles.content}>
           <Configurator />
