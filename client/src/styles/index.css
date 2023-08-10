@@ -12,6 +12,12 @@ body {
   animation: color 8s ease-in-out infinite; 
   color: #ffffff;
   overflow: hidden;
+  font-family: Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+
 }
 
 

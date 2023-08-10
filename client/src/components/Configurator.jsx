@@ -21,16 +21,21 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     background: "rgba(217, 217, 217, 0.20)",
-    borderRadius: "0.25em", 
+    borderRadius: "1em", 
     padding: "0.5em", 
-    margin: "0.5em 0", 
+    width: "50em",
+    
   },
   slider: {
     width: "12.5em", 
     margin: "0.5em 0", 
+    width: "50em",
+
   },
   button: {
     margin: "1em 0", 
+    width: "58em",
+    borderRadius: "1em", 
   },
 }));
 
@@ -90,6 +95,8 @@ export default function Configurator() {
       <div className={classes.configurator}>
       <form onSubmit={handleSubmit}>
         <Input
+          required
+          color="text"
           type="text"
           name="prompt"
           className={classes.input}
