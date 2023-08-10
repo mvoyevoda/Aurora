@@ -20,7 +20,7 @@ async function generate(req, res) {
       `
       I will be taking your response and formatting it inside user-friendly quiz taking environment on my website. 
       Please respond in JSON format. 
-      For each question, specify whether the question is 0 or 1 or 2 ---> multiple choice or true/false.
+      For each question, specify whether the question is 0 or 1 ---> multiple choice or true/false.
       There could only be 2 question types, 0 or 1. NOTHING ELSE!!!!!
       Questions can only be multiple choice or true/false, do not include any other types!
       Do not ask open ended questions or fill-in-the-blank!

@@ -22,11 +22,11 @@ export default function Portal() {
   const [submissions, setSubmissions] = useState({});
   const [score, setScore] = useState(null);
 
-  useEffect(() => {
-    console.log("SUBMISSIONS LENGTH: " + Object.keys(submissions).length)
-    console.log("SUBMISSIONS:", JSON.stringify(submissions));
+  // useEffect(() => {
+  //   console.log("SUBMISSIONS LENGTH: " + Object.keys(submissions).length)
+  //   console.log("SUBMISSIONS:", JSON.stringify(submissions));
 
-  }, [submissions])
+  // }, [submissions])
 
   //Update currentQuestionId when currentQuestionIndex changes
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Portal() {
       if (attemptResponse.status === 200) {
         setAttempt(attemptResponse.data);
         setProgress(attemptResponse.data.progress);
-        console.log("Fetched attempt:", attemptResponse.data);
+        // console.log("Fetched attempt:", attemptResponse.data);
   
         try {
           // Fetching submissions for the fetched attempt
@@ -52,7 +52,7 @@ export default function Portal() {
               // Map the response object to an array containing all submission choices
               // const submissionMap = submissionsResponse.data.map(sub => sub.submissionChoice);
               setSubmissions(submissionsResponse.data);
-              console.log("SUBMISSIONS: " + submissions)
+              // console.log("SUBMISSIONS: " + submissions)
           }
         } catch (submissionsError) {
             console.error('Error fetching submissions:', submissionsError);
@@ -65,7 +65,7 @@ export default function Portal() {
           const attemptResponse = await axios.post(`/api/attempts/${userId}/${quizId}`, { withCredentials: true });
           setAttempt(attemptResponse.data);
           setProgress(attemptResponse.data.progress);
-          console.log("Initialized attempt: ", attemptResponse.data); 
+          // console.log("Initialized attempt: ", attemptResponse.data); 
   
           // After initializing the attempt, you might want to fetch the submissions here as well, if needed.
           // However, it's probable that a new attempt might not have submissions yet.
@@ -107,7 +107,7 @@ export default function Portal() {
   function handleSubmission(userChoice) {
     if (Object.keys(submissions).length === 0) {
       setSubmissions({ [currentQuestionId]: userChoice });
-      console.log("Initialization of submissions: " + submissions);
+      // console.log("Initialization of submissions: " + submissions);
       setProgress(prevProgress => prevProgress + 1);
     } else {
       // Create a shallow copy of the submissions object
@@ -130,11 +130,13 @@ export default function Portal() {
   }  
 
   async function handleSubmitQuiz(){
-
+    //1. PATCH: Update Attempt Progress
+    //2. PATCH: Update submissionChoice of each submission
+    //3. Compare each submission to each question's correctAnswer
   }
 
   let selectedChoice = Object.keys(submissions).length !== 0? submissions[currentQuestionId] : null
-  console.log("SELECTED CHOICE: " + selectedChoice)
+  // console.log("SELECTED CHOICE: " + selectedChoice)
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -232,13 +234,6 @@ export default function Portal() {
           }
         </div>
       </div>
-      {/* <ul>
-      {submissions?.map((submission, index) => (
-        <li key={index}>
-          {submission.submissionChoice}
-        </li>
-      ))}
-    </ul> */}
     </div>
   );
 
