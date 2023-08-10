@@ -46,7 +46,11 @@ async function createSubmission(req, res) {
 async function updateSubmission(req, res) {
   const attemptId = parseInt(req.params.attemptId);
   const questionId = parseInt(req.params.questionId);
-  const submissionChoice = req.body.submissionChoice; 
+  const submissionChoice = req.body.submissionChoice;
+
+  console.log("Attempt id:", attemptId);
+  console.log("Question id:", questionId);
+  console.log("Submission choice", submissionChoice);
 
   try {
     // Find the existing submission

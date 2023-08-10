@@ -27,14 +27,19 @@ export default function Portal () {
       try {
         const quizResponse = await axios.get(`/api/quizzes/${quizId}`, { withCredentials: true });
         console.log("Quiz response: ", quizResponse);
-        setQuestions(quizResponse.data);
+        
+        // Sort questions by id (or other property)
+        const sortedQuestions = quizResponse.data.sort((a, b) => a.id - b.id);
+        
+        setQuestions(sortedQuestions);
         // Initialize submissions with null values for each question
-        setSubmissions(Array(quizResponse.data.length).fill(null));
+        setSubmissions(Array(sortedQuestions.length).fill(null));
       } catch (error) {
         console.error('Error fetching quiz details:', error);
       }
     }
   };
+  
 
   const getAttempt = async () => {
     try {
@@ -65,17 +70,21 @@ export default function Portal () {
     }
   };
 
+  // Function to fetch submissions for the current attempt
   const fetchAttemptSubmissions = async () => {
     try {
       if (attempt) {
         const submissionsResponse = await axios.get(`/api/submissions/${attempt.id}`, { withCredentials: true });
         console.log("Submissions response: ", submissionsResponse);
         if (submissionsResponse.status === 200) {
-          // Map the response to a map of question IDs and choice indices
-          const submissionMap = submissionsResponse.data.reduce((map, sub) => {
-            map[sub.questionId] = sub.submissionChoice;
-            return map;
-          }, {});
+          // Initialize an empty object to hold the mapping
+          const submissionMap = {};
+          // Iterate through the data and add each questionId and submissionChoice to the map
+          for (let i = 0; i < submissionsResponse.data.length; i++) {
+            const sub = submissionsResponse.data[i];
+            submissionMap[sub.questionId] = sub.submissionChoice;
+          }
+          // Set the submissions state with the constructed map
           setSubmissions(submissionMap);
         }
       }
@@ -83,6 +92,7 @@ export default function Portal () {
       console.error('Error fetching submissions:', error);
     }
   };
+  
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -96,12 +106,12 @@ export default function Portal () {
 
   useEffect(() => {
     // Fetch existing submissions for the attempt after the attempt is set
-    const fetchSubmissions = async () => {
+    const fetchSubmissionsForAttempt = async () => {
       if (attempt) {
         await fetchAttemptSubmissions();
       }
     };
-    fetchSubmissions();
+    fetchSubmissionsForAttempt();
   }, [attempt?.id]);
 
   const incrementProgress = async () => {
@@ -118,19 +128,25 @@ export default function Portal () {
     if (attempt) { // Check if attempt is defined
       try {
         const existingSubmission = submissions[currentQuestionIndex];
-        if (existingSubmission === null) {
+        console.log(submissions);
+        if (!existingSubmission) {
           // Increment progress only if the question has not been answered
           incrementProgress();
-  
           // Create new submission
           await axios.post(`/api/submissions/${attempt.id}/${questions[currentQuestionIndex].id}`, { submissionChoice: choiceIndex }, { withCredentials: true });
         } else {
           // Update existing submission
+          console.log("Attempt id:" , attempt.id);
+          console.log("Current question index in questions: ", questions[currentQuestionIndex].id);
+          console.log("Current question index", currentQuestionIndex);
           await axios.patch(`/api/submissions/${attempt.id}/${questions[currentQuestionIndex].id}`, { submissionChoice: choiceIndex }, { withCredentials: true });
         }
   
-        const newSubmissions = [...submissions];
-        newSubmissions[currentQuestionIndex] = choiceIndex; // Update the selected choice for the current question
+        // Re-fetch submissions to make sure the state is up-to-date
+        await fetchAttemptSubmissions();
+  
+        const newSubmissions = { ...submissions };
+        newSubmissions[questions[currentQuestionIndex].id] = choiceIndex;
         setSubmissions(newSubmissions);
       } catch (error) {
         console.error('Error handling answer choice selection:', error);
@@ -139,6 +155,7 @@ export default function Portal () {
       console.error('Attempt is not defined.');
     }
   };
+  
 
   const renderMultipleChoiceQuestion = (question) => (
     <div className="question-container">
@@ -204,6 +221,7 @@ export default function Portal () {
         <>
           <div>User ID: {userId}</div>
           <div>Attempt ID: {attempt?.id}</div>
+          <div>Question: {currentQuestionIndex + 1}/{questions.length}</div>
           <div>Progress: {progress}/{questions.length}</div>
           {showScore ? (
             <div className="score-container">
