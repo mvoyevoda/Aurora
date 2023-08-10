@@ -20,15 +20,15 @@ const RecentQuizzesList = () => {
       });
   }, []);
 
-  const shouldEnableScroll = recentQuizzes.length > 8;
+  const shouldEnableScroll = recentQuizzes.length > 6;
 
   return (
     <div style={{ maxHeight: "690px", overflowY: shouldEnableScroll ? "auto" : "initial" }}>
       {recentQuizzes.map((quiz, index) => (
-        <Link to={`/portal/${quiz.id}`} key={quiz.id}>
-          <Card key={quiz.id} variant="outlined" style={{ marginBottom: "10px" }}>
+        <Link to={`/portal/${quiz.id}`} key={quiz.id} style={{ textDecoration: "none" }}>
+          <Card key={quiz.id} variant="outlined" style={{ marginBottom: "10px", backgroundColor: "rgba(212, 212, 212, .05)", color: "white",}}>
             <CardContent>
-              <Typography variant="h6" component="h2">
+              <Typography variant="h6" component="h2" style={{ fontSize: "40px" }}>
                 {quiz.category}
               </Typography>
             </CardContent>
