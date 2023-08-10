@@ -46,17 +46,19 @@ export default function Portal() {
         try {
           // Fetching submissions for the fetched attempt
           const submissionsResponse = await axios.get(`/api/submissions/${attemptResponse.data.id}`, { withCredentials: true });
-          // console.log("Submissions response: ", submissionsResponse);
           
           if (submissionsResponse.status === 200) {
-              // Map the response object to an array containing all submission choices
-              // const submissionMap = submissionsResponse.data.map(sub => sub.submissionChoice);
-              setSubmissions(submissionsResponse.data);
-              // console.log("SUBMISSIONS: " + submissions)
+            // Transform the response array to an object of the form: { questionId: submissionChoice, ... }
+            const submissionsObject = submissionsResponse.data.reduce((accumulator, submission) => {
+              accumulator[submission.questionId] = submission.submissionChoice;
+              return accumulator;
+            }, {});
+        
+            setSubmissions(submissionsObject);
           }
         } catch (submissionsError) {
             console.error('Error fetching submissions:', submissionsError);
-        }      
+        }        
       }
     } catch (attemptError) {
       if (attemptError.response && attemptError.response.status === 404) {
