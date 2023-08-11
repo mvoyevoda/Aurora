@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import axios from "axios";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LogoutButton() {
   const navigate = useNavigate();
@@ -30,19 +30,20 @@ export default function LogoutButton() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             &nbsp;
           </Typography>
-          <Button
-            onClick={handleLogout}
-            color="inherit"
-            href="/"
-            sx={{
-              backgroundColor: "transparent",
-              border: "1px solid transparent",
-              borderRadius: "4px",
-              opacity: 0.5,
-            }}
-          >
-            Log Out
-          </Button>
+          <Link to="/" style={{color: 'white'}}>
+            <Button
+              onClick={handleLogout}
+              color="inherit"
+              sx={{
+                backgroundColor: "transparent",
+                border: "1px solid transparent",
+                borderRadius: "4px",
+                opacity: 0.5,
+              }}
+            >
+              Log Out
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>

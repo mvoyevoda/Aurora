@@ -44,7 +44,7 @@ export default function SignUp() {
     <>
       <HomeNB />
       <h1 style={{ marginTop: "12vh" }}>Sign Up</h1>
-      <form onSubmit={handleSignUp} className="signup_form">
+      <form onSubmit={handleSignUp} className="form">
         {errorMessage && (
           <div className="error-message" style={{ marginBottom: "1rem" }}>
             {errorMessage}

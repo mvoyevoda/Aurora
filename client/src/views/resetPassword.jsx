@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../styles/signup.css";
+import { Button, TextField } from "@mui/material";
+
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -35,22 +38,64 @@ export default function ResetPassword() {
 
       {error && <p>{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="password"
-          placeholder="New Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <form onSubmit={handleSubmit} className="form">
+        <TextField
+            sx={{
+              backgroundColor: "rgba(217, 217, 217, 0.20)",
+              marginBottom: "1.25em",
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "black",
+              },
+            }}
+            type="password"
+            name="password"
+            label="New Password"
+            variant="filled"
+            color="text"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            fullWidth
+            margin="normal"
+          />
 
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+        <TextField
+            sx={{
+              backgroundColor: "rgba(217, 217, 217, 0.20)",
+              marginBottom: "1.25em",
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "black",
+              },
+            }}
+            type="password"
+            name="password"
+            label="Confirm Password"
+            variant="filled"
+            color="text"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            fullWidth
+            margin="normal"
+          />
+          <Button
+            variant="outlined"
+            type="submit"
+            sx={{
+              color: "white",
+              border: "1px solid",
+              display: "block",
+              width: "100%",
+              borderRadius: "50px",
+              "&:hover": {
+                backgroundColor: "rgba(217, 217, 217, 0.20)",
+                borderColor: "white",
+              },
+            }}
+          >
+            Reset Password
+          </Button>
 
-        <button type="submit">Reset Password</button>
       </form>
     </div>
   );
