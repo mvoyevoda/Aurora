@@ -51,7 +51,7 @@ async function generate(req, res) {
 
       Below is some info about the quiz I want you to generate right now:
       
-      Please generate a quiz on this topic: ${prompt}, ${questions} questions, difficulty: ${difficulty}
+      Please generate a quiz on this topic: ${prompt}, ${questions} questions, difficulty: ${difficulty}/5
       ` 
     }],
   })

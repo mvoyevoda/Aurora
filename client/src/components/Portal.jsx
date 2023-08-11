@@ -12,7 +12,7 @@ export default function Portal() {
   const userId = authContext.currentUser?.id;
   const isAuthChecked = authContext.isAuthChecked;
   const isAuthenticated = !!authContext.currentUser;
-  let calculatedScore = null
+  // let calculatedScore = null
   // console.log("Authenticated?: ", isAuthenticated);
 
   const [questions, setQuestions] = useState([]);
