@@ -67,11 +67,6 @@ export default function Portal() {
           const attemptResponse = await axios.post(`/api/attempts/${userId}/${quizId}`, { withCredentials: true });
           setAttempt(attemptResponse.data);
           setProgress(attemptResponse.data.progress);
-          // console.log("Initialized attempt: ", attemptResponse.data); 
-  
-          // After initializing the attempt, you might want to fetch the submissions here as well, if needed.
-          // However, it's probable that a new attempt might not have submissions yet.
-  
         } catch (AttemptInitializationError) {
           console.error('Error initializing attempt:', AttemptInitializationError);
         }
@@ -132,8 +127,48 @@ export default function Portal() {
   }  
 
   async function handleSubmitQuiz(){
-    //1. PATCH: Update Attempt Progress
-    //2. PATCH: Update submissionChoice of each submission
+    //1. Update Attempt Progress
+    if (attempt.progress < progress){
+      await axios.patch(`/api/attempts/${attempt.id}`, {
+        progress: progress
+      }, {
+        withCredentials: true
+      })
+    }
+    //2. Update submissionChoice of each submission
+    const submissionPromises = Object.keys(submissions).map(async (questionId) => {
+      try {
+        // Try to fetch the submission to check if it exists
+        const response = await axios.get(`/api/submissions/${attempt.id}/${questionId}`, {
+          withCredentials: true
+        });
+    
+        // If the submission exists (and you get a successful response), PATCH it
+        if (response.status === 200) {
+          return axios.patch(`/api/submissions/${attempt.id}/${questionId}`, {
+            submissionChoice: submissions[questionId]
+          }, {
+            withCredentials: true
+          });
+        }
+      } catch (error) {
+        // If the submission does not exist, indicated by a 404 error from Axios
+        if (error.response && error.response.status === 404) {
+          console.log("404 logic should be running");
+          return axios.post(`/api/submissions/${attempt.id}/${questionId}`, {
+            submissionChoice: submissions[questionId]
+          }, {
+            withCredentials: true
+          });
+        } else {
+          console.error('An unexpected error occurred:', error);
+        }
+      }
+    });
+    
+    // Execute all submission PATCH requests concurrently
+    await Promise.all(submissionPromises);
+
     //3. Compare each submission to each question's correctAnswer
   }
 
@@ -231,7 +266,7 @@ export default function Portal() {
               Next
             </Button>
           )}
-          {progress === questions.length &&
+          {progress >= questions.length &&
             <button className="Submit Quiz" onClick={handleSubmitQuiz}>Submit Quiz</button>
           }
         </div>
