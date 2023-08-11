@@ -104,7 +104,7 @@ export default function Configurator() {
           inputProps={{ style: { color: 'white' } }}
         />
         <div className={classes.slider}>
-        <label htmlFor="questions-slider">
+        <label htmlFor="questions-slider" style={{ textAlign: 'left' }}>
             {questions} questions
           </label>
           <Slider
@@ -116,6 +116,7 @@ export default function Configurator() {
             max={25}
             valueLabelDisplay="auto"
             aria-labelledby="questions-slider"
+            sx={{ color: 'white' }} 
           />
         </div>
         <div className={classes.slider}>
@@ -131,10 +132,11 @@ export default function Configurator() {
             max={60}
             valueLabelDisplay="auto"
             aria-labelledby="minutes-slider"
+            sx={{ color: 'white' }} 
           />
         </div>
         <div className={classes.slider}>
-        <label htmlFor="difficulty-slider">
+        <label htmlFor="difficulty-slider" >
             {difficulty === 1 ? "Very Easy" : difficulty === 2 ? "Easy" : difficulty === 3 ? "Medium" : difficulty === 4 ? "Hard" : "Very Hard"} difficulty
           </label>
           <Slider
@@ -153,6 +155,7 @@ export default function Configurator() {
             //   { value: 5, label: "Very Hard" },
             // ]}
             aria-labelledby="difficulty-slider"
+            sx={{ color: 'white' }} 
           />
         </div>
         {loading ?        
@@ -163,6 +166,18 @@ export default function Configurator() {
             variant="contained"
             color="primary"
             className={classes.button}
+            sx={{
+              backgroundColor: 'transparent',
+              color: "white",
+              border: "1px solid",
+              display: "block",
+              width: "100%",
+              borderRadius: "50px",
+              "&:hover": {
+                backgroundColor: "rgba(217, 217, 217, 0.20)",
+                borderColor: "white",
+              },
+            }}
           >
             Generate
           </Button>
