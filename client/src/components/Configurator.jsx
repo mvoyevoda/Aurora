@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   input: {
+    background: "rgba(217, 217, 217, 0.20)",
     borderRadius: "1em", 
     padding: "0.5em", 
     width: "50em",
