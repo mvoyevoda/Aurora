@@ -5,7 +5,8 @@ const { Question } = require('../models');
 async function generate(req, res) {
 
   // Form Data
-  const { prompt, questions, minutes, difficulty } = req.body; 
+  const { prompt, questions, minutes, difficulty } = req.body;
+  const userId = req.user.id; 
 
   // OpenAI Configuration
   const configuration = new Configuration({
@@ -69,6 +70,7 @@ async function generate(req, res) {
     }
 
     Quiz.create({
+      userId: userId,
       category: prompt,
       quizLength: questions, 
       difficulty: difficulty
