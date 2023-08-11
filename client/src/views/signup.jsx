@@ -33,7 +33,7 @@ export default function SignUp() {
     } catch (error) {
       console.error(`Error: ${error}`);
       if(error.response){
-        setErrorMessage(error.response.data.message);
+        setErrorMessage("You already have an account.");
       } else {
         setErrorMessage("An unexpected error has occured. Try again.");
       }
@@ -55,7 +55,7 @@ export default function SignUp() {
       </Button>
 
       <form onSubmit={handleSignUp} className="signup_form">
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
+      {errorMessage && <div className="error-message" style={{ marginBottom: "1rem" }}>{errorMessage}</div>}
         <TextField
           sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",
