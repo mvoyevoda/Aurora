@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Container, Typography, TextField, Button } from "@mui/material";
 import HomeNB from "../components/HomeNB";
+import "../styles/signup.css";
+
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -25,11 +27,11 @@ const ForgotPassword = () => {
       <Container>
         <h1>Forgot Password</h1>
         <Typography sx={{ marginTop: "20px" }}>{message}</Typography>
-        <form onSubmit={handleForgotPassword}>
+        <form onSubmit={handleForgotPassword} className="form">
           <TextField
             sx={{
               backgroundColor: "rgba(217, 217, 217, 0.20)",
-              marginBottom: "0.625em",
+              marginBottom: "1.25em",
               "& .MuiInputLabel-root.Mui-focused": {
                 color: "black",
               },
@@ -37,7 +39,8 @@ const ForgotPassword = () => {
             type="email"
             name="email"
             label="Enter your email"
-            variant="outlined"
+            variant="filled"
+            color="text"
             onChange={(e) => setEmail(e.target.value)}
             required
             fullWidth

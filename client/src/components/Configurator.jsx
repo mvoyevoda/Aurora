@@ -29,6 +29,29 @@ const useStyles = makeStyles((theme) => ({
   slider: {
     margin: "0.5em 0", 
     width: "50em",
+    "& .MuiSlider-root": {
+      color: "rgba(217, 217, 217, 0.20)", // Change the slider color to grey
+      height: 4, // Adjust the height of the slider track
+      "&:focus, &:active": {
+        color: "white", // Change the slider color
+        height: "6"
+      },
+    },
+    "& .MuiSlider-thumb": {
+      width: 14, // Adjust the width of the slider thumb
+      height: 14, // Adjust the height of the slider thumb
+      color: "grey", // Change the slider
+      "&:focus, &:active": {
+        width: 18, // Increase width when focused/active
+        height: 18, // Increase height when focused/active
+        color: "white", // Change the slider color
+      },
+    },
+  
+
+  },
+  label: {
+    display: "flex",
   },
   button: {
     margin: "1em 0", 
@@ -99,10 +122,10 @@ export default function Configurator() {
           name="prompt"
           className={classes.input}
           placeholder="summarize the quiz topic in a few words... "
-          inputProps={{ style: { color: 'white' } }}
+          inputProps={{ style: { color: 'white', textAlign:'center' } }}
         />
         <div className={classes.slider}>
-        <label htmlFor="questions-slider" style={{ textAlign: 'left' }}>
+        <label htmlFor="questions-slider" className={classes.label}>
             {questions} questions
           </label>
           <Slider
@@ -118,7 +141,7 @@ export default function Configurator() {
           />
         </div>
         <div className={classes.slider}>
-        <label htmlFor="minutes-slider">
+        <label htmlFor="minutes-slider"  className={classes.label}>
             {minutes} minutes
           </label>
           <Slider
@@ -134,8 +157,8 @@ export default function Configurator() {
           />
         </div>
         <div className={classes.slider}>
-        <label htmlFor="difficulty-slider" >
-            {difficulty === 1 ? "Very Easy" : difficulty === 2 ? "Easy" : difficulty === 3 ? "Medium" : difficulty === 4 ? "Hard" : "Very Hard"} difficulty
+        <label htmlFor="difficulty-slider" className={classes.label}>
+            {difficulty === 1 ? "Very Easy" : difficulty === 2 ? "Easy" : difficulty === 3 ? "Medium" : difficulty === 4 ? "Hard" : "Very Hard"} Difficulty
           </label>
           <Slider
             value={difficulty}
@@ -171,6 +194,7 @@ export default function Configurator() {
               display: "block",
               width: "100%",
               borderRadius: "50px",
+              
               "&:hover": {
                 backgroundColor: "rgba(217, 217, 217, 0.20)",
                 borderColor: "white",
