@@ -27,9 +27,9 @@ export default function LogIn() {
       navigate("/generator");
     } catch (error) {
       if (error.message.includes("401")) {
-        setErrorMessage("Invalid email or password.");
+        setErrorMessage("An unexpected error occured. Try again.");
       } else {
-        setErrorMessage("An unexpected error has occured. Try again.");
+        setErrorMessage("Invalid email or password.");
       }
       console.error(`Error: ${error}`);
     }
