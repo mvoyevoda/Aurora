@@ -29,29 +29,7 @@ const useStyles = makeStyles((theme) => ({
   slider: {
     margin: "0.5em 0", 
     width: "50em",
-    "& .MuiSlider-root": {
-      color: "rgba(217, 217, 217, 0.20)", // Change the slider color to grey
-      height: 4, // Adjust the height of the slider track
-      "&:focus, &:active": {
-        color: "white", // Change the slider color
-        height: "6"
-      },
-    },
-    "& .MuiSlider-thumb": {
-      width: 14, // Adjust the width of the slider thumb
-      height: 14, // Adjust the height of the slider thumb
-      color: "grey", // Change the slider
-      "&:focus, &:active": {
-        width: 18, // Increase width when focused/active
-        height: 18, // Increase height when focused/active
-        color: "white", // Change the slider color
-      },
-    },
-  
 
-  },
-  label: {
-    display: "flex",
   },
   button: {
     margin: "1em 0", 
