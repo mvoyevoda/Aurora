@@ -20,31 +20,37 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   input: {
-    background: "rgba(217, 217, 217, 0.20)",
     borderRadius: "1em", 
     padding: "0.5em", 
     width: "50em",
-    
   },
+  
   slider: {
     margin: "0.5em 0", 
     width: "50em",
     "& .MuiSlider-root": {
-      color: "rgba(217, 217, 217, 0.20)", // Change the slider color to grey
+      color: "white", // Change the slider color to grey
+      opacity: '0.5',
+
       height: 4, // Adjust the height of the slider track
       "&:focus, &:active": {
-        color: "white", // Change the slider color
+        color: "white", // Change the slider color to grey
+        opacity: '1.0',  
         height: "6"
       },
     },
     "& .MuiSlider-thumb": {
       width: 14, // Adjust the width of the slider thumb
       height: 14, // Adjust the height of the slider thumb
-      color: "grey", // Change the slider
+      color: "white", // Change the slider color to grey
+      opacity: '0.7',
+
       "&:focus, &:active": {
         width: 18, // Increase width when focused/active
         height: 18, // Increase height when focused/active
-        color: "white", // Change the slider color
+        color: "white", // Change the slider color to grey
+        opacity: '1.0',  
+
       },
     },
   
@@ -122,7 +128,10 @@ export default function Configurator() {
           name="prompt"
           className={classes.input}
           placeholder="summarize the quiz topic in a few words... "
-          inputProps={{ style: { color: 'white', textAlign:'center' } }}
+          inputProps={{ style: { color: 'white', opacity: '1.0', textAlign:'center' } 
+          
+        }}
+          
         />
         <div className={classes.slider}>
         <label htmlFor="questions-slider" className={classes.label}>
@@ -135,7 +144,6 @@ export default function Configurator() {
             step={1}
             min={5}
             max={25}
-            valueLabelDisplay="auto"
             aria-labelledby="questions-slider"
             sx={{ color: 'white' }} 
           />
@@ -151,7 +159,6 @@ export default function Configurator() {
             step={5}
             min={5}
             max={60}
-            valueLabelDisplay="auto"
             aria-labelledby="minutes-slider"
             sx={{ color: 'white' }} 
           />
@@ -167,7 +174,6 @@ export default function Configurator() {
             step={1}
             min={1}
             max={5}
-            valueLabelDisplay="auto"
             // marks={[
             //   { value: 1, label: "Very Easy" },
             //   { value: 2, label: "Easy" },
