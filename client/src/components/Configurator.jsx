@@ -101,6 +101,7 @@ export default function Configurator() {
           name="prompt"
           className={classes.input}
           placeholder="summarize the quiz topic in a few words... "
+          inputProps={{ style: { color: 'white' } }}
         />
         <div className={classes.slider}>
         <label htmlFor="questions-slider">
