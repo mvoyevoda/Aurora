@@ -38,8 +38,8 @@ export default function LogIn() {
   return (
     <>
       <HomeNB />
-      <h1>Log In</h1>
-      {errorMessage && <p style={{ color: "rgba(245, 245, 245)" }}>{errorMessage}</p>}
+      <h1 style={{ marginTop: "12vh"}} >Log In</h1>
+      {errorMessage && <p style={{ color: "rgba(245, 245, 245)"}}>{errorMessage}</p>}
       <form onSubmit={handleLogIn} className="signup_form">
         <TextField
           sx={{

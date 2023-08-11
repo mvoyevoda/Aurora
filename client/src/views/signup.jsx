@@ -43,17 +43,7 @@ export default function SignUp() {
   return (
     <>
       <HomeNB />
-      <h1>Sign Up</h1>
-      <Button
-        variant="contained"
-        startIcon={<GoogleIcon />}
-        onClick={() => {
-          // Handle the "Sign Up with Google" button click
-        }}
-      >
-        Sign Up with Google
-      </Button>
-
+      <h1 style={{ marginTop: "12vh"}} >Sign Up</h1>
       <form onSubmit={handleSignUp} className="signup_form">
       {errorMessage && <div className="error-message" style={{ marginBottom: "1rem" }}>{errorMessage}</div>}
         <TextField
