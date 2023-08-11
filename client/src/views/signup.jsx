@@ -14,7 +14,7 @@ export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ export default function SignUp() {
       navigate("/generator");
     } catch (error) {
       console.error(`Error: ${error}`);
-      if(error.response){
+      if (error.response) {
         setErrorMessage("You already have an account.");
       } else {
         setErrorMessage("An unexpected error has occured. Try again.");
@@ -43,19 +43,13 @@ export default function SignUp() {
   return (
     <>
       <HomeNB />
-      <h1>Sign Up</h1>
-      <Button
-        variant="contained"
-        startIcon={<GoogleIcon />}
-        onClick={() => {
-          // Handle the "Sign Up with Google" button click
-        }}
-      >
-        Sign Up with Google
-      </Button>
-
+      <h1 style={{ marginTop: "12vh" }}>Sign Up</h1>
       <form onSubmit={handleSignUp} className="signup_form">
-      {errorMessage && <div className="error-message" style={{ marginBottom: "1rem" }}>{errorMessage}</div>}
+        {errorMessage && (
+          <div className="error-message" style={{ marginBottom: "1rem" }}>
+            {errorMessage}
+          </div>
+        )}
         <TextField
           sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",

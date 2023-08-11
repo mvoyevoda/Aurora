@@ -27,9 +27,9 @@ export default function LogIn() {
       navigate("/generator");
     } catch (error) {
       if (error.message.includes("401")) {
-        setErrorMessage("Invalid email or password.");
+        setErrorMessage("An unexpected error occured. Try again.");
       } else {
-        setErrorMessage("An unexpected error has occured. Try again.");
+        setErrorMessage("Invalid email or password.");
       }
       console.error(`Error: ${error}`);
     }
@@ -38,8 +38,8 @@ export default function LogIn() {
   return (
     <>
       <HomeNB />
-      <h1>Log In</h1>
-      {errorMessage && <p style={{ color: "rgba(245, 245, 245)" }}>{errorMessage}</p>}
+      <h1 style={{ marginTop: "12vh"}} >Log In</h1>
+      {errorMessage && <p style={{ color: "rgba(245, 245, 245)"}}>{errorMessage}</p>}
       <form onSubmit={handleLogIn} className="signup_form">
         <TextField
           sx={{
