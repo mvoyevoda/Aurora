@@ -39,7 +39,7 @@ export default function LogIn() {
     <>
       <HomeNB />
       <h1>Log In</h1>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      {errorMessage && <p style={{ color: "rgba(245, 245, 245)" }}>{errorMessage}</p>}
       <Button
         variant="contained"
         startIcon={<GoogleIcon />}
