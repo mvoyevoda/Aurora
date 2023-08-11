@@ -12,6 +12,7 @@ export default function Portal() {
   const userId = authContext.currentUser?.id;
   const isAuthChecked = authContext.isAuthChecked;
   const isAuthenticated = !!authContext.currentUser;
+  let calculatedScore = null
   // console.log("Authenticated?: ", isAuthenticated);
 
   const [questions, setQuestions] = useState([]);
@@ -41,6 +42,7 @@ export default function Portal() {
       if (attemptResponse.status === 200) {
         setAttempt(attemptResponse.data);
         setProgress(attemptResponse.data.progress);
+        setScore(attemptResponse.data.score);
         // console.log("Fetched attempt:", attemptResponse.data);
   
         try {
@@ -170,6 +172,22 @@ export default function Portal() {
     await Promise.all(submissionPromises);
 
     //3. Compare each submission to each question's correctAnswer
+    let scoreCounter = 0;
+    for (const [questionId, submissionChoice] of Object.entries(submissions)) {
+      const question = questions.find(q => q.id === parseInt(questionId));
+      if (submissionChoice === question.correctAnswer) {
+        scoreCounter++;
+      }
+    }
+    let calculatedScore = (scoreCounter / questions.length) * 100;
+    setScore(calculatedScore);  // This will update your state for future renders
+    
+    await axios.patch(`/api/attempts/${attempt.id}/score`, {
+      score: calculatedScore
+    }, {
+      withCredentials: true
+    });    
+
   }
 
   let selectedChoice = Object.keys(submissions).length !== 0? submissions[currentQuestionId] : null
@@ -200,7 +218,7 @@ export default function Portal() {
       <div style={{ position: "absolute", top: "10px", left: "10px" }}>
         <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
         {/* Display the score if it is not null */}
-        {score !== null && <p> Score: {score} / {questions.length}</p>}
+        {score && <p> Score: {score}%</p>}
       </div>
   
       <h1 className="question-text">
