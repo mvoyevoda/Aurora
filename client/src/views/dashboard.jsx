@@ -8,6 +8,7 @@ import "../styles/index.css"
 import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes/SuggestedTitle";
 import RecentQuizzesList from "../components/Dashboard Section/RecentQuizzes/RecentQuizzesList";
 import SuggestedQuizzesList from "../components/Dashboard Section/SuggestedQuizzes/SuggestedQuizzesList";
+//import Footer from "../components/Footer";
 
 const styles = {
   pcContainer: {

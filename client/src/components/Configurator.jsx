@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   slider: {
     margin: "0.5em 0", 
     width: "50em",
-
   },
   button: {
     margin: "1em 0", 
