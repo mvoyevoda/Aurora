@@ -13,9 +13,9 @@ const ForgotPassword = () => {
       await axios.post("/api/auth/forgotPassword", {
         email,
       });
-      setMessage("Email has been sent");
+      setMessage("Email has been sent.");
     } catch (error) {
-      setMessage("Email not found");
+      setMessage("Email not found.");
     }
   };
 
@@ -24,11 +24,12 @@ const ForgotPassword = () => {
       <HomeNB />
       <Container>
         <h1>Forgot Password</h1>
+        <Typography sx={{ marginTop: "20px" }}>{message}</Typography>
         <form onSubmit={handleForgotPassword}>
           <TextField
             sx={{
               backgroundColor: "rgba(217, 217, 217, 0.20)",
-              marginBottom: "0.625em", 
+              marginBottom: "0.625em",
               "& .MuiInputLabel-root.Mui-focused": {
                 color: "black",
               },
@@ -60,7 +61,6 @@ const ForgotPassword = () => {
             Submit
           </Button>
         </form>
-        <Typography sx={{marginTop: '20px'}} >{message}</Typography>
       </Container>
     </>
   );
