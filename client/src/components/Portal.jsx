@@ -215,7 +215,7 @@ export default function Portal() {
         </Button>
       </div>
   
-      <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+      <div style={{ position: "absolute", top: "10px", left: "1000px" }}>
         <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
         {/* Display the score if it is not null */}
         {score && <p> Score: {score}%</p>}
