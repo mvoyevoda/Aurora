@@ -40,7 +40,7 @@ export default function LogIn() {
       <HomeNB />
       <h1 style={{ marginTop: "13vh"}} >Log In</h1>
       {errorMessage && <p style={{ color: "rgba(245, 245, 245)"}}>{errorMessage}</p>}
-      <form onSubmit={handleLogIn} className="signup_form">
+      <form onSubmit={handleLogIn} className="form">
         <TextField
           sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",

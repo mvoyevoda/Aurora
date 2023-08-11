@@ -2,20 +2,12 @@ body{
     background-color: black;
     text-align: center;
 }
-.signup_form{
+form{
     margin: 4px;
     width: 50%;
     position: absolute;
     left: 25%;
     top: 25%;
-}
-
-.login_form{
-  margin: 4px;
-  width: 50%;
-  position: absolute;
-  left: 25%;
-  top: 25%;
 }
 
 input:-webkit-autofill,
