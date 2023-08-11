@@ -40,16 +40,6 @@ export default function LogIn() {
       <HomeNB />
       <h1>Log In</h1>
       {errorMessage && <p style={{ color: "rgba(245, 245, 245)" }}>{errorMessage}</p>}
-      <Button
-        variant="contained"
-        startIcon={<GoogleIcon />}
-        onClick={() => {
-          // Handle the "Sign Up with Google" button click
-        }}
-      >
-        Log In with Google
-      </Button>
-
       <form onSubmit={handleLogIn} className="signup_form">
         <TextField
           sx={{
