@@ -6,7 +6,6 @@ import RecentTitle from "../components/Dashboard Section/RecentQuizzes/RecentTit
 import "../styles/dashboard.css"
 import "../styles/index.css"
 import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes/SuggestedTitle";
-import NavSettings from "../components/Dashboard Section/NavSettings"
 import RecentQuizzesList from "../components/Dashboard Section/RecentQuizzes/RecentQuizzesList";
 import SuggestedQuizzesList from "../components/Dashboard Section/SuggestedQuizzes/SuggestedQuizzesList";
 
@@ -65,7 +64,6 @@ export default function Dashboard() {
             </div>
           </div>
       </div>    
-      <NavSettings/>
       </div>
     </>
   );
