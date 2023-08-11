@@ -26,7 +26,7 @@ export default function LogIn() {
       await login(emailRef.current.value, passwordRef.current.value);
       navigate("/generator");
     } catch (error) {
-      if(error.message.includes("401")) {
+      if (error.message.includes("401")) {
         setErrorMessage("Invalid email or password.");
       } else {
         setErrorMessage("An unexpected error has occured. Try again.");
@@ -34,7 +34,7 @@ export default function LogIn() {
       console.error(`Error: ${error}`);
     }
   };
-  
+
   return (
     <>
       <HomeNB />
@@ -51,86 +51,87 @@ export default function LogIn() {
       </Button>
 
       <form onSubmit={handleLogIn} className="signup_form">
-      <TextField
-        sx={{
-          backgroundColor: "rgba(217, 217, 217, 0.20)",
-          marginBottom: "0.625em", 
-          "& .MuiInputLabel-root.Mui-focused": {
-            color: "black",
-          },
-        }}
-        variant="standard"
-        color="text"
-        label="Email"
-        id="email"
-        fullWidth 
-        required
-        inputRef={emailRef}
-      />
-      <TextField
-        sx={{
-          backgroundColor: "rgba(217, 217, 217, 0.20)",
-          marginBottom: "0.625em", 
-          "& .MuiInputLabel-root.Mui-focused": {
-            color: "black",
-          },
-        }}
-        variant="standard"
-        color="text"
-        label="Password"
-        id="password"
-        type="password"
-        fullWidth 
-        required
-        inputRef={passwordRef}
-      />
-      <Link
-        onClick={handleForgotPasswordClick}
-        href="#"
-        variant="p"
-        color="inherit"
-        sx={{
-          position: "relative",
-          left: "20em", 
-        }}
-      >
-        Forgot password?
-      </Link>
-      <Button
-        href="./signup"
-        variant="outlined"
-        sx={{
-          marginTop: "0.625em", 
-          color: "white",
-          border: "1px solid",
-          borderRadius: "50px",
-          display: "block",
-          marginBottom: "1.25em", 
-          "&:hover": {
+        <TextField
+          sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",
-            borderColor: "white",
-          },
-        }}
-      >
-        Don&apos;t have an account?
-      </Button>
-      <Button
-        variant="outlined"
-        type="submit"
-        sx={{
-          color: "white",
-          border: "1px solid",
-          display: "block",
-          width: "100%",
-          borderRadius: "50px",
-          "&:hover": {
+            marginBottom: "0.625em",
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black",
+            },
+          }}
+          variant="standard"
+          color="text"
+          label="Email"
+          id="email"
+          fullWidth
+          required
+          inputRef={emailRef}
+        />
+        <TextField
+          sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",
-            borderColor: "white",
-          },
-        }}
-      >
-        Log In
-      </Button>
-    </form>    </>
+            marginBottom: "0.625em",
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black",
+            },
+          }}
+          variant="standard"
+          color="text"
+          label="Password"
+          id="password"
+          type="password"
+          fullWidth
+          required
+          inputRef={passwordRef}
+        />
+        <Link
+          onClick={handleForgotPasswordClick}
+          href="#"
+          variant="p"
+          color="inherit"
+          sx={{
+            position: "relative",
+            left: "20em",
+          }}
+        >
+          Forgot password?
+        </Link>
+        <Button
+          href="./signup"
+          variant="outlined"
+          sx={{
+            marginTop: "0.625em",
+            color: "white",
+            border: "1px solid",
+            borderRadius: "50px",
+            display: "block",
+            marginBottom: "1.25em",
+            "&:hover": {
+              backgroundColor: "rgba(217, 217, 217, 0.20)",
+              borderColor: "white",
+            },
+          }}
+        >
+          Don&apos;t have an account?
+        </Button>
+        <Button
+          variant="outlined"
+          type="submit"
+          sx={{
+            color: "white",
+            border: "1px solid",
+            display: "block",
+            width: "100%",
+            borderRadius: "50px",
+            "&:hover": {
+              backgroundColor: "rgba(217, 217, 217, 0.20)",
+              borderColor: "white",
+            },
+          }}
+        >
+          Log In
+        </Button>
+      </form>
+    </>
   );
 }
