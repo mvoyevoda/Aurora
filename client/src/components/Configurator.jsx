@@ -135,7 +135,6 @@ export default function Configurator() {
             step={1}
             min={5}
             max={25}
-            valueLabelDisplay="auto"
             aria-labelledby="questions-slider"
             sx={{ color: 'white' }} 
           />
@@ -151,7 +150,6 @@ export default function Configurator() {
             step={5}
             min={5}
             max={60}
-            valueLabelDisplay="auto"
             aria-labelledby="minutes-slider"
             sx={{ color: 'white' }} 
           />
@@ -167,7 +165,6 @@ export default function Configurator() {
             step={1}
             min={1}
             max={5}
-            valueLabelDisplay="auto"
             // marks={[
             //   { value: 1, label: "Very Easy" },
             //   { value: 2, label: "Easy" },
