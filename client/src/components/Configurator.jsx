@@ -21,16 +21,21 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     background: "rgba(217, 217, 217, 0.20)",
-    borderRadius: "0.25em", 
+    borderRadius: "1em", 
     padding: "0.5em", 
-    margin: "0.5em 0", 
+    width: "50em",
+    
   },
   slider: {
     width: "12.5em", 
     margin: "0.5em 0", 
+    width: "50em",
+
   },
   button: {
     margin: "1em 0", 
+    width: "58em",
+    borderRadius: "1em", 
   },
 }));
 
@@ -90,13 +95,16 @@ export default function Configurator() {
       <div className={classes.configurator}>
       <form onSubmit={handleSubmit}>
         <Input
+          required
+          color="text"
           type="text"
           name="prompt"
           className={classes.input}
           placeholder="summarize the quiz topic in a few words... "
+          inputProps={{ style: { color: 'white' } }}
         />
         <div className={classes.slider}>
-        <label htmlFor="questions-slider">
+        <label htmlFor="questions-slider" style={{ textAlign: 'left' }}>
             {questions} questions
           </label>
           <Slider
@@ -108,6 +116,7 @@ export default function Configurator() {
             max={25}
             valueLabelDisplay="auto"
             aria-labelledby="questions-slider"
+            sx={{ color: 'white' }} 
           />
         </div>
         <div className={classes.slider}>
@@ -123,10 +132,11 @@ export default function Configurator() {
             max={60}
             valueLabelDisplay="auto"
             aria-labelledby="minutes-slider"
+            sx={{ color: 'white' }} 
           />
         </div>
         <div className={classes.slider}>
-        <label htmlFor="difficulty-slider">
+        <label htmlFor="difficulty-slider" >
             {difficulty === 1 ? "Very Easy" : difficulty === 2 ? "Easy" : difficulty === 3 ? "Medium" : difficulty === 4 ? "Hard" : "Very Hard"} difficulty
           </label>
           <Slider
@@ -145,6 +155,7 @@ export default function Configurator() {
             //   { value: 5, label: "Very Hard" },
             // ]}
             aria-labelledby="difficulty-slider"
+            sx={{ color: 'white' }} 
           />
         </div>
         {loading ?        
@@ -155,6 +166,18 @@ export default function Configurator() {
             variant="contained"
             color="primary"
             className={classes.button}
+            sx={{
+              backgroundColor: 'transparent',
+              color: "white",
+              border: "1px solid",
+              display: "block",
+              width: "100%",
+              borderRadius: "50px",
+              "&:hover": {
+                backgroundColor: "rgba(217, 217, 217, 0.20)",
+                borderColor: "white",
+              },
+            }}
           >
             Generate
           </Button>

@@ -1,6 +1,8 @@
 import Configurator from "../components/Configurator";
 import NavDashboard from "../components/Dashboard Section/NavDashboard";
 import LogoutButton from "../components/Dashboard Section/LogoutButton";
+import "../styles/dashboard.css";
+
 
 const styles = {
   container: {
@@ -23,16 +25,21 @@ const styles = {
 function Generator() {
   return (
     <>
-    <LogoutButton />
-    <div style={styles.container}>
-      <div style={styles.content}>
-        <Configurator />
+    <div className="scrollDownAnimation">
+      <div className="logOutDiv">
+        <LogoutButton />
       </div>
-      <div style={styles.navDashboard}>
-        <NavDashboard />
+      <div style={styles.container}>
+        <div style={styles.content}>
+          <Configurator />
+        </div>
+        <div style={styles.navDashboard}>
+          <NavDashboard />
+        </div>
       </div>
     </div>
     </>
+    
   );
 }
 

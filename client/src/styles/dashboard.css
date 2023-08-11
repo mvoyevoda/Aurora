@@ -3,3 +3,37 @@ body, html {
     padding: 0;
   }
   
+  @keyframes scrollUpAnimation {
+    from {
+      transform: translateY(100%); /* Start from the bottom of the page */
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0); /* Original position */
+      opacity: 1;
+    }
+  }
+  
+  .scrollUpAnimation {
+    animation: scrollUpAnimation 1s ease-out;
+  }
+    
+
+  @keyframes scrollDownAnimation {
+    from {
+      transform: translateY(-100%); /* Start from the top */
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0); /* Original position */
+      opacity: 1;
+    }
+  }
+  
+  .scrollDownAnimation {
+    animation: scrollDownAnimation 1s ease-out;
+  }
+        
+  .logOutDiv{
+    background-color: rgba(212, 212, 212, .05);
+  }

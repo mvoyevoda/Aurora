@@ -1,246 +1,295 @@
 import { useState, useEffect, useContext } from 'react';
-import "../styles/portal.css";
+import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext'; // Update the path to the correct location of AuthContext.jsx
+import { AuthContext } from '../contexts/AuthContext';
+import "../styles/portal.css";
+import { Button, selectClasses } from '@mui/material';
 
+export default function Portal() {
 
-export default function Portal () {
   const { quizId } = useParams();
   const authContext = useContext(AuthContext);
+  const userId = authContext.currentUser?.id;
   const isAuthChecked = authContext.isAuthChecked;
   const isAuthenticated = !!authContext.currentUser;
-  const userId = authContext.currentUser?.id;
-  console.log("Authenticated?: ", isAuthenticated);
+  let calculatedScore = null
+  // console.log("Authenticated?: ", isAuthenticated);
 
   const [questions, setQuestions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionId, setCurrentQuestionId] = useState(null)
   const [attempt, setAttempt] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedChoiceIndex, setSelectedChoiceIndex] = useState(null);
-  const [submissions, setSubmissions] = useState([]);
+  const [submissions, setSubmissions] = useState({});
   const [score, setScore] = useState(null);
-  const [showScore, setShowScore] = useState(false);
 
-  const fetchQuizDetails = async () => {
-    if (isAuthenticated) {
-      try {
-        const quizResponse = await axios.get(`/api/quizzes/${quizId}`, { withCredentials: true });
-        console.log("Quiz response: ", quizResponse);
-        
-        // Sort questions by id (or other property)
-        const sortedQuestions = quizResponse.data.sort((a, b) => a.id - b.id);
-        
-        setQuestions(sortedQuestions);
-        // Initialize submissions with null values for each question
-        setSubmissions(Array(sortedQuestions.length).fill(null));
-      } catch (error) {
-        console.error('Error fetching quiz details:', error);
-      }
-    }
-  };
-  
+  // useEffect(() => {
+  //   console.log("SUBMISSIONS LENGTH: " + Object.keys(submissions).length)
+  //   console.log("SUBMISSIONS:", JSON.stringify(submissions));
 
-  const getAttempt = async () => {
+  // }, [submissions])
+
+  //Update currentQuestionId when currentQuestionIndex changes
+  useEffect(() => {
+    // console.log("RANNNNN") 
+    if (currentQuestionIndex !== 0) setCurrentQuestionId(questions[currentQuestionIndex].id)
+  }, [currentQuestionIndex])
+
+  const loadData = async () => {
     try {
       const attemptResponse = await axios.get(`/api/attempts/${userId}/${quizId}`, { withCredentials: true });
+      
       if (attemptResponse.status === 200) {
         setAttempt(attemptResponse.data);
         setProgress(attemptResponse.data.progress);
-        console.log("Fetched attempt:", attemptResponse.data);
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
-        // Handle the case where the attempt does not exist
-        initializeAttempt();
-      } else {
-        console.error('Error fetching attempt:', error);
-      }
-    }
-  };
-
-  const initializeAttempt = async () => {
-    try {
-      const attemptResponse = await axios.post(`/api/attempts/${userId}/${quizId}`, { withCredentials: true });
-      setAttempt(attemptResponse.data);
-      setProgress(attemptResponse.data.progress);
-      console.log("Initialized attempt: ", attemptResponse.data); // Log initialized attempt
-    } catch (error) {
-      console.error('Error initializing attempt:', error);
-    }
-  };
-
-  // Function to fetch submissions for the current attempt
-  const fetchAttemptSubmissions = async () => {
-    try {
-      if (attempt) {
-        const submissionsResponse = await axios.get(`/api/submissions/${attempt.id}`, { withCredentials: true });
-        console.log("Submissions response: ", submissionsResponse);
-        if (submissionsResponse.status === 200) {
-          // Initialize an empty object to hold the mapping
-          const submissionMap = {};
-          // Iterate through the data and add each questionId and submissionChoice to the map
-          for (let i = 0; i < submissionsResponse.data.length; i++) {
-            const sub = submissionsResponse.data[i];
-            submissionMap[sub.questionId] = sub.submissionChoice;
+        setScore(attemptResponse.data.score);
+        // console.log("Fetched attempt:", attemptResponse.data);
+  
+        try {
+          // Fetching submissions for the fetched attempt
+          const submissionsResponse = await axios.get(`/api/submissions/${attemptResponse.data.id}`, { withCredentials: true });
+          
+          if (submissionsResponse.status === 200) {
+            // Transform the response array to an object of the form: { questionId: submissionChoice, ... }
+            const submissionsObject = submissionsResponse.data.reduce((accumulator, submission) => {
+              accumulator[submission.questionId] = submission.submissionChoice;
+              return accumulator;
+            }, {});
+        
+            setSubmissions(submissionsObject);
           }
-          // Set the submissions state with the constructed map
-          setSubmissions(submissionMap);
+        } catch (submissionsError) {
+            console.error('Error fetching submissions:', submissionsError);
+        }        
+      }
+    } catch (attemptError) {
+      if (attemptError.response && attemptError.response.status === 404) {
+        // Handle the case where the attempt does not exist --> Create a new attempt
+        try {
+          const attemptResponse = await axios.post(`/api/attempts/${userId}/${quizId}`, { withCredentials: true });
+          setAttempt(attemptResponse.data);
+          setProgress(attemptResponse.data.progress);
+        } catch (AttemptInitializationError) {
+          console.error('Error initializing attempt:', AttemptInitializationError);
         }
+      } else {
+        console.error('Error fetching attempt:', attemptError);
       }
-    } catch (error) {
-      console.error('Error fetching submissions:', error);
     }
-  };
-  
+  };  
 
-  useEffect(() => {
-    const fetchDetails = async () => {
-      if (isAuthenticated && isAuthChecked) {
-        await fetchQuizDetails();
-        await getAttempt(); // Fetch existing attempt or initialize a new one
-      }
-    };
-    fetchDetails();
-  }, [userId, quizId, isAuthChecked, isAuthenticated]);
-
-  useEffect(() => {
-    // Fetch existing submissions for the attempt after the attempt is set
-    const fetchSubmissionsForAttempt = async () => {
-      if (attempt) {
-        await fetchAttemptSubmissions();
-      }
-    };
-    fetchSubmissionsForAttempt();
-  }, [attempt?.id]);
-
-  const incrementProgress = async () => {
-    const newProgress = Math.min(progress + 1, questions.length);
+  async function fetchQuestions() {
+    if (!isAuthChecked || !isAuthenticated) {
+      return;
+    }
     try {
-      await axios.patch(`/api/attempts/${attempt.id}`, { progress: newProgress }, { withCredentials: true });
-      setProgress(newProgress);
+      const questionsResponse = await axios.get(`/api/quizzes/${quizId}`, {
+        withCredentials: true
+      });
+      setQuestions(questionsResponse.data);
+      setCurrentQuestionId(questionsResponse.data[0].id) //Set to id of first question
     } catch (error) {
-      console.error('Error incrementing progress:', error);
+      console.error("Failed to fetch questions:", error);
     }
-  };
-
-  const handleChoiceSelection = async (choiceIndex) => {
-    if (attempt) { // Check if attempt is defined
-      try {
-        const existingSubmission = submissions[currentQuestionIndex];
-        console.log(submissions);
-        if (!existingSubmission) {
-          // Increment progress only if the question has not been answered
-          incrementProgress();
-          // Create new submission
-          await axios.post(`/api/submissions/${attempt.id}/${questions[currentQuestionIndex].id}`, { submissionChoice: choiceIndex }, { withCredentials: true });
-        } else {
-          // Update existing submission
-          console.log("Attempt id:" , attempt.id);
-          console.log("Current question index in questions: ", questions[currentQuestionIndex].id);
-          console.log("Current question index", currentQuestionIndex);
-          await axios.patch(`/api/submissions/${attempt.id}/${questions[currentQuestionIndex].id}`, { submissionChoice: choiceIndex }, { withCredentials: true });
-        }
+  }
   
-        // Re-fetch submissions to make sure the state is up-to-date
-        await fetchAttemptSubmissions();
-  
-        const newSubmissions = { ...submissions };
-        newSubmissions[questions[currentQuestionIndex].id] = choiceIndex;
-        setSubmissions(newSubmissions);
-      } catch (error) {
-        console.error('Error handling answer choice selection:', error);
+  useEffect(() => {
+    const initialize = async () => {
+      if (isAuthenticated && isAuthChecked) {
+        await loadData();
+        await fetchQuestions();
       }
+    };
+    initialize();
+  }, [])
+
+  function handleSubmission(userChoice) {
+    if (Object.keys(submissions).length === 0) {
+      setSubmissions({ [currentQuestionId]: userChoice });
+      // console.log("Initialization of submissions: " + submissions);
+      setProgress(prevProgress => prevProgress + 1);
     } else {
-      console.error('Attempt is not defined.');
+      // Create a shallow copy of the submissions object
+      const updatedSubmissions = { ...submissions };
+      JSON.stringify(updatedSubmissions)
+    
+      // Update the userChoice of the currentQuestion in the copied object
+      updatedSubmissions[currentQuestionId] = userChoice;
+    
+      // Check the length before and after to determine progress
+      const prevLength = Object.keys(submissions).length;
+      setSubmissions(updatedSubmissions);
+      const newLength = Object.keys(updatedSubmissions).length;
+    
+      // If a new submission was added, increment the progress
+      if (newLength > prevLength) {
+        setProgress(prevProgress => prevProgress + 1);
+      }
     }
-  };
-  
+  }  
 
-  const renderMultipleChoiceQuestion = (question) => (
-    <div className="question-container">
-      <h3>{question.questionText}</h3>
-      {question.answerChoices.map((choice, index) => (
-        <button
-          key={index}
-          className={`choice-container ${submissions[question.id] === index ? 'highlighted' : ''}`} // Use submissions map
-          onClick={() => handleChoiceSelection(index)}
-        >
-          {choice}
-        </button>
-      ))}
-    </div>
-  );
-  
-  const renderTrueFalseQuestion = (question) => (
-    <div className="question-container">
-      <h3>{question.questionText}</h3>
-      {['True', 'False'].map((choice, index) => (
-        <button
-          key={index}
-          className={`choice-container ${submissions[question.id] === index ? 'highlighted' : ''}`} // Use submissions map
-          onClick={() => handleChoiceSelection(index)}
-        >
-          {choice}
-        </button>
-      ))}
-    </div>
-  );
-
-  const renderQuestion = (question) => {
-    switch (question.questionType) {
-      case 0: // Multiple-choice question
-        return renderMultipleChoiceQuestion(question);
-      case 1: // True/False question
-        return renderTrueFalseQuestion(question);
-      // Add more cases if there are other question types
-      default:
-        return <p>Unknown question type</p>;
+  async function handleSubmitQuiz(){
+    //1. Update Attempt Progress
+    if (attempt.progress < progress){
+      await axios.patch(`/api/attempts/${attempt.id}`, {
+        progress: progress
+      }, {
+        withCredentials: true
+      })
     }
-  };
-
-  const handleSubmitQuiz = () => {
-    let questionsCorrect = 0;
-    submissions.forEach((submission, index) => {
-      if (submission.choiceIndex === questions[index].correctAnswerIndex) {
-        questionsCorrect++;
+    //2. Update submissionChoice of each submission
+    const submissionPromises = Object.keys(submissions).map(async (questionId) => {
+      try {
+        // Try to fetch the submission to check if it exists
+        const response = await axios.get(`/api/submissions/${attempt.id}/${questionId}`, {
+          withCredentials: true
+        });
+    
+        // If the submission exists (and you get a successful response), PATCH it
+        if (response.status === 200) {
+          return axios.patch(`/api/submissions/${attempt.id}/${questionId}`, {
+            submissionChoice: submissions[questionId]
+          }, {
+            withCredentials: true
+          });
+        }
+      } catch (error) {
+        // If the submission does not exist, indicated by a 404 error from Axios
+        if (error.response && error.response.status === 404) {
+          console.log("404 logic should be running");
+          return axios.post(`/api/submissions/${attempt.id}/${questionId}`, {
+            submissionChoice: submissions[questionId]
+          }, {
+            withCredentials: true
+          });
+        } else {
+          console.error('An unexpected error occurred:', error);
+        }
       }
     });
+    
+    // Execute all submission PATCH requests concurrently
+    await Promise.all(submissionPromises);
 
-    const scorePercentage = (questionsCorrect / questions.length) * 100;
-    const scoreFraction = `${questionsCorrect}/${questions.length}`;
+    //3. Compare each submission to each question's correctAnswer
+    let scoreCounter = 0;
+    for (const [questionId, submissionChoice] of Object.entries(submissions)) {
+      const question = questions.find(q => q.id === parseInt(questionId));
+      if (submissionChoice === question.correctAnswer) {
+        scoreCounter++;
+      }
+    }
+    let calculatedScore = (scoreCounter / questions.length) * 100;
+    setScore(calculatedScore);  // This will update your state for future renders
+    
+    await axios.patch(`/api/attempts/${attempt.id}/score`, {
+      score: calculatedScore
+    }, {
+      withCredentials: true
+    });    
 
-    setScore({ percentage: scorePercentage, fraction: scoreFraction });
-    setShowScore(true);
-  };
+  }
+
+  let selectedChoice = Object.keys(submissions).length !== 0? submissions[currentQuestionId] : null
+  // console.log("SELECTED CHOICE: " + selectedChoice)
 
   return (
-    questions.length > 0 &&
-    <div className="portal-container">
-      {isAuthenticated ? (
-        <>
-          <div>User ID: {userId}</div>
-          <div>Attempt ID: {attempt?.id}</div>
-          <div>Question: {currentQuestionIndex + 1}/{questions.length}</div>
-          <div>Progress: {progress}/{questions.length}</div>
-          {showScore ? (
-            <div className="score-container">
-              <h2>Your Score:</h2>
-              <p>{score.percentage}%</p>
-              <p>{score.fraction}</p>
-            </div>
-          ) : (
-            <>
-              {renderQuestion(questions[currentQuestionIndex])} {/* Render the question based on its type */}
-              {currentQuestionIndex > 0 && <button onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}>Previous</button>}
-              {currentQuestionIndex < questions.length - 1 && <button onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}>Next</button>}
-              {progress >= questions.length && <button onClick={handleSubmitQuiz}>Submit Quiz</button>}
-            </>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={{ marginTop: "10px" }}>
+        <h3>Progress: {progress} / {questions.length}</h3>
+        <h3>Question: {currentQuestionIndex + 1} / {questions.length}</h3>
+      </div>
+  
+      <div style={{ position: "absolute", top: "10px", right: "10px" }}>
+        <Button
+          color="inherit"
+          href="/dashboard"
+          sx={{
+            backgroundColor: "transparent",
+            border: "1px solid transparent",
+            borderRadius: "4px",
+            opacity: 0.5,
+          }}
+        >
+          Exit
+        </Button>
+      </div>
+  
+      <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+        <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
+        {/* Display the score if it is not null */}
+        {score && <p> Score: {score}%</p>}
+      </div>
+  
+      <h1 className="question-text">
+        {questions[currentQuestionIndex]?.questionText}
+      </h1>
+  
+      <div className="answer-choices">
+        {/* Multiple Choice Container */}
+        {questions[currentQuestionIndex]?.questionType === 0 && (
+          questions[currentQuestionIndex]?.answerChoices?.map((choice, index) => (
+            <button
+              key={index}
+              className={`${selectedChoice === index ? 'selected-choice' : ''}`}
+              onClick={() => handleSubmission(index)}
+            >
+              {choice}
+            </button>
+          ))
+        )}
+        {/* True/False Container */}
+        {questions[currentQuestionIndex]?.questionType === 1 && (
+          <>
+            <button
+              className={`${selectedChoice === 1 ? 'selected-choice' : ''}`}
+              onClick={() => handleSubmission(1)}
+            >
+              True
+            </button>
+            <button
+              className={`${selectedChoice === 0 ? 'selected-choice' : ''}`}
+              onClick={() => handleSubmission(0)}
+            >
+              False
+            </button>
+          </>
+        )}
+        {/* Short Answer Container */}
+        {/* {questions[currentQuestion]?.questionType === 2 && (
+          <>
+            <input type="text" />
+          </>
+        )} */}
+      </div>
+  
+      <div style={{ position: "fixed", top: "20em", left: "50%", transform: "translateX(-50%)" }}>
+        <div style={{ display: "flex" }}>
+          {currentQuestionIndex !== 0 && (
+            <Button
+              onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
+              variant="contained"
+              color="primary"
+              style={{ marginRight: "10px" }}
+            >
+              Prev
+            </Button>
           )}
-        </>
-      ) : (
-        <p>Please log in to take the quiz.</p>
-      )}
+          {currentQuestionIndex !== questions.length - 1 && (
+            <Button
+              onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
+              variant="contained"
+              color="primary"
+            >
+              Next
+            </Button>
+          )}
+          {progress >= questions.length &&
+            <button className="Submit Quiz" onClick={handleSubmitQuiz}>Submit Quiz</button>
+          }
+        </div>
+      </div>
     </div>
   );
+
 }

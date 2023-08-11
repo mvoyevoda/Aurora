@@ -14,7 +14,7 @@ export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,11 +29,11 @@ export default function SignUp() {
         emailRef.current.value,
         passwordRef.current.value
       );
-      navigate("/app");
+      navigate("/generator");
     } catch (error) {
       console.error(`Error: ${error}`);
-      if(error.response){
-        setErrorMessage(error.response.data.message);
+      if (error.response) {
+        setErrorMessage("You already have an account.");
       } else {
         setErrorMessage("An unexpected error has occured. Try again.");
       }
@@ -43,130 +43,113 @@ export default function SignUp() {
   return (
     <>
       <HomeNB />
-      <h1>Sign Up</h1>
-      <Button
-        variant="contained"
-        startIcon={<GoogleIcon />}
-        onClick={() => {
-          // Handle the "Sign Up with Google" button click
-        }}
-      >
-        Sign Up with Google
-      </Button>
-
-<form onSubmit={handleSignUp} className="signup_form">
-  {errorMessage && <div className="error-message">{errorMessage}</div>}
-  <TextField
-    sx={{
-      backgroundColor: "rgba(217, 217, 217, 0.20)",
-      marginBottom: "1rem", // Relative unit
-      "& .MuiInputLabel-root.Mui-focused": {
-        color: "black",
-      },
-    }}
-    color="text"
-    variant="filled"
-    label="Full Name"
-    id="full_name"
-    fullWidth={true}
-    required
-    inputRef={full_nameRef}
-  />
-  <TextField
-    sx={{
-      backgroundColor: "rgba(217, 217, 217, 0.20)",
-      marginBottom: "1rem", // Relative unit
-      "& .MuiInputLabel-root.Mui-focused": {
-        color: "black",
-      },
-    }}
-    color="text"
-    variant="filled"
-    label="Username"
-    id="username"
-    fullWidth={true}
-    required
-    inputRef={userNameRef}
-  />
-  <TextField
-    sx={{
-      backgroundColor: "rgba(217, 217, 217, 0.20)",
-      marginBottom: "1rem", // Relative unit
-      "& .MuiInputLabel-root.Mui-focused": {
-        color: "black",
-      },
-    }}
-    color="text"
-    variant="filled"
-    label="Email"
-    id="email"
-    fullWidth={true}
-    required
-    inputRef={emailRef}
-  />
-  <TextField
-    sx={{
-      backgroundColor: "rgba(217, 217, 217, 0.20)",
-      marginBottom: "1rem", // Relative unit
-      "& .MuiInputLabel-root.Mui-focused": {
-        color: "black",
-      },
-    }}
-    color="text"
-    variant="filled"
-    label="Password"
-    id="password"
-    type="password"
-    fullWidth={true}
-    required
-    inputRef={passwordRef}
-  />
-  <Link
-    href="#"
-    variant="p"
-    color="inherit"
-    sx={{
-      position: "relative",
-      left: "19rem", 
-    }}
-  >
-    Forgot password?
-  </Link>
-  <Button
-    href="./login"
-    variant="outlined"
-    sx={{
-      color: "white",
-      border: "1px solid",
-      borderRadius: "50px",
-      display: "block",
-      marginBottom: "2rem", 
-      "&:hover": {
-        backgroundColor: "rgba(217, 217, 217, 0.20)",
-        borderColor: "white",
-      },
-    }}
-  >
-    Already have an account?
-  </Button>
-  <Button
-    variant="outlined"
-    type="submit"
-    sx={{
-      color: "white",
-      border: "1px solid",
-      display: "block",
-      width: "100%",
-      borderRadius: "50px",
-      "&:hover": {
-        backgroundColor: "rgba(217, 217, 217, 0.20)",
-        borderColor: "white",
-      },
-    }}
-  >
-    Sign Up
-  </Button>
-</form>
+      <h1 style={{ marginTop: "12vh" }}>Sign Up</h1>
+      <form onSubmit={handleSignUp} className="signup_form">
+        {errorMessage && (
+          <div className="error-message" style={{ marginBottom: "1rem" }}>
+            {errorMessage}
+          </div>
+        )}
+        <TextField
+          sx={{
+            backgroundColor: "rgba(217, 217, 217, 0.20)",
+            marginBottom: "1rem",
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black",
+            },
+          }}
+          color="text"
+          variant="filled"
+          label="Full Name"
+          id="full_name"
+          fullWidth={true}
+          required
+          inputRef={full_nameRef}
+        />
+        <TextField
+          sx={{
+            backgroundColor: "rgba(217, 217, 217, 0.20)",
+            marginBottom: "1rem",
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black",
+            },
+          }}
+          color="text"
+          variant="filled"
+          label="Username"
+          id="username"
+          fullWidth={true}
+          required
+          inputRef={userNameRef}
+        />
+        <TextField
+          sx={{
+            backgroundColor: "rgba(217, 217, 217, 0.20)",
+            marginBottom: "1rem",
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black",
+            },
+          }}
+          color="text"
+          variant="filled"
+          label="Email"
+          id="email"
+          fullWidth={true}
+          required
+          inputRef={emailRef}
+        />
+        <TextField
+          sx={{
+            backgroundColor: "rgba(217, 217, 217, 0.20)",
+            marginBottom: "1rem",
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black",
+            },
+          }}
+          color="text"
+          variant="filled"
+          label="Password"
+          id="password"
+          type="password"
+          fullWidth={true}
+          required
+          inputRef={passwordRef}
+        />
+        <Button
+          href="./login"
+          variant="outlined"
+          sx={{
+            color: "white",
+            border: "1px solid",
+            borderRadius: "50px",
+            display: "block",
+            marginBottom: "2rem",
+            "&:hover": {
+              backgroundColor: "rgba(217, 217, 217, 0.20)",
+              borderColor: "white",
+            },
+          }}
+        >
+          Already have an account?
+        </Button>
+        <Button
+          variant="outlined"
+          type="submit"
+          sx={{
+            color: "white",
+            border: "1px solid",
+            display: "block",
+            width: "100%",
+            borderRadius: "50px",
+            "&:hover": {
+              backgroundColor: "rgba(217, 217, 217, 0.20)",
+              borderColor: "white",
+            },
+          }}
+        >
+          Sign Up
+        </Button>
+      </form>
     </>
   );
 }
