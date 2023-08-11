@@ -38,12 +38,13 @@ export default function LogIn() {
   return (
     <>
       <HomeNB />
-      <h1 style={{ marginTop: "12vh"}} >Log In</h1>
+      <h1 style={{ marginTop: "13vh"}} >Log In</h1>
       {errorMessage && <p style={{ color: "rgba(245, 245, 245)"}}>{errorMessage}</p>}
       <form onSubmit={handleLogIn} className="signup_form">
         <TextField
           sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",
+            marginTop: "2em",
             marginBottom: "0.625em",
             "& .MuiInputLabel-root.Mui-focused": {
               color: "black",
