@@ -194,31 +194,35 @@ export default function Portal() {
   // console.log("SELECTED CHOICE: " + selectedChoice)
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <div style={{ marginTop: "10px" }}>
-        <h3>Progress: {progress} / {questions.length}</h3>
-        <h3>Question: {currentQuestionIndex + 1} / {questions.length}</h3>
-      </div>
-  
-      <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-        <Button
-          color="inherit"
-          href="/dashboard"
-          sx={{
-            backgroundColor: "transparent",
-            border: "1px solid transparent",
-            borderRadius: "4px",
-            opacity: 0.5,
-          }}
-        >
-          Exit
-        </Button>
-      </div>
-  
-      <div style={{ position: "absolute", top: "10px", left: "10px" }}>
-        <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
-        {/* Display the score if it is not null */}
-        {score && <p> Score: {score}%</p>}
+    <div >
+      <div className='bgDiv'>
+        <div>
+          <h3>{progress} / {questions.length}</h3>
+          
+        </div>
+    
+        <div style={{ position: "absolute", top: "0.625em", right: "0.625em" }}>
+          <Button
+            color="inherit"
+            href="/dashboard"
+            sx={{
+              backgroundColor: "transparent",
+              border: "1px solid transparent",
+              borderRadius: "4px",
+              opacity: "0.5",
+            }}
+          >
+            Exit
+          </Button>
+        </div>
+    
+        <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+          <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
+          {/* Display the score if it is not null */}
+          {score && <p> Score: {score}%</p>}
+        </div>
+
+
       </div>
   
       <h1 className="question-text">
@@ -229,30 +233,75 @@ export default function Portal() {
         {/* Multiple Choice Container */}
         {questions[currentQuestionIndex]?.questionType === 0 && (
           questions[currentQuestionIndex]?.answerChoices?.map((choice, index) => (
-            <button
-              key={index}
-              className={`${selectedChoice === index ? 'selected-choice' : ''}`}
-              onClick={() => handleSubmission(index)}
-            >
-              {choice}
-            </button>
+        <Button
+        key={index}
+        variant='outlined'
+        onClick={() => handleSubmission(index)}
+        sx={{
+          color: 'white',
+          fontFamily: 'Helvetica',
+          display: 'block',
+          border: '1px solid white',
+          borderRadius: '1.2em',
+          width: '78em',
+          padding: '1em',
+          marginBottom: '10px', // Add margin between buttons
+          textAlign: 'center', // Center the text
+          backgroundColor: selectedChoice === index ? 'rgba(255, 255, 255, 0.2)' : 'transparent', // Change background color when selected
+          "&:hover": {
+            borderColor: 'white'
+          }
+        }}
+      >
+        {choice}
+      </Button>
           ))
         )}
         {/* True/False Container */}
         {questions[currentQuestionIndex]?.questionType === 1 && (
           <>
-            <button
-              className={`${selectedChoice === 1 ? 'selected-choice' : ''}`}
+            <Button
+              variant='outlined'
               onClick={() => handleSubmission(1)}
+              sx={{
+                color: 'white',
+                fontFamily: 'Helvetica',
+                display: 'block',
+                border: '1px solid white',
+                borderRadius: '1.2em',
+                width: '78em',
+                padding: '1em',
+                marginBottom: '10px', // Add margin between buttons
+                textAlign: 'center', // Center the text
+                backgroundColor: selectedChoice === 1 ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+                "&:hover": {
+                  borderColor: 'white'
+                }
+              }}
             >
               True
-            </button>
-            <button
-              className={`${selectedChoice === 0 ? 'selected-choice' : ''}`}
+            </Button>
+            <Button
+              variant='outlined'
               onClick={() => handleSubmission(0)}
+              sx={{
+                color: 'white',
+                fontFamily: 'Helvetica',
+                display: 'block',
+                border: '1px solid white',
+                borderRadius: '1.2em',
+                width: '78em',
+                padding: '1em',
+                marginBottom: '10px', // Add margin between buttons
+                textAlign: 'center', // Center the text
+                backgroundColor: selectedChoice === 0 ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+                "&:hover": {
+                  borderColor: 'white'
+                }
+              }}
             >
               False
-            </button>
+            </Button>
           </>
         )}
         {/* Short Answer Container */}
@@ -263,14 +312,14 @@ export default function Portal() {
         )} */}
       </div>
   
-      <div style={{ position: "fixed", top: "20em", left: "50%", transform: "translateX(-50%)" }}>
+      <div style={{ position: "fixed", top: "40em", left: "50%", transform: "translateX(-50%)" }}>
         <div style={{ display: "flex" }}>
           {currentQuestionIndex !== 0 && (
             <Button
               onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
               variant="contained"
               color="primary"
-              style={{ marginRight: "10px" }}
+              style={{ marginRight: "20em" }}
             >
               Prev
             </Button>
@@ -289,7 +338,29 @@ export default function Portal() {
           }
         </div>
       </div>
-    </div>
+      <div className='bgDiv' style={{position: 'absolute', bottom: 0, left: 0, width: '100%'}}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {questions.map((_, index) => (
+            <a
+            key={index}
+            onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
+            style={{
+              textDecoration: 'none',
+              fontSize: '2.5em',
+              margin: '0.2em',
+              padding: '0.1em',
+              borderRadius: '50%',
+              color: currentQuestionIndex === index ? 'white' : 'rgba(255, 255, 255, 0.5)',
+              cursor: 'default',
+            }}
+          >
+            -
+          </a>
+          ))}
+        </div>
+      </div>    
+</div>
+
   );
 
 }
