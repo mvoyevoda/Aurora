@@ -227,9 +227,10 @@ export default function Portal() {
   
 
       {/*Given Questions*/}
-      <Typography variant="h3" className="question-text" marginTop={'18vh'} >
+      <Typography variant="h3" className="question-text" marginTop={'18vh'} 
+        sx={{fontFamily: 'Helvetica-light'}}>
       {questions[currentQuestionIndex]?.questionText}
-    </Typography>
+      </Typography>
   
       <div className="answer-choices">
         {/* Multiple Choice Container */}
@@ -242,7 +243,6 @@ export default function Portal() {
         sx={{
           color: 'white',
           fontFamily: 'Helvetica',
-          fontSize: '20px',
           display: 'block',
           border: '1px solid white',
           borderRadius: '1.2em',
@@ -270,7 +270,6 @@ export default function Portal() {
               sx={{
                 color: 'white',
                 fontFamily: 'Helvetica',
-                fontSize: '20px',
                 display: 'block',
                 border: '1px solid white',
                 borderRadius: '1.2em',
@@ -293,7 +292,6 @@ export default function Portal() {
               sx={{
                 color: 'white',
                 fontFamily: 'Helvetica',
-                fontSize: '20px',
                 display: 'block',
                 border: '1px solid white',
                 borderRadius: '1.2em',
@@ -319,7 +317,6 @@ export default function Portal() {
         )} */}
       </div>
       <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-  <div style={{ marginTop: "5%", display: "flex", justifyContent: "space-between", width: "100%", maxWidth: "400px" }}>
     {currentQuestionIndex !== 0 && (
       <Button
         onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
@@ -331,6 +328,8 @@ export default function Portal() {
           fontSize: "3vw", // Responsive font size
           boxShadow: "none",
           marginRight: "2em", // Adjust margin to space out
+          position: "absolute",
+          right: "37vw"
         }}
       >
         &lt;
@@ -339,13 +338,25 @@ export default function Portal() {
     {progress >= questions.length && (
       <Button
         onClick={handleSubmitQuiz}
-        variant="contained"
+        variant="text"
         color="primary"
+        sx={{
+          position: "relative",
+          top: "20vw",
+          color: 'white',
+          fontFamily: 'Helvetica',
+          display: 'block',
+          borderRadius: '1.2em',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          width: "15em",
+
+        }}
       >
         Submit Quiz
       </Button>
     )}
-    {currentQuestionIndex !== questions.length - 1 && (
+    
+  {currentQuestionIndex !== questions.length - 1 && (
       <Button
         onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
         variant="contained"
@@ -356,12 +367,14 @@ export default function Portal() {
           fontSize: "3vw", // Responsive font size
           boxShadow: "none",
           marginLeft: "2em", // Adjust margin to space out
+          position: "absolute",
+          left: "37vw"
+
         }}
       >
         &gt;
       </Button>
     )}
-  </div>
 </div>
 
 

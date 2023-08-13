@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "../styles/signup.css";
-import Link from "@mui/material/Link";
+import {Link} from "react-router-dom";
 import HomeNB from "../components/HomeNB";
 import GoogleIcon from "@mui/icons-material/Google";
 import { AuthContext } from "../contexts/AuthContext";
@@ -75,36 +75,40 @@ export default function LogIn() {
           required
           inputRef={passwordRef}
         />
-        <Link
-          onClick={handleForgotPasswordClick}
-          href="#"
-          variant="p"
-          color="inherit"
-          sx={{
-            position: "relative",
-            left: "20em",
-          }}
-        >
-          Forgot password?
+        <Link style={{textDecoration: 'none', color: 'white'}}>
+          <Button
+            onClick={handleForgotPasswordClick}
+            variant="p"
+            color="inherit"
+            sx={{
+              position: "relative",
+              left: "20em",
+              cursor: "pointer",
+            }}
+          >
+            Forgot password?
+          </Button>
         </Link>
-        <Button
-          href="./signup"
-          variant="outlined"
-          sx={{
-            marginTop: "0.625em",
-            color: "white",
-            border: "1px solid",
-            borderRadius: "50px",
-            display: "block",
-            marginBottom: "1.25em",
-            "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
-              borderColor: "white",
-            },
-          }}
-        >
-          Don&apos;t have an account?
-        </Button>
+        <Link to="/signup" style={{textDecoration: 'none'}}>
+          <Button
+            variant="outlined"
+            sx={{
+              marginTop: "0.625em",
+              color: "white",
+              border: "1px solid",
+              borderRadius: "50px",
+              display: "block",
+              marginBottom: "1.25em",
+              width: "100%",
+              "&:hover": {
+                backgroundColor: "rgba(217, 217, 217, 0.20)",
+                borderColor: "white",
+              },
+            }}
+          >
+            Don&apos;t have an account?
+          </Button>
+        </Link>
         <Button
           variant="outlined"
           type="submit"
