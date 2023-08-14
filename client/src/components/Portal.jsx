@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
 import "../styles/portal.css";
-import { Button, selectClasses, Typography } from '@mui/material';
+import { alpha, Button, selectClasses, Typography } from '@mui/material';
 
 export default function Portal() {
 
@@ -202,22 +202,7 @@ export default function Portal() {
         <div className="header-mid">
           <p> {progress} / {questions.length} </p>
         </div>
-        <div className="header-right">
-          {/* <Button
-            color="inherit"
-            href="/dashboard"
-            sx={{
-              backgroundColor: "transparent",
-              border: "1px solid transparent",
-              borderRadius: "4px",
-              opacity: "0.5",
-              textTransform: "none",
-              fontWeight: 10,
-            }}
-          >
-            Exit
-          </Button> */}
-        </div>
+        <div className="header-right"></div>
 
         {/* <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
@@ -229,7 +214,7 @@ export default function Portal() {
       {/* ------------------------------------------------------------------------ */}
 
       <div className="main-container">
-        
+
         <div className="overlay"></div>
 
         <div className="left">
@@ -254,7 +239,99 @@ export default function Portal() {
         </div>
 
         <div className="quiz-container">
-          <h1 className="">TEST</h1>
+          {/*Given Questions*/}
+          <div className="question">
+            {/* <Typography
+              variant="p"
+              sx={{
+                fontSize: "100%",
+              }}
+            >
+              {questions[currentQuestionIndex]?.questionText}
+            </Typography> */}
+            {questions[currentQuestionIndex]?.questionText}
+          </div>
+          <div className="choices">
+           
+
+            {/* Multiple Choice Container */}
+            {questions[currentQuestionIndex]?.questionType === 0 &&
+              questions[currentQuestionIndex]?.answerChoices?.map(
+                (choice, index) => (
+                  <Button
+                    key={index}
+                    variant="outlined"
+                    onClick={() => handleSubmission(index)}
+                    className="choice"
+                    sx={{
+                      margin: "auto",
+                      width: "98%",
+                      borderRadius: "20px",
+                      color: "white",
+                      fontSize: "1.5em",
+                      textTransform: "none",
+                      borderColor: "white",
+                      height: "15%",
+                      opacity: (selectedChoice === index ? "1.0" : "0.7"),
+                      // backgroundColor:
+                      //   selectedChoice === index
+                      //     ? "rgba(255, 255, 255, 0.2)"
+                      //     : "transparent", // Change background color when selected
+                    }}
+                  >
+                    {choice}
+                  </Button>
+                )
+              )}
+            {/* True/False Container */}
+            {questions[currentQuestionIndex]?.questionType === 1 && (
+              <>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSubmission(1)}
+                  sx={{
+                    margin: "auto",
+                    width: "98%",
+                    borderRadius: "20px",
+                    color: "white",
+                    fontSize: "1.5em",
+                    textTransform: "none",
+                    borderColor: "white",
+                    height: "15%",
+                    opacity: (selectedChoice === 1 ? "1.0" : "0.7"),
+                    // backgroundColor:
+                    //   selectedChoice === index
+                    //     ? "rgba(255, 255, 255, 0.2)"
+                    //     : "transparent", // Change background color when selected
+                  }}
+                >
+                  True
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSubmission(0)}
+                  sx={{
+                    margin: "auto",
+                    width: "98%",
+                    borderRadius: "20px",
+                    color: "white",
+                    fontSize: "1.5em",
+                    textTransform: "none",
+                    borderColor: "white",
+                    height: "15%",
+                    opacity: (selectedChoice === 0 ? "1.0" : "0.7"),
+                    // backgroundColor:
+                    //   selectedChoice === index
+                    //     ? "rgba(255, 255, 255, 0.2)"
+                    //     : "transparent", // Change background color when selected
+                  }}
+                >
+                  False
+                </Button>
+              </>
+            )}
+
+          </div>
         </div>
 
         <div className="right">

@@ -30,6 +30,7 @@ async function generate(req, res) {
       Each question should be an object with keys: type, question, choices, answer. 
       For the multiple choice, do not include the corresponding letter, only include the choice. 
       List 4 choices for multiple choice questions. 
+      Each question should have a limit of 120 characters.
       Give me a good mix of all question types. Strictly adhere to this example format in your response:
 
       {
