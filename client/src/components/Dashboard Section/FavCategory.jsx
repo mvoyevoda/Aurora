@@ -22,7 +22,7 @@ export default function FavCategory() {
           fontSize={80}
           sx={{ lineHeight: 1 }}
         >
-          Anime
+          N/A
         </Typography>
         {/* Additional Content */}
         <Typography

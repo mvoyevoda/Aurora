@@ -1,7 +1,22 @@
 .quiz-container {
   margin: 50px;
 }
-
-.selected-choice {
+/* .selected-choice {
   background-color: green;
+} */
+
+.answer-choices{
+  padding-top: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  
+}
+.bgDiv{
+  background-color: rgba(212, 212, 212, .05);
+  padding-top: 0.625em;
+  padding-bottom: 0.5em;
 }

@@ -1,6 +1,27 @@
 import { Card, CardContent, Typography } from "@mui/material";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import { AuthContext } from '../../contexts/AuthContext';
+
 
 export function QuizGen() {
+
+  const [quizCount, setQuizCount] = useState(0);
+  const authContext = useContext(AuthContext); 
+  const userId = authContext.currentUser?.id;
+
+  useEffect(() => {
+    axios.get(`/api/users/${userId}/quizzes`)
+    .then((response) => {
+      setQuizCount(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    // Assuming you have the user ID available in your component
+    
+  }, []);
   return (
     <Card
       sx={{
@@ -20,7 +41,7 @@ export function QuizGen() {
           fontSize={180}
           sx={{ lineHeight: 1 }}
         >
-          9
+          {quizCount.count}
         </Typography>
         {/* Additional Content */}
         <Typography

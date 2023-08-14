@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
 import "../styles/portal.css";
-import { Button, selectClasses } from '@mui/material';
+import { Button, selectClasses, Typography } from '@mui/material';
 
 export default function Portal() {
 
@@ -194,65 +194,119 @@ export default function Portal() {
   // console.log("SELECTED CHOICE: " + selectedChoice)
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <div style={{ marginTop: "10px" }}>
-        <h3>Progress: {progress} / {questions.length}</h3>
-        <h3>Question: {currentQuestionIndex + 1} / {questions.length}</h3>
+    <div >
+      <div className='bgDiv'>
+        <div>
+          <h3>{progress} / {questions.length}</h3>
+          
+        </div>
+    
+        <div style={{ position: "absolute", top: "0.625em", right: "0.625em" }}>
+          <Button
+            color="inherit"
+            href="/dashboard"
+            sx={{
+              backgroundColor: "transparent",
+              border: "1px solid transparent",
+              borderRadius: "4px",
+              opacity: "0.5",
+            }}
+          >
+            Exit
+          </Button>
+        </div>
+    
+        <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+          <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
+          {/* Display the score if it is not null */}
+          {score && <p> Score: {score}%</p>}
+        </div>
+
+
       </div>
   
-      <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-        <Button
-          color="inherit"
-          href="/dashboard"
-          sx={{
-            backgroundColor: "transparent",
-            border: "1px solid transparent",
-            borderRadius: "4px",
-            opacity: 0.5,
-          }}
-        >
-          Exit
-        </Button>
-      </div>
-  
-      <div style={{ position: "absolute", top: "10px", left: "10px" }}>
-        <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
-        {/* Display the score if it is not null */}
-        {score && <p> Score: {score}%</p>}
-      </div>
-  
-      <h1 className="question-text">
-        {questions[currentQuestionIndex]?.questionText}
-      </h1>
+
+      {/*Given Questions*/}
+      <Typography variant="h3" className="question-text" marginTop={'18vh'} 
+        sx={{fontFamily: 'Helvetica-light'}}>
+      {questions[currentQuestionIndex]?.questionText}
+      </Typography>
   
       <div className="answer-choices">
         {/* Multiple Choice Container */}
         {questions[currentQuestionIndex]?.questionType === 0 && (
           questions[currentQuestionIndex]?.answerChoices?.map((choice, index) => (
-            <button
-              key={index}
-              className={`${selectedChoice === index ? 'selected-choice' : ''}`}
-              onClick={() => handleSubmission(index)}
-            >
-              {choice}
-            </button>
+        <Button
+        key={index}
+        variant='outlined'
+        onClick={() => handleSubmission(index)}
+        sx={{
+          color: 'white',
+          fontFamily: 'Helvetica',
+          display: 'block',
+          border: '1px solid white',
+          borderRadius: '1.2em',
+          height: 'h',
+          width: '78em',
+          padding: '1em',
+          marginBottom: '3vh', // Add margin between buttons
+          textAlign: 'center', // Center the text
+          backgroundColor: selectedChoice === index ? 'rgba(255, 255, 255, 0.2)' : 'transparent', // Change background color when selected
+          "&:hover": {
+            borderColor: 'white'
+          }
+        }}
+      >
+        {choice}
+      </Button>
           ))
         )}
         {/* True/False Container */}
         {questions[currentQuestionIndex]?.questionType === 1 && (
           <>
-            <button
-              className={`${selectedChoice === 1 ? 'selected-choice' : ''}`}
+            <Button
+              variant='outlined'
               onClick={() => handleSubmission(1)}
+              sx={{
+                color: 'white',
+                fontFamily: 'Helvetica',
+                display: 'block',
+                border: '1px solid white',
+                borderRadius: '1.2em',
+                width: '78em',
+                padding: '1em',
+                marginTop: '5vh',
+                marginBottom: '5vh', // Add margin between buttons
+                textAlign: 'center', // Center the text
+                backgroundColor: selectedChoice === 1 ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+                "&:hover": {
+                  borderColor: 'white'
+                }
+              }}
             >
               True
-            </button>
-            <button
-              className={`${selectedChoice === 0 ? 'selected-choice' : ''}`}
+            </Button>
+            <Button
+              variant='outlined'
               onClick={() => handleSubmission(0)}
+              sx={{
+                color: 'white',
+                fontFamily: 'Helvetica',
+                display: 'block',
+                border: '1px solid white',
+                borderRadius: '1.2em',
+                width: '78em',
+                padding: '1em',
+                marginBottom: '10px', // Add margin between buttons
+                textAlign: 'center', // Center the text
+                backgroundColor: selectedChoice === 0 ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+                "&:hover": {
+                  borderColor: 'white'
+                }
+              }}
             >
               False
-            </button>
+            </Button>
           </>
         )}
         {/* Short Answer Container */}
@@ -262,34 +316,93 @@ export default function Portal() {
           </>
         )} */}
       </div>
-  
-      <div style={{ position: "fixed", top: "20em", left: "50%", transform: "translateX(-50%)" }}>
-        <div style={{ display: "flex" }}>
-          {currentQuestionIndex !== 0 && (
-            <Button
-              onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
-              variant="contained"
-              color="primary"
-              style={{ marginRight: "10px" }}
-            >
-              Prev
-            </Button>
-          )}
-          {currentQuestionIndex !== questions.length - 1 && (
-            <Button
-              onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
-              variant="contained"
-              color="primary"
-            >
-              Next
-            </Button>
-          )}
-          {progress >= questions.length &&
-            <button className="Submit Quiz" onClick={handleSubmitQuiz}>Submit Quiz</button>
-          }
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+    {currentQuestionIndex !== 0 && (
+      <Button
+        onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
+        variant="contained"
+        color="primary"
+        disableRipple // Disable the ripple effect
+        style={{
+          background: "transparent",
+          fontSize: "3vw", // Responsive font size
+          boxShadow: "none",
+          marginRight: "2em", // Adjust margin to space out
+          position: "absolute",
+          right: "37vw"
+        }}
+      >
+        &lt;
+      </Button>
+    )}
+    {progress >= questions.length && (
+      <Button
+        onClick={handleSubmitQuiz}
+        variant="text"
+        color="primary"
+        sx={{
+          position: "relative",
+          top: "20vw",
+          color: 'white',
+          fontFamily: 'Helvetica',
+          display: 'block',
+          borderRadius: '1.2em',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          width: "15em",
+
+        }}
+      >
+        Submit Quiz
+      </Button>
+    )}
+    
+  {currentQuestionIndex !== questions.length - 1 && (
+      <Button
+        onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
+        variant="contained"
+        color="primary"
+        disableRipple // Disable the ripple effect
+        style={{
+          background: "transparent",
+          fontSize: "3vw", // Responsive font size
+          boxShadow: "none",
+          marginLeft: "2em", // Adjust margin to space out
+          position: "absolute",
+          left: "37vw"
+
+        }}
+      >
+        &gt;
+      </Button>
+    )}
+</div>
+
+
+
+
+      <div className='bgDiv' style={{position: 'absolute', bottom: 0, left: 0, width: '100%'}}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {questions.map((_, index) => (
+            <a
+            key={index}
+            onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
+            style={{
+              textDecoration: 'none',
+              fontSize: '2.5em',
+              margin: '0.2em',
+              padding: '0.1em',
+              borderRadius: '50%',
+              color: currentQuestionIndex === index ? 'white' : 'rgba(255, 255, 255, 0.5)',
+              cursor: 'default',
+            }}
+          >
+            -
+          </a>
+          ))}
         </div>
-      </div>
-    </div>
+      </div>    
+</div>
+
   );
 
 }
