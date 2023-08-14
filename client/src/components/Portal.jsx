@@ -239,12 +239,14 @@ export default function Portal() {
   const modalContent = (
     <Box
       sx={{
-        width: 400,
+        width: 500, // Adjusted width
+        height: 300, // Adjusted height
         bgcolor: "background.paper",
         p: 2,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        justifyContent: "space-between", // Changed to space between buttons
         position: "absolute",
         top: "50%",
         left: "50%",
@@ -257,7 +259,7 @@ export default function Portal() {
         onClick={closeModal}
         variant="contained"
         color="primary"
-        sx={{ width: "100%", marginBottom: 1 }}
+        sx={{ width: "20vh", height: "5vh", fontSize: "20px", marginTop: '50px'}} // Added margin
       >
         Resume
       </Button>
@@ -265,7 +267,7 @@ export default function Portal() {
         href="/dashboard"
         variant="outlined"
         color="primary"
-        sx={{ width: "100%", marginBottom: 1 }}
+        sx={{ width: "20vh", height: "5vh", fontSize: "20px"}} // Added margin
       >
         Exit
       </Button>
@@ -273,14 +275,16 @@ export default function Portal() {
         onClick={() => {
           // Add your logic here for regenerating
         }}
-        variant="outlined"
+        variant="contained"
         color="primary"
-        sx={{ width: "100%" }}
+        sx={{ width: "20vh", height: "5vh", fontSize: "20px", marginBottom: '50px' }} // Added margin
       >
         Regenerate
       </Button>
     </Box>
   );
+  
+  
 
   let selectedChoice =
     Object.keys(submissions).length !== 0

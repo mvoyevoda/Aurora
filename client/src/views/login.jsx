@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "../styles/signup.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import HomeNB from "../components/HomeNB";
-import GoogleIcon from "@mui/icons-material/Google";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function LogIn() {
@@ -38,8 +37,10 @@ export default function LogIn() {
   return (
     <>
       <HomeNB />
-      <h1 style={{ marginTop: "13vh"}} >Log In</h1>
-      {errorMessage && <p style={{ color: "rgba(245, 245, 245)"}}>{errorMessage}</p>}
+      <h1 style={{ marginTop: "13vh" }}>Log In</h1>
+      {errorMessage && (
+        <p style={{ color: "rgba(245, 245, 245)" }}>{errorMessage}</p>
+      )}
       <form onSubmit={handleLogIn} className="form">
         <TextField
           sx={{
@@ -75,7 +76,7 @@ export default function LogIn() {
           required
           inputRef={passwordRef}
         />
-        <Link style={{textDecoration: 'none', color: 'white'}}>
+        <Link style={{ textDecoration: "none", color: "white" }}>
           <Button
             onClick={handleForgotPasswordClick}
             variant="p"
@@ -89,7 +90,7 @@ export default function LogIn() {
             Forgot password?
           </Button>
         </Link>
-        <Link to="/signup" style={{textDecoration: 'none'}}>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
           <Button
             variant="outlined"
             sx={{
