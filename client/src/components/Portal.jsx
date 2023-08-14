@@ -241,15 +241,38 @@ export default function Portal() {
           </h3>
         </div>
 
+
+        <div style={{ margin: "left", position: "absolute", top: "1.2em", left: "2.5em" }}>
+  <Button
+    color="inherit"
+    href=""
+    disableRipple  // Add this prop to disable the ripple effect
+    sx={{
+      fontSize: "30px",
+      height: "10px",
+      backgroundColor: "transparent",
+      border: "1px solid transparent",
+      borderRadius: "4px",
+      fontWeight: "bold",  // Changed from "bold: true" to "fontWeight: 'bold'"
+      opacity: "0.5",
+    }}
+  >
+    ...
+  </Button>
+</div>
+
+
         <div style={{ position: "absolute", top: "1.2em", right: "2em" }}>
           <Button
             color="inherit"
             href="/dashboard"
+            disableRipple
             sx={{
               backgroundColor: "transparent",
               border: "1px solid transparent",
               borderRadius: "4px",
               opacity: "0.5",
+              fontSize: "15px"
             }}
           >
             Exit
