@@ -201,7 +201,7 @@ export default function Portal() {
           <h3>{progress} / {questions.length}</h3>
         </div>
     
-        <div style={{ position: "absolute", top: "0.625em", right: "0.625em" }}>
+        <div style={{ position: "absolute", top: "1.2em", right: "2em" }}>
           <Button
             color="inherit"
             href="/dashboard"
