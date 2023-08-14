@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 //Done with GeneratorButton
 export default function NavDashboard() {
   return (
-    <Link to="/dashboard">
+    <Link to="/dashboard" style={{textDecoration: 'none'}}>
       <Button
         variant="contained"
         color="primary"

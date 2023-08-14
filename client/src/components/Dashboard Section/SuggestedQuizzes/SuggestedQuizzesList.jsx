@@ -69,14 +69,14 @@ const SuggestedQuizzesList = () => {
       </div>
       {currentPage > 1 && (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Button  color="inherit" backgroundColor="rgba(212, 212, 212, .08)" onClick={handleShowLess}>
+          <Button  color="inherit" backgroundcolor="rgba(212, 212, 212, .08)" onClick={handleShowLess}>
             Show Less ^
           </Button>
         </div>
       )}
       {endIndex < mockRecentQuizzes.length && (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Button  color="inherit" backgroundColor="rgba(212, 212, 212, .08)" onClick={handleShowMore}>
+          <Button  color="inherit" backgroundcolor="rgba(212, 212, 212, .08)" onClick={handleShowMore}>
             Show More V
           </Button>
         </div>
