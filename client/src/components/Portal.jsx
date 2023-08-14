@@ -195,10 +195,10 @@ export default function Portal() {
 
   return (
     <div >
-      <div className='bgDiv'>
+      <div className='header'>
+
         <div>
           <h3>{progress} / {questions.length}</h3>
-          
         </div>
     
         <div style={{ position: "absolute", top: "0.625em", right: "0.625em" }}>
@@ -222,9 +222,7 @@ export default function Portal() {
           {score && <p> Score: {score}%</p>}
         </div>
 
-
       </div>
-  
 
       {/*Given Questions*/}
       <Typography variant="h3" className="question-text" marginTop={'18vh'} 
@@ -316,6 +314,7 @@ export default function Portal() {
           </>
         )} */}
       </div>
+
       <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
     {currentQuestionIndex !== 0 && (
       <Button
@@ -350,11 +349,11 @@ export default function Portal() {
           backgroundColor: 'rgba(255, 255, 255, 0.1)',
           width: "15em",
 
-        }}
-      >
-        Submit Quiz
-      </Button>
-    )}
+            }}
+          >
+            Submit Quiz
+          </Button>
+        )}
     
   {currentQuestionIndex !== questions.length - 1 && (
       <Button
@@ -370,38 +369,35 @@ export default function Portal() {
           position: "fixed",
           left: "37vw"
 
-        }}
-      >
-        &gt;
-      </Button>
-    )}
-</div>
-
-
-
+              }}
+            >
+              &gt;
+            </Button>
+          )}
+      </div>
 
       <div className='bgDiv' style={{position: 'absolute', bottom: 0, left: 0, width: '100%'}}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {questions.map((_, index) => (
             <a
-            key={index}
-            onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
-            style={{
-              textDecoration: 'none',
-              fontSize: '2.5em',
-              margin: '0.2em',
-              padding: '0.1em',
-              borderRadius: '50%',
-              color: currentQuestionIndex === index ? 'white' : 'rgba(255, 255, 255, 0.5)',
-              cursor: 'default',
-            }}
-          >
-            -
-          </a>
+              key={index}
+              onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
+              style={{
+                textDecoration: 'none',
+                fontSize: '2.5em',
+                margin: '0.2em',
+                padding: '0.1em',
+                borderRadius: '50%',
+                color: currentQuestionIndex === index ? 'white' : 'rgba(255, 255, 255, 0.5)',
+                cursor: 'default',
+              }}
+            >
+              -
+            </a>
           ))}
         </div>
       </div>    
-</div>
+  </div>
 
   );
 

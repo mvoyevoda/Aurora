@@ -15,7 +15,7 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   
 }
-.bgDiv{
+.header{
   background-color: rgba(212, 212, 212, .05);
   padding-top: 0.625em;
   padding-bottom: 0.5em;
