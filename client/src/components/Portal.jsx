@@ -328,14 +328,14 @@ export default function Portal() {
           fontSize: "3vw", // Responsive font size
           boxShadow: "none",
           marginRight: "2em", // Adjust margin to space out
-          position: "absolute",
+          position: "fixed",
           right: "37vw"
         }}
       >
         &lt;
       </Button>
     )}
-    {progress >= questions.length && (
+    {(progress >= questions.length) && (
       <Button
         onClick={handleSubmitQuiz}
         variant="text"
@@ -367,7 +367,7 @@ export default function Portal() {
           fontSize: "3vw", // Responsive font size
           boxShadow: "none",
           marginLeft: "2em", // Adjust margin to space out
-          position: "absolute",
+          position: "fixed",
           left: "37vw"
 
         }}

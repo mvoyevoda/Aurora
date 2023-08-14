@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 //Done with GeneratorButton
 export default function NavDashboard() {
   return (
-    <Link to="/dashboard">
+
       <Button
         variant="contained"
         color="primary"
+        href="/dashboard"
         sx={{
           backgroundColor: "rgba(212, 212, 212, .05)", // Change the color and opacity here
           color: "rgba(255, 255, 255, .4)", // Change the text color to white with reduced opacity
@@ -24,6 +25,6 @@ export default function NavDashboard() {
       >
         v Dashboard v
       </Button>
-    </Link>
+
   );
 }
