@@ -194,15 +194,16 @@ export default function Portal() {
   // console.log("SELECTED CHOICE: " + selectedChoice)
 
   return (
-    <div >
+    <div className="portal">
+
       <div className='header'>
 
-        <div>
-          <h3>{progress} / {questions.length}</h3>
+        <div className="header-left"></div>
+        <div className="header-mid">
+          <p> {progress} / {questions.length} </p>
         </div>
-    
-        <div style={{ position: "absolute", top: "0.625em", right: "0.625em" }}>
-          <Button
+        <div className="header-right">
+          {/* <Button
             color="inherit"
             href="/dashboard"
             sx={{
@@ -210,195 +211,129 @@ export default function Portal() {
               border: "1px solid transparent",
               borderRadius: "4px",
               opacity: "0.5",
+              textTransform: "none",
+              fontWeight: 10,
             }}
           >
             Exit
-          </Button>
+          </Button> */}
         </div>
-    
-        <div style={{ position: "absolute", top: "10px", left: "10px" }}>
+
+        {/* <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
-          {/* Display the score if it is not null */}
           {score && <p> Score: {score}%</p>}
+        </div> */}
+
+      </div>
+
+      {/* ------------------------------------------------------------------------ */}
+
+      <div className="main-container">
+        
+        <div className="overlay"></div>
+
+        <div className="left">
+          {currentQuestionIndex !== 0 && (
+            <Button
+              onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
+              variant="contained"
+              color="primary"
+              disableRipple // Disable the ripple effect
+              style={{
+                background: "transparent",
+                fontSize: "3vw", // Responsive font size
+                boxShadow: "none",
+                // marginRight: "2em", // Adjust margin to space out
+                // position: "fixed",
+                // right: "37vw"
+              }}
+            >
+              &lt;
+            </Button>
+          )}
         </div>
 
-      </div>
+        <div className="quiz-container">
+          <h1 className="">TEST</h1>
+        </div>
 
-      {/*Given Questions*/}
-      <Typography variant="h3" className="question-text" marginTop={'18vh'} 
-        sx={{fontFamily: 'Helvetica-light'}}>
-      {questions[currentQuestionIndex]?.questionText}
-      </Typography>
-  
-      <div className="answer-choices">
-        {/* Multiple Choice Container */}
-        {questions[currentQuestionIndex]?.questionType === 0 && (
-          questions[currentQuestionIndex]?.answerChoices?.map((choice, index) => (
-        <Button
-        key={index}
-        variant='outlined'
-        onClick={() => handleSubmission(index)}
-        sx={{
-          color: 'white',
-          fontFamily: 'Helvetica',
-          display: 'block',
-          border: '1px solid white',
-          borderRadius: '1.2em',
-          height: 'h',
-          width: '78em',
-          padding: '1em',
-          marginBottom: '3vh', // Add margin between buttons
-          textAlign: 'center', // Center the text
-          backgroundColor: selectedChoice === index ? 'rgba(255, 255, 255, 0.2)' : 'transparent', // Change background color when selected
-          "&:hover": {
-            borderColor: 'white'
-          }
-        }}
-      >
-        {choice}
-      </Button>
-          ))
-        )}
-        {/* True/False Container */}
-        {questions[currentQuestionIndex]?.questionType === 1 && (
-          <>
+        <div className="right">
+          {currentQuestionIndex !== questions.length - 1 && (
             <Button
-              variant='outlined'
-              onClick={() => handleSubmission(1)}
-              sx={{
-                color: 'white',
-                fontFamily: 'Helvetica',
-                display: 'block',
-                border: '1px solid white',
-                borderRadius: '1.2em',
-                width: '78em',
-                padding: '1em',
-                marginTop: '5vh',
-                marginBottom: '5vh', // Add margin between buttons
-                textAlign: 'center', // Center the text
-                backgroundColor: selectedChoice === 1 ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
-                "&:hover": {
-                  borderColor: 'white'
-                }
-              }}
-            >
-              True
-            </Button>
-            <Button
-              variant='outlined'
-              onClick={() => handleSubmission(0)}
-              sx={{
-                color: 'white',
-                fontFamily: 'Helvetica',
-                display: 'block',
-                border: '1px solid white',
-                borderRadius: '1.2em',
-                width: '78em',
-                padding: '1em',
-                marginBottom: '10px', // Add margin between buttons
-                textAlign: 'center', // Center the text
-                backgroundColor: selectedChoice === 0 ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
-                "&:hover": {
-                  borderColor: 'white'
-                }
-              }}
-            >
-              False
-            </Button>
-          </>
-        )}
-        {/* Short Answer Container */}
-        {/* {questions[currentQuestion]?.questionType === 2 && (
-          <>
-            <input type="text" />
-          </>
-        )} */}
-      </div>
-
-      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-    {currentQuestionIndex !== 0 && (
-      <Button
-        onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
-        variant="contained"
-        color="primary"
-        disableRipple // Disable the ripple effect
-        style={{
-          background: "transparent",
-          fontSize: "3vw", // Responsive font size
-          boxShadow: "none",
-          marginRight: "2em", // Adjust margin to space out
-          position: "fixed",
-          right: "37vw"
-        }}
-      >
-        &lt;
-      </Button>
-    )}
-    {(progress >= questions.length) && (
-      <Button
-        onClick={handleSubmitQuiz}
-        variant="text"
-        color="primary"
-        sx={{
-          position: "relative",
-          top: "20vw",
-          color: 'white',
-          fontFamily: 'Helvetica',
-          display: 'block',
-          borderRadius: '1.2em',
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          width: "15em",
-
-            }}
-          >
-            Submit Quiz
-          </Button>
-        )}
-    
-  {currentQuestionIndex !== questions.length - 1 && (
-      <Button
-        onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
-        variant="contained"
-        color="primary"
-        disableRipple // Disable the ripple effect
-        style={{
-          background: "transparent",
-          fontSize: "3vw", // Responsive font size
-          boxShadow: "none",
-          marginLeft: "2em", // Adjust margin to space out
-          position: "fixed",
-          left: "37vw"
-
+              onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
+              variant="contained"
+              color="primary"
+              disableRipple // Disable the ripple effect
+              style={{
+                background: "transparent",
+                fontSize: "3vw", // Responsive font size
+                boxShadow: "none",
+                // marginLeft: "2em", // Adjust margin to space out
+                // position: "fixed",
+                // left: "37vw"
               }}
             >
               &gt;
             </Button>
           )}
+        </div>
+
       </div>
 
-      <div className='bgDiv' style={{position: 'absolute', bottom: 0, left: 0, width: '100%'}}>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {questions.map((_, index) => (
-            <a
-              key={index}
-              onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
-              style={{
-                textDecoration: 'none',
-                fontSize: '2.5em',
-                margin: '0.2em',
-                padding: '0.1em',
-                borderRadius: '50%',
-                color: currentQuestionIndex === index ? 'white' : 'rgba(255, 255, 255, 0.5)',
-                cursor: 'default',
+      {/* ------------------------------------------------------------------------ */}
+
+      <div className="footer">
+
+        {/* <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          {(progress >= questions.length) && (
+            <Button
+              onClick={handleSubmitQuiz}
+              variant="text"
+              color="primary"
+              sx={{
+                position: "relative",
+                top: "20vw",
+                color: 'white',
+                fontFamily: 'Helvetica',
+                display: 'block',
+                borderRadius: '1.2em',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                width: "15em",
               }}
             >
-              -
-            </a>
-          ))}
-        </div>
-      </div>    
-  </div>
+              Submit Quiz
+            </Button>
+          )}
 
-  );
+        </div> */}
 
+        {/* <div className='bgDiv' style={{position: 'absolute', bottom: 0, left: 0, width: '100%'}}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {questions.map((_, index) => (
+              <a
+                key={index}
+                onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
+                style={{
+                  textDecoration: 'none',
+                  fontSize: '2.5em',
+                  margin: '0.2em',
+                  padding: '0.1em',
+                  borderRadius: '50%',
+                  color: currentQuestionIndex === index ? 'white' : 'rgba(255, 255, 255, 0.5)',
+                  cursor: 'default',
+                }}
+              >
+                -
+              </a>
+            ))}
+          </div>
+        </div>  */}
+
+        <h1 className="TEST2"></h1>
+
+      </div>
+
+    </div>
+
+  )
 }

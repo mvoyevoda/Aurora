@@ -5,18 +5,19 @@
 } */
 
 body {
-  margin: 0;
+  /* margin: 0;
   padding: 0;
   background: linear-gradient(80deg,rgb(18, 83, 109),rgb(192, 47, 127));
   background-size: 400% 400%;
   animation: color 8s ease-in-out infinite; 
   color: #ffffff;
-  overflow: hidden;
+  overflow: hidden; */
   font-family: Helvetica;
-  font-size: 16px;
+  color: white;
+  /* font-size: 16px;
   font-style: normal;
   font-weight: 300;
-  line-height: normal;
+  line-height: normal; */
 
 }
 
@@ -24,7 +25,7 @@ body {
 
 
 
-@keyframes color {
+/* @keyframes color {
   0% {
     background-position: 0% 50%;
   }
@@ -34,4 +35,4 @@ body {
   100% {
     background-position: 0% 50%;
   }
-}
+} */
