@@ -7,21 +7,27 @@ import { AuthContext } from '../../contexts/AuthContext';
 export function QuizGen() {
 
   const [quizCount, setQuizCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const authContext = useContext(AuthContext); 
   const userId = authContext.currentUser?.id;
 
   useEffect(() => {
     axios.get(`/api/users/${userId}/quizzes`)
-    .then((response) => {
-      setQuizCount(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    // Assuming you have the user ID available in your component
-    
+      .then((response) => {
+        setQuizCount(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false); // Data fetching is complete
+      });
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Card
       sx={{
