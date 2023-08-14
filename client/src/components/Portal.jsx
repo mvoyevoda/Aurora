@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import "../styles/portal.css";
-import { Button, selectClasses, Typography } from "@mui/material";
+import { Button, Modal, Typography, Box } from "@mui/material";
 
 export default function Portal() {
   const { quizId } = useParams();
@@ -226,6 +226,62 @@ export default function Portal() {
     );
   }
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const modalContent = (
+    <Box
+      sx={{
+        width: 400,
+        bgcolor: "background.paper",
+        p: 2,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        boxShadow: 24,
+        borderRadius: 8,
+      }}
+    >
+      <Button
+        onClick={closeModal}
+        variant="contained"
+        color="primary"
+        sx={{ width: "100%", marginBottom: 1 }}
+      >
+        Resume
+      </Button>
+      <Button
+        href="/dashboard"
+        variant="outlined"
+        color="primary"
+        sx={{ width: "100%", marginBottom: 1 }}
+      >
+        Exit
+      </Button>
+      <Button
+        onClick={() => {
+          // Add your logic here for regenerating
+        }}
+        variant="outlined"
+        color="primary"
+        sx={{ width: "100%" }}
+      >
+        Regenerate
+      </Button>
+    </Box>
+  );
+
   let selectedChoice =
     Object.keys(submissions).length !== 0
       ? submissions[currentQuestionId]
@@ -241,26 +297,36 @@ export default function Portal() {
           </h3>
         </div>
 
+        <div
+          style={{
+            margin: "left",
+            position: "absolute",
+            top: "1.2em",
+            left: "2.5em",
+          }}
+        >
+          <Button
+            color="inherit"
+            onClick={openModal} // Call openModal when the button is clicked
+            disableRipple
+            sx={{
+              fontSize: "30px",
+              height: "10px",
+              backgroundColor: "transparent",
+              border: "1px solid transparent",
+              borderRadius: "4px",
+              fontWeight: "bold",
+              opacity: "0.5",
+            }}
+          >
+            ...
+          </Button>
 
-        <div style={{ margin: "left", position: "absolute", top: "1.2em", left: "2.5em" }}>
-  <Button
-    color="inherit"
-    href=""
-    disableRipple  // Add this prop to disable the ripple effect
-    sx={{
-      fontSize: "30px",
-      height: "10px",
-      backgroundColor: "transparent",
-      border: "1px solid transparent",
-      borderRadius: "4px",
-      fontWeight: "bold",  // Changed from "bold: true" to "fontWeight: 'bold'"
-      opacity: "0.5",
-    }}
-  >
-    ...
-  </Button>
-</div>
-
+          {/* Modal */}
+          <Modal open={isModalOpen} onClose={closeModal}>
+            {modalContent}
+          </Modal>
+        </div>
 
         <div style={{ position: "absolute", top: "1.2em", right: "2em" }}>
           <Button
@@ -272,7 +338,7 @@ export default function Portal() {
               border: "1px solid transparent",
               borderRadius: "4px",
               opacity: "0.5",
-              fontSize: "15px"
+              fontSize: "15px",
             }}
           >
             Exit
