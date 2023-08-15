@@ -31,9 +31,10 @@ export default function Portal() {
 
   //Update currentQuestionId when currentQuestionIndex changes
   useEffect(() => {
-    // console.log("RANNNNN") 
-    if (currentQuestionIndex !== 0) setCurrentQuestionId(questions[currentQuestionIndex].id)
-  }, [currentQuestionIndex])
+    if (questions.length > 0) {
+      setCurrentQuestionId(questions[currentQuestionIndex].id);
+    }
+  }, [currentQuestionIndex]);
 
   const loadData = async () => {
     try {
