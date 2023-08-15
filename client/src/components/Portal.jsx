@@ -22,6 +22,7 @@ export default function Portal() {
   const [progress, setProgress] = useState(0);
   const [submissions, setSubmissions] = useState({});
   const [score, setScore] = useState(null);
+  const [loadingRegeneration, setLoadingRegeneration] = useState(false);
 
   // useEffect(() => {
   //   console.log("SUBMISSIONS LENGTH: " + Object.keys(submissions).length)
@@ -195,6 +196,34 @@ export default function Portal() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const regenerateQuestion = async (currentQuestionId) => {
+    setLoadingRegeneration(true);
+    try {
+      const response = await axios.put(`/api/openAI/regenerate/${currentQuestionId}`);
+      if (response.data.success) {
+        // Assuming the response contains the regenerated question text
+        const newText = response.data.questionText;
+  
+        // Finding the index of the current question in the questions array
+        const questionIndex = questions.findIndex((q) => q.id === currentQuestionId);
+  
+        // Updating the question text in the state
+        setQuestions((prevQuestions) => [
+          ...prevQuestions.slice(0, questionIndex),
+          { ...prevQuestions[questionIndex], questionText: newText },
+          ...prevQuestions.slice(questionIndex + 1),
+        ]);
+      } else {
+        console.error('Failed to regenerate question:', response.data.error);
+      }
+    } catch (error) {
+      console.error('Error regenerating question:', error);
+    }
+    setLoadingRegeneration(false);
+  };
+  
+  
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -256,9 +285,8 @@ export default function Portal() {
         Exit
       </Button>
       <Button
-        onClick={() => {
-          // Add your logic here for regenerating
-        }}
+        onClick={() => regenerateQuestion(currentQuestionId)}
+        disabled={loadingRegeneration}
         variant="contained"
         color="primary"
         sx={{ 
