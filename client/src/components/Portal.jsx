@@ -105,6 +105,7 @@ export default function Portal() {
   }, [])
 
   function handleSubmission(userChoice) {
+    if (score !== null) return
     if (Object.keys(submissions).length === 0) {
       setSubmissions({ [currentQuestionId]: userChoice });
       // console.log("Initialization of submissions: " + submissions);
@@ -279,6 +280,23 @@ export default function Portal() {
     </Box>
   );
 
+  // selectedChoice === index ? index === questions[currentQuestionIndex].correctAnswer ? "#33FF00" : "rgba(255, 255, 255, 0.2)" : "transparent",
+  function handleChoiceBgColor(index){
+    if (score !== null) {
+      if (index === questions[currentQuestionIndex].correctAnswer) {
+        return "#33FF00"; //green
+      }
+      else if (selectedChoice === index && index !== questions[currentQuestionIndex].correctAnswer) {
+        return "#FF0000" //red
+      }
+    }
+    if (selectedChoice === index) {
+      return "rgba(255, 255, 255, 0.4)"
+    } else {
+      return "rgba(255, 255, 255, 0.1)"
+    }
+  }
+
   return (
     <div className="portal">
 
@@ -293,6 +311,9 @@ export default function Portal() {
               fontSize: "30px",
               fontWeight: "bold",
               opacity: "0.7",
+              "&:hover": {
+                opacity: "1.0",
+              }
             }}
           >
             •••
@@ -301,7 +322,7 @@ export default function Portal() {
         <div className="header-mid">
             <p>Quiz #{quizId}</p>
         </div>
-        <div className="header-right"> <p> {progress} / {questions.length} </p></div>
+        <div className="header-right">{score === null ? <p>{progress} / {questions.length}</p> : <p>{score}%</p>}</div>
 
         {/* <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
@@ -365,6 +386,7 @@ export default function Portal() {
                     onClick={() => handleSubmission(index)}
                     className="choice"
                     disableRipple
+                    // disabled={score !== null}
                     sx={{
                         width: "98%",
                         margin: "1%",
@@ -374,13 +396,13 @@ export default function Portal() {
                         textTransform: "none",
                         borderColor: "white",
                         height: "40%",
-                        opacity: (selectedChoice === index ? "1.0" : "0.7"),
+                        opacity: (score !== null ? (index === questions[currentQuestionIndex].correctAnswer ? "1.0" : "0.7") : selectedChoice === index ? "1.0" : "0.7"),
                         "&:hover": {
                           opacity: "1.0", // Change opacity on hover
                           borderColor: "white",
-                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          backgroundColor: "rgba(255, 255, 255, 0.4)",
                         },
-                        backgroundColor: selectedChoice === index ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                        backgroundColor: handleChoiceBgColor(index),
                         "&:active": {
                           backgroundColor: "white", // Change background color when clicked
                           color: "black", // Change text color when clicked
@@ -406,6 +428,7 @@ export default function Portal() {
                   variant="outlined"
                   onClick={() => handleSubmission(1)}
                   disableRipple
+                  // disabled={score !== null}
                   sx={{
                     width: "98%",
                     margin: "1%",
@@ -415,13 +438,13 @@ export default function Portal() {
                     textTransform: "none",
                     borderColor: "white",
                     height: "40%",
-                    opacity: (selectedChoice === 1 ? "1.0" : "0.7"),
+                    opacity: (score !== null ? (1 === questions[currentQuestionIndex].correctAnswer ? "1.0" : "0.7") : selectedChoice === 1 ? "1.0" : "0.7"),
                     "&:hover": {
                       opacity: "1.0", // Change opacity on hover
                       borderColor: "white",
-                      backgroundColor: "rgba(255, 255, 255, 0.2)",
+                      backgroundColor: "rgba(255, 255, 255, 0.4)",
                     },
-                    backgroundColor: selectedChoice === 1 ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                    backgroundColor: handleChoiceBgColor(1),
                     "&:active": {
                       backgroundColor: "white", // Change background color when clicked
                       color: "black", // Change text color when clicked
@@ -439,6 +462,7 @@ export default function Portal() {
                   variant="outlined"
                   onClick={() => handleSubmission(0)}
                   disableRipple
+                  // disabled={score !== null}
                   sx={{
                     width: "98%",
                     margin: "1%",
@@ -448,13 +472,13 @@ export default function Portal() {
                     textTransform: "none",
                     borderColor: "white",
                     height: "40%",
-                    opacity: (selectedChoice === 0? "1.0" : "0.7"),
+                    opacity: (score !== null ? (0 === questions[currentQuestionIndex].correctAnswer ? "1.0" : "0.7") : selectedChoice === 0 ? "1.0" : "0.7"),
                     "&:hover": {
                       opacity: "1.0", // Change opacity on hover
                       borderColor: "white",
-                      backgroundColor: "rgba(255, 255, 255, 0.2)",
+                      backgroundColor: "rgba(255, 255, 255, 0.4)",
                     },
-                    backgroundColor: selectedChoice === 0 ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                    backgroundColor: handleChoiceBgColor(0),
                     "&:active": {
                       backgroundColor: "white", // Change background color when clicked
                       color: "black", // Change text color when clicked
