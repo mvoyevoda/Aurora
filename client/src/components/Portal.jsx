@@ -205,8 +205,8 @@ export default function Portal() {
   const modalContent = (
     <Box
       sx={{
-        width: "20vw", // Adjusted width
-        height: "40vh", // Adjusted height
+        width: "300px", // Adjusted width
+        height: "300px", // Adjusted height
         bgcolor: "background.paper",
         p: 2,
         display: "flex",
