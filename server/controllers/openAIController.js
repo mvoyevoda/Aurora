@@ -39,7 +39,7 @@ async function generate(req, res) {
         "questions": [
           {
             "type": 1,
-            "question": "Carrots are a type of vegetable. (True/False)",
+            "question": "Carrots are a type of vegetable.",
             "correctAnswer": "1"
           },
           {
