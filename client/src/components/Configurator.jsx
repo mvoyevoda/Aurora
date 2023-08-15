@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "1em", 
     padding: "0.5em", 
     width: "50em",
+    
   },
   
   slider: {
@@ -121,13 +122,20 @@ export default function Configurator() {
   return (
     <>
       <div className={classes.configurator}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='config-form'>
         <Input
           required
           color="text"
           type="text"
           name="prompt"
           className={classes.input}
+          sx={{
+            '@media (max-width: 700px)':{
+              width: '100%',
+              fontSize: '0.8em',
+              marginBottom: '1em',
+            }
+          }}
           placeholder="summarize the quiz topic in a few words... "
           inputProps={{ style: { color: 'white', opacity: '1.0', textAlign:'center' } 
           
@@ -146,7 +154,13 @@ export default function Configurator() {
             min={5}
             max={25}
             aria-labelledby="questions-slider"
-            sx={{ color: 'white' }} 
+            sx={{ color: 'white' ,
+            '@media (max-width: 700px)':{
+              width: '32vh',
+              position: 'relative',
+              right: '17.5em',
+            }}} 
+
           />
         </div>
         <div className={classes.slider}>
@@ -161,7 +175,13 @@ export default function Configurator() {
             min={5}
             max={60}
             aria-labelledby="minutes-slider"
-            sx={{ color: 'white' }} 
+            sx={{ color: 'white' ,
+            '@media (max-width: 700px)':{
+              width: '32vh',
+              position: 'relative',
+              right: '17.5em',
+            }
+            }} 
           />
         </div>
         <div className={classes.slider}>
@@ -183,7 +203,13 @@ export default function Configurator() {
             //   { value: 5, label: "Very Hard" },
             // ]}
             aria-labelledby="difficulty-slider"
-            sx={{ color: 'white' }} 
+            sx={{ color: 'white',
+            '@media (max-width: 700px)':{
+              width: '32vh',
+              position: 'relative',
+              right: '17.5em',
+             }
+             }} 
           />
         </div>
         {loading ?        

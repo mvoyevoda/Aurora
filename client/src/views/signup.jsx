@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "../styles/signup.css";
-import Link from "@mui/material/Link";
+import {Link} from "react-router-dom"
 import HomeNB from "../components/HomeNB";
 import GoogleIcon from "@mui/icons-material/Google";
 import { AuthContext } from "../contexts/AuthContext";
@@ -115,23 +115,26 @@ export default function SignUp() {
           required
           inputRef={passwordRef}
         />
-        <Button
-          href="./login"
-          variant="outlined"
-          sx={{
-            color: "white",
-            border: "1px solid",
-            borderRadius: "50px",
-            display: "block",
-            marginBottom: "2rem",
-            "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
-              borderColor: "white",
-            },
-          }}
-        >
-          Already have an account?
-        </Button>
+        <Link to="/login" style={{textDecoration: 'none'}}>
+          <Button
+            variant="outlined"
+            sx={{
+              marginTop: "0.625em",
+              color: "white",
+              border: "1px solid",
+              borderRadius: "50px",
+              display: "block",
+              marginBottom: "1.25em",
+              width: "100%",
+              "&:hover": {
+                backgroundColor: "rgba(217, 217, 217, 0.20)",
+                borderColor: "white",
+              },
+            }}
+          >
+            Already have an account?
+          </Button>
+        </Link>
         <Button
           variant="outlined"
           type="submit"
