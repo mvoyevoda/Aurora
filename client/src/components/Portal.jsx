@@ -3,9 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
 import "../styles/portal.css";
-import { alpha, Button, selectClasses, Typography } from '@mui/material';
-// import { Button } from '@mui/base';
-
+import { Button, Modal, Typography, Box } from "@mui/material";
 
 export default function Portal() {
 
@@ -193,41 +191,88 @@ export default function Portal() {
   }
 
   let selectedChoice = Object.keys(submissions).length !== 0? submissions[currentQuestionId] : null
-  // console.log("SELECTED CHOICE: " + selectedChoice)
 
-  // const buttonStyles = {
-  //   width: "98%",
-  //   margin: "1%",
-  //   borderRadius: "20px",
-  //   color: "white",
-  //   fontSize: "1.5em",
-  //   textTransform: "none",
-  //   borderColor: "white",
-  //   height: "40%",
-  //   opacity: (selectedChoice === index ? "1.0" : "0.7"),
-  //   "&:hover": {
-  //     opacity: "1.0", // Change opacity on hover
-  //     borderColor: "white",
-  //     backgroundColor: "rgba(255, 255, 255, 0.2)",
-  //   },
-  //   backgroundColor: selectedChoice === index ? "rgba(255, 255, 255, 0.2)" : "transparent",
-  //   "&:active": {
-  //     backgroundColor: "white", // Change background color when clicked
-  //     color: "black", // Change text color when clicked
-  //     // transition: "background-color 1s, color 1s", // Apply transition for click
-  //     // // Add any other styles you want to change when clicked
-  //   },
-  //   "&:not(:active)": {
-  //     transition: "background-color 1s, color 1s", // Apply transition after click
-  //   },
-  // }
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const modalContent = (
+    <Box
+      sx={{
+        width: 500, // Adjusted width
+        height: 300, // Adjusted height
+        bgcolor: "background.paper",
+        p: 2,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between", // Changed to space between buttons
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        boxShadow: 24,
+        borderRadius: 8,
+      }}
+    >
+      <Button
+        onClick={closeModal}
+        variant="contained"
+        color="primary"
+        sx={{ width: "20vh", height: "5vh", fontSize: "20px", marginTop: '50px'}} // Added margin
+      >
+        Resume
+      </Button>
+      <Button
+        href="/dashboard"
+        variant="outlined"
+        color="primary"
+        sx={{ width: "20vh", height: "5vh", fontSize: "20px"}} // Added margin
+      >
+        Exit
+      </Button>
+      <Button
+        onClick={() => {
+          // Add your logic here for regenerating
+        }}
+        variant="contained"
+        color="primary"
+        sx={{ width: "20vh", height: "5vh", fontSize: "20px", marginBottom: '50px' }} // Added margin
+      >
+        Regenerate
+      </Button>
+    </Box>
+  );
 
   return (
     <div className="portal">
 
       <div className='header'>
 
-        <div className="header-left"></div>
+        <div className="header-left">
+        <Button
+            color="inherit"
+            onClick={openModal} // Call openModal when the button is clicked
+            disableRipple
+            sx={{
+              fontSize: "30px",
+              height: "10px",
+              backgroundColor: "transparent",
+              border: "1px solid transparent",
+              borderRadius: "4px",
+              fontWeight: "bold",
+              opacity: "0.5",
+            }}
+          >
+            ...
+          </Button>
+        </div>
         <div className="header-mid">
           <p> {progress} / {questions.length} </p>
         </div>
@@ -245,6 +290,10 @@ export default function Portal() {
       <div className="main-container">
 
         <div className="overlay"></div>
+        {/* Modal */}
+        <Modal open={isModalOpen} onClose={closeModal}>
+          {modalContent}
+        </Modal>
 
         <div className="left">
           {currentQuestionIndex !== 0 && (
