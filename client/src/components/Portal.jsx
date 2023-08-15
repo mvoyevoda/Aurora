@@ -4,6 +4,8 @@ import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
 import "../styles/portal.css";
 import { alpha, Button, selectClasses, Typography } from '@mui/material';
+// import { Button } from '@mui/base';
+
 
 export default function Portal() {
 
@@ -193,6 +195,33 @@ export default function Portal() {
   let selectedChoice = Object.keys(submissions).length !== 0? submissions[currentQuestionId] : null
   // console.log("SELECTED CHOICE: " + selectedChoice)
 
+  // const buttonStyles = {
+  //   width: "98%",
+  //   margin: "1%",
+  //   borderRadius: "20px",
+  //   color: "white",
+  //   fontSize: "1.5em",
+  //   textTransform: "none",
+  //   borderColor: "white",
+  //   height: "40%",
+  //   opacity: (selectedChoice === index ? "1.0" : "0.7"),
+  //   "&:hover": {
+  //     opacity: "1.0", // Change opacity on hover
+  //     borderColor: "white",
+  //     backgroundColor: "rgba(255, 255, 255, 0.2)",
+  //   },
+  //   backgroundColor: selectedChoice === index ? "rgba(255, 255, 255, 0.2)" : "transparent",
+  //   "&:active": {
+  //     backgroundColor: "white", // Change background color when clicked
+  //     color: "black", // Change text color when clicked
+  //     // transition: "background-color 1s, color 1s", // Apply transition for click
+  //     // // Add any other styles you want to change when clicked
+  //   },
+  //   "&:not(:active)": {
+  //     transition: "background-color 1s, color 1s", // Apply transition after click
+  //   },
+  // }
+
   return (
     <div className="portal">
 
@@ -252,8 +281,6 @@ export default function Portal() {
             {questions[currentQuestionIndex]?.questionText}
           </div>
           <div className="choices">
-           
-
             {/* Multiple Choice Container */}
             {questions[currentQuestionIndex]?.questionType === 0 &&
               questions[currentQuestionIndex]?.answerChoices?.map(
@@ -263,46 +290,73 @@ export default function Portal() {
                     variant="outlined"
                     onClick={() => handleSubmission(index)}
                     className="choice"
+                    disableRipple
                     sx={{
-                      margin: "auto",
-                      width: "98%",
-                      borderRadius: "20px",
-                      color: "white",
-                      fontSize: "1.5em",
-                      textTransform: "none",
-                      borderColor: "white",
-                      height: "15%",
-                      opacity: (selectedChoice === index ? "1.0" : "0.7"),
-                      // backgroundColor:
-                      //   selectedChoice === index
-                      //     ? "rgba(255, 255, 255, 0.2)"
-                      //     : "transparent", // Change background color when selected
-                    }}
+                        width: "98%",
+                        margin: "1%",
+                        borderRadius: "20px",
+                        color: "white",
+                        fontSize: "1.5em",
+                        textTransform: "none",
+                        borderColor: "white",
+                        height: "40%",
+                        opacity: (selectedChoice === index ? "1.0" : "0.7"),
+                        "&:hover": {
+                          opacity: "1.0", // Change opacity on hover
+                          borderColor: "white",
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        },
+                        backgroundColor: selectedChoice === index ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                        "&:active": {
+                          backgroundColor: "white", // Change background color when clicked
+                          color: "black", // Change text color when clicked
+                          // transition: "background-color 1s, color 1s", // Apply transition for click
+                          // // Add any other styles you want to change when clicked
+                        },
+                        "&:not(:active)": {
+                          transition: "background-color 0.5s, color 0.5s", // Apply transition after click
+                        },
+                      }}
                   >
                     {choice}
                   </Button>
                 )
               )}
+          {/* </div> */}
+
             {/* True/False Container */}
             {questions[currentQuestionIndex]?.questionType === 1 && (
               <>
+              {/* <div className="true-false"> */}
                 <Button
                   variant="outlined"
                   onClick={() => handleSubmission(1)}
+                  disableRipple
                   sx={{
-                    margin: "auto",
                     width: "98%",
+                    margin: "1%",
                     borderRadius: "20px",
                     color: "white",
                     fontSize: "1.5em",
                     textTransform: "none",
                     borderColor: "white",
-                    height: "15%",
+                    height: "40%",
                     opacity: (selectedChoice === 1 ? "1.0" : "0.7"),
-                    // backgroundColor:
-                    //   selectedChoice === index
-                    //     ? "rgba(255, 255, 255, 0.2)"
-                    //     : "transparent", // Change background color when selected
+                    "&:hover": {
+                      opacity: "1.0", // Change opacity on hover
+                      borderColor: "white",
+                      backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    },
+                    backgroundColor: selectedChoice === 1 ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                    "&:active": {
+                      backgroundColor: "white", // Change background color when clicked
+                      color: "black", // Change text color when clicked
+                      // transition: "background-color 1s, color 1s", // Apply transition for click
+                      // // Add any other styles you want to change when clicked
+                    },
+                    "&:not(:active)": {
+                      transition: "background-color 0.5s, color 0.5s", // Apply transition after click
+                    },
                   }}
                 >
                   True
@@ -310,28 +364,41 @@ export default function Portal() {
                 <Button
                   variant="outlined"
                   onClick={() => handleSubmission(0)}
+                  disableRipple
                   sx={{
-                    margin: "auto",
                     width: "98%",
+                    margin: "1%",
                     borderRadius: "20px",
                     color: "white",
                     fontSize: "1.5em",
                     textTransform: "none",
                     borderColor: "white",
-                    height: "15%",
-                    opacity: (selectedChoice === 0 ? "1.0" : "0.7"),
-                    // backgroundColor:
-                    //   selectedChoice === index
-                    //     ? "rgba(255, 255, 255, 0.2)"
-                    //     : "transparent", // Change background color when selected
+                    height: "40%",
+                    opacity: (selectedChoice === 0? "1.0" : "0.7"),
+                    "&:hover": {
+                      opacity: "1.0", // Change opacity on hover
+                      borderColor: "white",
+                      backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    },
+                    backgroundColor: selectedChoice === 0 ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                    "&:active": {
+                      backgroundColor: "white", // Change background color when clicked
+                      color: "black", // Change text color when clicked
+                      // transition: "background-color 1s, color 1s", // Apply transition for click
+                      // // Add any other styles you want to change when clicked
+                    },
+                    "&:not(:active)": {
+                      transition: "background-color 0.5s, color 0.5s", // Apply transition after click
+                    },
                   }}
                 >
                   False
                 </Button>
-              </>
+                </>
             )}
+            </div>
 
-          </div>
+
         </div>
 
         <div className="right">
@@ -360,53 +427,62 @@ export default function Portal() {
       {/* ------------------------------------------------------------------------ */}
 
       <div className="footer">
-
-        {/* <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-          {(progress >= questions.length) && (
+      
+        {/* <div className="submit-quiz"> */}
+          {(progress >= questions.length && currentQuestionIndex === questions.length-1) ? (
             <Button
               onClick={handleSubmitQuiz}
               variant="text"
               color="primary"
               sx={{
-                position: "relative",
-                top: "20vw",
-                color: 'white',
-                fontFamily: 'Helvetica',
-                display: 'block',
-                borderRadius: '1.2em',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                width: "15em",
+                // position: "relative",
+                // top: "20vw",
+                // color: 'white',
+                // fontFamily: 'Helvetica',
+                // display: 'block',
+                // borderRadius: '1.2em',
+                // backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                // width: "15em",
+                textTransform: "none",
+                fontSize: "20px",
+                color: "white",
+                fontWeight: "100",
+                opacity: "0.7",
+                "&:hover": {
+                  opacity: "1.0", // Change opacity on hover
+                },
               }}
             >
-              Submit Quiz
+              Submit
             </Button>
-          )}
-
-        </div> */}
-
-        {/* <div className='bgDiv' style={{position: 'absolute', bottom: 0, left: 0, width: '100%'}}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {questions.map((_, index) => (
+          ) : 
+          <div className="link-ladder">
+            {questions.map((link, index) => (
               <a
                 key={index}
                 onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
-                style={{
-                  textDecoration: 'none',
-                  fontSize: '2.5em',
-                  margin: '0.2em',
-                  padding: '0.1em',
-                  borderRadius: '50%',
-                  color: currentQuestionIndex === index ? 'white' : 'rgba(255, 255, 255, 0.5)',
-                  cursor: 'default',
-                }}
+                // style={{
+                //   textDecoration: 'none',
+                //   fontSize: '4em',
+                //   margin: '0.1em',
+                //   // padding: '0.1em',
+                //   // borderRadius: '1px',
+                //   color: "white",
+                //   cursor: 'pointer', // Change cursor to pointer on hover
+                //   opacity: "0.7",
+                //   "&:hover": {
+                //     opacity: "1.0", // Change opacity on hover
+                //   },
+                // }}
               >
                 -
               </a>
             ))}
           </div>
-        </div>  */}
+          }
 
-        <h1 className="TEST2"></h1>
+          
+
 
       </div>
 
