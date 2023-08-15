@@ -461,7 +461,7 @@ export default function Portal() {
               <a
                 key={index}
                 onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
-                // style={{
+                style={{
                 //   textDecoration: 'none',
                 //   fontSize: '4em',
                 //   margin: '0.1em',
@@ -473,7 +473,10 @@ export default function Portal() {
                 //   "&:hover": {
                 //     opacity: "1.0", // Change opacity on hover
                 //   },
-                // }}
+                color: currentQuestionIndex === index
+                ? "white"
+                : "rgba(255, 255, 255, 0.5)",
+                }}
               >
                 -
               </a>
