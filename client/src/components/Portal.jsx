@@ -205,8 +205,8 @@ export default function Portal() {
   const modalContent = (
     <Box
       sx={{
-        width: 500, // Adjusted width
-        height: 300, // Adjusted height
+        width: "20vw", // Adjusted width
+        height: "40vh", // Adjusted height
         bgcolor: "background.paper",
         p: 2,
         display: "flex",
@@ -218,14 +218,21 @@ export default function Portal() {
         left: "50%",
         transform: "translate(-50%, -50%)",
         boxShadow: 24,
-        borderRadius: 8,
+        borderRadius: 5,
       }}
     >
       <Button
         onClick={closeModal}
         variant="contained"
-        color="primary"
-        sx={{ width: "20vh", height: "5vh", fontSize: "20px", marginTop: '50px'}} // Added margin
+        sx={{ 
+          width: "95%", 
+          height: "30%", 
+          borderRadius: 5,
+          fontSize: "20px", 
+          textTransform: "none",
+          alignItems: "center",
+          backgroundColor: "#00A3FF",
+        }}
       >
         Resume
       </Button>
@@ -233,7 +240,17 @@ export default function Portal() {
         href="/dashboard"
         variant="outlined"
         color="primary"
-        sx={{ width: "20vh", height: "5vh", fontSize: "20px"}} // Added margin
+        sx={{ 
+          width: "95%", 
+          height: "30%", 
+          borderRadius: 5,
+          fontSize: "20px", 
+          textTransform: "none",
+          alignItems: "center",
+          "&:hover": {
+            border: "2px solid", // Thicker border on hover
+          },
+        }}
       >
         Exit
       </Button>
@@ -243,7 +260,18 @@ export default function Portal() {
         }}
         variant="contained"
         color="primary"
-        sx={{ width: "20vh", height: "5vh", fontSize: "20px", marginBottom: '50px' }} // Added margin
+        sx={{ 
+          width: "95%", 
+          height: "30%", 
+          borderRadius: 5,
+          fontSize: "20px", 
+          textTransform: "none",
+          alignItems: "center",
+          backgroundColor: "#FF00F5",
+          "&:hover": {
+            backgroundColor: "#B800B0"
+          },
+        }}
       >
         Regenerate
       </Button>
@@ -507,17 +535,6 @@ export default function Portal() {
                 key={index}
                 onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
                 style={{
-                //   textDecoration: 'none',
-                //   fontSize: '4em',
-                //   margin: '0.1em',
-                //   // padding: '0.1em',
-                //   // borderRadius: '1px',
-                //   color: "white",
-                //   cursor: 'pointer', // Change cursor to pointer on hover
-                //   opacity: "0.7",
-                //   "&:hover": {
-                //     opacity: "1.0", // Change opacity on hover
-                //   },
                 color: (submissions[questions[index].id] !== undefined)
                 ? "white"
                 : "rgba(255, 255, 255, 0.5)",              
