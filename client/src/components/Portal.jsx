@@ -195,6 +195,11 @@ export default function Portal() {
   let selectedChoice = Object.keys(submissions).length !== 0? submissions[currentQuestionId] : null
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [exit, setExit] = useState(false);
+
+  const displayExitOptions = () => {
+    setExit(true)
+  }
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -204,7 +209,12 @@ export default function Portal() {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    setExit(false);
+  }, [isModalOpen]);
+
   const modalContent = (
+    !exit ?
     <Box
       sx={{
         width: "20vw", // Adjusted width
@@ -239,7 +249,7 @@ export default function Portal() {
         Resume
       </Button>
       <Button
-        href="/dashboard"
+        onClick={displayExitOptions}
         variant="outlined"
         color="primary"
         sx={{ 
@@ -278,6 +288,82 @@ export default function Portal() {
         Regenerate
       </Button>
     </Box>
+
+    :
+    
+    <Box
+    sx={{
+      width: "20vw", // Adjusted width
+      height: "40vh", // Adjusted height
+      bgcolor: "background.paper",
+      p: 2,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "space-between", // Changed to space between buttons
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      boxShadow: 24,
+      borderRadius: 5,
+    }}
+  >
+    <Button
+      onClick={closeModal}
+      variant="contained"
+      sx={{ 
+        width: "95%", 
+        height: "30%", 
+        borderRadius: 5,
+        fontSize: "20px", 
+        textTransform: "none",
+        alignItems: "center",
+        backgroundColor: "#00A3FF",
+      }}
+    >
+      Resume
+    </Button>
+    <Button
+      onClick={() => {
+        // Implement logic for save changes
+      }}
+      variant="outlined"
+      color="primary"
+      sx={{ 
+        width: "95%", 
+        height: "30%", 
+        borderRadius: 5,
+        fontSize: "20px", 
+        textTransform: "none",
+        alignItems: "center",
+        "&:hover": {
+          border: "2px solid", // Thicker border on hover
+        },
+      }}
+    >
+      Save Changes
+    </Button>
+    <Button
+      href="/dashboard"
+      variant="contained"
+      color="primary"
+      sx={{ 
+        width: "95%", 
+        height: "30%", 
+        borderRadius: 5,
+        fontSize: "20px", 
+        textTransform: "none",
+        alignItems: "center",
+        backgroundColor: "#FF00F5",
+        "&:hover": {
+          backgroundColor: "#B800B0"
+        },
+      }}
+    >
+      Discard Changes
+    </Button>
+  </Box>
   );
 
   // selectedChoice === index ? index === questions[currentQuestionIndex].correctAnswer ? "#33FF00" : "rgba(255, 255, 255, 0.2)" : "transparent",
@@ -396,7 +482,7 @@ export default function Portal() {
                         textTransform: "none",
                         borderColor: "white",
                         height: "40%",
-                        opacity: (score !== null ? (index === questions[currentQuestionIndex].correctAnswer ? "1.0" : "0.7") : selectedChoice === index ? "1.0" : "0.7"),
+                        opacity: (score !== null ? (index === questions[currentQuestionIndex].correctAnswer || submissions[questions[index].id] ? "1.0" : "0.7") : selectedChoice === index ? "1.0" : "0.7"),
                         "&:hover": {
                           opacity: "1.0", // Change opacity on hover
                           borderColor: "white",
@@ -438,7 +524,7 @@ export default function Portal() {
                     textTransform: "none",
                     borderColor: "white",
                     height: "40%",
-                    opacity: (score !== null ? (1 === questions[currentQuestionIndex].correctAnswer ? "1.0" : "0.7") : selectedChoice === 1 ? "1.0" : "0.7"),
+                    opacity: (score !== null ? (1 === questions[currentQuestionIndex].correctAnswer || submissions[questions[1].id] ? "1.0" : "0.7") : selectedChoice === 1 ? "1.0" : "0.7"),
                     "&:hover": {
                       opacity: "1.0", // Change opacity on hover
                       borderColor: "white",
@@ -472,7 +558,7 @@ export default function Portal() {
                     textTransform: "none",
                     borderColor: "white",
                     height: "40%",
-                    opacity: (score !== null ? (0 === questions[currentQuestionIndex].correctAnswer ? "1.0" : "0.7") : selectedChoice === 0 ? "1.0" : "0.7"),
+                    opacity: (score !== null ? (0 === questions[currentQuestionIndex].correctAnswer || submissions[questions[0].id] ? "1.0" : "0.7") : selectedChoice === 0 ? "1.0" : "0.7"),
                     "&:hover": {
                       opacity: "1.0", // Change opacity on hover
                       borderColor: "white",
