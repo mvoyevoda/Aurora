@@ -262,21 +262,17 @@ export default function Portal() {
             disableRipple
             sx={{
               fontSize: "30px",
-              height: "10px",
-              backgroundColor: "transparent",
-              border: "1px solid transparent",
-              borderRadius: "4px",
               fontWeight: "bold",
-              opacity: "0.5",
+              opacity: "0.7",
             }}
           >
-            ...
+            •••
           </Button>
         </div>
         <div className="header-mid">
-          <p> {progress} / {questions.length} </p>
+            <p>Quiz#{quizId}</p>
         </div>
-        <div className="header-right"></div>
+        <div className="header-right"> <p> {progress} / {questions.length} </p></div>
 
         {/* <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
@@ -522,9 +518,9 @@ export default function Portal() {
                 //   "&:hover": {
                 //     opacity: "1.0", // Change opacity on hover
                 //   },
-                color: currentQuestionIndex === index
+                color: (submissions[questions[index].id] !== undefined)
                 ? "white"
-                : "rgba(255, 255, 255, 0.5)",
+                : "rgba(255, 255, 255, 0.5)",              
                 }}
               >
                 -
