@@ -1,4 +1,5 @@
 import React from "react";
+import { useMediaQuery, useTheme } from "@mui/material"; 
 import NavGenerator from "../components/Dashboard Section/NavGenerator";
 import {QuizGen} from "../components/Dashboard Section/QuizGen";
 import FavCategory from "../components/Dashboard Section/FavCategory";
@@ -17,7 +18,7 @@ const styles = {
   leftColumn: {
     flex: 2,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column',  
 
   },
   rightColumn: {
@@ -36,47 +37,55 @@ const styles = {
     flexDirection: 'column',
 
   },
-  '@media (max-width: 768px)': {
-    pcContainer: {
-      flexDirection: 'column', // Change to a single column layout
-    },
-    leftColumn: {
-      marginLeft: 0, // Remove the left margin
-    },
-    rightColumn: {
-      marginLeft: 0, // Remove the left margin
-      flexDirection: 'column'
-    },
-    recentColumn: {
-      marginLeft: 0, // Remove the left margin
-    },
-    suggestedColumn: {
-      marginLeft: 0, // Remove the left margin
-    },
-  },
 };
 
+const mobileStyles = {
+  pcContainer: {
+    flexDirection: "column", // Stack columns on smaller screens
+  },
+  leftColumn: {
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "start",
+  },
+  rightColumn: {
+    display: "flex",
+    flexDirection: "row",
+    //justifyContent: "center",
+  },
+  recentColumn:{
+    position: "relative",
+    right: '1em',
+    bottom: '7em',
+  },
+  suggestedColumn: {
+    position: "relative",
+    right: '6em',
+    bottom: '7em',
+  },
+};
 export default function Dashboard() {
 
 
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
   return (
     <>
       
 
       <div className="scrollUpAnimation">
         <NavGenerator />
-        <div style={styles.pcContainer}>
-          <div style={styles.leftColumn}>
+        <div style={{ ...styles.pcContainer, ...(isMobile && mobileStyles.pcContainer) }}>
+          <div style={{ ...styles.leftColumn, ...(isMobile && mobileStyles.leftColumn)}}>
             <QuizGen />
             <FavCategory />
           </div>
-          <div style={styles.rightColumn}>
-            <div style ={styles.recentColumn}>
+          <div style={{...styles.rightColumn, ...(isMobile && mobileStyles.rightColumn)}}>
+            <div style={{...styles.recentColumn, ...(isMobile && mobileStyles.recentColumn)}}>
             <RecentTitle />
             <RecentQuizzesList />
             </div>
-            <div style={styles.suggestedColumn}>
+            <div style={{...styles.suggestedColumn, ...(isMobile && mobileStyles.suggestedColumn)}}>
             <SuggestedTitle />
             <SuggestedQuizzesList />
             </div>
