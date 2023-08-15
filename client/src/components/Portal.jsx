@@ -502,20 +502,12 @@ export default function Portal() {
       <div className="footer">
       
         {/* <div className="submit-quiz"> */}
-          {(progress >= questions.length && currentQuestionIndex === questions.length-1) ? (
+          {(progress >= questions.length && currentQuestionIndex === questions.length-1 && score === null) ? (
             <Button
               onClick={handleSubmitQuiz}
               variant="text"
               color="primary"
               sx={{
-                // position: "relative",
-                // top: "20vw",
-                // color: 'white',
-                // fontFamily: 'Helvetica',
-                // display: 'block',
-                // borderRadius: '1.2em',
-                // backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                // width: "15em",
                 textTransform: "none",
                 fontSize: "20px",
                 color: "white",
@@ -528,7 +520,23 @@ export default function Portal() {
             >
               Submit
             </Button>
-          ) : 
+          ) : score !== null ? 
+            <div className="link-ladder">
+            {questions.map((link, index) => (
+              <a
+                key={index}
+                onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
+                style={{
+                color: (submissions[questions[index].id] === questions[index].correctAnswer)
+                ? "green"
+                : "red",              
+                }}
+              >
+                -
+              </a>
+            ))}
+          </div>
+          :
           <div className="link-ladder">
             {questions.map((link, index) => (
               <a
