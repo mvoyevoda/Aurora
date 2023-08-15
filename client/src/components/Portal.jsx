@@ -206,8 +206,8 @@ export default function Portal() {
   const modalContent = (
     <Box
       sx={{
-        width: "300px", // Adjusted width
-        height: "300px", // Adjusted height
+        width: "20vw", // Adjusted width
+        height: "40vh", // Adjusted height
         bgcolor: "background.paper",
         p: 2,
         display: "flex",
@@ -290,7 +290,7 @@ export default function Portal() {
             onClick={openModal} // Call openModal when the button is clicked
             disableRipple
             sx={{
-              fontSize: "30px",
+              fontSize: "20px",
               fontWeight: "bold",
               opacity: "0.7",
             }}
