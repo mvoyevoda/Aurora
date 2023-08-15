@@ -289,7 +289,7 @@ export default function Portal() {
             onClick={openModal} // Call openModal when the button is clicked
             disableRipple
             sx={{
-              fontSize: "30px",
+              fontSize: "20px",
               fontWeight: "bold",
               opacity: "0.7",
             }}
@@ -298,7 +298,7 @@ export default function Portal() {
           </Button>
         </div>
         <div className="header-mid">
-            <p>Quiz#{quizId}</p>
+            <p>Quiz #{quizId}</p>
         </div>
         <div className="header-right"> <p> {progress} / {questions.length} </p></div>
 
