@@ -73,7 +73,7 @@ export default function Configurator() {
   const classes = useStyles();
   // const navigate = useNavigate();
   const [questions, setQuestions] = useState(10);
-  const [minutes, setMinutes] = useState(15);
+  // const [minutes, setMinutes] = useState(15);
   const [difficulty, setDifficulty] = useState(2); // 1 to 5: very easy to very hard
   const [loading, setLoading] = useState(false)
   
@@ -81,9 +81,9 @@ export default function Configurator() {
     setQuestions(value);
   };
 
-  const handleMinutesChange = (event, value) => {
-    setMinutes(value);
-  };
+  // const handleMinutesChange = (event, value) => {
+  //   setMinutes(value);
+  // };
 
   const handleDifficultyChange = (event, value) => {
     setDifficulty(value);
@@ -94,7 +94,7 @@ export default function Configurator() {
 
     const prompt = e.target.prompt.value;
     const questions = e.target.questions.value;
-    const minutes = e.target.mins.value;
+    // const minutes = e.target.mins.value;
     const difficulty = e.target.difficulty.value;
 
     setLoading(true)
@@ -165,7 +165,7 @@ export default function Configurator() {
           />
         </div>
         <div className={classes.slider}>
-        <label htmlFor="minutes-slider"  className={classes.label}>
+        {/* <label htmlFor="minutes-slider"  className={classes.label}>
             {minutes} minutes
           </label>
           <Slider
@@ -183,11 +183,11 @@ export default function Configurator() {
               right: '17.5em',
             }
             }} 
-          />
+          /> */}
         </div>
         <div className={classes.slider}>
         <label htmlFor="difficulty-slider" className={classes.label}>
-            {difficulty === 1 ? "Very Easy" : difficulty === 2 ? "Easy" : difficulty === 3 ? "Medium" : difficulty === 4 ? "Hard" : "Very Hard"} Difficulty
+            {difficulty === 1 ? "Very Easy" : difficulty === 2 ? "Easy" : difficulty === 3 ? "Medium" : difficulty === 4 ? "Hard" : "Very Hard"} 
           </label>
           <Slider
             value={difficulty}
@@ -226,7 +226,7 @@ export default function Configurator() {
               color: "white",
               border: "1px solid",
               display: "block",
-              width: "100%",
+              width: "97vh",
               borderRadius: "50px",
               
               "&:hover": {
