@@ -529,8 +529,8 @@ export default function Portal() {
                 onClick={() => setCurrentQuestionIndex(index)}  // Update the current question index
                 style={{
                 color: (submissions[questions[index].id] === questions[index].correctAnswer)
-                ? "green"
-                : "red",              
+                ? "#33FF00"
+                : "#FF0000",              
                 }}
               >
                 -
