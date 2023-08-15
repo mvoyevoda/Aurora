@@ -290,7 +290,7 @@ export default function Portal() {
             onClick={openModal} // Call openModal when the button is clicked
             disableRipple
             sx={{
-              fontSize: "20px",
+              fontSize: "30px",
               fontWeight: "bold",
               opacity: "0.7",
             }}
