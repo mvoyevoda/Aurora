@@ -12,7 +12,7 @@ export default function Footer() {
     boxShadow: 'none',
     }}>
       <CardContent>
-        <Typography sx={{fontSize: 14}} marginTop= "5px" color="rgba(212, 212, 212, 1)" gutterBottom>
+        <Typography sx={{fontSize: 14}} marginTop= "4vh" color="rgba(212, 212, 212, 1)" gutterBottom>
         © 2023 Aurora. All rights reserved.
         </Typography>
       </CardContent>
