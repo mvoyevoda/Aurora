@@ -72,7 +72,17 @@ const SuggestedQuizzesList = () => {
                 variant="h6"
                 component="h2"
                 style={{ fontSize: "30px", color:"rgba(255, 255, 255, .9)",
-              ...(isMobile && {
+                whiteSpace: "nowrap", // Prevent text from wrapping
+                  overflow: "hidden",   // Hide overflowing text
+                  textOverflow: "ellipsis", // Display ellipsis (...) for overflow
+                  transition: "all 0.3s", // Add smooth transition effect
+                  ":hover": {
+                    whiteSpace: "normal", // Display full text on hover
+                    overflow: "visible",  // Show all text
+                    textOverflow: "unset", // Remove ellipsis
+                    fontSize: "1.3em", // Increase font size on hover
+                  },
+                  ...(isMobile && {
                 fontSize: "1.3em", // Apply this style for small screens
               }),
             }}>
