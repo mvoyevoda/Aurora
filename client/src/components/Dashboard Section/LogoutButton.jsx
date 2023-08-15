@@ -30,7 +30,7 @@ export default function LogoutButton() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             &nbsp;
           </Typography>
-          <Link to="/" style={{color: 'white'}}>
+          <Link to="/" style={{color: 'white', textDecoration: 'none'}}>
             <Button
               onClick={handleLogout}
               color="inherit"

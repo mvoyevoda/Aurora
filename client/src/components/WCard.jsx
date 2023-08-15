@@ -18,8 +18,10 @@ export default function WCard() {
       sx={{
         paddingLeft: '7.5em',
         '@media (max-width: 700px)': {
+          display: 'flex',
           flexDirection: 'column', 
-          paddingLeft: 0, 
+          paddingLeft: '4vh',
+          margin: 0,
         },
       }}
     >
@@ -45,7 +47,7 @@ export default function WCard() {
               AURORA
             </Typography>
 
-            <Typography variant="body2" fontWeight="light-bold" color="white" fontSize={{ xs: '1rem', sm: '1.5rem', md: '2rem' }} paddingTop={1} sx={{ lineHeight: 1 }}>
+            <Typography variant="body2" fontWeight="light-bold" color="white" fontSize={{ xs: '0.9rem', sm: '1.5rem', md: '2rem' }} paddingTop={1} sx={{ lineHeight: 1 }}>
               Generate, assess, and improve with interactive quizzes. Track progress, receive valuable feedback, and unlock your learning potential.
             </Typography>
           </CardContent>

@@ -18,6 +18,7 @@ const styles = {
     flex: 2,
     display: 'flex',
     flexDirection: 'column',
+
   },
   rightColumn: {
     flex: 2,
@@ -33,7 +34,7 @@ const styles = {
     flex: 2,
     display: 'flex',
     flexDirection: 'column',
-    
+
   },
   '@media (max-width: 768px)': {
     pcContainer: {
@@ -44,6 +45,7 @@ const styles = {
     },
     rightColumn: {
       marginLeft: 0, // Remove the left margin
+      flexDirection: 'column'
     },
     recentColumn: {
       marginLeft: 0, // Remove the left margin
