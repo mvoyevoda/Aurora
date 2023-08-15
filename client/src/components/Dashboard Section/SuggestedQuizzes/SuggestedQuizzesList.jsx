@@ -3,6 +3,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { useMediaQuery, useTheme } from "@mui/material";
+
 
 const mockRecentQuizzes = [
   "Movie Quote",
@@ -23,8 +25,13 @@ const mockRecentQuizzes = [
   "Geo Genius",
   ];
 
+
+  
 const SuggestedQuizzesList = () => {
-  const itemsPerPage = 8;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const itemsPerPage = isMobile ? 5 : 8; 
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleShowMore = () => {
@@ -37,6 +44,7 @@ const SuggestedQuizzesList = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
 
   return (
     <div>
@@ -53,14 +61,21 @@ const SuggestedQuizzesList = () => {
               width: "40vh",
               height: "7vh",
               marginLeft: "47px",
+              ...(isMobile && {
+                width: "20vh", // Apply this style for small screens
+              }),
+              
             }}
           >
             <CardContent>
               <Typography
                 variant="h6"
                 component="h2"
-                style={{ fontSize: "30px", color:"rgba(255, 255, 255, .9)" }}
-              >
+                style={{ fontSize: "30px", color:"rgba(255, 255, 255, .9)",
+              ...(isMobile && {
+                fontSize: "1.3em", // Apply this style for small screens
+              }),
+            }}>
                 {quizTitle}
               </Typography>
             </CardContent>

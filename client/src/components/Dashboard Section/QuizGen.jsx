@@ -37,6 +37,13 @@ export function QuizGen() {
         boxShadow: "none",
         marginLeft: "275px",
         marginTop: "120px",
+        '@media (max-width: 700px)':{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "start",
+          margin: '2em 2em',
+        }
       }}
     >
       <CardContent>
@@ -45,7 +52,10 @@ export function QuizGen() {
           variant="h5"
           color="white"
           fontSize={180}
-          sx={{ lineHeight: 1 }}
+          sx={{ lineHeight: 1,
+            '@media (max-width: 700px)':{
+                fontSize: "6em",
+            } }}
         >
           {quizCount.count}
         </Typography>
@@ -54,7 +64,10 @@ export function QuizGen() {
           variant="subtitle2"
           color="rgba(255, 255, 255, .5)"
           fontSize={25}
-          sx={{ lineHeight: 1 }}
+          sx={{ lineHeight: 1, 
+            '@media (max-width: 700px)':{
+              fontSize: "1em",
+            }}}
         >
           Quizzes Generated
         </Typography>

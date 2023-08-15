@@ -23,7 +23,7 @@ export default function LogIn() {
     e.preventDefault();
     try {
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/generator");
+      window.location.href = "/generator"; 
     } catch (error) {
       if (error.message.includes("401")) {
         setErrorMessage("An unexpected error occured. Try again.");

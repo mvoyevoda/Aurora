@@ -12,6 +12,17 @@ export default function FavCategory() {
         boxShadow: "none",
         marginLeft: "225px",
         marginTop: "120px",
+        '@media (max-width: 700px)':{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "end",
+          margin: '0',
+          position: "absolute",
+          top: "7.7em",
+          right: "0",
+         
+        }
       }}
     >
       <CardContent>
@@ -20,7 +31,10 @@ export default function FavCategory() {
           variant="h5"
           color="white"
           fontSize={80}
-          sx={{ lineHeight: 1 }}
+          sx={{ lineHeight: 1,
+            '@media (max-width: 700px)':{
+              fontSize: '5.7em'
+            } }}
         >
           N/A
         </Typography>
@@ -29,7 +43,10 @@ export default function FavCategory() {
           variant="subtitle2"
           color="rgba(255, 255, 255, .5)"
           fontSize={25}
-          sx={{ lineHeight: 1 }}
+          sx={{ lineHeight: 1,
+            '@media (max-width: 700px)':{
+              fontSize: '1em'
+            } }}
         >
           Favorite Category
         </Typography>

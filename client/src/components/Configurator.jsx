@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Configurator() {
   const classes = useStyles();
   // const navigate = useNavigate();

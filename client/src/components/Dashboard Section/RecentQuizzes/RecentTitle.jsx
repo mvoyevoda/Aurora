@@ -11,13 +11,21 @@ export default function RecentTitle() {
         height: "10vh",
         width: "50vh",
         boxShadow: "none",
+        '@media (max-width: 700px)':{
+          width: "30vh",
+          paddingLeft: "0.5em"
+        }
       }}
     >
       <CardContent>
         <Typography
-          sx={{ mb: 1.5 }}
+          sx={{ mb: 1.5,
+            '@media (max-width: 700px)':{
+              fontSize: "2em"
+            } }}
           color="rgba(255, 255, 255, .7)"
           fontSize="2.5rem"
+          
         >
           Recent
         </Typography>
