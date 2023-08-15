@@ -37,3 +37,12 @@ body, html {
   .logOutDiv{
     background-color: rgba(212, 212, 212, .05);
   }
+  /* CSS for mobile screens */
+@media (max-width: 480px) { /* Adjust the breakpoint as needed */
+  body {
+    width: 100%; /* Set the width to 100% for mobile screens */
+    height: 40vh; /* Set the height to 100vh for mobile screens */
+    /* Add other styles specific to mobile screens */
+    overflow-y: auto;
+  }
+}

@@ -21,6 +21,10 @@ export default function NavDashboard() {
             backgroundColor: "rgba(212, 212, 212, .08)",
             boxShadow: "none", // Change the hover color to transparent
           },
+          '@media (max-width: 700px)':{
+            marginBottom: "0",
+            paddingBottom: "0",
+          }
         }}
       >
         v Dashboard v
