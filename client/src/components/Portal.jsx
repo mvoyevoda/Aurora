@@ -337,16 +337,20 @@ export default function Portal() {
         fontSize: "20px", 
         textTransform: "none",
         alignItems: "center",
+        color: "white",
+        backgroundColor: "#FF00F5",
         "&:hover": {
-          border: "2px solid", // Thicker border on hover
+          backgroundColor: "#B800B0",
+          borderColor: "B800B0",
         },
+        borderColor: "B800B0",
       }}
     >
       Save Changes
     </Button>
     <Button
       href="/dashboard"
-      variant="contained"
+      variant="outlined"
       color="primary"
       sx={{ 
         width: "95%", 
@@ -355,10 +359,10 @@ export default function Portal() {
         fontSize: "20px", 
         textTransform: "none",
         alignItems: "center",
-        backgroundColor: "#FF00F5",
-        "&:hover": {
-          backgroundColor: "#B800B0"
-        },
+        // "&:hover": {
+        //   border: "2px solid", // Thicker border on hover
+        // },
+        // backgroundColor: "white",
       }}
     >
       Discard Changes
