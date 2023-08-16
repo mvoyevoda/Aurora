@@ -6,5 +6,6 @@ const authenticateUser = require('../middleware/authMiddleware');
 router.use(authenticateUser);
 
 router.post('/generate', openAIController.generate);
+router.put('/regenerate/:questionId', openAIController.regenerateQuestion);
 
 module.exports = router;
