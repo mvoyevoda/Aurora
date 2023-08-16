@@ -12,7 +12,7 @@ export default function LogoutButton() {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/logout", {})
+      const response = await axios.post("/api/auth/logout", {});
       console.log(response);
       navigate("/");
     } catch (error) {
@@ -30,7 +30,7 @@ export default function LogoutButton() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             &nbsp;
           </Typography>
-          <Link to="/" style={{color: 'white', textDecoration: 'none'}}>
+          <Link to="/" style={{ color: "white", textDecoration: "none" }}>
             <Button
               onClick={handleLogout}
               color="inherit"
