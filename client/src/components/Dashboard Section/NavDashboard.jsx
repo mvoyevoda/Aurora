@@ -17,6 +17,7 @@ export default function NavDashboard() {
           width: "100%", // Set button width to 100% of the card width
           height: "9vh", // Set button height to 100% of the card height
           fontSize: "15px", // Change the font size of the text
+          textTransform: "none",
           "&:hover": {
             backgroundColor: "rgba(212, 212, 212, .08)",
             boxShadow: "none", // Change the hover color to transparent
