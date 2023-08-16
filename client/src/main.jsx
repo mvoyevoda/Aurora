@@ -5,6 +5,7 @@ import LogIn from "./views/login";
 import Welcome from "./views/welcome";
 // import App from "./views/Generator";
 import Portal from "./components/Portal";
+import Configurator from "./components/Configurator";
 import ForgotPassword from "./views/forgotPassword";
 import ResetPassword from "./views/resetPassword";
 import "./styles/index.css";
@@ -18,7 +19,7 @@ import ErrorPage from "./ErrorPage";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContext";
-import Generator from "./views/Generator";
+
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
     path: "/generator",
     element: (
       <ProtectedRoute>
-        <Generator />
+        <Configurator />
       </ProtectedRoute>
     ),
     errorElement: <ErrorPage />,

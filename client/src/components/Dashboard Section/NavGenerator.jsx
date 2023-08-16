@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import LogoutButton from "./LogoutButton";
 import { Link } from "react-router-dom";
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 
 export default function NavGenerator() {
   return (
@@ -27,7 +28,7 @@ export default function NavGenerator() {
             },
           }}
         >
-          <span style={{ flexGrow: 1, textAlign: "center" }}>^ Generator ^</span>
+          <KeyboardDoubleArrowUpIcon /> Generator <KeyboardDoubleArrowUpIcon />
         </Button>
       </Link>
       <div style={{position: 'absolute', top: '0.7em', right: 0 }}>

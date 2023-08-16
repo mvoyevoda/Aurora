@@ -506,9 +506,11 @@ export default function Portal() {
 
   return (
     <div className="portal">
-      <div className="header">
-        <div className="header-left">
-          <Button
+
+      <div className='portal-header'>
+
+        <div className="portal-header-left">
+        <Button
             color="inherit"
             onClick={openModal} // Call openModal when the button is clicked
             disableRipple
@@ -517,31 +519,18 @@ export default function Portal() {
               fontWeight: "bold",
               opacity: 0.7,
               "&:hover": {
-                opacity: 1.0,
+                opacity: "1.0",
                 backgroundColor: "transparent",
-                boxShadow: "none",
-              },
-              "&:active": {
-                backgroundColor: "transparent",
-                boxShadow: "none",
-              },
+              }
             }}
           >
             • • •
           </Button>
         </div>
-        <div className="header-mid">
-          <p>Quiz #{quizId}</p>
+        <div className="portal-header-mid">
+            <p>Quiz #{quizId}</p>
         </div>
-        <div className="header-right">
-          {score === null ? (
-            <p>
-              {progress} / {questions.length}
-            </p>
-          ) : (
-            <p>{score}%</p>
-          )}
-        </div>
+        <div className="portal-header-right">{score === null ? <p>{progress} / {questions.length}</p> : <p>{score}%</p>}</div>
 
         {/* <div style={{ position: "absolute", top: "10px", left: "10px" }}>
           <p>Attempt ID: {attempt?.id ?? "NONE"} <span style={{ paddingLeft: '2em' }}>User ID: {userId ?? "NONE"}</span></p>
@@ -551,14 +540,15 @@ export default function Portal() {
 
       {/* ------------------------------------------------------------------------ */}
 
-      <div className="main-container">
+      <div className="portal-main-container">
+
         <div className="overlay"></div>
         {/* Modal */}
         <Modal open={isModalOpen} onClose={closeModal}>
           {modalContent}
         </Modal>
 
-        <div className="left">
+        <div className="portal-left">
           {currentQuestionIndex !== 0 && (
             <Button
               onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
@@ -739,7 +729,7 @@ export default function Portal() {
           </div>
         </div>
 
-        <div className="right">
+        <div className="portal-right">
           {currentQuestionIndex !== questions.length - 1 && (
             <Button
               onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
@@ -763,7 +753,8 @@ export default function Portal() {
 
       {/* ------------------------------------------------------------------------ */}
 
-      <div className="footer">
+      <div className="portal-footer">
+      
         {/* <div className="submit-quiz"> */}
         {progress >= questions.length &&
         currentQuestionIndex === questions.length - 1 &&
