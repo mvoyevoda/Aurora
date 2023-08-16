@@ -8,6 +8,7 @@ router.use(authenticateUser);
 router.get('/', quizController.getAllQuizzes);
 router.get('/:id', quizController.getQuizQuestions);
 router.get('/', quizController.getAllQuizzes);
+router.get('/q/:id', quizController.getUserQuizzes);
 
 
 module.exports = router;
