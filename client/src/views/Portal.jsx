@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../AuthContext";
 import "../styles/portal.css";
 import { Button, Modal, Typography, Box } from "@mui/material";
 

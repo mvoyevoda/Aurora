@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '../../AuthContext';
 
 
 export function QuizGen() {

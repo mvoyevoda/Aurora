@@ -6,7 +6,7 @@ import Slider from "@mui/material/Slider";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
-import LogoutButton from "./LogoutButton"
+import LogoutButton from "../components/LogoutButton"
 import "../styles/configurator.css";
 
 // eslint-disable-next-line no-unused-vars
@@ -226,12 +226,14 @@ export default function Configurator() {
                 fontWeight: "100",
                 alignItems: "center",
                 boxShadow: "none",
+                opacity: "0.7",
                 "&:hover": {
                     borderColor: "white",
                     border: "3px solid", // Increased border thickness to 3px
                     backgroundColor: "transparent",
                     fontWeight: "500",
                     boxShadow: "none",
+                    opacity: "1.0",
                 },
               }}
             >

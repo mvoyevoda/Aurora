@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import "../styles/signup.css";
 import { Link } from "react-router-dom";
 import HomeNB from "../components/HomeNB";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../AuthContext";
 
 export default function LogIn() {
   const emailRef = useRef();

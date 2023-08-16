@@ -6,7 +6,7 @@ import "../styles/signup.css";
 import {Link} from "react-router-dom"
 import HomeNB from "../components/HomeNB";
 import GoogleIcon from "@mui/icons-material/Google";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../AuthContext";
 
 export default function SignUp() {
   const full_nameRef = useRef();
