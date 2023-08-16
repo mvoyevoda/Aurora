@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(80deg, #740a6b, #cc2525, #d1d409);
+  background: linear-gradient(80deg, #740a6b, #ca3b3b, #a80c8e);
   background-size: 400% 400%;
   animation: color 8s ease-in-out infinite; 
   color: #ffffff;
