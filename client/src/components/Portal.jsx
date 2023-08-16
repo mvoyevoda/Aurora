@@ -204,11 +204,11 @@ export default function Portal() {
   let selectedChoice = Object.keys(submissions).length !== 0? submissions[currentQuestionId] : null
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [exit, setExit] = useState(false);
+  // const [exit, setExit] = useState(false);
 
-  const displayExitOptions = () => {
-    setExit(true)
-  }
+  // const displayExitOptions = () => {
+  //   setExit(true)
+  // }
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -218,9 +218,9 @@ export default function Portal() {
     setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    setExit(false);
-  }, [isModalOpen]);
+  // useEffect(() => {
+  //   setExit(false);
+  // }, [isModalOpen]);
 
   const [regenerationStatus, setRegenerationStatus] = useState(false);
 
@@ -283,7 +283,7 @@ export default function Portal() {
   
 
   const modalContent = (
-    !exit ?
+    // !exit ?
     <Box
       sx={{
         width: "20vw", // Adjusted width
@@ -318,7 +318,8 @@ export default function Portal() {
         Resume
       </Button>
       <Button
-        onClick={displayExitOptions}
+        // onClick={displayExitOptions}
+        href="/dashboard"
         variant="outlined"
         color="primary"
         sx={{ 
@@ -357,85 +358,85 @@ export default function Portal() {
       </Button>
     </Box>
 
-    :
+  //   :
     
-    <Box
-    sx={{
-      width: "20vw", // Adjusted width
-      height: "40vh", // Adjusted height
-      bgcolor: "background.paper",
-      p: 2,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "space-between", // Changed to space between buttons
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      boxShadow: 24,
-      borderRadius: 5,
-    }}
-  >
-    <Button
-      onClick={closeModal}
-      variant="contained"
-      sx={{ 
-        width: "95%", 
-        height: "30%", 
-        borderRadius: 5,
-        fontSize: "20px", 
-        textTransform: "none",
-        alignItems: "center",
-        backgroundColor: "#00A3FF",
-      }}
-    >
-      Resume
-    </Button>
-    <Button
-      onClick={() => {
-        // Implement logic for save changes
-      }}
-      variant="outlined"
-      color="primary"
-      sx={{ 
-        width: "95%", 
-        height: "30%", 
-        borderRadius: 5,
-        fontSize: "20px", 
-        textTransform: "none",
-        alignItems: "center",
-        color: "white",
-        backgroundColor: "#FF00F5",
-        "&:hover": {
-          backgroundColor: "#B800B0",
-          borderColor: "B800B0",
-        },
-        borderColor: "B800B0",
-      }}
-    >
-      Save Changes
-    </Button>
-    <Button
-      href="/dashboard"
-      variant="outlined"
-      color="primary"
-      sx={{ 
-        width: "95%", 
-        height: "30%", 
-        borderRadius: 5,
-        fontSize: "20px", 
-        textTransform: "none",
-        alignItems: "center",
-        // "&:hover": {
-        //   border: "2px solid", // Thicker border on hover
-        // },
-        // backgroundColor: "white",
-      }}
-    >
-      Discard Changes
-    </Button>
-  </Box>
+  //   <Box
+  //   sx={{
+  //     width: "20vw", // Adjusted width
+  //     height: "40vh", // Adjusted height
+  //     bgcolor: "background.paper",
+  //     p: 2,
+  //     display: "flex",
+  //     flexDirection: "column",
+  //     alignItems: "center",
+  //     justifyContent: "space-between", // Changed to space between buttons
+  //     position: "absolute",
+  //     top: "50%",
+  //     left: "50%",
+  //     transform: "translate(-50%, -50%)",
+  //     boxShadow: 24,
+  //     borderRadius: 5,
+  //   }}
+  // >
+  //   <Button
+  //     onClick={closeModal}
+  //     variant="contained"
+  //     sx={{ 
+  //       width: "95%", 
+  //       height: "30%", 
+  //       borderRadius: 5,
+  //       fontSize: "20px", 
+  //       textTransform: "none",
+  //       alignItems: "center",
+  //       backgroundColor: "#00A3FF",
+  //     }}
+  //   >
+  //     Resume
+  //   </Button>
+  //   <Button
+  //     onClick={() => {
+  //       // Implement logic for save changes
+  //     }}
+  //     variant="outlined"
+  //     color="primary"
+  //     sx={{ 
+  //       width: "95%", 
+  //       height: "30%", 
+  //       borderRadius: 5,
+  //       fontSize: "20px", 
+  //       textTransform: "none",
+  //       alignItems: "center",
+  //       color: "white",
+  //       backgroundColor: "#FF00F5",
+  //       "&:hover": {
+  //         backgroundColor: "#B800B0",
+  //         borderColor: "B800B0",
+  //       },
+  //       borderColor: "B800B0",
+  //     }}
+  //   >
+  //     Save Changes
+  //   </Button>
+  //   <Button
+  //     href="/dashboard"
+  //     variant="outlined"
+  //     color="primary"
+  //     sx={{ 
+  //       width: "95%", 
+  //       height: "30%", 
+  //       borderRadius: 5,
+  //       fontSize: "20px", 
+  //       textTransform: "none",
+  //       alignItems: "center",
+  //       // "&:hover": {
+  //       //   border: "2px solid", // Thicker border on hover
+  //       // },
+  //       // backgroundColor: "white",
+  //     }}
+  //   >
+  //     Discard Changes
+  //   </Button>
+  // </Box>
   );
 
   // selectedChoice === index ? index === questions[currentQuestionIndex].correctAnswer ? "#33FF00" : "rgba(255, 255, 255, 0.2)" : "transparent",
