@@ -22,6 +22,7 @@ export default function Portal() {
   const [progress, setProgress] = useState(0);
   const [submissions, setSubmissions] = useState({});
   const [score, setScore] = useState(null);
+  const [loadingRegeneration, setLoadingRegeneration] = useState(false);
 
   // useEffect(() => {
   //   console.log("SUBMISSIONS LENGTH: " + Object.keys(submissions).length)
@@ -87,12 +88,17 @@ export default function Portal() {
       const questionsResponse = await axios.get(`/api/quizzes/${quizId}`, {
         withCredentials: true
       });
-      setQuestions(questionsResponse.data);
-      setCurrentQuestionId(questionsResponse.data[0].id) //Set to id of first question
+  
+      // Sort the questions by their IDs
+      const sortedQuestions = questionsResponse.data.sort((a, b) => a.id - b.id);
+  
+      setQuestions(sortedQuestions);
+      setCurrentQuestionId(sortedQuestions[0].id); // Set to id of the first question
     } catch (error) {
       console.error("Failed to fetch questions:", error);
     }
   }
+  
   
   useEffect(() => {
     const initialize = async () => {
@@ -105,30 +111,33 @@ export default function Portal() {
   }, [])
 
   function handleSubmission(userChoice) {
-    if (score !== null) return
+    if (score !== null) return;
     if (Object.keys(submissions).length === 0) {
       setSubmissions({ [currentQuestionId]: userChoice });
-      // console.log("Initialization of submissions: " + submissions);
       setProgress(prevProgress => prevProgress + 1);
     } else {
       // Create a shallow copy of the submissions object
       const updatedSubmissions = { ...submissions };
-      JSON.stringify(updatedSubmissions)
-    
+      JSON.stringify(updatedSubmissions);
+  
+      // Check if this question was answered before
+      const wasAnsweredBefore = Object.prototype.hasOwnProperty.call(updatedSubmissions, currentQuestionId);
+  
       // Update the userChoice of the currentQuestion in the copied object
       updatedSubmissions[currentQuestionId] = userChoice;
-    
+  
       // Check the length before and after to determine progress
       const prevLength = Object.keys(submissions).length;
       setSubmissions(updatedSubmissions);
       const newLength = Object.keys(updatedSubmissions).length;
-    
-      // If a new submission was added, increment the progress
-      if (newLength > prevLength) {
+  
+      // If a new submission was added or updated, increment the progress
+      if (newLength > prevLength || (wasAnsweredBefore && updatedSubmissions[currentQuestionId] !== submissions[currentQuestionId])) {
         setProgress(prevProgress => prevProgress + 1);
       }
     }
-  }  
+  }
+  
 
   async function handleSubmitQuiz(){
     //1. Update Attempt Progress
@@ -213,6 +222,66 @@ export default function Portal() {
     setExit(false);
   }, [isModalOpen]);
 
+  const [regenerationStatus, setRegenerationStatus] = useState(false);
+
+
+  const regenerateQuestion = async (currentQuestionId) => {
+    setLoadingRegeneration(true);
+    try {
+      const response = await axios.put(`/api/openAI/regenerate/${currentQuestionId}`);
+      if (response.data.success) {
+        const newText = response.data.questionText;
+        const newChoices = response.data.choices;
+        const newCorrectAnswer = response.data.correctAnswer;
+  
+        // Finding the index of the current question in the questions array
+        const questionIndex = questions.findIndex((q) => q.id === currentQuestionId);
+  
+        // Updating the question text, choices, and correct answer in the state
+        setQuestions((prevQuestions) => [
+          ...prevQuestions.slice(0, questionIndex),
+          {
+            ...prevQuestions[questionIndex],
+            questionText: newText,
+            answerChoices: newChoices,
+            correctAnswer: newCorrectAnswer,
+          },
+          ...prevQuestions.slice(questionIndex + 1),
+        ]);
+  
+        // Resetting the submission for the regenerated question
+        setSubmissions((prevSubmission) => ({
+          ...prevSubmission,
+          [currentQuestionId]: undefined,
+        }));
+  
+        // Decrementing progress by 1 for the regenerated question if there is a submission
+        if (submissions[currentQuestionId] !== undefined) {
+          setProgress((prevProgress) => prevProgress - 1);
+        }
+      } else {
+        console.error('Failed to regenerate question:', response.data.error);
+      }
+    } catch (error) {
+      console.error('Error regenerating question:', error);
+    }
+    setLoadingRegeneration(false);
+    closeModal();
+  };
+  
+  
+
+  useEffect(() => {
+    if (regenerationStatus) {
+      // Fetch the questions again (assuming you have a function to do this)
+      fetchQuestions();
+  
+      // Reset the regeneration status to false
+      setRegenerationStatus(false);
+    }
+  }, [regenerationStatus]);
+  
+
   const modalContent = (
     !exit ?
     <Box
@@ -267,9 +336,8 @@ export default function Portal() {
         Exit
       </Button>
       <Button
-        onClick={() => {
-          // Add your logic here for regenerating
-        }}
+        onClick={() => regenerateQuestion(currentQuestionId)}
+        
         variant="contained"
         color="primary"
         sx={{ 

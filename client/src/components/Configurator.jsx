@@ -103,7 +103,7 @@ export default function Configurator() {
       const response = await axios.post("/api/openAI/generate", {
         prompt,
         questions,
-        minutes,
+        //minutes,
         difficulty,
       });
 
