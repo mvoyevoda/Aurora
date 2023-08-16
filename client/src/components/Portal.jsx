@@ -463,20 +463,26 @@ export default function Portal() {
 
         <div className="header-left">
         <Button
-            color="inherit"
-            onClick={openModal} // Call openModal when the button is clicked
-            disableRipple
-            sx={{
-              fontSize: "30px",
-              fontWeight: "bold",
-              opacity: "0.7",
-              "&:hover": {
-                opacity: "1.0",
-              }
-            }}
-          >
-            •••
-          </Button>
+  color="inherit"
+  onClick={openModal} // Call openModal when the button is clicked
+  disableRipple
+  sx={{
+    fontSize: "25px",
+    fontWeight: "bold",
+    opacity: 0.7,
+    "&:hover": {
+      opacity: 1.0,
+      backgroundColor: "transparent", 
+      boxShadow: "none", 
+    },
+    "&:active": {
+      backgroundColor: "transparent", 
+      boxShadow: "none", 
+    },
+  }}
+>
+  • • •
+</Button>
         </div>
         <div className="header-mid">
             <p>Quiz #{quizId}</p>
