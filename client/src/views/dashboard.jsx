@@ -1,12 +1,12 @@
 import React from "react";
 import { useMediaQuery, useTheme } from "@mui/material"; 
-import NavGenerator from "../components/Dashboard Section/NavGenerator";
-import { QuizGen } from "../components/Dashboard Section/QuizGen";
-import FavCategory from "../components/Dashboard Section/FavCategory";
-import RecentTitle from "../components/Dashboard Section/RecentQuizzes/RecentTitle";
-import RecentQuizzesList from "../components/Dashboard Section/RecentQuizzes/RecentQuizzesList";
-import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes/SuggestedTitle";
-import SuggestedQuizzesList from "../components/Dashboard Section/SuggestedQuizzes/SuggestedQuizzesList";
+import NavGenerator from "../components/Dashboard/NavGenerator";
+import { QuizGen } from "../components/Dashboard/QuizGen";
+import FavCategory from "../components/Dashboard/FavCategory";
+import RecentTitle from "../components/Dashboard/RecentQuizzes/RecentTitle";
+import RecentQuizzesList from "../components/Dashboard/RecentQuizzes/RecentQuizzesList";
+import SuggestedTitle from "../components/Dashboard/SuggestedQuizzes/SuggestedTitle";
+import SuggestedQuizzesList from "../components/Dashboard/SuggestedQuizzes/SuggestedQuizzesList";
 //import Footer from "../components/Footer";
 
 const styles = {
