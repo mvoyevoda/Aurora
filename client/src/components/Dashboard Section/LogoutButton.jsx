@@ -39,6 +39,7 @@ export default function LogoutButton() {
                 border: "1px solid transparent",
                 borderRadius: "4px",
                 opacity: 0.5,
+                textTransform: "none",
               }}
             >
               Log Out

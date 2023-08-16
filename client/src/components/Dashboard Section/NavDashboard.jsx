@@ -1,6 +1,7 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom"; 
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 //Done with GeneratorButton
 export default function NavDashboard() {
   return (
@@ -28,7 +29,7 @@ export default function NavDashboard() {
           }
         }}
       >
-        v Dashboard v
+        <KeyboardDoubleArrowDownIcon /> Dashboard <KeyboardDoubleArrowDownIcon />
       </Button>
 // 
   );
