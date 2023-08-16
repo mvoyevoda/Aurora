@@ -4,8 +4,13 @@ import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
 import "../styles/portal.css";
 import { Button, Modal, Typography, Box } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
+
 
 export default function Portal() {
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { quizId } = useParams();
   const authContext = useContext(AuthContext);
@@ -300,6 +305,13 @@ export default function Portal() {
         transform: "translate(-50%, -50%)",
         boxShadow: 24,
         borderRadius: 5,
+        ...(isMobile &&{
+            display: "flex",
+            width: "20vh",
+            height: "20vh",
+            top: "33%",
+            left: "33%",
+        }),
       }}
     >
       <Button
@@ -472,7 +484,12 @@ export default function Portal() {
               opacity: "0.7",
               "&:hover": {
                 opacity: "1.0",
-              }
+              },
+              ...(isMobile &&{
+                display: "flex",
+                justifyContent: "left",
+                paddingLeft: "1em"  
+              }),
             }}
           >
             •••
@@ -514,6 +531,9 @@ export default function Portal() {
                 // marginRight: "2em", // Adjust margin to space out
                 // position: "fixed",
                 // right: "37vw"
+                ...(isMobile &&{
+                  fontSize: "6vw",
+                }),
               }}
             >
               &lt;
@@ -672,6 +692,9 @@ export default function Portal() {
                 // marginLeft: "2em", // Adjust margin to space out
                 // position: "fixed",
                 // left: "37vw"
+                ...(isMobile &&{
+                  fontSize: '6vw'
+                }),
               }}
             >
               &gt;
