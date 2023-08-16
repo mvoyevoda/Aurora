@@ -1,19 +1,15 @@
-/* body{
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(36,110,177,1) 42%, rgba(2,0,36,1) 100%);
-    color: #fff;
-} */
 
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(80deg,rgb(18, 83, 109),rgb(192, 47, 127));
+  background: linear-gradient(80deg, #740a6b, #cc2525, #d1d409);
   background-size: 400% 400%;
   animation: color 8s ease-in-out infinite; 
   color: #ffffff;
   overflow: hidden;
   font-family: Helvetica;
   color: white;
+  height: 100vh;
   /* font-size: 16px;
   font-style: normal;
   font-weight: 300;
@@ -27,7 +23,7 @@ body {
 
 @keyframes color {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 0%;
   }
   50% {
     background-position: 100% 50%;
