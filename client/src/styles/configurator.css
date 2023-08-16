@@ -27,6 +27,12 @@
   justify-content: center;
 }
 
+.config-header-right {
+  display: flex;
+  justify-content: right;
+  padding: 2%;
+}
+
 .config-footer {
   height: 10vh;
   display: flex;

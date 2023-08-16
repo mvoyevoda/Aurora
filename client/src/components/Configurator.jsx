@@ -6,6 +6,7 @@ import Slider from "@mui/material/Slider";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import LogoutButton from "./LogoutButton"
 import "../styles/configurator.css";
 
 // eslint-disable-next-line no-unused-vars
@@ -105,7 +106,7 @@ export default function Configurator() {
         <div className="config-header-left"></div>
         <div className="config-header-mid"></div>
         <div className="config-header-right">
-          <Button href="/logout"/>
+          <LogoutButton />
         </div>
       </div>
 
@@ -245,7 +246,7 @@ export default function Configurator() {
           href="/dashboard"
           disableRipple
           sx={{
-            fontSize: "100%",
+            fontSize: "1rem",
             fontWeight: "100",
             opacity: "0.7",
             textTransform: "none",

@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../LogoutButton";
 import { Link } from "react-router-dom";
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 
