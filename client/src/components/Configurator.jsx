@@ -59,7 +59,7 @@ export default function Configurator() {
   const classes = useStyles();
   // const navigate = useNavigate();
   const [questions, setQuestions] = useState(10);
-  const [difficulty, setDifficulty] = useState(2); // 1 to 5: very easy to very hard
+  const [difficulty, setDifficulty] = useState(3); // 1 to 5: very easy to very hard
   const [loading, setLoading] = useState(false)
   // const [inputCentering, setInputCentering] = setInputCentering(false)
   
