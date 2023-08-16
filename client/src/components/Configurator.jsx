@@ -225,11 +225,13 @@ export default function Configurator() {
                 fontSize: "200%",
                 fontWeight: "100",
                 alignItems: "center",
+                boxShadow: "none",
                 "&:hover": {
                     borderColor: "white",
                     border: "3px solid", // Increased border thickness to 3px
                     backgroundColor: "transparent",
                     fontWeight: "500",
+                    boxShadow: "none",
                 },
               }}
             >

@@ -4,12 +4,17 @@ body {
   padding: 0;
   background: linear-gradient(80deg, #740a6b, #ca3b3b, #a80c8e);
   background-size: 400% 400%;
-  animation: color 8s ease-in-out infinite; 
-  color: #ffffff;
   overflow: hidden;
+  animation: color 8s ease-in-out infinite; 
+  /* background-image: url('../images/backround1.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat; */
+  color: #ffffff;
   font-family: Helvetica;
   color: white;
   height: 100vh;
+  width: 100vw;
   /* font-size: 16px;
   font-style: normal;
   font-weight: 300;
