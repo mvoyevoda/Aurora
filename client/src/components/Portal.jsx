@@ -337,7 +337,7 @@ export default function Portal() {
       </Button>
       <Button
         onClick={() => regenerateQuestion(currentQuestionId)}
-        disabled={score !== null}
+        disabled={score !== null || loadingRegeneration}
         variant="contained"
         color="primary"
         sx={{ 
