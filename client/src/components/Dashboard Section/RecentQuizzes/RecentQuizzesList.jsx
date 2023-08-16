@@ -52,9 +52,12 @@ const RecentQuizzesList = () => {
       {recentQuizzes.slice(startIndex, endIndex).map((quiz, index) => (
         
         <Link to={`/portal/${quiz.id}`} key={quiz.id} style={{ textDecoration: "none" }}>
-          <Card key={quiz.id} variant="outlined" style={{ 
-            marginBottom: "10px", 
-            backgroundColor: "rgba(212, 212, 212, .05)", 
+        <Card
+          key={index}
+          variant="outlined"
+          style={{
+            marginBottom: "10px",
+            backgroundColor: "rgba(212, 212, 212, .05)",
             color: "white",
             borderRadius: '20px',
             width: "40vh",
@@ -63,22 +66,34 @@ const RecentQuizzesList = () => {
             ...(isMobile && {
               width: "20vh", // Apply this style for small screens
             }),
-            }}>
-            <CardContent>
-              <Typography 
-              variant="h6" 
-              component="h2" 
+            
+          }}
+        >
+          <CardContent>
+            <Typography
+              variant="h6"
+              component="h2"
               style={{ fontSize: "30px", color:"rgba(255, 255, 255, .9)",
-              ...(isMobile && {
-                fontSize: "1.3em", // Apply this style for small screens
-              }),
-               }}>
-                {quiz.category}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Link>
-      ))}
+              whiteSpace: "nowrap", // Prevent text from wrapping
+                overflow: "hidden",   // Hide overflowing text
+                textOverflow: "ellipsis", // Display ellipsis (...) for overflow
+                transition: "all 0.3s", // Add smooth transition effect
+                ":hover": {
+                  whiteSpace: "normal", // Display full text on hover
+                  overflow: "visible",  // Show all text
+                  textOverflow: "unset", // Remove ellipsis
+                  fontSize: "1.3em", // Increase font size on hover
+                },
+                ...(isMobile && {
+              fontSize: "1.3em", // Apply this style for small screens
+            }),
+          }}>
+              {quiz.category}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Link>
+            ))}
       {shouldEnableScroll && (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
           {currentPage > 1 && (

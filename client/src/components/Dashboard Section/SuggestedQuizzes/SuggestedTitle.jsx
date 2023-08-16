@@ -26,7 +26,7 @@ export default function SuggestedTitle() {
           color="rgba(255, 255, 255, .7)"
           fontSize="2.5rem"
         >
-          Suggested
+          Popular
         </Typography>
       </CardContent>
     </Card>
