@@ -1,12 +1,12 @@
 import Button from "@mui/material/Button";
 import LogoutButton from "../LogoutButton";
 import { Link } from "react-router-dom";
-import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
 export default function NavGenerator() {
   return (
-    <>
-      <Link to="/generator" style={{textDecoration: 'none'}} >
+    <div>
+      <Link to="/generator" style={{ textDecoration: "none" }}>
         <Button
           variant="contained"
           color="primary"
@@ -31,11 +31,9 @@ export default function NavGenerator() {
           <KeyboardDoubleArrowUpIcon /> Generator <KeyboardDoubleArrowUpIcon />
         </Button>
       </Link>
-      <div style={{position: 'absolute', top: '0.7em', right: 0 }}>
+      <div style={{ position: "absolute", top: "1.7em", right: 39 }}>
         <LogoutButton />
       </div>
-
-    </>
+    </div>
   );
-      }
-
+}
