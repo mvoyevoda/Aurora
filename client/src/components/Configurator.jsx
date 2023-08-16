@@ -1,61 +1,49 @@
 import axios from 'axios';
 // import { useNavigate } from "react-router-dom";
-//import "../styles/configurator.css"
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Slider from "@mui/material/Slider";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import "../styles/configurator.css";
 
 // eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
-  // configurator: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   height: "100vh",
-  //   width: "100vw",
-  // },
-  // input: {
-  //   // background: "rgba(217, 217, 217, 0.20)",
-  //   borderRadius: "1em", 
-  //   padding: "0.5em", 
-  //   width: "50em",
-    
-  // },
-  
   slider: {
-    // margin: "0.5em 0", 
     width: "50%",
     "& .MuiSlider-root": {
-      color: "white", // Change the slider color to grey
-      // opacity: '0.5',
-
-      height: 4, // Adjust the height of the slider track
+      color: "white",
+      height: 7, // Adjust the height of the slider track
+      // boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.2)",
       "&:focus, &:active": {
-        color: "white", // Change the slider color to grey
-        // opacity: '1.0',  
+        color: "white", 
         height: "6"
       },
     },
     "& .MuiSlider-thumb": {
-      width: 14, // Adjust the width of the slider thumb
-      height: 14, // Adjust the height of the slider thumb
+      width: 25, // Adjust the width of the slider thumb
+      height: 25, // Adjust the height of the slider thumb
       color: "white", // Change the slider color to grey
-      // opacity: '0.7',
-
-      "&:focus, &:active": {
-        width: 18, // Increase width when focused/active
-        height: 18, // Increase height when focused/active
-        color: "white", // Change the slider color to grey
-        // opacity: '1.0',  
-
-      },
     },
-  
-
+    "& .MuiSlider-thumb.Mui-active": {
+      height: 30,
+      width: 30,
+      outline: "none",
+      // boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.2)",
+    },
+    "& .MuiSlider-thumb:hover": {
+      boxShadow: "none !important",
+    },
+    "& .MuiSlider-thumb.Mui-focusVisible": {
+      boxShadow: "none !important",
+    },
+    // "& .MuiTouchRipple-root": {
+    //   display: 'none',
+    // },
+    // "& .MuiTouchRipple-thumb": {
+    //   display: 'none',
+    // },
   },
   label: {
     display: "flex",
@@ -63,11 +51,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontWeight: "100"
   },
-  // button: {
-  //   margin: "1em 0", 
-  //   width: "58em",
-  //   borderRadius: "1em", 
-  // },
 }));
 
 
@@ -77,6 +60,7 @@ export default function Configurator() {
   const [questions, setQuestions] = useState(10);
   const [difficulty, setDifficulty] = useState(2); // 1 to 5: very easy to very hard
   const [loading, setLoading] = useState(false)
+  // const [inputCentering, setInputCentering] = setInputCentering(false)
   
   const handleQuestionsChange = (event, value) => {
     setQuestions(value);
@@ -117,96 +101,107 @@ export default function Configurator() {
 
       <div className="configurator">
 
-      <div className='header'>
-        <div className="header-left"></div>
-        <div className="header-mid"></div>
-        <div className="header-right">
+      <div className='config-header'>
+        <div className="config-header-left"></div>
+        <div className="config-header-mid"></div>
+        <div className="config-header-right">
           <Button href="/logout"/>
         </div>
       </div>
 
       {/* <Input /> */}
 
-      <div className="main-container">
+      <div className="config-main-container">
        
-        <form onSubmit={handleSubmit}>
-        <p>uighiughiu</p>
-          {/* <Input
-            required
-            color="text"
-            type="text"
-            name="prompt"
-            className={classes.input}
-            disableUnderline
-            sx={{
-              bgcolor: "rgba(255, 255, 255, 0.05)", 
-              '@media (max-width: 700px)':{
-                width: '100%',
-                fontSize: '0.8em',
-                marginBottom: '1em',
-              }
-            }}
-            placeholder="summarize the quiz topic in a few words... "
-            inputProps={{ 
-              style: { 
-                color: 'white', 
-                opacity: '0.8', 
-                textAlign:'center',
-                fontWeight: "100"
-              } 
-            }}
-          /> */}
-          <input />
+        <form className="config-form" onSubmit={handleSubmit}>
 
-          {/* <div className={classes.slider}>
-            <label htmlFor="questions-slider" className={classes.label} >
-              {questions} questions
-            </label>
-            <Slider
-              value={questions}
-              name="questions"
-              onChange={handleQuestionsChange}
-              step={1}
-              min={5}
-              max={25}
-              aria-labelledby="questions-slider"
-              sx={{ color: 'white' ,
-              '@media (max-width: 700px)':{
-                width: '32vh',
-                position: 'relative',
-                right: '17.5em',
-              }}} 
-
+          <div className="config-form-inputs">
+            <Input
+              required
+              color="text"
+              type="text"
+              name="prompt"
+              className={classes.input}
+              // onInput={() => setInputCentering(true)}
+              disableUnderline
+              sx={{
+                bgcolor: "rgba(255, 255, 255, 0.05)", 
+                // '@media (max-width: 700px)':{
+                //   width: '100%',
+                //   fontSize: '0.8em',
+                //   marginBottom: '1em',
+                // }
+                borderRadius: "30px",
+                width: "50%",
+                height: "2rem",
+                padding: "2rem",
+              }}
+              placeholder="summarize the quiz topic in a few words... "
+              inputProps={{ 
+                style: { 
+                  color: 'white', 
+                  opacity: '0.8', 
+                  // textAlign:'center',
+                  fontWeight: "100",
+                  fontSize: "1.5rem",
+                  textAlign: "center",
+                } 
+              }}
             />
-          </div>
 
-          <div className={classes.slider}>
-            <label htmlFor="difficulty-slider" className={classes.label}>
-              {difficulty === 1 ? "Very Easy" : difficulty === 2 ? "Easy" : difficulty === 3 ? "Medium" : difficulty === 4 ? "Hard" : "Very Hard"} 
-            </label>
-            <Slider
-              value={difficulty}
-              name="difficulty"
-              onChange={handleDifficultyChange}
-              step={1}
-              min={1}
-              max={5}
-              // marks={[
-              //   { value: 1, label: "Very Easy" },
-              //   { value: 2, label: "Easy" },
-              //   { value: 3, label: "Medium" },
-              //   { value: 4, label: "Hard" },
-              //   { value: 5, label: "Very Hard" },
-              // ]}
-              aria-labelledby="difficulty-slider"
-              sx={{ color: 'white',
-              '@media (max-width: 700px)':{
-                width: '32vh',
-                position: 'relative',
-                right: '17.5em',
-              }
-              }} 
-            />
+            <div className={classes.slider}>
+              <label htmlFor="questions-slider" className={classes.label} >
+                {questions} questions
+              </label>
+              <Slider
+                value={questions}
+                name="questions"
+                onChange={handleQuestionsChange}
+                step={1}
+                min={5}
+                max={25}
+                aria-labelledby="questions-slider"
+                // sx={{ 
+                //   color: 'white' ,
+                //   '@media (max-width: 700px)':{
+                //     width: '32vh',
+                //     position: 'relative',
+                //     right: '17.5em',
+                //   }
+                // }} 
+
+              />
+            </div>
+
+            <div className={classes.slider}>
+              <label htmlFor="difficulty-slider" className={classes.label}>
+                {difficulty === 1 ? "Very Easy" : difficulty === 2 ? "Easy" : difficulty === 3 ? "Medium" : difficulty === 4 ? "Hard" : "Very Hard"} 
+              </label>
+              <Slider
+                value={difficulty}
+                name="difficulty"
+                onChange={handleDifficultyChange}
+                step={1}
+                min={1}
+                max={5}
+                // marks={[
+                //   { value: 1, label: "Very Easy" },
+                //   { value: 2, label: "Easy" },
+                //   { value: 3, label: "Medium" },
+                //   { value: 4, label: "Hard" },
+                //   { value: 5, label: "Very Hard" },
+                // ]}
+                aria-labelledby="difficulty-slider"
+                // sx={{ 
+                  // color: 'white',
+                  // '@media (max-width: 700px)':{
+                  //   width: '32vh',
+                  //   position: 'relative',
+                  //   right: '17.5em',
+                  // }
+                // }} 
+              />
+            </div>
           </div>
 
           {loading ?        
@@ -222,23 +217,47 @@ export default function Configurator() {
                 color: "white",
                 border: "1px solid",
                 display: "block",
-                width: "97vh",
+                width: "50%",
+                height: "15%",
+                textTransform: "none",
                 borderRadius: "50px",
-                
+                fontSize: "200%",
+                fontWeight: "100",
+                alignItems: "center",
                 "&:hover": {
-                  backgroundColor: "rgba(217, 217, 217, 0.20)",
-                  borderColor: "white",
+                    borderColor: "white",
+                    border: "3px solid", // Increased border thickness to 3px
+                    backgroundColor: "transparent",
+                    fontWeight: "500",
                 },
               }}
             >
               Generate
             </Button>
-          } */}
+          }
 
           </form>
       </div>
 
-      <div className="footer"></div>
+      <div className="config-footer">
+        <Button
+          color="inherit"
+          href="/dashboard"
+          disableRipple
+          sx={{
+            fontSize: "100%",
+            fontWeight: "100",
+            opacity: "0.7",
+            textTransform: "none",
+            "&:hover": {
+              opacity: "1.0",
+              backgroundColor: "transparent",
+            }
+          }}
+        >
+          <KeyboardDoubleArrowDownIcon /> Dashboard <KeyboardDoubleArrowDownIcon />
+        </Button>
+      </div>
 
     </div>
 

@@ -41,7 +41,7 @@ export default function LogIn() {
       {errorMessage && (
         <p style={{ color: "rgba(245, 245, 245)" }}>{errorMessage}</p>
       )}
-      <form onSubmit={handleLogIn} className="form">
+      <form onSubmit={handleLogIn} className="auth-form">
         <TextField
           sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",
@@ -50,7 +50,7 @@ export default function LogIn() {
             "& .MuiInputLabel-root.Mui-focused": {
               color: "black",
             },
-            
+            borderRadius: "10px"
           }}
           variant="standard"
           color="text"
@@ -59,6 +59,7 @@ export default function LogIn() {
           fullWidth
           required
           inputRef={emailRef}
+          disableUnderline
         />
         <TextField
           sx={{
