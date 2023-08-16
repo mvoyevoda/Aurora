@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -6,9 +6,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { AuthContext } from '../../../contexts/AuthContext';
+
 
 
 const RecentQuizzesList = () => {
+  const authContext = useContext(AuthContext); 
+  const userId = authContext.currentUser?.id;
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -19,7 +24,7 @@ const RecentQuizzesList = () => {
   useEffect(() => {
     // Fetch recent quizzes from your backend API
     axios
-      .get("/api/quizzes") 
+      .get(`/api/quizzes/q/${userId}`) 
       .then((response) => {
         setRecentQuizzes(response.data);
       })

@@ -48,4 +48,26 @@ async function getAllQuizzes(req, res) {
 }
 
 
-module.exports = { getQuiz, getQuizQuestions, getAllQuizzes };
+async function getUserQuizzes(req, res) {
+  try {
+    console.log('ok');
+    const quizzes = await Quiz.findAll({ where: { userId: req.params.id},
+      attributes: ['id', 'category'],
+      
+      order: [['createdAt', 'DESC']], // Sorting by createdBy in descending order
+
+    });
+
+    if (quizzes.length > 0) {
+      res.json(quizzes);
+    } else {
+      res.status(404).json({ error: 'Quizzes not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch quizzes' });
+  }
+}
+
+
+module.exports = { getQuiz, getQuizQuestions, getAllQuizzes, getUserQuizzes };
