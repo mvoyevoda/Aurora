@@ -35,7 +35,7 @@ export default function LogIn() {
   };
 
   return (
-    <>
+    <div>
       <HomeNB />
       <h1 style={{ marginTop: "13vh" }}>Log In</h1>
       {errorMessage && (
@@ -133,6 +133,6 @@ export default function LogIn() {
           Log In
         </Button>
       </form>
-    </>
+    </div>
   );
 }
