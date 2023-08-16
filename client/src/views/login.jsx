@@ -50,7 +50,6 @@ export default function LogIn() {
             "& .MuiInputLabel-root.Mui-focused": {
               color: "black",
             },
-            borderRadius: "10px"
           }}
           variant="standard"
           color="text"
@@ -108,9 +107,12 @@ export default function LogIn() {
               marginBottom: "1.25em",
               width: "100%",
               "&:hover": {
-                backgroundColor: "rgba(217, 217, 217, 0.20)",
                 borderColor: "white",
-              },
+                border: "3px solid", // Increased border thickness to 3px
+                backgroundColor: "transparent",
+                fontWeight: "500",
+                boxShadow: "none",
+            },
             }}
           >
             Don&apos;t have an account?
@@ -126,9 +128,12 @@ export default function LogIn() {
             width: "100%",
             borderRadius: "50px",
             "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
               borderColor: "white",
-            },
+              border: "3px solid", // Increased border thickness to 3px
+              backgroundColor: "transparent",
+              fontWeight: "500",
+              boxShadow: "none",
+          },
           }}
         >
           Log In
