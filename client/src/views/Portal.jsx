@@ -134,13 +134,15 @@ export default function Portal() {
     } else {
       // Create a shallow copy of the submissions object
       const updatedSubmissions = { ...submissions };
-      JSON.stringify(updatedSubmissions);
+      // JSON.stringify(updatedSubmissions);
 
       // Check if this question was answered before
-      const wasAnsweredBefore = Object.prototype.hasOwnProperty.call(
-        updatedSubmissions,
-        currentQuestionId
-      );
+      // const wasAnsweredBefore = Object.prototype.hasOwnProperty.call(
+      //   updatedSubmissions,
+      //   currentQuestionId
+      // );
+
+      const checkIfAnswered = updatedSubmissions[currentQuestionId] !== undefined
 
       // Update the userChoice of the currentQuestion in the copied object
       updatedSubmissions[currentQuestionId] = userChoice;
@@ -151,12 +153,8 @@ export default function Portal() {
       const newLength = Object.keys(updatedSubmissions).length;
 
       // If a new submission was added or updated, increment the progress
-      if (
-        newLength > prevLength ||
-        (wasAnsweredBefore &&
-          updatedSubmissions[currentQuestionId] !==
-            submissions[currentQuestionId])
-      ) {
+      // (wasAnsweredBefore && updatedSubmissions[currentQuestionId] !== submissions[currentQuestionId])
+      if (!checkIfAnswered) {
         setProgress((prevProgress) => prevProgress + 1);
       }
     }
