@@ -1,0 +1,87 @@
+
+            {/* Multiple Choice Container */}
+            {questions[currentQuestionIndex]?.questionType === 0 &&
+              questions[currentQuestionIndex]?.answerChoices?.map(
+                (choice, index) => (
+                  <Button
+                    key={index}
+                    variant="outlined"
+                    onClick={() => handleSubmission(index)}
+                    sx={{
+                      // color: "white",
+                      // fontFamily: "Helvetica",
+                      // display: "block",
+                      // border: "1px solid white",
+                      // borderRadius: "1.2em",
+                      // height: "h",
+                      // width: "78em",
+                      // padding: "1em",
+                      // marginBottom: "3vh", // Add margin between buttons
+                      // textAlign: "center", // Center the text
+                      backgroundColor:
+                        selectedChoice === index
+                          ? "rgba(255, 255, 255, 0.2)"
+                          : "transparent", // Change background color when selected
+                      "&:hover": {
+                        borderColor: "white",
+                      },
+                    }}
+                  >
+                    {choice}
+                  </Button>
+                )
+              )}
+            {/* True/False Container */}
+            {questions[currentQuestionIndex]?.questionType === 1 && (
+              <>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSubmission(1)}
+                  sx={{
+                    // color: "white",
+                    // fontFamily: "Helvetica",
+                    // display: "block",
+                    // border: "1px solid white",
+                    // borderRadius: "1.2em",
+                    // width: "78em",
+                    // padding: "1em",
+                    // marginTop: "5vh",
+                    // marginBottom: "5vh", // Add margin between buttons
+                    // textAlign: "center", // Center the text
+                    backgroundColor:
+                      selectedChoice === 1
+                        ? "rgba(255, 255, 255, 0.2)"
+                        : "transparent",
+                    "&:hover": {
+                      borderColor: "white",
+                    },
+                  }}
+                >
+                  True
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSubmission(0)}
+                  sx={{
+                    color: "white",
+                    fontFamily: "Helvetica",
+                    display: "block",
+                    border: "1px solid white",
+                    borderRadius: "1.2em",
+                    width: "78em",
+                    padding: "1em",
+                    marginBottom: "10px", // Add margin between buttons
+                    textAlign: "center", // Center the text
+                    backgroundColor:
+                      selectedChoice === 0
+                        ? "rgba(255, 255, 255, 0.2)"
+                        : "transparent",
+                    "&:hover": {
+                      borderColor: "white",
+                    },
+                  }}
+                >
+                  False
+                </Button>
+              </>
+            )}

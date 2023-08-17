@@ -96,6 +96,22 @@ async function getAttemptsByUser(req, res, next) {
     next(err);
   }
 };
+async function getAllQuizzesByUser(req, res, next) {
+  try {
+    const userId = req.params.id;
+
+    const numOfQuizzes = await Quiz.count({
+      where: {
+        userId: userId,
+      },
+    });
+
+    res.status(200).json({ count: numOfQuizzes });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+}
 
 
 module.exports = {
@@ -103,4 +119,6 @@ module.exports = {
   getUserById,
   deleteUser,
   getAttemptsByUser,
+  getAllQuizzesByUser
+  
 };

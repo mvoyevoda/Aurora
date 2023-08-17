@@ -1,8 +1,8 @@
 body{
-    background-color: black;
+    color: black;
     text-align: center;
 }
-.signup_form{
+.auth-form{
     margin: 4px;
     width: 50%;
     position: absolute;
@@ -10,13 +10,22 @@ body{
     top: 25%;
 }
 
-.login_form{
-  margin: 4px;
-  width: 50%;
-  position: absolute;
-  left: 25%;
-  top: 25%;
+@media (max-width: 700px){
+  body{
+    height: 100vh;
+  }
+  .auth-form{
+    width: 70%;
+    position: absolute;
+    left: 15%;
+    top: 30%;
+  }
+ 
+  .config-form{
+    top: 25vh;
+  }
 }
+
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

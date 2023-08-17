@@ -17,6 +17,30 @@ async function getAllAttempts(req, res) {
   }
 }
 
+async function getAttempt(req, res) {
+  try {
+    const userId = parseInt(req.params.userId);  // Extract userId from URL parameters
+    const quizId = parseInt(req.params.quizId);  // Extract quizId from URL parameters
+    
+    // Fetch the most recent attempt for the specific userId and quizId
+    const attempt = await Attempt.findOne({
+      where: { 
+        userId: userId, 
+        quizId: quizId  // Add a condition for both userId and quizId
+      },
+      order: [['createdAt', 'DESC']]
+    });
+
+    if (!attempt) {
+      res.status(404).json({ message: "No attempts found for the user for the given quiz" });
+    } else {
+      res.status(200).json(attempt);
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching the attempt", error: error.message });
+  }
+}
+
 async function getProgress(req, res) {
   const attemptId = parseInt(req.params.attemptId);
 
@@ -95,5 +119,5 @@ async function calculateScore(req, res) {
 
 }
 
-module.exports = { getProgress, createAttempt, updateProgress, getAllAttempts, updateScore };
+module.exports = { getProgress, createAttempt, updateProgress, getAllAttempts, getAttempt, updateScore };
 

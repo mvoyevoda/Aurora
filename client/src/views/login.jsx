@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "../styles/signup.css";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import HomeNB from "../components/HomeNB";
-import GoogleIcon from "@mui/icons-material/Google";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../AuthContext";
 
 export default function LogIn() {
   const emailRef = useRef();
@@ -24,113 +23,122 @@ export default function LogIn() {
     e.preventDefault();
     try {
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/generator");
+      window.location.href = "/generator"; 
     } catch (error) {
-      if(error.message.includes("401")) {
-        setErrorMessage("Invalid email or password.");
+      if (error.message.includes("401")) {
+        setErrorMessage("An unexpected error occured. Try again.");
       } else {
-        setErrorMessage("An unexpected error has occured. Try again.");
+        setErrorMessage("Invalid email or password.");
       }
       console.error(`Error: ${error}`);
     }
   };
-  
-  return (
-    <>
-      <HomeNB />
-      <h1>Log In</h1>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <Button
-        variant="contained"
-        startIcon={<GoogleIcon />}
-        onClick={() => {
-          // Handle the "Sign Up with Google" button click
-        }}
-      >
-        Log In with Google
-      </Button>
 
-      <form onSubmit={handleLogIn} className="signup_form">
-      <TextField
-        sx={{
-          backgroundColor: "rgba(217, 217, 217, 0.20)",
-          marginBottom: "0.625em", 
-          "& .MuiInputLabel-root.Mui-focused": {
-            color: "black",
-          },
-        }}
-        variant="standard"
-        color="text"
-        label="Email"
-        id="email"
-        fullWidth 
-        required
-        inputRef={emailRef}
-      />
-      <TextField
-        sx={{
-          backgroundColor: "rgba(217, 217, 217, 0.20)",
-          marginBottom: "0.625em", 
-          "& .MuiInputLabel-root.Mui-focused": {
-            color: "black",
-          },
-        }}
-        variant="standard"
-        color="text"
-        label="Password"
-        id="password"
-        type="password"
-        fullWidth 
-        required
-        inputRef={passwordRef}
-      />
-      <Link
-        onClick={handleForgotPasswordClick}
-        href="#"
-        variant="p"
-        color="inherit"
-        sx={{
-          position: "relative",
-          left: "20em", 
-        }}
-      >
-        Forgot password?
-      </Link>
-      <Button
-        href="./signup"
-        variant="outlined"
-        sx={{
-          marginTop: "0.625em", 
-          color: "white",
-          border: "1px solid",
-          borderRadius: "50px",
-          display: "block",
-          marginBottom: "1.25em", 
-          "&:hover": {
+  return (
+    <div>
+      <HomeNB />
+      <h1 style={{ marginTop: "13vh" }}>Log In</h1>
+      {errorMessage && (
+        <p style={{ color: "rgba(245, 245, 245)" }}>{errorMessage}</p>
+      )}
+      <form onSubmit={handleLogIn} className="auth-form">
+        <TextField
+          sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",
-            borderColor: "white",
-          },
-        }}
-      >
-        Don&apos;t have an account?
-      </Button>
-      <Button
-        variant="outlined"
-        type="submit"
-        sx={{
-          color: "white",
-          border: "1px solid",
-          display: "block",
-          width: "100%",
-          borderRadius: "50px",
-          "&:hover": {
+            marginTop: "2em",
+            marginBottom: "0.625em",
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black",
+            },
+          }}
+          variant="standard"
+          color="text"
+          label="Email"
+          id="email"
+          fullWidth
+          required
+          inputRef={emailRef}
+          disableUnderline
+        />
+        <TextField
+          sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",
-            borderColor: "white",
+            marginBottom: "0.625em",
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black",
+            },
+          }}
+          variant="standard"
+          color="text"
+          label="Password"
+          id="password"
+          type="password"
+          fullWidth
+          required
+          inputRef={passwordRef}
+        />
+        <Link style={{ textDecoration: "none", color: "white" }}>
+          <Button
+            onClick={handleForgotPasswordClick}
+            variant="p"
+            color="inherit"
+            sx={{
+              position: "relative",
+              left: "20em",
+              cursor: "pointer",
+              '@media (max-width: 700px)':{
+                left: "5em",
+
+              },
+            }}
+          >
+            Forgot password?
+          </Button>
+        </Link>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          <Button
+            variant="outlined"
+            sx={{
+              marginTop: "0.625em",
+              color: "white",
+              border: "1px solid",
+              borderRadius: "50px",
+              display: "block",
+              marginBottom: "1.25em",
+              width: "100%",
+              "&:hover": {
+                borderColor: "white",
+                border: "3px solid", // Increased border thickness to 3px
+                backgroundColor: "transparent",
+                fontWeight: "500",
+                boxShadow: "none",
+            },
+            }}
+          >
+            Don&apos;t have an account?
+          </Button>
+        </Link>
+        <Button
+          variant="outlined"
+          type="submit"
+          sx={{
+            color: "white",
+            border: "1px solid",
+            display: "block",
+            width: "100%",
+            borderRadius: "50px",
+            "&:hover": {
+              borderColor: "white",
+              border: "3px solid", // Increased border thickness to 3px
+              backgroundColor: "transparent",
+              fontWeight: "500",
+              boxShadow: "none",
           },
-        }}
-      >
-        Log In
-      </Button>
-    </form>    </>
+          }}
+        >
+          Log In
+        </Button>
+      </form>
+    </div>
   );
 }

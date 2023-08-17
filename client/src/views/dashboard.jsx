@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import NavGenerator from "../components/Dashboard Section/NavGenerator";
-import {QuizGen} from "../components/Dashboard Section/QuizGen";
-import FavCategory from "../components/Dashboard Section/FavCategory";
-import RecentTitle from "../components/Dashboard Section/RecentQuizzes/RecentTitle";
-import "../styles/dashboard.css"
-import SuggestedTitle from "../components/Dashboard Section/SuggestedQuizzes/SuggestedTitle";
-import NavSettings from "../components/Dashboard Section/NavSettings"
-import RecentQuizzesList from "../components/Dashboard Section/RecentQuizzes/RecentQuizzesList";
-import SuggestedQuizzesList from "../components/Dashboard Section/SuggestedQuizzes/SuggestedQuizzesList";
+import React from "react";
+import { useMediaQuery, useTheme } from "@mui/material"; 
+import NavGenerator from "../components/Dashboard/NavGenerator";
+import { QuizGen } from "../components/Dashboard/QuizGen";
+import FavCategory from "../components/Dashboard/FavCategory";
+import RecentTitle from "../components/Dashboard/RecentQuizzes/RecentTitle";
+import RecentQuizzesList from "../components/Dashboard/RecentQuizzes/RecentQuizzesList";
+import SuggestedTitle from "../components/Dashboard/SuggestedQuizzes/SuggestedTitle";
+import SuggestedQuizzesList from "../components/Dashboard/SuggestedQuizzes/SuggestedQuizzesList";
+//import Footer from "../components/Footer";
 
 const styles = {
   pcContainer: {
@@ -18,7 +18,8 @@ const styles = {
   leftColumn: {
     flex: 2,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column',  
+
   },
   rightColumn: {
     flex: 2,
@@ -34,37 +35,62 @@ const styles = {
     flex: 2,
     display: 'flex',
     flexDirection: 'column',
-    
-  }
+
+  },
 };
 
+const mobileStyles = {
+  pcContainer: {
+    flexDirection: "column", // Stack columns on smaller screens
+  },
+  leftColumn: {
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "start",
+  },
+  rightColumn: {
+    display: "flex",
+    flexDirection: "row",
+    //justifyContent: "center",
+  },
+  recentColumn:{
+    position: "relative",
+    right: '1em',
+    bottom: '7em',
+  },
+  suggestedColumn: {
+    position: "relative",
+    right: '6em',
+    bottom: '7em',
+  },
+};
 export default function Dashboard() {
-  useEffect(() => {
-    // When the component mounts, scroll to the top of the page with a smooth animation
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
 
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
   return (
     <>
+      
+
       <div className="scrollUpAnimation">
         <NavGenerator />
-        <div style={styles.pcContainer}>
-          <div style={styles.leftColumn}>
+        <div style={{ ...styles.pcContainer, ...(isMobile && mobileStyles.pcContainer) }}>
+          <div style={{ ...styles.leftColumn, ...(isMobile && mobileStyles.leftColumn)}}>
             <QuizGen />
             <FavCategory />
           </div>
-          <div style={styles.rightColumn}>
-            <div style ={styles.recentColumn}>
+          <div style={{...styles.rightColumn, ...(isMobile && mobileStyles.rightColumn)}}>
+            <div style={{...styles.recentColumn, ...(isMobile && mobileStyles.recentColumn)}}>
             <RecentTitle />
             <RecentQuizzesList />
             </div>
-            <div style={styles.suggestedColumn}>
+            <div style={{...styles.suggestedColumn, ...(isMobile && mobileStyles.suggestedColumn)}}>
             <SuggestedTitle />
             <SuggestedQuizzesList />
             </div>
           </div>
       </div>    
-      <NavSettings/>
       </div>
     </>
   );

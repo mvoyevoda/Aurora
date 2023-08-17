@@ -5,7 +5,8 @@ const { Question } = require('../models');
 async function generate(req, res) {
 
   // Form Data
-  const { prompt, questions, minutes, difficulty } = req.body; 
+  const { prompt, questions, minutes, difficulty } = req.body;
+  const userId = req.user.id; 
 
   // OpenAI Configuration
   const configuration = new Configuration({
@@ -20,15 +21,18 @@ async function generate(req, res) {
       `
       I will be taking your response and formatting it inside user-friendly quiz taking environment on my website. 
       Please respond in JSON format. 
-      For each question, specify whether the question is 0 or 1 or 2 ---> multiple choice or true/false.
+      For each question, specify whether the question is 0 or 1 ---> multiple choice or true/false.
       There could only be 2 question types, 0 or 1. NOTHING ELSE!!!!!
       Questions can only be multiple choice or true/false, do not include any other types!
       Do not ask open ended questions or fill-in-the-blank!
+      If a question is multiple choice, it is always of type 0.
       If a question is True/False, it is always of type 1.
       There can only be 1 answer.
       Each question should be an object with keys: type, question, choices, answer. 
       For the multiple choice, do not include the corresponding letter, only include the choice. 
       List 4 choices for multiple choice questions. 
+      Each question should have a limit of 120 characters.
+      Questions must only appear once, they cannot be repeated.
       Give me a good mix of all question types. Strictly adhere to this example format in your response:
 
       {
@@ -37,7 +41,7 @@ async function generate(req, res) {
         "questions": [
           {
             "type": 1,
-            "question": "Carrots are a type of vegetable. (True/False)",
+            "question": "Carrots are a type of vegetable.",
             "correctAnswer": "1"
           },
           {
@@ -51,7 +55,7 @@ async function generate(req, res) {
 
       Below is some info about the quiz I want you to generate right now:
       
-      Please generate a quiz on this topic: ${prompt}, ${questions} questions, difficulty: ${difficulty}
+      Please generate a quiz on this topic: ${prompt}, ${questions} questions, difficulty: ${difficulty}/5
       ` 
     }],
   })
@@ -69,6 +73,7 @@ async function generate(req, res) {
     }
 
     Quiz.create({
+      userId: userId,
       category: prompt,
       quizLength: questions, 
       difficulty: difficulty
@@ -107,4 +112,63 @@ async function generate(req, res) {
   });
 }
 
-module.exports = { generate };
+async function regenerateQuestion(req, res) {
+  const { questionId } = req.params;
+
+  const question = await Question.findByPk(questionId);
+  const quiz = await Quiz.findByPk(question.quizId);
+
+  const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(configuration);
+
+  const regenerationPrompt = question.questionType === 0
+    ? `Generate a new multiple choice question about ${quiz.category}. Include 4 choices. Do this in JSON format.
+    Don't specify option choice e.g a)`
+    : `Generate a new true/false question about ${quiz.category}. Do this in JSON format.
+    Don't specify option choice e.g a)`;
+
+  try {
+    const response = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: regenerationPrompt
+        }
+      ]
+    });
+
+    console.log('OpenAI response:', response.data);
+
+    const newText = response.data.choices[0].message.content;
+
+    console.log('New text:', newText);
+
+    // Assuming the OpenAI API returns the question, choices, and correct answer in a specific format
+    const regeneratedQuestion = JSON.parse(newText);
+
+    console.log('Regenerated question object:', regeneratedQuestion);
+
+    question.questionText = regeneratedQuestion.question;
+    question.answerChoices = regeneratedQuestion.choices
+    question.correctAnswer = regeneratedQuestion.correctAnswer;
+
+    await question.save();
+
+    res.json({ 
+      success: true, 
+      questionText: regeneratedQuestion.question, 
+      choices: regeneratedQuestion.choices, 
+      correctAnswer: regeneratedQuestion.correctAnswer 
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Failed to regenerate question.' });
+  }
+}
+
+
+
+module.exports = { generate, regenerateQuestion };

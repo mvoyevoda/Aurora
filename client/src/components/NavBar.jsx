@@ -30,7 +30,6 @@ export default function NavBar() {
       <Link to={'/login'} style={{textDecoration: 'none', color: 'white'}}>
         <Button
           color="inherit"
-          href="./login"
           sx={{
             backgroundColor: "transparent",
             border: "1px solid white",
@@ -40,10 +39,9 @@ export default function NavBar() {
           Log In
         </Button>
       </Link>
-      <Link to={'/login'} style={{textDecoration: 'none', color: 'white'}}>
+      <Link to={'/signup'} style={{textDecoration: 'none', color: 'white'}}>
         <Button
           color="inherit"
-          href="./signup"
           sx={{
             backgroundColor: "transparent",
             border: "1px solid white",

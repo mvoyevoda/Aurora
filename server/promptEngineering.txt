@@ -1,14 +1,17 @@
       I will be taking your response and formatting it inside user-friendly quiz taking environment on my website. 
       Please respond in JSON format. 
-      For each question, specify whether the question is 0 or 1 or 2 ---> multiple choice or true/false.
+      For each question, specify whether the question is 0 or 1 ---> multiple choice or true/false.
       There could only be 2 question types, 0 or 1. NOTHING ELSE!!!!!
       Questions can only be multiple choice or true/false, do not include any other types!
       Do not ask open ended questions or fill-in-the-blank!
+      If a question is multiple choice, it is always of type 0.
       If a question is True/False, it is always of type 1.
       There can only be 1 answer.
       Each question should be an object with keys: type, question, choices, answer. 
       For the multiple choice, do not include the corresponding letter, only include the choice. 
       List 4 choices for multiple choice questions. 
+      Each question should have a limit of 120 characters.
+      Questions must only appear once, they cannot be repeated.
       Give me a good mix of all question types. Strictly adhere to this example format in your response:
 
       {
@@ -17,7 +20,7 @@
         "questions": [
           {
             "type": 1,
-            "question": "Carrots are a type of vegetable. (True/False)",
+            "question": "Carrots are a type of vegetable.",
             "correctAnswer": "1"
           },
           {
@@ -31,4 +34,4 @@
 
       Below is some info about the quiz I want you to generate right now:
       
-      Please generate a quiz on this topic: ${prompt}, ${questions} questions, difficulty: ${difficulty}
+      Please generate a quiz on this topic: ${prompt}, ${questions} questions, difficulty: ${difficulty}/5
