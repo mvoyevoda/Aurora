@@ -1,13 +1,45 @@
-body{
+/* body{
     color: black;
     text-align: center;
-}
+} */
 .auth-form{
-    margin: 4px;
     width: 50%;
-    position: absolute;
-    left: 25%;
-    top: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.auth-form h1 {
+  font-weight: 100;
+}
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+}
+
+.auth-btns {
+  margin-top: 10%;
+  width: 50vw;
+}
+
+.signup, .login {
+  padding: 1%;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center; */
+  height: 100vh;
+}
+
+.forgot-pass {
+  display: flex;
+  justify-content: right;
+  width: 50vw;
 }
 
 @media (max-width: 700px){

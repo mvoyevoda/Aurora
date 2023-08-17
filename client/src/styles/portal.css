@@ -37,6 +37,9 @@
 .portal-header > * {
   width: 33.33vw;
   padding: 2%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .portal-footer {
