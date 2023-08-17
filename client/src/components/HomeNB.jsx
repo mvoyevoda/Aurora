@@ -2,14 +2,14 @@
 // import Box from '@mui/material/Box';
 // import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function HomeNB() {
   return (
     // <Box sx={{ flexGrow: 1 }}>
     //   <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
     //     <Toolbar sx={{ justifyContent: 'flex-start', paddingLeft: '1em' }}>
-    //     <Link to={'/'} style={{textDecoration: 'none', color: 'white'}}>
+<Link to={'/'} style={{textDecoration: 'none', color: 'white'}}>
             <Button
               color="inherit"
               sx={{
@@ -21,7 +21,7 @@ export default function HomeNB() {
             >
               Home
             </Button>
-    //       </Link>
+   </Link>
     //     </Toolbar>
     //   </AppBar>
     // </Box>
