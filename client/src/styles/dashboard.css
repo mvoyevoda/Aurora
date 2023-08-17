@@ -3,46 +3,281 @@
     padding: 0;
   } */
   
-  @keyframes scrollUpAnimation {
+  /* @keyframes scrollUpAnimation {
     from {
-      transform: translateY(100%); /* Start from the bottom of the page */
+      transform: translateY(100%);
       opacity: 0;
     }
     to {
-      transform: translateY(0); /* Original position */
+      transform: translateY(0); 
       opacity: 1;
     }
-  }
+  } */
   
-  .scrollUpAnimation {
+  /* .scrollUpAnimation {
     animation: scrollUpAnimation 1s ease-out;
-  }
+  } */
     
 
-  @keyframes scrollDownAnimation {
+  /* @keyframes scrollDownAnimation {
     from {
-      transform: translateY(-100%); /* Start from the top */
+      transform: translateY(-100%); 
       opacity: 0;
     }
     to {
-      transform: translateY(0); /* Original position */
+      transform: translateY(0);
       opacity: 1;
     }
-  }
+  } */
   
-  .scrollDownAnimation {
+  /* .scrollDownAnimation {
     animation: scrollDownAnimation 1s ease-out;
-  }
-        
+  } */
+/*         
   .logOutDiv{
     background-color: rgba(212, 212, 212, .05);
-  }
+  } */
   /* CSS for mobile screens */
-@media (max-width: 480px) { /* Adjust the breakpoint as needed */
+/* @media (max-width: 480px) {
   body {
-    width: 100%; /* Set the width to 100% for mobile screens */
-    height: 40vh; /* Set the height to 100vh for mobile screens */
-    /* Add other styles specific to mobile screens */
+    width: 100%;
+    height: 40vh;
     overflow-y: auto;
   }
+} */
+
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.dash-header{
+  /* background-color: red; */
+  /* padding: 10px; */
+  /* padding-top: 0.625em;
+  padding-bottom: 0.5em; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 10;
+  height: 10vh;
+  width: 100vw;
+  align-items: center;
+}
+
+.dash-header > * {
+  width: 33.33vw;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  /* background-color: green; */
+}
+
+.dash-header-right {
+  display: flex;
+  justify-content: right;
+  /* background-color: violet; */
+}
+
+.dash-header-mid {
+  margin: 0px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: red; */
+}
+
+/* .dash-header-left { */
+  /* background-color: orange; */
+/* } */
+
+.dash-footer {
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100vw;
+  /* background-color: yellow; */
+}
+
+.dash-main-container {
+  background-color: rgba(212, 212, 212, .05);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 80vh;
+  width: 100vw;
+}
+
+.dash-main-right, .dash-main-left {
+  width: 50%;
+  height: inherit;
+}
+
+.dash-main-left {
+  /* background-color: black; */
+  padding: 0px;
+  /* align-items: center;
+  display: flex;
+  justify-content: space-evenly; */
+}
+
+.quizzes-generated {
+  /* background-color: orange; */
+  /* height: 50%; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quizzes-generated-content {
+  align-items: center;
+  text-align: center;
+}
+
+.quizzes-generated-content h1 {
+  font-size: 20em;
+  font-weight: 100;
+  margin: -10%;
+}
+
+.quizzes-generated-content p {
+  margin: 0px;
+  font-size: 2em;
+  font-weight: 100;
+  opacity: 0.5;
+}
+
+.favorite-category {
+  /* background-color: blue; */
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favorite-category-content {
+  align-items: center;
+  text-align: center;
+}
+
+.favorite-category-content p {
+  margin: 0px;
+  font-size: 1.6em;
+  font-weight: 100;
+  opacity: 0.5;
+}
+
+.favorite-category-content h1 {
+  font-size: 5em;
+  font-weight: 100;
+  margin: -10%;
+}
+
+/* .vertical-divider {
+  width: 48vw;
+  height: 70wh;
+  background-color: white;
+} */
+
+.dash-main-right {
+  /* background-color: blue; */
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-around; */
+}
+
+.dash-main-right h3 {
+  font-size: 3em;
+  font-weight: 100;
+  height: 5vh;
+}
+
+/* .recent-quizzes {
+  background-color: green;
+  width: 60%; */
+  /* height: 30rem; */
+/* } */
+
+.recent-quizzes-list {
+  /* background-color: green; */
+  overflow-y: scroll;
+  padding: 3%;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* CSS for mobile screens */
+@media (max-width: 805px) {
+  
+  .dashboard {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .dash-main-container {
+    flex-direction: column; /* Stack child elements vertically */
+    height: inherit;
+  }
+  
+  .dash-main-right, .dash-main-left {
+    width: 100%; /* Make them take the full width of the parent */
+    padding: 100px;
+    margin: 0px;
+  }
+
+  .dash-main-right {
+    margin-top: -150px;
+  }
+
+  .quizzes-generated-content h1 {
+    font-size: 10em;
+  }
+  
+  .quizzes-generated-content p {
+    margin: 0px;
+    font-size: 1.1em;
+    font-weight: 100;
+    opacity: 0.5;
+  }
+
+  .dash-main-right {
+    height: auto;
+  }
+
+  .dash-main-right h3 {
+    font-size: 2em;
+    font-weight: 100;
+    height: 5vh;
+  }
+
+  .dash-footer {
+    height: 0px;
+  }
+
+  .recent-quizzes-list {
+    /* background-color: green; */
+    overflow-y: auto;
+    padding: 3%;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
 }

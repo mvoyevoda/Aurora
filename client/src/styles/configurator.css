@@ -22,7 +22,7 @@
 }
 
 .config-header > * {
-  width: 33vw;
+  width: 33.33vw;
   display: flex;
   justify-content: center;
 }
@@ -30,7 +30,6 @@
 .config-header-right {
   display: flex;
   justify-content: right;
-  padding: 2%;
 }
 
 .config-footer {
@@ -69,4 +68,26 @@
   /* background-color: yellow; */
   width: inherit;
   height: 50%;
+}
+
+@media (max-width: 805px) {
+  
+  .configurator {
+    height: auto;
+  }
+
+  .config-main-container {
+    height: inherit;
+    /* height: 80vh; */
+    padding: 50px;
+  }
+
+  .config-form-inputs > * {
+    margin: 20px;
+  }
+
+  .config-form-inputs {
+    width: 650px;
+  }
+
 }

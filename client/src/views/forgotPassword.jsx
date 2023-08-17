@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Container, Typography, TextField, Button } from "@mui/material";
 import HomeNB from "../components/HomeNB";
-import "../styles/signup.css";
+import "../styles/auth.css";
 
 
 const ForgotPassword = () => {

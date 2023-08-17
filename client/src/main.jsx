@@ -8,7 +8,7 @@ import Portal from "./views/Portal";
 import Configurator from "./views/Configurator";
 import ForgotPassword from "./views/ForgotPassword";
 import ResetPassword from "./views/ResetPassword";
-import "./styles/index.css";
+import "../index.css";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ErrorPage from "./ErrorPage";
 

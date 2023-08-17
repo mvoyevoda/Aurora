@@ -7,6 +7,7 @@ import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import LogoutButton from "../components/LogoutButton"
+import { useMediaQuery, useTheme } from "@mui/material";
 import "../styles/configurator.css";
 
 // eslint-disable-next-line no-unused-vars
@@ -62,6 +63,8 @@ export default function Configurator() {
   const [difficulty, setDifficulty] = useState(3); // 1 to 5: very easy to very hard
   const [loading, setLoading] = useState(false)
   // const [inputCentering, setInputCentering] = setInputCentering(false)
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   
   const handleQuestionsChange = (event, value) => {
     setQuestions(value);
@@ -218,7 +221,7 @@ export default function Configurator() {
                 color: "white",
                 border: "1px solid",
                 display: "block",
-                width: "50%",
+                width: isMobile ? "90vw" : "50vw",
                 height: "15%",
                 textTransform: "none",
                 borderRadius: "50px",
