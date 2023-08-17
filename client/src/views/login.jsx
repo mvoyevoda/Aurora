@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import "../styles/signup.css";
 import { Link } from "react-router-dom";
 import HomeNB from "../components/HomeNB";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../AuthContext";
 
 export default function LogIn() {
   const emailRef = useRef();
@@ -35,13 +35,13 @@ export default function LogIn() {
   };
 
   return (
-    <>
+    <div>
       <HomeNB />
       <h1 style={{ marginTop: "13vh" }}>Log In</h1>
       {errorMessage && (
         <p style={{ color: "rgba(245, 245, 245)" }}>{errorMessage}</p>
       )}
-      <form onSubmit={handleLogIn} className="form">
+      <form onSubmit={handleLogIn} className="auth-form">
         <TextField
           sx={{
             backgroundColor: "rgba(217, 217, 217, 0.20)",
@@ -50,7 +50,6 @@ export default function LogIn() {
             "& .MuiInputLabel-root.Mui-focused": {
               color: "black",
             },
-            
           }}
           variant="standard"
           color="text"
@@ -59,6 +58,7 @@ export default function LogIn() {
           fullWidth
           required
           inputRef={emailRef}
+          disableUnderline
         />
         <TextField
           sx={{
@@ -107,9 +107,12 @@ export default function LogIn() {
               marginBottom: "1.25em",
               width: "100%",
               "&:hover": {
-                backgroundColor: "rgba(217, 217, 217, 0.20)",
                 borderColor: "white",
-              },
+                border: "3px solid", // Increased border thickness to 3px
+                backgroundColor: "transparent",
+                fontWeight: "500",
+                boxShadow: "none",
+            },
             }}
           >
             Don&apos;t have an account?
@@ -125,14 +128,17 @@ export default function LogIn() {
             width: "100%",
             borderRadius: "50px",
             "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
               borderColor: "white",
-            },
+              border: "3px solid", // Increased border thickness to 3px
+              backgroundColor: "transparent",
+              fontWeight: "500",
+              boxShadow: "none",
+          },
           }}
         >
           Log In
         </Button>
       </form>
-    </>
+    </div>
   );
 }

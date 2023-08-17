@@ -1,12 +1,13 @@
 import ReactDOM from "react-dom/client";
-import Dashboard from "./views/dashboard";
-import SignUp from "./views/signup";
-import LogIn from "./views/login";
-import Welcome from "./views/welcome";
+import Dashboard from "./views/Dashboard";
+import SignUp from "./views/Signup";
+import LogIn from "./views/Login";
+import Welcome from "./views/Welcome";
 // import App from "./views/Generator";
-import Portal from "./components/Portal";
-import ForgotPassword from "./views/forgotPassword";
-import ResetPassword from "./views/resetPassword";
+import Portal from "./views/Portal";
+import Configurator from "./views/Configurator";
+import ForgotPassword from "./views/ForgotPassword";
+import ResetPassword from "./views/ResetPassword";
 import "./styles/index.css";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ErrorPage from "./ErrorPage";
@@ -17,8 +18,8 @@ import ErrorPage from "./ErrorPage";
 // import '@fontsource/roboto/700.css';
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthProvider from "./contexts/AuthContext";
-import Generator from "./views/Generator";
+import AuthProvider from "./AuthContext";
+
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
     path: "/generator",
     element: (
       <ProtectedRoute>
-        <Generator />
+        <Configurator />
       </ProtectedRoute>
     ),
     errorElement: <ErrorPage />,

@@ -2,7 +2,12 @@
   background-color: green;
 } */
 
-.portal * {
+.portal {
+  display: flex;
+  flex-direction: column;
+}
+
+.portal > * {
   display: flex;
   align-items: center;
 }
@@ -14,13 +19,8 @@
   align-items: center;
 }
 
-/* .portal {
-  display: flex;
-  flex-direction: column;
-} */
-
-.header{
-  background-color: rgba(212, 212, 212, .05);
+.portal-header{
+  /* background-color: rgba(212, 212, 212, .05); */
   /* background-color: yellow; */
   /* padding: 10px; */
   /* padding-top: 0.625em;
@@ -34,13 +34,12 @@
   align-items: center;
 }
 
-.header * {
-  width: 200px;
-  display: flex;
-  justify-content: center;
+.portal-header > * {
+  width: 33.33vw;
+  padding: 2%;
 }
 
-.footer {
+.portal-footer {
   height: 10vh;
   display: flex;
   flex-direction: row;
@@ -56,7 +55,7 @@
   align-items: center;
 }
 
-.main-container {
+.portal-main-container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -66,7 +65,7 @@
   opacity: 5%; */
 }
 
-.main-container * {
+.portal-main-container > * {
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -85,12 +84,23 @@
   z-index: -1; /* Place the overlay behind the content */
 }
 
-.left, .right {
-  /* width: 100px; */
-  /* background-color: blue; */
-  /* margin: 200px; */
-  width: 20vw;
+.portal-header-left {
+  display: flex;
+  justify-content: left;
 }
+
+/* .portal-header-left > * {
+  margin-left: 30px;
+} */
+
+.portal-header-right {
+  display: flex;
+  justify-content: right;
+}
+
+/* .portal-header-right > * {
+  margin-right: 30px;
+} */
 
 .quiz-container {
   /* background-color: orange; */
@@ -107,8 +117,11 @@
   font-size: 2em;
   margin-bottom: 0px;
   padding-bottom: 0px;
-  padding-top: 0.3rem;
+  /* padding-top: 0.3rem; */
   /* background-color: blue; */
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .choices {
@@ -142,3 +155,7 @@
 /* .link-ladder a:hover {
   opacity: 1.0;
 } */
+
+.portal-left, .portal-right {
+  width: 10vw;
+}

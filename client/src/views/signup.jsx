@@ -6,7 +6,7 @@ import "../styles/signup.css";
 import {Link} from "react-router-dom"
 import HomeNB from "../components/HomeNB";
 import GoogleIcon from "@mui/icons-material/Google";
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../AuthContext";
 
 export default function SignUp() {
   const full_nameRef = useRef();
@@ -44,7 +44,7 @@ export default function SignUp() {
     <>
       <HomeNB />
       <h1 style={{ marginTop: "12vh" }}>Sign Up</h1>
-      <form onSubmit={handleSignUp} className="form">
+      <form onSubmit={handleSignUp} className="auth-form">
         {errorMessage && (
           <div className="error-message" style={{ marginBottom: "1rem" }}>
             {errorMessage}
@@ -127,9 +127,12 @@ export default function SignUp() {
               marginBottom: "1.25em",
               width: "100%",
               "&:hover": {
-                backgroundColor: "rgba(217, 217, 217, 0.20)",
                 borderColor: "white",
-              },
+                border: "3px solid",
+                backgroundColor: "transparent",
+                fontWeight: "500",
+                boxShadow: "none",
+            },
             }}
           >
             Already have an account?
@@ -145,9 +148,12 @@ export default function SignUp() {
             width: "100%",
             borderRadius: "50px",
             "&:hover": {
-              backgroundColor: "rgba(217, 217, 217, 0.20)",
               borderColor: "white",
-            },
+              border: "3px solid", // Increased border thickness to 3px
+              backgroundColor: "transparent",
+              fontWeight: "500",
+              boxShadow: "none",
+          },
           }}
         >
           Sign Up

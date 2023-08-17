@@ -1,19 +1,20 @@
 body{
-
+    color: black;
     text-align: center;
 }
-form{
+.auth-form{
     margin: 4px;
     width: 50%;
     position: absolute;
     left: 25%;
     top: 25%;
 }
+
 @media (max-width: 700px){
   body{
     height: 100vh;
   }
-  form{
+  .auth-form{
     width: 70%;
     position: absolute;
     left: 15%;

@@ -27,16 +27,16 @@ function Generator() {
   return (
     <>
     <div className="scrollDownAnimation">
-      <div className="logOutDiv">
+      {/* <div className="logOutDiv">
         <LogoutButton />
-      </div>
+      </div> */}
       <div style={styles.container}>
         <div style={styles.content}>
           <Configurator />
         </div>
-        <div style={styles.navDashboard}>
+        {/* <div style={styles.navDashboard}>
           <NavDashboard />
-        </div>
+        </div> */}
       </div>
     </div>
     </>
