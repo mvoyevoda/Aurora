@@ -51,7 +51,7 @@ async function getAllQuizzes(req, res) {
 async function getUserQuizzes(req, res) {
   try {
     console.log('ok');
-    const quizzes = await Quiz.findAll({ where: { userId: req.params.id},
+    const quizzes = await Quiz.findAll({ where: { userId: req.params.userId},
       attributes: ['id', 'category'],
       
       order: [['createdAt', 'DESC']], // Sorting by createdBy in descending order

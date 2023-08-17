@@ -25,6 +25,7 @@ export default function LogoutButton() {
         fontSize: "1rem",
         fontWeight: "100",
         opacity: "0.7",
+        margin: "5%",
         textTransform: "none",
         "&:hover": {
           opacity: "1.0",
