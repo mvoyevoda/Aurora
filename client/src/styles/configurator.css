@@ -69,3 +69,25 @@
   width: inherit;
   height: 50%;
 }
+
+@media (max-width: 805px) {
+  
+  .configurator {
+    height: auto;
+  }
+
+  .config-main-container {
+    height: inherit;
+    /* height: 80vh; */
+    padding: 50px;
+  }
+
+  .config-form-inputs > * {
+    margin: 20px;
+  }
+
+  .config-form-inputs {
+    width: 650px;
+  }
+
+}

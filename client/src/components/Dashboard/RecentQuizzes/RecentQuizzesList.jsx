@@ -69,9 +69,9 @@ const [endIndex, setEndIndex] = useState(0);
               width: "28em",
               height: "5em",
               // marginLeft: "47px",
-              // ...(isMobile && {
-              //   width: "20vh", // Apply this style for small screens
-              // }),
+              ...(isMobile && {
+                width: "80vw", // Apply this style for small screens
+              }),
               
             }}
           >
@@ -91,9 +91,9 @@ const [endIndex, setEndIndex] = useState(0);
                     textOverflow: "unset", // Remove ellipsis
                     fontSize: "1.3em", // Increase font size on hover
                   },
-                  ...(isMobile && {
-                fontSize: "1.3em", // Apply this style for small screens
-              }),
+              //     ...(isMobile && {
+              //   fontSize: "1.3em", // Apply this style for small screens
+              // }),
             }}>
               {quiz.category}
             </Typography>

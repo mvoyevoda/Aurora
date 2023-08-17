@@ -219,9 +219,14 @@
 /* CSS for mobile screens */
 @media (max-width: 805px) {
   
+  .dashboard {
+    height: auto;
+    overflow-y: auto;
+  }
+
   .dash-main-container {
     flex-direction: column; /* Stack child elements vertically */
-    height: 90vh;
+    height: inherit;
   }
   
   .dash-main-right, .dash-main-left {
@@ -245,6 +250,10 @@
     opacity: 0.5;
   }
 
+  .dash-main-right {
+    height: auto;
+  }
+
   .dash-main-right h3 {
     font-size: 2em;
     font-weight: 100;
@@ -253,6 +262,16 @@
 
   .dash-footer {
     height: 0px;
+  }
+
+  .recent-quizzes-list {
+    /* background-color: green; */
+    overflow-y: auto;
+    padding: 3%;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 
 }
