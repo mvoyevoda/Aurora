@@ -36,7 +36,7 @@ const RecentQuizzesList = () => {
   
 
 // const [endIndex, setEndIndex] = useState(0);
-const [endIndex, setEndIndex] = useState(20);
+const [endIndex, setEndIndex] = useState(recentQuizzes.length);
 
   // const handleShowMore = () => {
   //   // setCurrentPage(prevPage => prevPage + 1);
