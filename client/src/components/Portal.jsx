@@ -723,6 +723,7 @@ export default function Portal() {
                 "&:hover": {
                   opacity: "1.0", // Change opacity on hover
                 },
+                
               }}
             >
               Submit
@@ -736,7 +737,8 @@ export default function Portal() {
                 style={{
                 color: (submissions[questions[index].id] === questions[index].correctAnswer)
                 ? "#33FF00"
-                : "#FF0000",              
+                : "#FF0000",   
+           
                 }}
               >
                 -
