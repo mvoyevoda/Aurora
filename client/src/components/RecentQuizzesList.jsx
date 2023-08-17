@@ -35,12 +35,13 @@ const RecentQuizzesList = () => {
   }, []);
   
 
-const [endIndex, setEndIndex] = useState(0);
+// const [endIndex, setEndIndex] = useState(0);
+const [endIndex, setEndIndex] = useState(20);
 
-  const handleShowMore = () => {
-    // setCurrentPage(prevPage => prevPage + 1);
-    setEndIndex(() => endIndex+10 <= recentQuizzes.length ? endIndex+10 : recentQuizzes.length)
-  };
+  // const handleShowMore = () => {
+  //   // setCurrentPage(prevPage => prevPage + 1);
+  //   setEndIndex(() => endIndex+10 <= recentQuizzes.length ? endIndex+10 : recentQuizzes.length)
+  // };
 
   // const handleShowLess = () => {
   //   setCurrentPage(prevPage => prevPage - 1);
@@ -115,12 +116,12 @@ const [endIndex, setEndIndex] = useState(0);
           )}
         </div>
       )} */}
-      {
+      {/* {
         endIndex !== recentQuizzes.length && 
         <Button color="inherit" onClick={handleShowMore}>
           V Show More V
         </Button>
-      }
+      } */}
 
     </div>
   );

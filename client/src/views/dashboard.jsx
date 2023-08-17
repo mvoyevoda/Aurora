@@ -134,7 +134,7 @@ export default function Dashboard() {
               </div>
             </div> */}
         </div>
-        <div className="vertical-divider"></div>
+        {/* <div className="vertical-divider"></div> */}
         <div className="dash-main-right">
             <h3>Recent</h3>
             {/* <div className="recent-quizzes"> */}
