@@ -100,7 +100,7 @@ export default function Portal() {
       return;
     }
     try {
-      const questionsResponse = await axios.get(`/api/quizzes/${quizId}`, {
+      const questionsResponse = await axios.get(`/api/quizzes/getQuiz/${quizId}`, {
         withCredentials: true,
       });
 
@@ -332,8 +332,8 @@ export default function Portal() {
     // !exit ?
     <Box
       sx={{
-        width: "20vw", // Adjusted width
-        height: "40vh", // Adjusted height
+        width: "400px", // Adjusted width
+        height: "400px", // Adjusted height
         bgcolor: "background.paper",
         p: 2,
         display: "flex",

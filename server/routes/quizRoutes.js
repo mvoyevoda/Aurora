@@ -6,7 +6,7 @@ const quizController = require('../controllers/quizController')
 router.use(authenticateUser);
 
 router.get('/', quizController.getAllQuizzes);
-router.get('/:id', quizController.getQuizQuestions);
+router.get('/getQuiz/:id', quizController.getQuizQuestions);
 router.get('/', quizController.getAllQuizzes);
 router.get('/:userId', quizController.getUserQuizzes);
 

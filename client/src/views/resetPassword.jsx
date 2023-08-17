@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../styles/signup.css";
+import "../styles/auth.css";
 import { Button, TextField } from "@mui/material";
 
 

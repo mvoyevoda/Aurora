@@ -197,10 +197,62 @@
 .dash-main-right h3 {
   font-size: 3em;
   font-weight: 100;
+  height: 5vh;
 }
 
-.recent-quizzes {
+/* .recent-quizzes {
   background-color: green;
-  width: 60%;
-  height: 70%;
+  width: 60%; */
+  /* height: 30rem; */
+/* } */
+
+.recent-quizzes-list {
+  /* background-color: green; */
+  overflow-y: scroll;
+  padding: 3%;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* CSS for mobile screens */
+@media (max-width: 805px) {
+  
+  .dash-main-container {
+    flex-direction: column; /* Stack child elements vertically */
+    height: 90vh;
+  }
+  
+  .dash-main-right, .dash-main-left {
+    width: 100%; /* Make them take the full width of the parent */
+    padding: 100px;
+    margin: 0px;
+  }
+
+  .dash-main-right {
+    margin-top: -150px;
+  }
+
+  .quizzes-generated-content h1 {
+    font-size: 10em;
+  }
+  
+  .quizzes-generated-content p {
+    margin: 0px;
+    font-size: 1.1em;
+    font-weight: 100;
+    opacity: 0.5;
+  }
+
+  .dash-main-right h3 {
+    font-size: 2em;
+    font-weight: 100;
+    height: 5vh;
+  }
+
+  .dash-footer {
+    height: 0px;
+  }
+
 }
