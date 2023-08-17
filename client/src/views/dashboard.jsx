@@ -2,7 +2,7 @@
 // import { QuizGen } from "../components/Dashboard/QuizGen";
 // import FavCategory from "../components/Dashboard/FavCategory";
 // import RecentTitle from "../components/Dashboard/RecentQuizzes/RecentTitle";
-import RecentQuizzesList from "../components/Dashboard/RecentQuizzes/RecentQuizzesList";
+import RecentQuizzesList from "../components/RecentQuizzesList";
 // import SuggestedTitle from "../components/Dashboard/SuggestedQuizzes/SuggestedTitle";
 // import SuggestedQuizzesList from "../components/Dashboard/SuggestedQuizzes/SuggestedQuizzesList";
 // import Footer from "../components/Footer";
@@ -134,6 +134,7 @@ export default function Dashboard() {
               </div>
             </div> */}
         </div>
+        <div className="vertical-divider"></div>
         <div className="dash-main-right">
             <h3>Recent</h3>
             {/* <div className="recent-quizzes"> */}

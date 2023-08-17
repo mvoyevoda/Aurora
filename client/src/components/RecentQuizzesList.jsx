@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { useMediaQuery, useTheme } from "@mui/material";
-import { AuthContext } from '../../../AuthContext';
+import { AuthContext } from '../AuthContext';
 
 const RecentQuizzesList = () => {
   const authContext = useContext(AuthContext); 
