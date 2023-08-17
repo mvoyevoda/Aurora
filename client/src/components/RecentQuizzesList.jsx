@@ -25,8 +25,8 @@ const RecentQuizzesList = () => {
       .then((response) => {
         const data = response.data;
         setRecentQuizzes(data);
-        const newIndex = 10 < data.length ? 10 : data.length;
-        setEndIndex(newIndex);
+        // const newIndex = 10 < data.length ? 10 : data.length;
+        setEndIndex(data.length);
         // console.log("Changed endIndex: ", newIndex);
       })
       .catch((error) => {
@@ -36,7 +36,7 @@ const RecentQuizzesList = () => {
   
 
 // const [endIndex, setEndIndex] = useState(0);
-const [endIndex, setEndIndex] = useState(recentQuizzes.length);
+const [endIndex, setEndIndex] = useState(null);
 
   // const handleShowMore = () => {
   //   // setCurrentPage(prevPage => prevPage + 1);
