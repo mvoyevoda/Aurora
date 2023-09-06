@@ -21,8 +21,8 @@ Aurora is a quiz generation platform, powered by OpenAI's GPT-3.5. This user-fri
 - React
 - Nodemailer
 - OpenAI API
-- Node.JS
-- Express.JS
+- Node
+- Express
 - PostgreSQL
 - Sequelize
 - Material UI
