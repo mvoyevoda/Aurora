@@ -29,9 +29,10 @@ async function generate(req, res) {
       If a question is True/False, it is always of type 1.
       There can only be 1 answer.
       Each question should be an object with keys: type, question, choices, answer. 
-      For the multiple choice, do not include the corresponding letter, only include the choice. 
+      For the multiple choice questions, do not include the corresponding letter, only include the choice. 
+      The correct answer to a multiple choice question can only be a number between 0-3, corresponding to the position of the correct choice in the array of choices.
       List 4 choices for multiple choice questions. 
-      Each question should have a limit of 120 characters.
+      Each question should have a limit of 80 characters.
       Questions must only appear once, they cannot be repeated.
       Give me a good mix of all question types. Strictly adhere to this example format in your response:
 

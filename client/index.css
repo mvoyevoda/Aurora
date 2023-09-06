@@ -2,14 +2,15 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(80deg, #740a6b, #ca3b3b, #a80c8e);
-  background-size: 400% 400%;
+  /* background: linear-gradient(80deg, #740a6b, #ca3b3b, #a80c8e); */
+  /* background-size: 400% 400%; */
   overflow: hidden;
-  animation: color 8s ease-in-out infinite; 
-  /* background-image: url('../images/backround1.jpeg');
+  /* animation: color 8s ease-in-out infinite;  */
+  background-image: url('/src/images/background1.jpeg');
+  
   background-size: cover;
   background-position: center center;
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   color: #ffffff;
   font-family: Helvetica;
   color: white;
@@ -26,7 +27,7 @@ body {
 
 
 
-@keyframes color {
+/* @keyframes color {
   0% {
     background-position: 0% 0%;
   }
@@ -36,4 +37,4 @@ body {
   100% {
     background-position: 0% 50%;
   }
-}
+} */
