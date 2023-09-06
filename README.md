@@ -1,5 +1,5 @@
 <div align="center">
-# Aurora 
+<h1>Aurora</h1>
 </div>
 
 <div align="center">
