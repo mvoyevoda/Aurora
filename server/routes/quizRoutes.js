@@ -10,5 +10,4 @@ router.get('/getQuiz/:id', quizController.getQuizQuestions);
 router.get('/', quizController.getAllQuizzes);
 router.get('/:userId', quizController.getUserQuizzes);
 
-
 module.exports = router;
