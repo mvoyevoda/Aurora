@@ -1,7 +1,7 @@
 
 # Aurora 
 
-Aurora is a quiz generation platform, powered by OpenAI's GPT-3.5. Designed to boost user's overall learning experience, Aurora offers users a personalized and interactive educational journey, enabling them to create and take quizzes. It offers a way to generate quizzes without manual intervention, only requiring a prompt topic to be entered before quiz generation.
+Aurora is a quiz generation platform, powered by OpenAI's GPT-3.5. Designed to boost users' overall learning experience, Aurora offers users a personalized and interactive educational experience, enabling them to generate, take, and save quizzes as well as analyze their performance in-depth. You simply enter a quiz topic in plain English, specify number of questions, choose a difficulty, and hit generate!
 
 ![ezgif-3-2ca06bff51](https://github.com/mvoyevoda/Aurora/assets/102834064/4cebac36-9a27-42b0-a0f1-7add53372118)
 
