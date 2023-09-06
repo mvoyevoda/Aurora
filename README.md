@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Aurora</h2>
-  <br>
+
 </div>
 
 
