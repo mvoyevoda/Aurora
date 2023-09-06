@@ -11,11 +11,17 @@
 </div>
 
 ## 💫 Features
+
 ![configurator](https://github.com/mvoyevoda/Aurora/assets/13859065/736fb015-4321-40ec-8c4a-1bc6fdf5ba2c)
+
 ![portalAttempt](https://github.com/mvoyevoda/Aurora/assets/13859065/a8bd5f83-c6f7-4cbb-9aa3-0526a8662100)
+
 ![regenerate](https://github.com/mvoyevoda/Aurora/assets/13859065/03c9fabb-ae5d-4778-8aca-7e3730f7bea0)
+
 ![portalReview](https://github.com/mvoyevoda/Aurora/assets/13859065/5ed160c4-a6ea-4fd8-8b8c-803ab865f971)
+
 ![dashboard](https://github.com/mvoyevoda/Aurora/assets/13859065/e2c76fc2-c9ff-4bff-a874-9336c005d873)
+
 
 ## 🧪 Technologies Used
 - React
