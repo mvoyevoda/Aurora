@@ -22,7 +22,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <>
+    <div className="forgot-password">
       <HomeNB />
       <Container>
         <h1>Forgot Password</h1>
@@ -65,7 +65,7 @@ const ForgotPassword = () => {
           </Button>
         </form>
       </Container>
-    </>
+    </div>
   );
 };
 

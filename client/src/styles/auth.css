@@ -8,8 +8,9 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    color: white;
 }
-.auth-form h1 {
+.auth-form h1, .forgot-password h1 {
   font-weight: 100;
 }
 
@@ -27,7 +28,7 @@
   width: 50vw;
 }
 
-.signup, .login {
+.signup, .login, .forgot-password {
   padding: 1%;
   /* display: flex;
   flex-direction: column;
