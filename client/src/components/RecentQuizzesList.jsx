@@ -33,7 +33,7 @@ const RecentQuizzesList = () => {
       {recentQuizzes.slice(0, endIndex).map((quiz) => (
         <Link to={`/portal/${quiz.id}`} key={quiz.id} style={{ textDecoration: "none" }}>
           <Card
-            variant="outlined"
+            // variant="outlined"
             sx={{
               margin: "10px",
               backgroundColor: "rgba(212, 212, 212, .05)",
