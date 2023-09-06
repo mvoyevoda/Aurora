@@ -219,7 +219,7 @@
   height: 55vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 /* CSS for mobile screens */
@@ -272,12 +272,10 @@
 
   .recent-quizzes-list {
     /* background-color: green; */
-    overflow-y: auto;
-    padding: 3%;
-    height: 1000px;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
   }
 
 }
