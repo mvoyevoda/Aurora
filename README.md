@@ -6,9 +6,7 @@
 </div>
 <br>
 
-<div align="center">
-  <img src="https://github.com/mvoyevoda/Aurora/assets/102834064/4cebac36-9a27-42b0-a0f1-7add53372118" style="max-width:100%;">
-</div>
+<img src="https://github.com/mvoyevoda/Aurora/assets/102834064/4cebac36-9a27-42b0-a0f1-7add53372118">
 
 ## 💫 Features
 
