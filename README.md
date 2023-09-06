@@ -33,4 +33,6 @@ Aurora is a quiz generation platform, powered by OpenAI's GPT-3.5. This user-fri
 - https://github.com/ddamme05
 - https://github.com/mvoyevoda
 
+  
+
 [Experimental AWS Deployment (Behind by several commits)](https://rb.gy/u53l8)
