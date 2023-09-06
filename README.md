@@ -1,5 +1,8 @@
 
-## Aurora
+<div align="center">
+  <h2>Aurora</h2>
+</div>
+
 
 <div align="center">
   Aurora is a quiz generation platform, powered by OpenAI's GPT-3.5. This user-friendly web application offers users a personalized and interactive educational experience, enabling them to generate, take, and save quizzes as well as analyze their performance in-depth. You simply enter a quiz topic in plain English, specify the number of questions, choose difficulty, and hit generate!
