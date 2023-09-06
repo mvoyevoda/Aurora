@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" style="margin: 0px; padding: 0px;">
 <h1>Aurora</h1>
 </div>
 
